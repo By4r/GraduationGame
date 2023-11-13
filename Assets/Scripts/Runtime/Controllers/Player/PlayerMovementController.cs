@@ -31,6 +31,7 @@ namespace Runtime.Controllers.Player
         private void FixedUpdate()
         {
             MovePlayer();
+            SprintPlayer();
         }
 
         private void MovePlayer()
@@ -41,6 +42,16 @@ namespace Runtime.Controllers.Player
             Vector3 move = transform.right * x + transform.forward * z;
             characterController.Move(move * _data.ForwardSpeed * Time.deltaTime);
         }
-        
+
+        private void SprintPlayer()
+        {
+            if (Input.GetKey("left shift"))
+            {
+                Vector3 run = transform.forward;
+                characterController.Move(run * _data.SprintSpeed * Time.deltaTime);
+
+            }
+
+        }
     }
 }
