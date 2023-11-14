@@ -36,7 +36,7 @@ namespace Runtime.Managers
 
         private void OnLevelInitialize(byte levelValue)
         {
-            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Player, 0);
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 0);
             UISignals.Instance.onSetLevelValue?.Invoke(levelValue);
         }
 
