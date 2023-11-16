@@ -1,4 +1,6 @@
 ﻿using System;
+using Runtime.Enums;
+using Runtime.Signals;
 using TMPro;
 using UnityEngine;
 
@@ -13,7 +15,24 @@ namespace Runtime.Controllers.PlayTime
         private bool isCounting = false;
         [SerializeField] private TextMeshProUGUI timerText;
 
+        private int currentStage = 1; // Initial stage
+
+        private float _stageIncrementDuration;
+
         #endregion
+
+        private void Awake()
+        {
+            if (initialTime != 0)
+            {
+                _stageIncrementDuration = initialTime / 5f;
+            }
+            else
+            {
+                // Handle the case where initialTime is 0 to avoid division by zero.
+                Debug.LogError("Initial time cannot be zero.");
+            }
+        }
 
         void Start()
         {
@@ -35,6 +54,12 @@ namespace Runtime.Controllers.PlayTime
                 }
 
                 UpdateTimerText();
+
+
+                if (Mathf.Approximately((initialTime - currentTime) % _stageIncrementDuration, 0f))
+                {
+                    IncrementStage();
+                }
             }
         }
 
@@ -52,6 +77,21 @@ namespace Runtime.Controllers.PlayTime
         private void ShowTimeUpMessage()
         {
             Debug.Log("Time's up!");
+        }
+
+        private void IncrementStage()
+        {
+            // Increment the stage
+            currentStage++;
+
+            // Ensure the stage doesn't go beyond the maximum value
+            if (currentStage > (int)AnomalyStageTypes.Part5)
+            {
+                currentStage = (int)AnomalyStageTypes.Part5;
+            }
+
+            // Notify about the new stage
+            AnomalySignals.Instance.onAnomalyStage?.Invoke((AnomalyStageTypes)currentStage);
         }
     }
 }

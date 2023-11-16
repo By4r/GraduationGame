@@ -1,6 +1,6 @@
 ﻿namespace Runtime.Enums
 {
-    public enum StageTypes
+    public enum AnomalyStageTypes
     {
         Part1,
         Part2,

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anomalyData:
     SpawnReferences:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 7589808084704644013, guid: c00fd69c2688c024c8b2753503387a3a, type: 3}
+    - {fileID: 7589808084704644013, guid: f427307b845921c4ea3c316b8be17370, type: 3}
+    - {fileID: 7589808084704644013, guid: 3b631053b75c0a749b70dc3f694b1635, type: 3}
+    - {fileID: 7589808084704644013, guid: 100f60377a98cff4d806ca4ae474afbf, type: 3}
+    - {fileID: 7589808084704644013, guid: d12fbe733641ba947a35c1ca5fdac3a4, type: 3}
