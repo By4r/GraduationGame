@@ -196,7 +196,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7099317636351242140}
+  - {fileID: 881364303560851845}
   m_Father: {fileID: 4260727170193953655}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -276,9 +276,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 16.8, y: 9.4, z: 1.38}
   m_Center: {x: -0.14, y: 4.23, z: -0.192}
-<<<<<<< HEAD
---- !u!1001 &5651948883322746419
-=======
 --- !u!1 &7441189542411100569
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +370,6 @@ Transform:
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1001 &2364717994464761898
->>>>>>> Beyar
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -442,11 +438,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a35edac99a68f364aa1bdfcd84e62a4d, type: 3}
---- !u!4 &7099317636351242140 stripped
+--- !u!4 &881364303560851845 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3236423843551615407, guid: a35edac99a68f364aa1bdfcd84e62a4d,
     type: 3}
-  m_PrefabInstance: {fileID: 5651948883322746419}
+  m_PrefabInstance: {fileID: 2364717994464761898}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5766168308183616888
 PrefabInstance:
@@ -473,7 +469,7 @@ PrefabInstance:
     - target: {fileID: 2668918509374487775, guid: 4781ee214aaf6f5459b6cd29f669ba4c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2668918509374487775, guid: 4781ee214aaf6f5459b6cd29f669ba4c,
         type: 3}
