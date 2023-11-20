@@ -1,7 +1,7 @@
-﻿using Runtime.Data.ValueObjects;
-using Runtime.Keys;
+﻿using System;
+using Runtime.Controllers.Stamina;
+using Runtime.Data.ValueObjects;
 using Sirenix.OdinInspector;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Runtime.Controllers.Player
@@ -13,6 +13,8 @@ namespace Runtime.Controllers.Player
         #region Serialized Variables
         
         [SerializeField] public CharacterController characterController;
+
+        [SerializeField] private SprintStaminaController _staminaController;
         #endregion
 
         #region Private Variables
@@ -28,30 +30,52 @@ namespace Runtime.Controllers.Player
             _data = data;
         }
 
+        private void Start()
+        {
+            _staminaController = FindObjectOfType<SprintStaminaController>();
+        }
+
         private void FixedUpdate()
         {
-            MovePlayer();
-            SprintPlayer();
+            RunOrSprint();
         }
+
 
         private void MovePlayer()
         {
-            float x = Input.GetAxis("Horizontal");
-            float z = Input.GetAxis("Vertical");
-
+            var x = Input.GetAxis("Horizontal");
+           
+            var z = Input.GetAxis("Vertical");
+            
             Vector3 move = transform.right * x + transform.forward * z;
             characterController.Move(move * _data.ForwardSpeed * Time.deltaTime);
+            
+            _staminaController.IncreaseStamina();
         }
 
+        private void RunOrSprint()
+        {
+            var shift = Input.GetKey(KeyCode.LeftShift);
+            if (shift)
+            {
+                SprintPlayer();
+                Debug.Log("DecreaseStamina and run");
+            }
+            else
+            {
+                MovePlayer();
+                Debug.Log("IncreaseStamina and move");
+            }
+
+        }
         private void SprintPlayer()
         {
-            if (Input.GetKey("left shift"))
+            if (Input.GetKey(KeyCode.LeftShift) && (Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow)))
             {
                 Vector3 run = transform.forward;
                 characterController.Move(run * _data.SprintSpeed * Time.deltaTime);
-
+                _staminaController.DecreaseStamina();
             }
-
         }
     }
 }

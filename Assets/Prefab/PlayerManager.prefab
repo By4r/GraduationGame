@@ -310,3 +310,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 2668918509374487768}
+  _staminaController: {fileID: 0}

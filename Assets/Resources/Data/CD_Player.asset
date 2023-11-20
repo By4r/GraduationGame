@@ -14,5 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     MovementData:
+<<<<<<< HEAD
       ForwardSpeed: 30
       SprintSpeed: 5
+=======
+      ForwardSpeed: 15
+      SprintSpeed: 20
+>>>>>>> origin/Emre
