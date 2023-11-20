@@ -15,11 +15,4 @@ MonoBehaviour:
   Data:
     MovementData:
       ForwardSpeed: 15
-      SprintSpeed: 5
-    MeshData:
-      ScaleCounter: 0
-    ForceData:
-      ForceParameters:
-        x: 0
-        y: 0
-        z: 0
+      SprintSpeed: 20
