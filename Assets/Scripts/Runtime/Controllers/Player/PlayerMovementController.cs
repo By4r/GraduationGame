@@ -1,6 +1,7 @@
 ﻿using System;
 using Runtime.Controllers.Stamina;
 using Runtime.Data.ValueObjects;
+using Runtime.Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -76,6 +77,26 @@ namespace Runtime.Controllers.Player
                 characterController.Move(run * _data.SprintSpeed * Time.deltaTime);
                 _staminaController.DecreaseStamina();
             }
+        }
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+        private void SubscribeEvents()
+        {
+            PlayerSignals.Instance.onMovePlayer += MovePlayer;
+            PlayerSignals.Instance.onRunPlayer += SprintPlayer;
+            PlayerSignals.Instance.onRunOrSprint += RunOrSprint;
+        }
+        private void OnDisable()
+        {
+            UnSubscribeEvents();
+        }
+        private void UnSubscribeEvents()
+        {
+            PlayerSignals.Instance.onMovePlayer -= MovePlayer;
+            PlayerSignals.Instance.onRunPlayer -= SprintPlayer;
+            PlayerSignals.Instance.onRunOrSprint -= RunOrSprint;
         }
     }
 }

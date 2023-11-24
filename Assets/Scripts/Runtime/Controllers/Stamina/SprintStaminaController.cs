@@ -23,22 +23,6 @@ namespace Runtime.Controllers.Stamina
             image1.fillAmount = maxStamina;
         }
 
-        private void Update()
-        {
-            
-           // StaminaDecider();
-          // if (Input.GetKey("left shift"))
-          // {
-          //     DecreaseStamina();
-          //     image1.fillAmount = stamina;
-          // }
-          // else if (stamina != maxStamina)
-          // {
-          //     IncreaseStamina();
-          //     image1.fillAmount = stamina;
-          // }
-        }
-        
         public void DecreaseStamina()
         {
             if (stamina >= 0)
