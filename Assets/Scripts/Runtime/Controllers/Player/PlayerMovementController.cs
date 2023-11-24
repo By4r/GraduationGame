@@ -16,6 +16,7 @@ namespace Runtime.Controllers.Player
         [SerializeField] public CharacterController characterController;
 
         [SerializeField] private SprintStaminaController _staminaController;
+        [SerializeField] public bool canRun;
         #endregion
 
         #region Private Variables
@@ -35,7 +36,6 @@ namespace Runtime.Controllers.Player
         {
             _staminaController = FindObjectOfType<SprintStaminaController>();
         }
-
         private void FixedUpdate()
         {
             RunOrSprint();
@@ -56,8 +56,21 @@ namespace Runtime.Controllers.Player
 
         private void RunOrSprint()
         {
+            if (_staminaController.stamina <= 0.01f)
+            {
+                canRun = false;
+            }
+            else if (_staminaController.stamina >= 0.03f)
+            {
+                canRun = true;
+            }
+
+            
+            
             var shift = Input.GetKey(KeyCode.LeftShift);
-            if (shift)
+            var w = Input.GetKey("w");
+            var uparrow= Input.GetKey(KeyCode.UpArrow);
+            if (shift && w && canRun == true||uparrow)
             {
                 SprintPlayer();
                 Debug.Log("DecreaseStamina and run");
@@ -85,8 +98,8 @@ namespace Runtime.Controllers.Player
         private void SubscribeEvents()
         {
             PlayerSignals.Instance.onMovePlayer += MovePlayer;
-            PlayerSignals.Instance.onRunPlayer += SprintPlayer;
-            PlayerSignals.Instance.onRunOrSprint += RunOrSprint;
+           // PlayerSignals.Instance.onRunPlayer += SprintPlayer;
+           // PlayerSignals.Instance.onRunOrSprint += RunOrSprint;
         }
         private void OnDisable()
         {
@@ -95,8 +108,8 @@ namespace Runtime.Controllers.Player
         private void UnSubscribeEvents()
         {
             PlayerSignals.Instance.onMovePlayer -= MovePlayer;
-            PlayerSignals.Instance.onRunPlayer -= SprintPlayer;
-            PlayerSignals.Instance.onRunOrSprint -= RunOrSprint;
+           // PlayerSignals.Instance.onRunPlayer -= SprintPlayer;
+           // PlayerSignals.Instance.onRunOrSprint -= RunOrSprint;
         }
     }
 }

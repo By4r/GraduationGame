@@ -55,9 +55,27 @@ namespace Runtime.Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onReset += OnReset;
+            PlayerSignals.Instance.onMovePlayer += OnPlayerMove;
+            PlayerSignals.Instance.onRunPlayer += OnPlayerRun;
+            PlayerSignals.Instance.onRunOrSprint += OnRunOrSprint;
+            
+            PlayerSignals.Instance.onDecreaseStamina += OnDecreaseStamina;
+            PlayerSignals.Instance.onIncreaseStamina += OnIncreaseStamina;
         }
 
 
+        private void OnPlayerMove()
+        {
+            PlayerSignals.Instance.onMovePlayer?.Invoke();
+        }
+        private void OnPlayerRun()
+        {
+            PlayerSignals.Instance.onRunPlayer?.Invoke();
+        }
+        private void OnRunOrSprint()
+        {
+            PlayerSignals.Instance.onRunOrSprint?.Invoke();
+        }
         private void OnReset()
         {
             StageValue = 0;
@@ -67,11 +85,27 @@ namespace Runtime.Managers
         private void UnSubscribeEvents()
         {
             CoreGameSignals.Instance.onReset -= OnReset;
+            PlayerSignals.Instance.onMovePlayer -= OnPlayerMove;
+            PlayerSignals.Instance.onRunPlayer -= OnPlayerRun;
+            PlayerSignals.Instance.onRunOrSprint -= OnRunOrSprint;
+            
+            PlayerSignals.Instance.onDecreaseStamina -= OnDecreaseStamina;
+            PlayerSignals.Instance.onIncreaseStamina -= OnIncreaseStamina;
         }
 
         private void OnDisable()
         {
             UnSubscribeEvents();
         }
+        
+        private void OnDecreaseStamina()
+        {
+            PlayerSignals.Instance.onDecreaseStamina?.Invoke();
+        }
+        private void OnIncreaseStamina()
+        {
+            PlayerSignals.Instance.onIncreaseStamina?.Invoke();
+        }
+        
     }
 }
