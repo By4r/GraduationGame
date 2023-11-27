@@ -310,4 +310,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 2668918509374487768}
-  _staminaController: {fileID: 0}
+  _staminaController: {fileID: 6399046552709942025, guid: dcdaa1e5edb5fe84fb11ec77d84c65c3,
+    type: 3}
+  canRun: 1

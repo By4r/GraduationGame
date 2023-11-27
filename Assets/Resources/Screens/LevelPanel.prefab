@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b090aecfc129497e916e4f288f4df03c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anomalyHolder: []
 --- !u!1 &2103122791312155861
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,6 +883,8 @@ MonoBehaviour:
   maxStamina: 1
   dValue: 0.08
   image1: {fileID: 845035330945601138}
+  playerMovementController: {fileID: 2668918509374487774, guid: 4781ee214aaf6f5459b6cd29f669ba4c,
+    type: 3}
 --- !u!1 &7282406559960353193
 GameObject:
   m_ObjectHideFlags: 0

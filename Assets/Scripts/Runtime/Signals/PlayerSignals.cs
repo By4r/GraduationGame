@@ -9,5 +9,7 @@ namespace Runtime.Signals
         public UnityAction onMovePlayer = delegate { };
         public UnityAction onRunPlayer = delegate { };
         public UnityAction onRunOrSprint = delegate { };
+        public UnityAction onDecreaseStamina = delegate { };
+        public UnityAction onIncreaseStamina = delegate { };
     }
 }
