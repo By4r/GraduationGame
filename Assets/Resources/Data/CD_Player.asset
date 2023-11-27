@@ -15,4 +15,4 @@ MonoBehaviour:
   Data:
     MovementData:
       ForwardSpeed: 15
-      SprintSpeed: 50
+      SprintSpeed: 30
