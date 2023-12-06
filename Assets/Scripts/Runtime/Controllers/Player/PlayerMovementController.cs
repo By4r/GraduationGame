@@ -13,10 +13,10 @@ namespace Runtime.Controllers.Player
 
         #region Serialized Variables
         
-        [SerializeField] public CharacterController characterController;
+        [SerializeField] public  CharacterController characterController;
 
         [SerializeField] private SprintStaminaController _staminaController;
-        [SerializeField] public bool canRun;
+        [SerializeField] private bool canRun;
         #endregion
 
         #region Private Variables
@@ -34,7 +34,17 @@ namespace Runtime.Controllers.Player
 
         private void Start()
         {
+            characterController = GetComponent<CharacterController>();
+                if (characterController == null)
+                {
+                    Debug.LogError("CharacterController is not assigned and not found on the GameObject.");
+                }
+           
             _staminaController = FindObjectOfType<SprintStaminaController>();
+                if (_staminaController == null)
+                {
+                    Debug.LogError("SprintStaminaController is not assigned and not found in the scene.");
+                }
         }
         private void FixedUpdate()
         {
@@ -44,33 +54,34 @@ namespace Runtime.Controllers.Player
 
         private void MovePlayer()
         {
-            var x = Input.GetAxis("Horizontal");
-           
-            var z = Input.GetAxis("Vertical");
-            
-            Vector3 move = transform.right * x + transform.forward * z;
+            Vector3 move = CalculateMoveVector();
             characterController.Move(move * _data.ForwardSpeed * Time.deltaTime);
+
+            if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.RightShift))
+            {
+                _staminaController.IncreaseStamina();
+            }
             
-            _staminaController.IncreaseStamina();
+        }
+        private bool CanSprint()
+        {
+            return Input.GetKey(KeyCode.LeftShift) && (Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow)) && canRun;
+        }
+
+        private Vector3 CalculateMoveVector()
+        {
+            var x = Input.GetAxisRaw("Horizontal");
+            var z = Input.GetAxisRaw("Vertical");
+            return transform.right * x + transform.forward * z;
         }
 
         private void RunOrSprint()
         {
-            if (_staminaController.stamina <= 0.01f)
-            {
-                canRun = false;
-            }
-            else if (_staminaController.stamina >= 0.03f)
-            {
-                canRun = true;
-            }
+            var shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+            var w = Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow);
+            
 
-            
-            
-            var shift = Input.GetKey(KeyCode.LeftShift);
-            var w = Input.GetKey("w");
-            var uparrow= Input.GetKey(KeyCode.UpArrow);
-            if (shift && w && canRun == true||uparrow)
+            if (shift && w && canRun )
             {
                 SprintPlayer();
                 Debug.Log("DecreaseStamina and run");
@@ -81,35 +92,46 @@ namespace Runtime.Controllers.Player
                 Debug.Log("IncreaseStamina and move");
             }
 
+            if (!shift)
+            {
+                canRun = true; // Reset canRun when shift key is released
+            }
+
         }
         private void SprintPlayer()
         {
-            if (Input.GetKey(KeyCode.LeftShift) && (Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow)))
+            if (CanSprint())
             {
-                Vector3 run = transform.forward;
-                characterController.Move(run * _data.SprintSpeed * Time.deltaTime);
+                Vector3 move = CalculateMoveVector();
+                characterController.Move(move * _data.SprintSpeed * Time.deltaTime);
                 _staminaController.DecreaseStamina();
+
+                if (_staminaController.stamina <= 0.01f)
+                {
+                    canRun = false; // Disable running when stamina is depleted
+                }
             }
+            
         }
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
-        private void SubscribeEvents()
-        {
-            PlayerSignals.Instance.onMovePlayer += MovePlayer;
-           // PlayerSignals.Instance.onRunPlayer += SprintPlayer;
-           // PlayerSignals.Instance.onRunOrSprint += RunOrSprint;
-        }
-        private void OnDisable()
-        {
-            UnSubscribeEvents();
-        }
-        private void UnSubscribeEvents()
-        {
-            PlayerSignals.Instance.onMovePlayer -= MovePlayer;
-           // PlayerSignals.Instance.onRunPlayer -= SprintPlayer;
-           // PlayerSignals.Instance.onRunOrSprint -= RunOrSprint;
-        }
+        // private void OnEnable()
+        // {
+        //     SubscribeEvents();
+        // }
+        // private void SubscribeEvents()
+        // {
+        //     PlayerSignals.Instance.onMovePlayer += MovePlayer;
+        //     PlayerSignals.Instance.onRunPlayer += SprintPlayer;
+        //     PlayerSignals.Instance.onRunOrSprint += RunOrSprint;
+        // }
+        // private void OnDisable()
+        // {
+        //     UnSubscribeEvents();
+        // }
+        // private void UnSubscribeEvents()
+        // {
+        //     PlayerSignals.Instance.onMovePlayer -= MovePlayer;
+        //     PlayerSignals.Instance.onRunPlayer -= SprintPlayer;
+        //     PlayerSignals.Instance.onRunOrSprint -= RunOrSprint;
+        // }
     }
 }
