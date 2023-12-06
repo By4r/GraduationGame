@@ -35,7 +35,6 @@ namespace Runtime.Controllers.Stamina
                 image1.fillAmount = stamina;
             }
         }
-
         
 
         public void IncreaseStamina()
