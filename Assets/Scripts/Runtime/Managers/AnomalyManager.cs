@@ -17,7 +17,9 @@ namespace Runtime.Managers
 
         #region Private Variables
 
-        private AnomalyData _anomalyData;
+        private LocalAnomalyData _localAnomalyData;
+
+        private UniqueAnomalyData _uniqueAnomalyData;
 
         private int _currentAnomalyIndex;
 
@@ -27,15 +29,20 @@ namespace Runtime.Managers
 
         private void Awake()
         {
-            _anomalyData = GetAnomalyData();
+            _localAnomalyData = GetLocalAnomalyData();
+            _uniqueAnomalyData = GetUniqueAnomalyData();
         }
 
 
-        private AnomalyData GetAnomalyData()
+        private LocalAnomalyData GetLocalAnomalyData()
         {
-            return Resources.Load<CD_Anomaly>("Data/CD_Anomaly").anomalyData;
+            return Resources.Load<CD_LocalAnomaly>("Data/CD_LocalAnomaly").localAnomalyData;
         }
 
+        private UniqueAnomalyData GetUniqueAnomalyData()
+        {
+            return Resources.Load<CD_UniqueAnomaly>("Data/CD_UniqueAnomaly").uniqueAnomalyData;
+        }
 
         private void OnEnable()
         {
@@ -54,27 +61,44 @@ namespace Runtime.Managers
             switch (_currentStage)
             {
                 case AnomalyStageTypes.Part1:
-                    anomalyController.SpawnAnomaly(_anomalyData.SpawnReferences[(int)AnomalyStageTypes.Part1],
+                    anomalyController.SpawnAnomaly(_localAnomalyData.SpawnReferences[(int)AnomalyStageTypes.Part1],
+                        _currentAnomalyIndex);
+                    anomalyController.SpawnAnomaly(_uniqueAnomalyData.SpawnReferences[(int)AnomalyStageTypes.Part1],
                         _currentAnomalyIndex);
                     break;
 
                 case AnomalyStageTypes.Part2:
-                    anomalyController.SpawnAnomaly(_anomalyData.SpawnReferences[(int)AnomalyStageTypes.Part2],
+                    anomalyController.SpawnAnomaly(_localAnomalyData.SpawnReferences[(int)AnomalyStageTypes.Part2],
+                        _currentAnomalyIndex);
+                    anomalyController.SpawnAnomaly(_uniqueAnomalyData.SpawnReferences[(int)AnomalyStageTypes.Part2],
                         _currentAnomalyIndex);
                     break;
 
                 case AnomalyStageTypes.Part3:
-                    anomalyController.SpawnAnomaly(_anomalyData.SpawnReferences[(int)AnomalyStageTypes.Part3],
+                    anomalyController.SpawnAnomaly(_localAnomalyData.SpawnReferences[(int)AnomalyStageTypes.Part3],
+                        _currentAnomalyIndex);
+                    anomalyController.SpawnAnomaly(_uniqueAnomalyData.SpawnReferences[(int)AnomalyStageTypes.Part3],
                         _currentAnomalyIndex);
                     break;
 
                 case AnomalyStageTypes.Part4:
-                    anomalyController.SpawnAnomaly(_anomalyData.SpawnReferences[(int)AnomalyStageTypes.Part4],
+                    anomalyController.SpawnAnomaly(_localAnomalyData.SpawnReferences[(int)AnomalyStageTypes.Part4],
+                        _currentAnomalyIndex);
+                    anomalyController.SpawnAnomaly(_uniqueAnomalyData.SpawnReferences[(int)AnomalyStageTypes.Part4],
                         _currentAnomalyIndex);
                     break;
 
                 case AnomalyStageTypes.Part5:
-                    anomalyController.SpawnAnomaly(_anomalyData.SpawnReferences[(int)AnomalyStageTypes.Part5],
+                    anomalyController.SpawnAnomaly(_localAnomalyData.SpawnReferences[(int)AnomalyStageTypes.Part5],
+                        _currentAnomalyIndex);
+                    anomalyController.SpawnAnomaly(_uniqueAnomalyData.SpawnReferences[(int)AnomalyStageTypes.Part5],
+                        _currentAnomalyIndex);
+                    break;
+
+                case AnomalyStageTypes.Part6:
+                    anomalyController.SpawnAnomaly(_localAnomalyData.SpawnReferences[(int)AnomalyStageTypes.Part6],
+                        _currentAnomalyIndex);
+                    anomalyController.SpawnAnomaly(_uniqueAnomalyData.SpawnReferences[(int)AnomalyStageTypes.Part6],
                         _currentAnomalyIndex);
                     break;
                 default:

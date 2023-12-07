@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c1b1a7035844e8b833b53cd11be6f7, type: 3}
+  m_Name: CD_UniqueAnomaly
+  m_EditorClassIdentifier: 
+  uniqueAnomalyData:
+    SpawnReferences:
+    - {fileID: 7589808084704644013, guid: 439f41afc21852344a2c75dbefcc9094, type: 3}
+    - {fileID: 7589808084704644013, guid: ba89ffcdd8f32ea4c87008f85ab089d5, type: 3}
+    - {fileID: 7589808084704644013, guid: 152f7367cb6799d49be8df747229a10d, type: 3}
+    - {fileID: 7589808084704644013, guid: ad8e4d9380ce86e4ab320f7a87ea5a2d, type: 3}
+    - {fileID: 7589808084704644013, guid: de3277fb55c677d4cbe0b72495bb530f, type: 3}
+    - {fileID: 7589808084704644013, guid: cac0534f3357627478ef10d7ffdbf813, type: 3}

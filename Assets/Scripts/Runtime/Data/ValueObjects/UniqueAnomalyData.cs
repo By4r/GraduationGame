@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Runtime.Data.ValueObjects
 {
     [Serializable]
-    public class AnomalyData
+    public class UniqueAnomalyData
     {
         public List<GameObject> SpawnReferences = new List<GameObject>();
     }
