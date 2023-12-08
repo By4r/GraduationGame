@@ -4,20 +4,24 @@ using Runtime.Managers;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Runtime.Enums;
+using Runtime.Signals;
 
 public class CapturePhoto : MonoBehaviour
 {
     [Header("Photo Taker")] 
     [SerializeField] private Image photoDisplayArea;
     [SerializeField] private GameObject photoFrame;
+    [SerializeField] private bool isPhotoModeOpen;
 
     [FormerlySerializedAs("camereFlash")]
     [Header("Flash Effect")] 
     [SerializeField] private GameObject cameraFlash;
     [SerializeField] private float flashTime;
 
-    [Header("Photo Fader Effect")] 
+    [Header("Photo Animations")] 
     [SerializeField] private Animator fadingAnimation;
+    [SerializeField] private Animator removingAnimation;
     
     [SerializeField] private PlayerManager _playerManager;
     
@@ -37,21 +41,47 @@ public class CapturePhoto : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown("r"))
         {
-            if (!viewingPhoto)
-            {
-                StartCoroutine(PhotoCapture());
-            }
-            else RemovePhoto();
+            OpenPhotoMode();
+        }
 
+        if (isPhotoModeOpen)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (!viewingPhoto)
+                {
+                    StartCoroutine(PhotoCapture());
+                    StartCoroutine(PhotoRemoveEffect());
+                }
+
+            }
+        }
+       
+    }
+    
+    private void OpenPhotoMode()
+    {
+        if (!isPhotoModeOpen)
+        {
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Photo, 2);
+            isPhotoModeOpen = true;
+        }
+        else if(isPhotoModeOpen)
+        {
+            CoreUISignals.Instance.onClosePanel.Invoke(2);
+            isPhotoModeOpen = false;
+            Debug.Log("panel closed");
         }
     }
 
+   // bool IsPanelOpen(){return;}
     private void RemovePhoto()
     {
         viewingPhoto = false;
         photoFrame.SetActive(false);
+        
     }
 
     IEnumerator PhotoCapture()
@@ -64,7 +94,11 @@ public class CapturePhoto : MonoBehaviour
         screenCapture.ReadPixels(regionToRead,0,0,false);
         screenCapture.Apply();
         ShowPhoto();
+        Debug.Log("Photo Taken");
+       
     }
+
+  
 
     private void ShowPhoto()
     {
@@ -77,7 +111,13 @@ public class CapturePhoto : MonoBehaviour
         StartCoroutine(CameraFlashEffect());
         fadingAnimation.Play("PhotoFadeAnim");
     }
-
+    IEnumerator PhotoRemoveEffect()
+    {
+        removingAnimation.Play("PhotoRemovingAnim");
+        yield return new WaitForSeconds(3);
+        
+        RemovePhoto();
+    }
     IEnumerator CameraFlashEffect()
     {
         //audio play here

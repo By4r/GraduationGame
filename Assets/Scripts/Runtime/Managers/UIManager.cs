@@ -42,7 +42,7 @@ namespace Runtime.Managers
 
         private void OnLevelSuccessful()
         {
-            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Win, 2);
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Photo, 2);
         }
 
         private void OnLevelFailed()

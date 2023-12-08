@@ -4,7 +4,7 @@ namespace Runtime.Enums
     {
         Start,
         Level,
-        Win,
+        Photo,
         Fail
         
     }
