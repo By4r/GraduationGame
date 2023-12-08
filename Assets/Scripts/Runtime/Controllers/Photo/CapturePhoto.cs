@@ -53,7 +53,7 @@ public class CapturePhoto : MonoBehaviour
                 if (!viewingPhoto)
                 {
                     StartCoroutine(PhotoCapture());
-                    StartCoroutine(PhotoRemoveEffect());
+                    
                 }
 
             }
@@ -95,7 +95,7 @@ public class CapturePhoto : MonoBehaviour
         screenCapture.Apply();
         ShowPhoto();
         Debug.Log("Photo Taken");
-       
+        StartCoroutine(PhotoRemoveEffect());
     }
 
   
@@ -114,7 +114,7 @@ public class CapturePhoto : MonoBehaviour
     IEnumerator PhotoRemoveEffect()
     {
         removingAnimation.Play("PhotoRemovingAnim");
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.5f);
         
         RemovePhoto();
     }
