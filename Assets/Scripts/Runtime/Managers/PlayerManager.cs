@@ -13,6 +13,7 @@ namespace Runtime.Managers
         #region Public Variables
 
         public byte StageValue;
+        public GameObject light;
 
         #endregion
 
