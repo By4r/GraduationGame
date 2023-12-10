@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Runtime.Controllers.Player;
 using Runtime.Managers;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -24,6 +25,8 @@ public class CapturePhoto : MonoBehaviour
     [SerializeField] private Animator removingAnimation;
     
     [SerializeField] private PlayerManager _playerManager;
+    [SerializeField] private PlayerAnomalyReport _playerAnomalyReport;
+    
     
     private Texture2D screenCapture;
     private bool viewingPhoto;
@@ -33,6 +36,7 @@ public class CapturePhoto : MonoBehaviour
         screenCapture = new Texture2D(Screen.width, Screen.height,TextureFormat.RGB24,false);
         
         _playerManager = FindObjectOfType<PlayerManager>();
+        _playerAnomalyReport = FindObjectOfType<PlayerAnomalyReport>();
         //_playerManager = GameObject.Find("PhotoFlashLight").GetComponentInChildren<PlayerManager>();
         cameraFlash = _playerManager.light;
         
@@ -88,7 +92,9 @@ public class CapturePhoto : MonoBehaviour
     {
         viewingPhoto = true;
         yield return new WaitForEndOfFrame();
-
+        
+        _playerAnomalyReport.PlayerRaycast();
+        
         Rect regionToRead = new Rect(0, 0, Screen.width, Screen.height);
         
         screenCapture.ReadPixels(regionToRead,0,0,false);
@@ -96,6 +102,8 @@ public class CapturePhoto : MonoBehaviour
         ShowPhoto();
         Debug.Log("Photo Taken");
         StartCoroutine(PhotoRemoveEffect());
+
+
     }
 
   

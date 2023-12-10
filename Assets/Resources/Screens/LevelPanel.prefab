@@ -1016,6 +1016,7 @@ MonoBehaviour:
   removingAnimation: {fileID: 3171946193418821091}
   _playerManager: {fileID: 3027736164108901709, guid: 4781ee214aaf6f5459b6cd29f669ba4c,
     type: 3}
+  _playerAnomalyReport: {fileID: 0}
 --- !u!1 &6505831848746032812
 GameObject:
   m_ObjectHideFlags: 0
