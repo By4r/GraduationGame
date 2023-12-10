@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 6979727516235878582}
   - component: {fileID: 3027736164108901709}
   - component: {fileID: 6979727516235878576}
+  - component: {fileID: 5533503943032313352}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -201,6 +202,19 @@ MonoBehaviour:
   _staminaController: {fileID: 6399046552709942025, guid: dcdaa1e5edb5fe84fb11ec77d84c65c3,
     type: 3}
   canRun: 1
+--- !u!114 &5533503943032313352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6979727516235878583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e2ddc653c47e34db71f6d9048647c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerLook: {fileID: 6979727517585880250}
 --- !u!1 &6979727517174179793
 GameObject:
   m_ObjectHideFlags: 0
