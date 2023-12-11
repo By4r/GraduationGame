@@ -14,6 +14,7 @@ namespace Runtime.Managers
 
         public byte StageValue;
         public new GameObject light;
+        public new GameObject playerEyes;
 
         #endregion
 

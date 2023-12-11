@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using Runtime.Managers;
 
 namespace Runtime.Controllers.Player
 {
@@ -8,12 +10,20 @@ namespace Runtime.Controllers.Player
     {
         [SerializeField] LayerMask layerMask;
         [SerializeField] public bool isAnomalyDetected;
-        public GameObject playerLook;
-        
+        [SerializeField] private TextMeshProUGUI anomalyDetectionText;
+        [SerializeField] private Animator AnomalyDetectionAnim;
+        [SerializeField] private GameObject playerlook;
+        //[SerializeField] private CapturePhoto _capturePhoto;
+        [SerializeField] private PlayerManager _playerManager;
+
+        public bool anomalyOnReport;
         // Start is called before the first frame update
         void Start()
         {
-
+            // _capturePhoto.animatorr = FindObjectOfType<Animator>();
+            // AnomalyDetectionAnim = _capturePhoto.animatorr;
+            _playerManager = FindObjectOfType<PlayerManager>();
+            playerlook = _playerManager.playerEyes;
         }
 
         
@@ -25,11 +35,11 @@ namespace Runtime.Controllers.Player
         
         public void PlayerRaycast()
         {
-            if (Physics.Raycast(playerLook.transform.position, playerLook.transform.TransformDirection(Vector3.forward),
+            if (Physics.Raycast(playerlook.transform.position, playerlook.transform.TransformDirection(Vector3.forward),
                     out RaycastHit hitInfo, 20f,layerMask,QueryTriggerInteraction.Collide))
             {
                 Debug.Log("hit");
-                Debug.DrawRay(playerLook.transform.position, playerLook.transform.TransformDirection(Vector3.forward) * hitInfo.distance,
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hitInfo.distance,
                     Color.green);
                 isAnomalyDetected = true;
 
@@ -37,34 +47,31 @@ namespace Runtime.Controllers.Player
             else
             {
                 Debug.Log("no hit");
-                Debug.DrawRay(playerLook.transform.position, playerLook.transform.TransformDirection(Vector3.forward) * 20f,
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 20f,
                     Color.red);
                 isAnomalyDetected = false;
             }
+            //StartCoroutine(AnomalyReported());
+        }
+        
+        public IEnumerator AnomalyReported()
+        {
+            anomalyOnReport = true;
+            AnomalyDetectionAnim.enabled = true;
+            AnomalyDetectionAnim.Play("AnomalyReported", -1, 0f);
+            anomalyDetectionText.text = "Checking Anomaly...";
+            Debug.Log("11");
+            yield return new WaitForSeconds(5f);
+            
+            anomalyDetectionText.text = isAnomalyDetected ? "Anomaly Fixed." : "Anomaly Not Found.";
+            Debug.Log("22");
+            yield return new WaitForSeconds(3f);
+            AnomalyDetectionAnim.enabled = false;
+            Debug.Log("33");
+            anomalyOnReport = false;
 
-            if (isAnomalyDetected)
-            {
-                StartCoroutine(AnomalyDetected());
-            }
-            else StartCoroutine(AnomalyNotDetected());
         }
         
-        IEnumerator AnomalyDetected()
-        {
-            //removingAnimation.Play("PhotoRemovingAnim");
-            Debug.Log("anomalydeteceted");
-            yield return new WaitForSeconds(1.5f);
-        
-            
-        }
-        IEnumerator AnomalyNotDetected()
-        {
-            Debug.Log("anomalydetecetedNO");
-            //removingAnimation.Play("PhotoRemovingAnim");
-            yield return new WaitForSeconds(1.5f);
-        
-            
-        }
         
     }
     }

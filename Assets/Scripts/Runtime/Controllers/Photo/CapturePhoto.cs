@@ -30,6 +30,7 @@ public class CapturePhoto : MonoBehaviour
     
     private Texture2D screenCapture;
     private bool viewingPhoto;
+    //public Animator animatorr;
     
     void Start()
     {
@@ -41,6 +42,8 @@ public class CapturePhoto : MonoBehaviour
         cameraFlash = _playerManager.light;
         
         
+         //animatorr = FindObjectOfType<Animator>();
+
     }
     
     void Update()
@@ -54,7 +57,7 @@ public class CapturePhoto : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (!viewingPhoto)
+                if (!viewingPhoto&& !_playerAnomalyReport.anomalyOnReport)
                 {
                     StartCoroutine(PhotoCapture());
                     
@@ -102,7 +105,7 @@ public class CapturePhoto : MonoBehaviour
         ShowPhoto();
         Debug.Log("Photo Taken");
         StartCoroutine(PhotoRemoveEffect());
-
+        StartCoroutine(_playerAnomalyReport.AnomalyReported());
 
     }
 
