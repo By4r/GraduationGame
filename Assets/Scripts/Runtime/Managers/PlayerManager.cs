@@ -63,6 +63,8 @@ namespace Runtime.Managers
             
             PlayerSignals.Instance.onDecreaseStamina += OnDecreaseStamina;
             PlayerSignals.Instance.onIncreaseStamina += OnIncreaseStamina;
+            PlayerSignals.Instance.onDecreaseMentalHealth += OnDecreaseMentalHealth;
+            PlayerSignals.Instance.onIncreaseMentalHealth += OnIncreaseMentalHealth;
         }
 
 
@@ -93,6 +95,8 @@ namespace Runtime.Managers
             
             PlayerSignals.Instance.onDecreaseStamina -= OnDecreaseStamina;
             PlayerSignals.Instance.onIncreaseStamina -= OnIncreaseStamina;
+            PlayerSignals.Instance.onDecreaseMentalHealth -= OnDecreaseMentalHealth;
+            PlayerSignals.Instance.onIncreaseMentalHealth -= OnIncreaseMentalHealth;
         }
 
         private void OnDisable()
@@ -107,6 +111,15 @@ namespace Runtime.Managers
         private void OnIncreaseStamina()
         {
             PlayerSignals.Instance.onIncreaseStamina?.Invoke();
+        }
+        
+        private void OnDecreaseMentalHealth()
+        {
+            PlayerSignals.Instance.onDecreaseMentalHealth?.Invoke();
+        }
+        private void OnIncreaseMentalHealth()
+        {
+            PlayerSignals.Instance.onIncreaseMentalHealth?.Invoke();
         }
         
     }

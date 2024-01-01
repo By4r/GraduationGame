@@ -11,5 +11,7 @@ namespace Runtime.Signals
         public UnityAction onRunOrSprint = delegate { };
         public UnityAction onDecreaseStamina = delegate { };
         public UnityAction onIncreaseStamina = delegate { };
+        public UnityAction onIncreaseMentalHealth = delegate { };
+        public UnityAction onDecreaseMentalHealth = delegate { };
     }
 }
