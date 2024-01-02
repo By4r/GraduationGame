@@ -13,97 +13,47 @@ namespace Runtime.Controllers.Player
 
         #region Serialized Variables
 
-        //[SerializeField] private PlayerManager manager;
-        // [SerializeField] private new Collider collider;
-        // [SerializeField] private new Rigidbody rigidbody;
-
         #endregion
 
         #region Private Variables
-
-        private readonly string _stageArea = "StageArea";
-        private readonly string _finish = "FinishArea";
-        private readonly string _miniGame = "MiniGameArea";
+        
         private readonly string _inLight = "InsideLight";
         private bool increasemental;
+        private bool decreasemental;
         #endregion
 
         #endregion
 
-        private void FixedUpdate()
+        private void Update()
         {
-            if (increasemental)
+            if (decreasemental&&!increasemental)
             {
-                
+                DecreaseMentalHealth();
             }
         }
-
-        private void OnTriggerEnter(Collider other)
+        
+        private void OnTriggerStay(Collider other)
         {
-            if (other.CompareTag(_inLight))
+            if (other.CompareTag(_inLight) && !decreasemental && increasemental)
             {
-                increasemental = true;
-                Debug.Log("weq");
+                Debug.Log("IncreaseMental");
                 PlayerSignals.Instance.onIncreaseMentalHealth?.Invoke();
             }
-            
-            // if (other.CompareTag(_stageArea))
-            // {
-            //     CoreGameSignals.Instance.onStageAreaEntered?.Invoke();
-            //     InputSignals.Instance.onDisableInput?.Invoke();
-            //
-            //     DOVirtual.DelayedCall(3, () =>
-            //     {
-            //         // var result = other.transform.parent.GetComponentInChildren<PoolController>()
-            //         //     .TakeResults(manager.StageValue);
-            //         //
-            //         // if (result)
-            //         // {
-            //         //     CoreGameSignals.Instance.onStageAreaSuccessful?.Invoke(manager.StageValue);
-            //         //     InputSignals.Instance.onEnableInput?.Invoke();
-            //         // }
-            //         // else
-            //         // {
-            //         //     CoreGameSignals.Instance.onLevelFailed?.Invoke();
-            //         // }
-            //     });
-            //     return;
-            // }
-
-           
-            // if (other.CompareTag(_finish))
-            // {
-            //     CoreGameSignals.Instance.onFinishAreaEntered?.Invoke();
-            //     InputSignals.Instance.onDisableInput?.Invoke();
-            //     return;
-            // }
-            //
-            // if (other.CompareTag(_miniGame))
-            // {
-            //     //Write the MiniGame Mechanics
-            // }
         }
-
+        private void DecreaseMentalHealth()
+        {
+            PlayerSignals.Instance.onDecreaseMentalHealth?.Invoke();
+            Debug.Log("DecreaseMental");
+        }
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag(_inLight))
-            {
-                increasemental = false;
-                Debug.Log("çıktı");
-                PlayerSignals.Instance.onDecreaseMentalHealth?.Invoke();
-            }
+            decreasemental = true;
+            increasemental= false;
         }
-        // private void OnDrawGizmos()
-        // {
-        //     Gizmos.color = Color.yellow;
-        //     var transform1 = manager.transform;
-        //     var position1 = transform1.position;
-        //
-        //     Gizmos.DrawSphere(new Vector3(position1.x, position1.y - 1f, position1.z + .9f), 1.7f);
-        // }
-
-        public void OnReset()
+        private void OnTriggerEnter(Collider other)
         {
+            increasemental = true;
+            decreasemental = false;
         }
     }
 }

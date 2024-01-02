@@ -55,16 +55,16 @@ namespace Runtime.Controllers.Stamina
             if (mentalStamina <= maxMentalStamina)
             {
                 mentalStamina += mentalMultiplier * Time.deltaTime;
-                Debug.Log(mentalStamina+"IncreaseMentalHealth");
+                //Debug.Log(mentalStamina+"IncreaseMentalHealth");
             }
         }
         
         public void DecreaseMentalHealth()
         {
-            if (mentalStamina <= maxMentalStamina)
+            if (mentalStamina >= 0)
             {
                 mentalStamina -= mentalMultiplier * Time.deltaTime;
-                Debug.Log(mentalStamina+"DecreaseMentalHealth");
+                //Debug.Log(mentalStamina+"DecreaseMentalHealth");
             }
         }
         private void OnEnable()

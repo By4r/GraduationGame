@@ -1,4 +1,5 @@
 using Runtime.Controllers.Player;
+using Runtime.Controllers.Stamina;
 using Runtime.Data.UnityObjects;
 using Runtime.Data.ValueObjects;
 using Runtime.Signals;
@@ -21,7 +22,7 @@ namespace Runtime.Managers
         #region Serialized Variables
 
         [SerializeField] private PlayerMovementController movementController;
-
+        [SerializeField] private StaminaController staminaController;
         #endregion
 
         #region Private Variables
@@ -37,7 +38,14 @@ namespace Runtime.Managers
             _data = GetPlayerData();
             SendDataToControllers();
         }
-
+        private void Start()
+        {
+            staminaController = FindObjectOfType<StaminaController>();
+            if (staminaController == null)
+            {
+                Debug.Log("SprintStaminaController is not assigned and not found in the scene.");
+            }
+        }
         private PlayerData GetPlayerData()
         {
             return Resources.Load<CD_Player>("Data/CD_Player").Data;
@@ -115,12 +123,27 @@ namespace Runtime.Managers
         
         private void OnDecreaseMentalHealth()
         {
-            PlayerSignals.Instance.onDecreaseMentalHealth?.Invoke();
+            if (staminaController != null)
+            {
+                staminaController.DecreaseMentalHealth();
+            }
+            else
+            {
+                Debug.LogError("staminaController is null in OnDecreaseMentalHealth.");
+            }
         }
         private void OnIncreaseMentalHealth()
         {
-            PlayerSignals.Instance.onIncreaseMentalHealth?.Invoke();
+            if (staminaController != null)
+            {
+                staminaController.IncreaseMentalHealth();
+            }
+            else
+            {
+                Debug.LogError("staminaController is null in OnIncreaseMentalHealth.");
+            }
         }
+
         
     }
 }
