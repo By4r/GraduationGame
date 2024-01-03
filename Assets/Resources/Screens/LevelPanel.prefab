@@ -1202,6 +1202,7 @@ MonoBehaviour:
     type: 3}
   _playerAnomalyReport: {fileID: 1827650969363417841, guid: 4781ee214aaf6f5459b6cd29f669ba4c,
     type: 3}
+  photoRemainCount: 3
 --- !u!114 &730799531077369667
 MonoBehaviour:
   m_ObjectHideFlags: 0

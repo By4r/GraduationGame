@@ -75,9 +75,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19093c4e7ea49f5a53a3e069624633c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 1536458146505994795}
-  collider: {fileID: 205884046871737277}
-  rigidbody: {fileID: 205884046871737266}
 --- !u!1 &205884047143833462
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,7 +175,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StageValue: 0
+  light: {fileID: 0}
+  playerEyes: {fileID: 0}
   movementController: {fileID: 1335139585367996292}
+  staminaController: {fileID: 0}
 --- !u!114 &1335139585367996292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +192,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
+  _staminaController: {fileID: 0}
+  canRun: 0
 --- !u!1 &8971931367769713202
 GameObject:
   m_ObjectHideFlags: 0

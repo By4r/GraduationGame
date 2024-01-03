@@ -123,25 +123,13 @@ namespace Runtime.Managers
         
         private void OnDecreaseMentalHealth()
         {
-            if (staminaController != null)
-            {
-                staminaController.DecreaseMentalHealth();
-            }
-            else
-            {
-                Debug.LogError("staminaController is null in OnDecreaseMentalHealth.");
-            }
+           //PlayerSignals.Instance.onDecreaseMentalHealth?.Invoke();
+           staminaController.DecreaseMentalHealth();
         }
         private void OnIncreaseMentalHealth()
         {
-            if (staminaController != null)
-            {
-                staminaController.IncreaseMentalHealth();
-            }
-            else
-            {
-                Debug.LogError("staminaController is null in OnIncreaseMentalHealth.");
-            }
+            //PlayerSignals.Instance.onIncreaseMentalHealth?.Invoke();
+            staminaController.IncreaseMentalHealth();
         }
 
         
