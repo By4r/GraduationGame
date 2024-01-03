@@ -8,7 +8,6 @@ namespace Runtime.Managers
     {
         #region Serialized Variables
         
-        [SerializeField] private SecurityCameraController _securityCameraController;
         #endregion
         
         private void OnNextCamera()
