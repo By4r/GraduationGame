@@ -9,6 +9,8 @@ TagManager:
   - Collectable
   - FinishArea
   - MiniGameArea
+  - InsideLight
+  - OutsideLight
   layers:
   - Default
   - TransparentFX

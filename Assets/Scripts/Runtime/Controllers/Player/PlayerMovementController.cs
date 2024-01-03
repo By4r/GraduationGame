@@ -15,7 +15,7 @@ namespace Runtime.Controllers.Player
         
         [SerializeField] public  CharacterController characterController;
 
-        [SerializeField] private SprintStaminaController _staminaController;
+        [SerializeField] private StaminaController _staminaController;
         [SerializeField] private bool canRun;
         #endregion
 
@@ -37,13 +37,13 @@ namespace Runtime.Controllers.Player
             characterController = GetComponent<CharacterController>();
                 if (characterController == null)
                 {
-                    Debug.LogError("CharacterController is not assigned and not found on the GameObject.");
+                    Debug.Log("CharacterController is not assigned and not found on the GameObject.");
                 }
            
-            _staminaController = FindObjectOfType<SprintStaminaController>();
+            _staminaController = FindObjectOfType<StaminaController>();
                 if (_staminaController == null)
                 {
-                    Debug.LogError("SprintStaminaController is not assigned and not found in the scene.");
+                    Debug.Log("SprintStaminaController is not assigned and not found in the scene.");
                 }
         }
         private void FixedUpdate()
@@ -61,7 +61,6 @@ namespace Runtime.Controllers.Player
             {
                 _staminaController.IncreaseStamina();
             }
-            
         }
         private bool CanSprint()
         {
@@ -86,7 +85,7 @@ namespace Runtime.Controllers.Player
                 SprintPlayer();
                 Debug.Log("DecreaseStamina and run");
             }
-            else
+            else 
             {
                 MovePlayer();
                 Debug.Log("IncreaseStamina and move");
@@ -106,32 +105,12 @@ namespace Runtime.Controllers.Player
                 characterController.Move(move * _data.SprintSpeed * Time.deltaTime);
                 _staminaController.DecreaseStamina();
 
-                if (_staminaController.stamina <= 0.01f)
+                if (_staminaController.sprintStamina <= 0.01f)
                 {
                     canRun = false; // Disable running when stamina is depleted
                 }
             }
             
         }
-        // private void OnEnable()
-        // {
-        //     SubscribeEvents();
-        // }
-        // private void SubscribeEvents()
-        // {
-        //     PlayerSignals.Instance.onMovePlayer += MovePlayer;
-        //     PlayerSignals.Instance.onRunPlayer += SprintPlayer;
-        //     PlayerSignals.Instance.onRunOrSprint += RunOrSprint;
-        // }
-        // private void OnDisable()
-        // {
-        //     UnSubscribeEvents();
-        // }
-        // private void UnSubscribeEvents()
-        // {
-        //     PlayerSignals.Instance.onMovePlayer -= MovePlayer;
-        //     PlayerSignals.Instance.onRunPlayer -= SprintPlayer;
-        //     PlayerSignals.Instance.onRunOrSprint -= RunOrSprint;
-        // }
     }
 }

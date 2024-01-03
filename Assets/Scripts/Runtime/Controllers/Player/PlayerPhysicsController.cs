@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Runtime.Controllers.Pool;
 using Runtime.Managers;
 using Runtime.Signals;
@@ -12,9 +13,9 @@ namespace Runtime.Controllers.Player
 
         #region Serialized Variables
 
-        [SerializeField] private PlayerManager manager;
-        [SerializeField] private new Collider collider;
-        [SerializeField] private new Rigidbody rigidbody;
+        //[SerializeField] private PlayerManager manager;
+        // [SerializeField] private new Collider collider;
+        // [SerializeField] private new Rigidbody rigidbody;
 
         #endregion
 
@@ -23,57 +24,83 @@ namespace Runtime.Controllers.Player
         private readonly string _stageArea = "StageArea";
         private readonly string _finish = "FinishArea";
         private readonly string _miniGame = "MiniGameArea";
-
+        private readonly string _inLight = "InsideLight";
+        private bool increasemental;
         #endregion
 
         #endregion
+
+        private void FixedUpdate()
+        {
+            if (increasemental)
+            {
+                
+            }
+        }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(_stageArea))
+            if (other.CompareTag(_inLight))
             {
-                CoreGameSignals.Instance.onStageAreaEntered?.Invoke();
-                InputSignals.Instance.onDisableInput?.Invoke();
-
-                DOVirtual.DelayedCall(3, () =>
-                {
-                    var result = other.transform.parent.GetComponentInChildren<PoolController>()
-                        .TakeResults(manager.StageValue);
-
-                    if (result)
-                    {
-                        CoreGameSignals.Instance.onStageAreaSuccessful?.Invoke(manager.StageValue);
-                        InputSignals.Instance.onEnableInput?.Invoke();
-                    }
-                    else
-                    {
-                        CoreGameSignals.Instance.onLevelFailed?.Invoke();
-                    }
-                });
-                return;
+                increasemental = true;
+                Debug.Log("weq");
+                PlayerSignals.Instance.onIncreaseMentalHealth?.Invoke();
             }
+            
+            // if (other.CompareTag(_stageArea))
+            // {
+            //     CoreGameSignals.Instance.onStageAreaEntered?.Invoke();
+            //     InputSignals.Instance.onDisableInput?.Invoke();
+            //
+            //     DOVirtual.DelayedCall(3, () =>
+            //     {
+            //         // var result = other.transform.parent.GetComponentInChildren<PoolController>()
+            //         //     .TakeResults(manager.StageValue);
+            //         //
+            //         // if (result)
+            //         // {
+            //         //     CoreGameSignals.Instance.onStageAreaSuccessful?.Invoke(manager.StageValue);
+            //         //     InputSignals.Instance.onEnableInput?.Invoke();
+            //         // }
+            //         // else
+            //         // {
+            //         //     CoreGameSignals.Instance.onLevelFailed?.Invoke();
+            //         // }
+            //     });
+            //     return;
+            // }
 
-            if (other.CompareTag(_finish))
-            {
-                CoreGameSignals.Instance.onFinishAreaEntered?.Invoke();
-                InputSignals.Instance.onDisableInput?.Invoke();
-                return;
-            }
-
-            if (other.CompareTag(_miniGame))
-            {
-                //Write the MiniGame Mechanics
-            }
+           
+            // if (other.CompareTag(_finish))
+            // {
+            //     CoreGameSignals.Instance.onFinishAreaEntered?.Invoke();
+            //     InputSignals.Instance.onDisableInput?.Invoke();
+            //     return;
+            // }
+            //
+            // if (other.CompareTag(_miniGame))
+            // {
+            //     //Write the MiniGame Mechanics
+            // }
         }
 
-        private void OnDrawGizmos()
+        private void OnTriggerExit(Collider other)
         {
-            Gizmos.color = Color.yellow;
-            var transform1 = manager.transform;
-            var position1 = transform1.position;
-
-            Gizmos.DrawSphere(new Vector3(position1.x, position1.y - 1f, position1.z + .9f), 1.7f);
+            if (other.CompareTag(_inLight))
+            {
+                increasemental = false;
+                Debug.Log("çıktı");
+                PlayerSignals.Instance.onDecreaseMentalHealth?.Invoke();
+            }
         }
+        // private void OnDrawGizmos()
+        // {
+        //     Gizmos.color = Color.yellow;
+        //     var transform1 = manager.transform;
+        //     var position1 = transform1.position;
+        //
+        //     Gizmos.DrawSphere(new Vector3(position1.x, position1.y - 1f, position1.z + .9f), 1.7f);
+        // }
 
         public void OnReset()
         {
