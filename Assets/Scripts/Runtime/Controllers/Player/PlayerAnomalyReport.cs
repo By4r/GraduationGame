@@ -60,14 +60,11 @@ namespace Runtime.Controllers.Player
             AnomalyDetectionAnim.enabled = true;
             AnomalyDetectionAnim.Play("AnomalyReported", -1, 0f);
             anomalyDetectionText.text = "Checking Anomaly...";
-            Debug.Log("11");
             yield return new WaitForSeconds(5f);
             
             anomalyDetectionText.text = isAnomalyDetected ? "Anomaly Fixed." : "Anomaly Not Found.";
-            Debug.Log("22");
             yield return new WaitForSeconds(3f);
             AnomalyDetectionAnim.enabled = false;
-            Debug.Log("33");
             anomalyOnReport = false;
 
         }

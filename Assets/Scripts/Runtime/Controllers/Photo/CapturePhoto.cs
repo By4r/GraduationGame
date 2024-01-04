@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using Runtime.Controllers.Player;
+using Runtime.Data.UnityObjects;
+using Runtime.Data.ValueObjects;
 using Runtime.Managers;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Runtime.Enums;
 using Runtime.Signals;
+
 
 public class CapturePhoto : MonoBehaviour
 {
@@ -15,7 +18,7 @@ public class CapturePhoto : MonoBehaviour
     [SerializeField] private GameObject photoFrame;
     [SerializeField] private bool isPhotoModeOpen;
 
-    [FormerlySerializedAs("camereFlash")]
+    
     [Header("Flash Effect")] 
     [SerializeField] private GameObject cameraFlash;
     [SerializeField] private float flashTime;
@@ -30,8 +33,9 @@ public class CapturePhoto : MonoBehaviour
     
     private Texture2D screenCapture;
     private bool viewingPhoto;
-    //public Animator animatorr;
-    
+
+    [SerializeField] private int photoRemainCount;
+   
     void Start()
     {
         screenCapture = new Texture2D(Screen.width, Screen.height,TextureFormat.RGB24,false);
@@ -45,7 +49,7 @@ public class CapturePhoto : MonoBehaviour
          //animatorr = FindObjectOfType<Animator>();
 
     }
-    
+   
     void Update()
     {
         if (Input.GetKeyDown("r"))
@@ -67,7 +71,7 @@ public class CapturePhoto : MonoBehaviour
         }
        
     }
-    
+   
     private void OpenPhotoMode()
     {
         if (!isPhotoModeOpen)
@@ -82,8 +86,7 @@ public class CapturePhoto : MonoBehaviour
             Debug.Log("panel closed");
         }
     }
-
-   // bool IsPanelOpen(){return;}
+    
     private void RemovePhoto()
     {
         viewingPhoto = false;
@@ -103,12 +106,13 @@ public class CapturePhoto : MonoBehaviour
         screenCapture.ReadPixels(regionToRead,0,0,false);
         screenCapture.Apply();
         ShowPhoto();
+        photoRemainCount--;
         Debug.Log("Photo Taken");
         StartCoroutine(PhotoRemoveEffect());
         StartCoroutine(_playerAnomalyReport.AnomalyReported());
-
+        
     }
-
+// EĞER 3 FOTO-- OLDUKTAN SONRA CANAVAR UYANMA SİNYALİ TETİKLENİR
   
 
     private void ShowPhoto()

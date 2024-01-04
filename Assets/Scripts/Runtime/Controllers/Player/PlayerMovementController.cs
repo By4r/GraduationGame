@@ -35,16 +35,7 @@ namespace Runtime.Controllers.Player
         private void Start()
         {
             characterController = GetComponent<CharacterController>();
-                if (characterController == null)
-                {
-                    Debug.Log("CharacterController is not assigned and not found on the GameObject.");
-                }
-           
             _staminaController = FindObjectOfType<StaminaController>();
-                if (_staminaController == null)
-                {
-                    Debug.Log("SprintStaminaController is not assigned and not found in the scene.");
-                }
         }
         private void FixedUpdate()
         {
