@@ -132,10 +132,10 @@ namespace Runtime.Controllers.PlayTime
         private void RandomAnomalyTime()
         {
             // Choose a random duration within the _stageIncrementDuration range
-            uniqueAnomalyTime = Random.Range(0f, _stageIncrementDuration/10f);
+            uniqueAnomalyTime = Random.Range(0f, _stageIncrementDuration);
 
             // Choose a random duration for local use within the _stageIncrementDuration range
-            localAnomalyTime = Random.Range(0f, _stageIncrementDuration/10f);
+            localAnomalyTime = Random.Range(0f, _stageIncrementDuration);
 
             // If the localAnomalyTime has been used before, select a new one 
             while (uniqueAnomalyTime == localAnomalyTime)
