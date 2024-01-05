@@ -6,7 +6,7 @@ using Runtime.Managers;
 
 namespace Runtime.Controllers.Player
 {
-    public class PlayerAnomalyReport : MonoBehaviour
+    public class PlayerAnomalyReportController : MonoBehaviour
     {
         [SerializeField] LayerMask layerMask;
         [SerializeField] public bool isAnomalyDetected;

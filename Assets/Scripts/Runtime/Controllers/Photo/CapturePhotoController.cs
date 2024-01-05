@@ -11,7 +11,7 @@ using Runtime.Enums;
 using Runtime.Signals;
 
 
-public class CapturePhoto : MonoBehaviour
+public class CapturePhotoController : MonoBehaviour
 {
     [Header("Photo Taker")] 
     [SerializeField] private Image photoDisplayArea;
@@ -28,7 +28,7 @@ public class CapturePhoto : MonoBehaviour
     [SerializeField] private Animator removingAnimation;
     
     [SerializeField] private PlayerManager _playerManager;
-    [SerializeField] private PlayerAnomalyReport _playerAnomalyReport;
+    [SerializeField] private PlayerAnomalyReportController _playerAnomalyReport;
     
     
     private Texture2D screenCapture;
@@ -41,7 +41,7 @@ public class CapturePhoto : MonoBehaviour
         screenCapture = new Texture2D(Screen.width, Screen.height,TextureFormat.RGB24,false);
         
         _playerManager = FindObjectOfType<PlayerManager>();
-        _playerAnomalyReport = FindObjectOfType<PlayerAnomalyReport>();
+        _playerAnomalyReport = FindObjectOfType<PlayerAnomalyReportController>();
         //_playerManager = GameObject.Find("PhotoFlashLight").GetComponentInChildren<PlayerManager>();
         cameraFlash = _playerManager.light;
         
