@@ -25,19 +25,25 @@ namespace Runtime.Controllers.PlayTime
         private float uniqueAnomalyTime; // Uniquely generated anomaly time
         private float localAnomalyTime; // Anomaly time local to the current stage
 
-        private int currentStage = 1; // Initial stage
+        private int currentStage = 0; // Initial stage
 
         private float _stageIncrementDuration;
 
         private float stageTime;
-
+        
+        
+        private bool hasEnteredLocalAnomaly = false;
+        private bool hasEnteredUniqueAnomaly = false;
+        
         #endregion
 
         private void Awake()
         {
             if (totalTime != 0)
             {
-                _stageIncrementDuration = totalTime / 6f;
+                _stageIncrementDuration = totalTime / 120f;
+                
+                Debug.LogWarning("STAGE INCREMENT DURATION " + _stageIncrementDuration);
             }
             else
             {
@@ -78,14 +84,24 @@ namespace Runtime.Controllers.PlayTime
 
                 UpdateTimerText();
 
-                if (stageTime >= localAnomalyTime)
+                if (stageTime >= localAnomalyTime && !hasEnteredLocalAnomaly)
                 {
                     Debug.Log("Local Anomaly Time in");
+                    
+                    AnomalySignals.Instance.onAnomalySpawn?.Invoke();
+                    hasEnteredLocalAnomaly = true; // Set the flag to true to prevent further logs
                 }
 
-                if (stageTime >= uniqueAnomalyTime)
+                if (stageTime >= uniqueAnomalyTime && !hasEnteredUniqueAnomaly)
                 {
                     Debug.Log("Unique Anomaly Time in");
+                    hasEnteredUniqueAnomaly = true; // Set the flag to true to prevent further logs
+                }
+                
+                // Reset hasEnteredLocalAnomaly flag if stageTime is less than localAnomalyTime
+                if (stageTime < localAnomalyTime)
+                {
+                    hasEnteredLocalAnomaly = false;
                 }
 
                 // if (Mathf.Approximately((totalTime - currentTime) % _stageIncrementDuration, 0f))
@@ -116,10 +132,10 @@ namespace Runtime.Controllers.PlayTime
         private void RandomAnomalyTime()
         {
             // Choose a random duration within the _stageIncrementDuration range
-            uniqueAnomalyTime = Random.Range(0f, _stageIncrementDuration);
+            uniqueAnomalyTime = Random.Range(0f, _stageIncrementDuration/10f);
 
             // Choose a random duration for local use within the _stageIncrementDuration range
-            localAnomalyTime = Random.Range(0f, _stageIncrementDuration);
+            localAnomalyTime = Random.Range(0f, _stageIncrementDuration/10f);
 
             // If the localAnomalyTime has been used before, select a new one 
             while (uniqueAnomalyTime == localAnomalyTime)
@@ -137,13 +153,14 @@ namespace Runtime.Controllers.PlayTime
         {
             // Increment the stage
             currentStage++;
+            Debug.LogWarning("CURRENT STAGE INT:  " + currentStage);
             
             stageAnomalyUIController.UpdateStageIndex(currentStage); // Should Remove After Test
             
             // Ensure the stage doesn't go beyond the maximum value
-            if (currentStage > (int)AnomalyStageTypes.Part5)
+            if (currentStage > (int)AnomalyStageTypes.Part6)
             {
-                currentStage = (int)AnomalyStageTypes.Part5;
+                currentStage = (int)AnomalyStageTypes.Part6;
             }
             
             // Notify about the new stage

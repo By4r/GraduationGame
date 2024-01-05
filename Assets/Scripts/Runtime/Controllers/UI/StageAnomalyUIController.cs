@@ -10,7 +10,7 @@ namespace Runtime.Controllers.UI
 
         private int _currentStage;
 
-        private readonly int _maxStage = 6;
+        private readonly int _maxStage = 5;
 
         private void Start()
         {
@@ -25,8 +25,9 @@ namespace Runtime.Controllers.UI
 
         private void ShowStage()
         {
-            stageText.text = "Stage: " + _currentStage + " / " + _maxStage;
+            stageText.text = "Stage: " + _currentStage + " / " + _maxStage + " (Total Anomaly " + (_maxStage + 1) + ")";
         }
+
     }
     
     

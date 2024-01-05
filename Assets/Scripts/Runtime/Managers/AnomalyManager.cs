@@ -104,6 +104,7 @@ namespace Runtime.Managers
                 case AnomalyStageTypes.Part6:
                     anomalyController.SpawnAnomaly(_localAnomalyData.SpawnReferences[(int)AnomalyStageTypes.Part6],
                         _currentAnomalyIndex);
+                    Debug.LogWarning("LAST PART !!!!");
                     // anomalyController.SpawnAnomaly(_uniqueAnomalyData.SpawnReferences[(int)AnomalyStageTypes.Part6],
                     //     _currentAnomalyIndex);
                     break;
@@ -111,13 +112,15 @@ namespace Runtime.Managers
                 //throw new ArgumentOutOfRangeException();
             }
 
-
+            ++_currentAnomalyIndex;
+            
             Debug.Log("Anomaly Spawned !");
         }
 
         private void OnAnomalyStage(AnomalyStageTypes state)
         {
             _currentStage = state;
+            Debug.LogWarning(_currentStage);
         }
 
         private void UnSubscribeEvents()
