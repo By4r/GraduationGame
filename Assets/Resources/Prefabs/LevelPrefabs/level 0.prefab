@@ -168,8 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameras:
-  - {fileID: 2406139939753945370}
   - {fileID: 4076601373012766680}
+  - {fileID: 2406139939753945370}
   - {fileID: 5574802840941641288}
 --- !u!1 &2406139939753945370
 GameObject:
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 6584682973338791177}
   - component: {fileID: 7224668402314352518}
   m_Layer: 0
-  m_Name: Camera (1)
+  m_Name: Camera1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -367,6 +367,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anomalyController: {fileID: 9114516005485464195}
+  _currentAnomalyIndex: 0
+  _currentStage: 0
 --- !u!1 &4076601373012766680
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +381,7 @@ GameObject:
   - component: {fileID: 2432140348918721613}
   - component: {fileID: 5357864721904214159}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: Camera0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -519,7 +521,7 @@ GameObject:
   - component: {fileID: 6367498454937586470}
   - component: {fileID: 159832165671601049}
   m_Layer: 0
-  m_Name: Camera (2)
+  m_Name: Camera2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

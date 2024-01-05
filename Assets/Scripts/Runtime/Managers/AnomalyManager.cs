@@ -22,7 +22,10 @@ namespace Runtime.Managers
 
         private UniqueAnomalyData _uniqueAnomalyData;
 
-        [ShowInInspector] private int _currentAnomalyIndex;
+        //[ShowInInspector] private int _currentAnomalyIndex;
+
+        [SerializeField] private int _currentAnomalyIndex;
+
 
         //private AnomalyStageTypes _currentStage;
 
@@ -104,8 +107,8 @@ namespace Runtime.Managers
                     // anomalyController.SpawnAnomaly(_uniqueAnomalyData.SpawnReferences[(int)AnomalyStageTypes.Part6],
                     //     _currentAnomalyIndex);
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                //default:
+                //throw new ArgumentOutOfRangeException();
             }
 
 
