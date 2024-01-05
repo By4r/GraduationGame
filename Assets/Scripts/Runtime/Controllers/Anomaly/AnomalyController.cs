@@ -24,6 +24,8 @@ namespace Runtime.Controllers
             // If anomalyHolder is null, return early
             if (anomalyHolder == null)
             {
+                Debug.LogWarning("ANOMALY CONTROLLER HOLDER WARNING");
+
                 return;
             }
 

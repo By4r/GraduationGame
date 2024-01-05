@@ -13,7 +13,7 @@ namespace Runtime.Controllers.PlayTime
     {
         #region TimeController Variables
 
-        [SerializeField] private float totalTime = 1800f; // 30 minutes in seconds
+        [SerializeField] private float totalTime = 3f; // 30 minutes in seconds // 1800f
         private float currentTime;
         private bool isCounting = false;
         [SerializeField] private TextMeshProUGUI timerText;
@@ -121,7 +121,7 @@ namespace Runtime.Controllers.PlayTime
             // Choose a random duration for local use within the _stageIncrementDuration range
             localAnomalyTime = Random.Range(0f, _stageIncrementDuration);
 
-            // If the localAnomalyTime has been used before, select a new one
+            // If the localAnomalyTime has been used before, select a new one 
             while (uniqueAnomalyTime == localAnomalyTime)
             {
                 localAnomalyTime = Random.Range(0f, _stageIncrementDuration);
