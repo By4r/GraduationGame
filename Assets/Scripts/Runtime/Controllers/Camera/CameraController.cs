@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using Runtime.Data.ValueObjects;
 using Runtime.Keys;
+using UnityEngine.Rendering;
 
 namespace Runtime.Controllers.Camera
 {
@@ -55,5 +56,6 @@ namespace Runtime.Controllers.Camera
 
             _playerMovementController.characterController.transform.Rotate(Vector3.up * mouseX);
         }
+        
     }
 }
