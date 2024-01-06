@@ -101,7 +101,7 @@ namespace Runtime.Controllers.Player
             // rigidbody.velocity = Vector3.zero;
             // rigidbody.angularVelocity = Vector3.zero;
             characterController.Move(Vector3.zero);
-            characterController.transform.Rotate(Vector3.up * mouseX);
+            //characterController.transform.Rotate(Vector3.up * mouseX);
         }
         private void SprintPlayer()
         {

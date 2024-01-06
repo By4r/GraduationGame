@@ -172,6 +172,7 @@ MonoBehaviour:
   - {fileID: 2406139939753945370}
   - {fileID: 5574802840941641288}
   _playerMovementController: {fileID: 7299940200891810097}
+  _cameraController: {fileID: 7299940201688458529}
 --- !u!1 &2406139939753945370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,6 +1332,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aebfed1d454e4c8a8fd45c770f04895d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7299940201688458529 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3840184450421729369, guid: 4781ee214aaf6f5459b6cd29f669ba4c,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766168308183616888}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38133230cd0842749c63c9493ea31c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8574143861553061596

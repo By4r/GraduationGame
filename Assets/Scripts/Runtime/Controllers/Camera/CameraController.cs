@@ -16,7 +16,7 @@ namespace Runtime.Controllers.Camera
 
         [SerializeField] private float mouseSensitivity;
         [SerializeField] private PlayerMovementController _playerMovementController;
-
+        public bool mouseState =true;
         #endregion
 
         #region Private Variables
@@ -36,7 +36,13 @@ namespace Runtime.Controllers.Camera
 
         private void LateUpdate()
         {
-            MoveMouseAxis();
+            if (mouseState)
+            {
+                UpdateMouseAxis();
+            }
+            //else FreezeMouseAxis();
+
+
         }
 
         private void RemoveMouseCursor()
@@ -44,7 +50,36 @@ namespace Runtime.Controllers.Camera
             Cursor.lockState = CursorLockMode.Locked;
         }
 
-        private void MoveMouseAxis()
+        // private void MoveMouseAxis()
+        // {
+        //     
+        //     float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        //     float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        //
+        //     xRotation -= mouseY;
+        //     xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        //
+        //     transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        //
+        //     _playerMovementController.characterController.transform.Rotate(Vector3.up * mouseX);
+        // }
+        
+        //uçak oldu amk
+        // private void UpdateMouseAxis()
+        // {
+        //     float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        //     float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        //
+        //     xRotation -= mouseY;
+        //     xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        //
+        //     transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        //
+        //     Vector3 rotationAmount = mouseState ? new Vector3(-mouseY, mouseX, 0f) : Vector3.zero;
+        //
+        //     _playerMovementController.characterController.transform.Rotate(rotationAmount);
+        // }
+        private void UpdateMouseAxis()
         {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
@@ -54,8 +89,14 @@ namespace Runtime.Controllers.Camera
 
             transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
-            _playerMovementController.characterController.transform.Rotate(Vector3.up * mouseX);
+            if (mouseState)
+            {
+                _playerMovementController.characterController.transform.Rotate(Vector3.up * mouseX);
+            }
+            else
+            {
+                _playerMovementController.characterController.transform.rotation = Quaternion.identity;
+            }
         }
-        
     }
 }

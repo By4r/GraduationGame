@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Runtime.Controllers.Camera;
 using Runtime.Controllers.Player;
 using Runtime.Enums;
 using Runtime.Signals;
@@ -14,6 +15,7 @@ namespace Runtime.Controllers.Security_Camera
         public List<GameObject> cameras;
         private int cameraSelected;
         [SerializeField] private PlayerMovementController _playerMovementController;
+        [SerializeField] private CameraController _cameraController;
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.D))
@@ -31,7 +33,7 @@ namespace Runtime.Controllers.Security_Camera
             }
             if (Input.GetKeyDown(KeyCode.Y))
             {
-                Zoomout();
+                ZoomOut();
             }
         }
 //  e basınca ekranın önüne 
@@ -55,16 +57,19 @@ namespace Runtime.Controllers.Security_Camera
             Debug.Log("Selected Camera: " + cameraSelected);
         }
         
-        void ZoomIn()
+        private void ZoomIn()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.SecurityCamera, 2);
             _playerMovementController.canMove=false;
-            
+            _cameraController.mouseState = false;
+
         }
-        void Zoomout()
+
+        private void ZoomOut()
         {
             _playerMovementController.canMove=true;
             CoreUISignals.Instance.onClosePanel?.Invoke(2);
+            _cameraController.mouseState = true;
         }
     }
 }
