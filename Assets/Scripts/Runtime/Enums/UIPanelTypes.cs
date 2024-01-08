@@ -6,7 +6,8 @@ namespace Runtime.Enums
         Level,
         Photo,
         Fail,
-        SecurityCamera
+        SecurityCamera,
+        Settings,
         
     }
 }

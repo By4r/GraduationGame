@@ -5,5 +5,7 @@ namespace Runtime.Enums
         OnPlay,
         OnNextLevel,
         OnRestartLevel,
+        OnSettings,
+        OnQuitGame,
     }
 }

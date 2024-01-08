@@ -1,5 +1,8 @@
 ﻿
+using System;
+using Runtime.Controllers.Camera;
 using Runtime.Signals;
+using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -11,6 +14,8 @@ namespace Runtime.Managers
 
         #region Serialized Variables
 
+        [ShowInInspector] private CameraController cameraController;
+        
        // [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
         #endregion
@@ -23,8 +28,16 @@ namespace Runtime.Managers
 
         #endregion
 
+
+        private void Awake()
+        {
+            cameraController = FindObjectOfType<CameraController>();
+        }
+
         private void Start()
         {
+            cameraController = FindObjectOfType<CameraController>();
+
             Init();
         }
 
@@ -40,7 +53,10 @@ namespace Runtime.Managers
 
         private void SubscribeEvents()
         {
+            
             CameraSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
+            CameraSignals.Instance.onCameraLocked += OnHideCursor;
+            CameraSignals.Instance.onCameraConfine += OnEnableCursor;
             CoreGameSignals.Instance.onReset += OnReset;
         }
 
@@ -59,12 +75,25 @@ namespace Runtime.Managers
         private void UnSubscribeEvents()
         {
             CameraSignals.Instance.onSetCameraTarget -= OnSetCameraTarget;
+            CameraSignals.Instance.onCameraLocked -= OnHideCursor;
+            CameraSignals.Instance.onCameraConfine -= OnEnableCursor;
             CoreGameSignals.Instance.onReset -= OnReset;
         }
 
         private void OnDisable()
         {
             UnSubscribeEvents();
+        }
+
+        private void OnHideCursor()
+        {
+            Debug.LogWarning("HIDE CALISTI !");
+            cameraController.RemoveMouseCursor();
+        }
+
+        private void OnEnableCursor()
+        {
+            cameraController.EnableMouseCursor();
         }
     }
 }

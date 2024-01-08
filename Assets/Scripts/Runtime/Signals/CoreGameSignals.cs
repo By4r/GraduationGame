@@ -10,6 +10,7 @@ namespace Runtime.Signals
         public UnityAction<GameStates> onChangeGameState = delegate { };
         public UnityAction<byte> onLevelInitialize = delegate { };
         public UnityAction onClearActiveLevel = delegate { };
+        public UnityAction onLevelStart = delegate { };
         public UnityAction onLevelSuccessful = delegate { };
         public UnityAction onLevelFailed = delegate { };
         public UnityAction onNextLevel = delegate { };

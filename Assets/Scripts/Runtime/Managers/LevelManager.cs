@@ -64,6 +64,7 @@ namespace Runtime.Managers
         {
             CoreGameSignals.Instance.onLevelInitialize += _levelLoaderCommand.Execute;
             CoreGameSignals.Instance.onClearActiveLevel += _levelDestroyerCommand.Execute;
+            CoreGameSignals.Instance.onLevelStart += OnLevelStart;
             CoreGameSignals.Instance.onGetLevelValue += OnGetLevelValue;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
@@ -95,6 +96,7 @@ namespace Runtime.Managers
         {
             CoreGameSignals.Instance.onLevelInitialize -= _levelLoaderCommand.Execute;
             CoreGameSignals.Instance.onClearActiveLevel -= _levelDestroyerCommand.Execute;
+            CoreGameSignals.Instance.onLevelStart -= OnLevelStart;
             CoreGameSignals.Instance.onGetLevelValue -= OnGetLevelValue;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
@@ -105,10 +107,15 @@ namespace Runtime.Managers
             UnSubscribeEvents();
         }
 
-        private void Start()
+        private void OnLevelStart()
         {
             CoreGameSignals.Instance.onLevelInitialize?.Invoke((byte)(_currentLevel % totalLevelCount));
-            //CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
+        }
+
+        private void Start()
+        {
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
+
         }
     }
 }

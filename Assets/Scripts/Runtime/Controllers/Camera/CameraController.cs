@@ -16,7 +16,8 @@ namespace Runtime.Controllers.Camera
 
         [SerializeField] private float mouseSensitivity;
         [SerializeField] private PlayerMovementController _playerMovementController;
-        public bool mouseState =true;
+        public bool mouseState = true;
+
         #endregion
 
         #region Private Variables
@@ -41,13 +42,16 @@ namespace Runtime.Controllers.Camera
                 UpdateMouseAxis();
             }
             //else FreezeMouseAxis();
-
-
         }
 
-        private void RemoveMouseCursor()
+        internal void RemoveMouseCursor()
         {
             Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        internal void EnableMouseCursor()
+        {
+            Cursor.lockState = CursorLockMode.Confined;
         }
 
         // private void MoveMouseAxis()
@@ -63,7 +67,7 @@ namespace Runtime.Controllers.Camera
         //
         //     _playerMovementController.characterController.transform.Rotate(Vector3.up * mouseX);
         // }
-        
+
         //uçak oldu amk
         // private void UpdateMouseAxis()
         // {

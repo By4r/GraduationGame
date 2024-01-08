@@ -50,6 +50,11 @@ namespace Runtime.Managers
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Fail, 2);
         }
 
+        private void OnSettingsPanel()
+        {
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Fail, 2);
+        }
+
         public void NextLevel()
         {
             CoreGameSignals.Instance.onNextLevel?.Invoke();
@@ -65,9 +70,16 @@ namespace Runtime.Managers
         public void Play()
         {
             UISignals.Instance.onPlay?.Invoke();
+            CoreGameSignals.Instance.onLevelStart?.Invoke();
             CoreUISignals.Instance.onClosePanel?.Invoke(1);
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
             InputSignals.Instance.onEnableInput?.Invoke();
-            CameraSignals.Instance.onSetCameraTarget?.Invoke();
+        }
+
+        public void Settings()
+        {
+            CoreUISignals.Instance.onClosePanel?.Invoke(1);
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Settings, 2);
         }
 
         private void OnStageAreaSuccessful(byte stageValue)

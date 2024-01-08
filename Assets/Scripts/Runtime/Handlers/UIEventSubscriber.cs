@@ -59,6 +59,11 @@ namespace Runtime.Handlers
                     button.onClick.AddListener(_manager.RestartLevel);
                     break;
                 }
+                case UIEventSubscriptionTypes.OnSettings:
+                {
+                    button.onClick.AddListener(_manager.Settings);
+                    break;
+                }
             }
         }
 
@@ -79,6 +84,11 @@ namespace Runtime.Handlers
                 case UIEventSubscriptionTypes.OnRestartLevel:
                 {
                     button.onClick.RemoveListener(_manager.RestartLevel);
+                    break;
+                }
+                case UIEventSubscriptionTypes.OnSettings:
+                {
+                    button.onClick.RemoveListener(_manager.Settings);
                     break;
                 }
             }
