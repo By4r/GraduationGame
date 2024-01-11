@@ -16,6 +16,7 @@ namespace Runtime.Controllers.Security_Camera
         private int cameraSelected;
         [SerializeField] private PlayerMovementController _playerMovementController;
         [SerializeField] private CameraController _cameraController;
+        public bool isSecurityPanelOpen;
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.D))
@@ -29,11 +30,11 @@ namespace Runtime.Controllers.Security_Camera
             }
             if (Input.GetKeyDown(KeyCode.T))
             {
-                ZoomIn();
+                SecurityCamOpen();
             }
             if (Input.GetKeyDown(KeyCode.Y))
             {
-                ZoomOut();
+                SecurityCamClose();
             }
         }
 //  e basınca ekranın önüne 
@@ -57,18 +58,19 @@ namespace Runtime.Controllers.Security_Camera
             Debug.Log("Selected Camera: " + cameraSelected);
         }
         
-        private void ZoomIn()
+        private void SecurityCamOpen()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.SecurityCamera, 2);
+            isSecurityPanelOpen = true;
             _playerMovementController.canMove=false;
             _cameraController.mouseState = false;
-
         }
 
-        private void ZoomOut()
+        private void SecurityCamClose()
         {
-            _playerMovementController.canMove=true;
             CoreUISignals.Instance.onClosePanel?.Invoke(2);
+            isSecurityPanelOpen = false;
+            _playerMovementController.canMove=true;
             _cameraController.mouseState = true;
         }
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Runtime.Controllers.Player;
+using Runtime.Controllers.Security_Camera;
 using Runtime.Data.UnityObjects;
 using Runtime.Data.ValueObjects;
 using Runtime.Managers;
@@ -29,7 +30,7 @@ public class CapturePhotoController : MonoBehaviour
     
     [SerializeField] private PlayerManager _playerManager;
     [SerializeField] private PlayerAnomalyReportController _playerAnomalyReport;
-    
+    [SerializeField] private SecurityCameraController _securityCameraController;
     
     private Texture2D screenCapture;
     private bool viewingPhoto;
@@ -44,15 +45,15 @@ public class CapturePhotoController : MonoBehaviour
         _playerAnomalyReport = FindObjectOfType<PlayerAnomalyReportController>();
         //_playerManager = GameObject.Find("PhotoFlashLight").GetComponentInChildren<PlayerManager>();
         cameraFlash = _playerManager.light;
-        
-        
-         //animatorr = FindObjectOfType<Animator>();
+        _securityCameraController = FindObjectOfType<SecurityCameraController>();
+
+        //animatorr = FindObjectOfType<Animator>();
 
     }
    
     void Update()
     {
-        if (Input.GetKeyDown("r"))
+        if (Input.GetKeyDown(KeyCode.R) && !_securityCameraController.isSecurityPanelOpen)
         {
             OpenPhotoMode();
         }
