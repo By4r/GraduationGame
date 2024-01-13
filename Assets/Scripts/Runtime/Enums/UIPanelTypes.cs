@@ -8,6 +8,7 @@ namespace Runtime.Enums
         Fail,
         SecurityCamera,
         Settings,
+        Pause,
         
     }
 }

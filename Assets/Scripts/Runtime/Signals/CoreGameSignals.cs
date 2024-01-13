@@ -2,6 +2,7 @@
 using Enums;
 using Runtime.Extensions;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Runtime.Signals
 {
@@ -17,6 +18,8 @@ namespace Runtime.Signals
         public UnityAction onRestartLevel = delegate { };
         public UnityAction onPlay = delegate { };
         public UnityAction onReset = delegate { };
+        public UnityAction onPause = delegate { };
+        public UnityAction onResume = delegate { };
         public Func<byte> onGetLevelValue = delegate { return 0; };
 
         public UnityAction<byte> onStageAreaSuccessful = delegate { };

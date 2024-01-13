@@ -1,6 +1,7 @@
 using Runtime.Enums;
 using Runtime.Signals;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace Runtime.Managers
 {
@@ -18,7 +19,11 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onStageAreaSuccessful += OnStageAreaSuccessful;
+            CoreGameSignals.Instance.onPause += OnPauseGame;
+            CoreGameSignals.Instance.onResume += OnResumeGame;
+
         }
+
 
         private void UnSubscribeEvents()
         {
@@ -27,6 +32,8 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onStageAreaSuccessful -= OnStageAreaSuccessful;
+            CoreGameSignals.Instance.onPause -= OnPauseGame;
+            CoreGameSignals.Instance.onResume -= OnResumeGame;
         }
 
         private void OnDisable()
@@ -54,6 +61,16 @@ namespace Runtime.Managers
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Fail, 2);
         }
 
+        private void OnPauseGame()
+        {
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Pause,3);
+        }
+
+        private void OnResumeGame()
+        {
+            CoreUISignals.Instance.onClosePanel?.Invoke(3);
+        }
+
         public void NextLevel()
         {
             CoreGameSignals.Instance.onNextLevel?.Invoke();
@@ -79,6 +96,14 @@ namespace Runtime.Managers
         {
             CoreUISignals.Instance.onClosePanel?.Invoke(1);
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Settings, 2);
+        }
+
+        
+        [Button("RESUME BUTTON")]
+        public void Resume()
+        {
+            //CoreUISignals.Instance.onClosePanel?.Invoke(3);
+            PauseSignals.Instance.onResumeGame?.Invoke();
         }
 
         private void OnStageAreaSuccessful(byte stageValue)
