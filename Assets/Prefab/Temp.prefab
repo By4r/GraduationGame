@@ -194,6 +194,7 @@ MonoBehaviour:
   characterController: {fileID: 0}
   _staminaController: {fileID: 0}
   canRun: 0
+  canMove: 1
 --- !u!1 &8971931367769713202
 GameObject:
   m_ObjectHideFlags: 0
