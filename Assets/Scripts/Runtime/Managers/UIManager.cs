@@ -64,11 +64,13 @@ namespace Runtime.Managers
         private void OnPauseGame()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Pause,3);
+            //CameraSignals.Instance.onCameraConfine?.Invoke();
         }
 
         private void OnResumeGame()
         {
             CoreUISignals.Instance.onClosePanel?.Invoke(3);
+            //CameraSignals.Instance.onCameraLocked?.Invoke();
         }
 
         public void NextLevel()

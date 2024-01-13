@@ -11,7 +11,7 @@ namespace Runtime.Managers
         private bool _isPaused = false;
 
         #endregion
-        
+
         private void OnEnable()
         {
             SubscribeEvents();
@@ -21,7 +21,6 @@ namespace Runtime.Managers
         {
             PauseSignals.Instance.onPauseGame += OnPauseGame;
             PauseSignals.Instance.onResumeGame += OnResumeGame;
-
         }
 
 
@@ -52,7 +51,8 @@ namespace Runtime.Managers
         private void OnPauseGame()
         {
             CoreGameSignals.Instance.onPause?.Invoke();
-            
+            CameraSignals.Instance.onCameraConfine?.Invoke();
+
             // Pause the game by setting the time scale to 0
             Time.timeScale = 0f;
             // You can add additional pause-related actions here (e.g., displaying UI)
@@ -62,7 +62,10 @@ namespace Runtime.Managers
         private void OnResumeGame()
         {
             CoreGameSignals.Instance.onResume?.Invoke();
-            
+            CameraSignals.Instance.onCameraLocked?.Invoke();
+
+
+
             // Resume the game by setting the time scale to 1
             Time.timeScale = 1f;
             // You can add additional actions to resume the game (e.g., removing UI)
