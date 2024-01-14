@@ -71,5 +71,29 @@ namespace Runtime.Controllers.Security_Camera
             _playerMovementController.canMove=true;
             _cameraController.mouseState = true;
         }
+        
+        private void SubscribeEvents()
+        {
+            SecurityCameraSignals.Instance.onNextCamera += NextCam;
+            SecurityCameraSignals.Instance.onPreviousCamera += PreviousCam;
+            SecurityCameraSignals.Instance.onSecurityCameraOpen += SecurityCamOpen;
+            SecurityCameraSignals.Instance.onSecurityCameraClose += SecurityCamClose;
+        }
+        private void UnSubscribeEvents()
+        {
+            SecurityCameraSignals.Instance.onNextCamera -= NextCam;
+            SecurityCameraSignals.Instance.onPreviousCamera -= PreviousCam;
+            SecurityCameraSignals.Instance.onSecurityCameraOpen -= SecurityCamOpen;
+            SecurityCameraSignals.Instance.onSecurityCameraClose -= SecurityCamClose;
+        }
+        private void OnDisable()
+        {
+            UnSubscribeEvents();
+        }
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
     }
+    
 }

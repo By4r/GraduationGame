@@ -35,7 +35,7 @@ public class CapturePhotoController : MonoBehaviour
     private Texture2D screenCapture;
     private bool viewingPhoto;
 
-    [SerializeField] private int photoRemainCount;
+    [SerializeField] public int photoRemainCount;
    
     void Start()
     {
@@ -43,12 +43,9 @@ public class CapturePhotoController : MonoBehaviour
         
         _playerManager = FindObjectOfType<PlayerManager>();
         _playerAnomalyReport = FindObjectOfType<PlayerAnomalyReportController>();
-        //_playerManager = GameObject.Find("PhotoFlashLight").GetComponentInChildren<PlayerManager>();
         cameraFlash = _playerManager.light;
         _securityCameraController = FindObjectOfType<SecurityCameraController>();
-
-        //animatorr = FindObjectOfType<Animator>();
-
+        
     }
    
     void Update()
@@ -113,8 +110,7 @@ public class CapturePhotoController : MonoBehaviour
         StartCoroutine(_playerAnomalyReport.AnomalyReported());
         
     }
-// EĞER 3 FOTO-- OLDUKTAN SONRA CANAVAR UYANMA SİNYALİ TETİKLENİR
-  
+
 
     private void ShowPhoto()
     {
