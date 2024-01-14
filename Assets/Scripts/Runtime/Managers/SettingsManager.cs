@@ -21,5 +21,12 @@ namespace Runtime.Managers
             
             Debug.Log("Current Quality Index: " + index);
         }
+
+        public void SetFullscreen(bool isFullScreen)
+        {
+            Screen.fullScreen = isFullScreen;
+            
+            Debug.Log("Fullscreen: " + isFullScreen);
+        }
     }
 }

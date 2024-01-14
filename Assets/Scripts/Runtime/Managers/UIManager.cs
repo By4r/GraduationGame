@@ -100,6 +100,12 @@ namespace Runtime.Managers
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Settings, 2);
         }
 
+        public void CloseSettings()
+        {
+            CoreUISignals.Instance.onClosePanel?.Invoke(2); 
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
+        }
+
         
         [Button("RESUME BUTTON")]
         public void Resume()

@@ -69,6 +69,11 @@ namespace Runtime.Handlers
                     button.onClick.AddListener(_manager.Resume);
                     break;
                 }
+                case UIEventSubscriptionTypes.OnExitSettings:
+                {
+                    button.onClick.AddListener(_manager.CloseSettings);
+                    break;
+                }
             }
         }
 
@@ -99,6 +104,11 @@ namespace Runtime.Handlers
                 case UIEventSubscriptionTypes.OnResumeGame:
                 {
                     button.onClick.RemoveListener(_manager.Resume);
+                    break;
+                }
+                case UIEventSubscriptionTypes.OnExitSettings:
+                {
+                    button.onClick.RemoveListener(_manager.CloseSettings);
                     break;
                 }
             }
