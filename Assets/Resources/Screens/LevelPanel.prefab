@@ -1178,7 +1178,7 @@ MonoBehaviour:
   maxSprintStamina: 1
   sprintMultiplier: 0.08
   image1: {fileID: 6907844879510208684}
-  mentalStamina: 0
+  mentalStamina: 1
   maxMentalStamina: 1
   mentalMultiplier: 0.05
 --- !u!114 &3667049849109311587
@@ -1204,6 +1204,7 @@ MonoBehaviour:
     type: 3}
   _playerAnomalyReport: {fileID: 1827650969363417841, guid: 4781ee214aaf6f5459b6cd29f669ba4c,
     type: 3}
+  _securityCameraController: {fileID: 0}
   photoRemainCount: 3
 --- !u!114 &730799531077369667
 MonoBehaviour:
