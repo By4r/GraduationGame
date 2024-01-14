@@ -87,7 +87,7 @@ namespace Runtime.Managers
 
         private void OnHideCursor()
         {
-            Debug.LogWarning("HIDE CALISTI !");
+            Debug.LogWarning("HIDE WORKED !");
             cameraController.RemoveMouseCursor();
         }
 

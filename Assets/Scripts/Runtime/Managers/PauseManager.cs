@@ -1,6 +1,7 @@
 ﻿using System;
 using Runtime.Signals;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Runtime.Managers
 {
@@ -63,7 +64,6 @@ namespace Runtime.Managers
         {
             CoreGameSignals.Instance.onResume?.Invoke();
             CameraSignals.Instance.onCameraLocked?.Invoke();
-
 
 
             // Resume the game by setting the time scale to 1
