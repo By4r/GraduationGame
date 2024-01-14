@@ -14,5 +14,12 @@ namespace Runtime.Managers
             
             Debug.Log("Current Volume: " + value);
         }
+
+        public void SetQuality(int index)
+        {
+            QualitySettings.SetQualityLevel(index);
+            
+            Debug.Log("Current Quality Index: " + index);
+        }
     }
 }
