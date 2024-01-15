@@ -10,6 +10,7 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Runtime.Enums;
 using Runtime.Signals;
+using Sirenix.OdinInspector;
 
 
 public class CapturePhotoController : MonoBehaviour
@@ -19,6 +20,8 @@ public class CapturePhotoController : MonoBehaviour
 
     [SerializeField] private GameObject photoFrame;
     [SerializeField] private bool isPhotoModeOpen;
+
+    [ShowInInspector] private bool isPauseState;
 
 
     [Header("Flash Effect")] [SerializeField]
@@ -49,12 +52,20 @@ public class CapturePhotoController : MonoBehaviour
     private void SubscribeEvents()
     {
         PauseSignals.Instance.onPhotoModeState += OnPhotoModeState;
+        PauseSignals.Instance.onPauseState += OnPauseState;
+    }
+
+    private void OnPauseState(bool state)
+    {
+        isPauseState = state;
     }
 
 
     private void UnSubscribeEvents()
     {
         PauseSignals.Instance.onPhotoModeState -= OnPhotoModeState;
+        PauseSignals.Instance.onPauseState -= OnPauseState;
+
     }
 
     private void OnDisable()
@@ -75,7 +86,7 @@ public class CapturePhotoController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !_securityCameraController.isSecurityPanelOpen)
+        if (Input.GetKeyDown(KeyCode.R) && !_securityCameraController.isSecurityPanelOpen && !isPauseState)
         {
             OpenPhotoMode();
         }

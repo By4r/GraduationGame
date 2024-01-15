@@ -12,5 +12,6 @@ namespace Runtime.Signals
         public UnityAction onResumeGame = delegate { };
         public UnityAction onMainMenuGame = delegate { };
         public UnityAction<bool> onPhotoModeState = delegate { };
+        public UnityAction<bool> onPauseState = delegate { };
     }
 }
