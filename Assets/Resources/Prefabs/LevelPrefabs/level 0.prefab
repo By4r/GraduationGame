@@ -173,6 +173,7 @@ MonoBehaviour:
   - {fileID: 5574802840941641288}
   _playerMovementController: {fileID: 7299940200891810097}
   _cameraController: {fileID: 7299940201688458529}
+  isSecurityPanelOpen: 0
 --- !u!1 &2406139939753945370
 GameObject:
   m_ObjectHideFlags: 0
