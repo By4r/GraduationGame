@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Resources/Prefabs/LevelPrefabs/NavMeshPlane.prefab.meta
 guid: 1b6abd7801d2be44698eb72ea7ada142
+=======
+guid: a9aa07922481e584384eac1e0ea7c1cf
+>>>>>>> Melihcan:Assets/Resources/Prefabs/LevelPrefabs/level 4.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
