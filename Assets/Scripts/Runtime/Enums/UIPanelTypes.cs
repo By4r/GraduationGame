@@ -9,6 +9,7 @@ namespace Runtime.Enums
         SecurityCamera,
         Settings,
         Pause,
+        Loading,
         
     }
 }

@@ -120,6 +120,11 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onCancelLevel?.Invoke();
         }
 
+        public void LoadGame()
+        {
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Loading, 1);
+        }
+
         private void OnStageAreaSuccessful(byte stageValue)
         {
             UISignals.Instance.onSetStageColor?.Invoke(stageValue);
