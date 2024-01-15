@@ -56,6 +56,8 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onPause?.Invoke();
             CameraSignals.Instance.onCameraConfine?.Invoke();
             PauseSignals.Instance.onPhotoModeState?.Invoke(false);
+            
+            PauseSignals.Instance.onPauseState?.Invoke(true);
 
             // Pause the game by setting the time scale to 0
             Time.timeScale = 0f;
@@ -68,7 +70,8 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onResume?.Invoke();
             CameraSignals.Instance.onCameraLocked?.Invoke();
             PauseSignals.Instance.onPhotoModeState?.Invoke(true);
-
+            
+            PauseSignals.Instance.onPauseState?.Invoke(false);
 
             // Resume the game by setting the time scale to 1
             Time.timeScale = 1f;
@@ -79,6 +82,8 @@ namespace Runtime.Managers
         private void OnMainMenuGame()
         {
             CoreGameSignals.Instance.onResume?.Invoke();
+            
+            PauseSignals.Instance.onPauseState?.Invoke(false);
             //CameraSignals.Instance.onCameraConfine?.Invoke();
 
 
