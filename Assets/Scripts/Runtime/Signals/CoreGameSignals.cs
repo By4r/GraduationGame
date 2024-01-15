@@ -16,10 +16,12 @@ namespace Runtime.Signals
         public UnityAction onLevelFailed = delegate { };
         public UnityAction onNextLevel = delegate { };
         public UnityAction onRestartLevel = delegate { };
+        public UnityAction onCancelLevel = delegate { };
         public UnityAction onPlay = delegate { };
         public UnityAction onReset = delegate { };
         public UnityAction onPause = delegate { };
         public UnityAction onResume = delegate { };
+        public UnityAction onMain = delegate { };
         public Func<byte> onGetLevelValue = delegate { return 0; };
 
         public UnityAction<byte> onStageAreaSuccessful = delegate { };

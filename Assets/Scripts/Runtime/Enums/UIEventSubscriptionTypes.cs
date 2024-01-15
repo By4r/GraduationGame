@@ -9,5 +9,6 @@ namespace Runtime.Enums
         OnQuitGame,
         OnResumeGame,
         OnExitSettings,
+        OnMainMenu,
     }
 }

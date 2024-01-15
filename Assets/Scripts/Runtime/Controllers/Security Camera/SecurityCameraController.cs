@@ -58,6 +58,7 @@ namespace Runtime.Controllers.Security_Camera
         
         private void SecurityCamOpen()
         {
+            Debug.Log("SecurityCam OPENED");
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.SecurityCamera, 2);
             isSecurityPanelOpen = true;
             _playerMovementController.canMove=false;

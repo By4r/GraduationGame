@@ -21,7 +21,6 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onStageAreaSuccessful += OnStageAreaSuccessful;
             CoreGameSignals.Instance.onPause += OnPauseGame;
             CoreGameSignals.Instance.onResume += OnResumeGame;
-
         }
 
 
@@ -63,7 +62,7 @@ namespace Runtime.Managers
 
         private void OnPauseGame()
         {
-            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Pause,3);
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Pause, 3);
             //CameraSignals.Instance.onCameraConfine?.Invoke();
         }
 
@@ -92,6 +91,7 @@ namespace Runtime.Managers
             CoreUISignals.Instance.onClosePanel?.Invoke(1);
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
             InputSignals.Instance.onEnableInput?.Invoke();
+            //CameraSignals.Instance.onCameraLocked?.Invoke();
         }
 
         public void Settings()
@@ -102,16 +102,22 @@ namespace Runtime.Managers
 
         public void CloseSettings()
         {
-            CoreUISignals.Instance.onClosePanel?.Invoke(2); 
+            CoreUISignals.Instance.onClosePanel?.Invoke(2);
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
         }
 
-        
+
         [Button("RESUME BUTTON")]
         public void Resume()
         {
             //CoreUISignals.Instance.onClosePanel?.Invoke(3);
             PauseSignals.Instance.onResumeGame?.Invoke();
+        }
+
+        public void ReturnMainMenu()
+        {
+            PauseSignals.Instance.onMainMenuGame?.Invoke();
+            CoreGameSignals.Instance.onCancelLevel?.Invoke();
         }
 
         private void OnStageAreaSuccessful(byte stageValue)

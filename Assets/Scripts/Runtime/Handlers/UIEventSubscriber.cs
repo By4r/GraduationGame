@@ -1,3 +1,4 @@
+using System.Runtime.Remoting.Messaging;
 using Runtime.Enums;
 using Runtime.Managers;
 using Sirenix.OdinInspector;
@@ -74,6 +75,11 @@ namespace Runtime.Handlers
                     button.onClick.AddListener(_manager.CloseSettings);
                     break;
                 }
+                case UIEventSubscriptionTypes.OnMainMenu:
+                {
+                    button.onClick.AddListener(_manager.ReturnMainMenu);
+                    break;
+                }
             }
         }
 
@@ -109,6 +115,11 @@ namespace Runtime.Handlers
                 case UIEventSubscriptionTypes.OnExitSettings:
                 {
                     button.onClick.RemoveListener(_manager.CloseSettings);
+                    break;
+                }
+                case UIEventSubscriptionTypes.OnMainMenu:
+                {
+                    button.onClick.RemoveListener(_manager.ReturnMainMenu);
                     break;
                 }
             }

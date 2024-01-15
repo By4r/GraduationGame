@@ -68,6 +68,7 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onGetLevelValue += OnGetLevelValue;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
+            CoreGameSignals.Instance.onCancelLevel += OnCancelLevel;
         }
 
         [Button]
@@ -87,6 +88,12 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onLevelInitialize?.Invoke((byte)(_currentLevel % totalLevelCount));
         }
 
+        private void OnCancelLevel()
+        {
+            CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
+            CoreGameSignals.Instance.onReset?.Invoke();
+        }
+
         private byte OnGetLevelValue()
         {
             return (byte)((byte)_currentLevel % totalLevelCount);
@@ -100,6 +107,7 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onGetLevelValue -= OnGetLevelValue;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
+            CoreGameSignals.Instance.onCancelLevel -= OnCancelLevel;
         }
 
         private void OnDisable()
@@ -115,7 +123,6 @@ namespace Runtime.Managers
         private void Start()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
-
         }
     }
 }

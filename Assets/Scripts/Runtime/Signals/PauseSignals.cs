@@ -10,5 +10,6 @@ namespace Runtime.Signals
     {
         public UnityAction onPauseGame = delegate { };
         public UnityAction onResumeGame = delegate { };
+        public UnityAction onMainMenuGame = delegate { };
     }
 }

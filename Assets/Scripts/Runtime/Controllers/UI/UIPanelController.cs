@@ -31,7 +31,27 @@ namespace Runtime.Controllers.UI
             CoreUISignals.Instance.onCloseAllPanels += OnCloseAllPanels;
         }
 
+
         [Button("Close All Panels")]
+        private void OnCloseAllPanels()
+        {
+            foreach (var layer in layers)
+            {
+                if (layer.childCount > 0)
+                {
+#if UNITY_EDITOR
+                    DestroyImmediate(layer.GetChild(0).gameObject);
+#else
+            Destroy(layer.GetChild(0).gameObject);
+#endif
+                }
+            }
+        }
+        
+        
+        
+
+        /*[Button("Close All Panels")]
         private void OnCloseAllPanels()
         {
             foreach (var layer in layers)
@@ -43,7 +63,7 @@ namespace Runtime.Controllers.UI
                 Destroy(layer.GetChild(0).gameObject);
 #endif
             }
-        }
+        }*/
 
         [Button("Open Panel")]
         private void OnOpenPanel(UIPanelTypes panelType, int value)
