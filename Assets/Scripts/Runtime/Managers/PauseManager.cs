@@ -23,7 +23,6 @@ namespace Runtime.Managers
             PauseSignals.Instance.onPauseGame += OnPauseGame;
             PauseSignals.Instance.onResumeGame += OnResumeGame;
             PauseSignals.Instance.onMainMenuGame += OnMainMenuGame;
-
         }
 
 
@@ -32,7 +31,6 @@ namespace Runtime.Managers
             PauseSignals.Instance.onPauseGame -= OnPauseGame;
             PauseSignals.Instance.onResumeGame -= OnResumeGame;
             PauseSignals.Instance.onMainMenuGame -= OnMainMenuGame;
-
         }
 
         private void OnDisable()
@@ -57,6 +55,7 @@ namespace Runtime.Managers
         {
             CoreGameSignals.Instance.onPause?.Invoke();
             CameraSignals.Instance.onCameraConfine?.Invoke();
+            PauseSignals.Instance.onPhotoModeState?.Invoke(false);
 
             // Pause the game by setting the time scale to 0
             Time.timeScale = 0f;
@@ -68,6 +67,7 @@ namespace Runtime.Managers
         {
             CoreGameSignals.Instance.onResume?.Invoke();
             CameraSignals.Instance.onCameraLocked?.Invoke();
+            PauseSignals.Instance.onPhotoModeState?.Invoke(true);
 
 
             // Resume the game by setting the time scale to 1
@@ -75,7 +75,7 @@ namespace Runtime.Managers
             // You can add additional actions to resume the game (e.g., removing UI)
             _isPaused = false;
         }
-        
+
         private void OnMainMenuGame()
         {
             CoreGameSignals.Instance.onResume?.Invoke();
