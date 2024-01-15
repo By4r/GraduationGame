@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Runtime.Controllers.Stamina;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Runtime.Controllers.Beast
-
 {
     public class BeastController : MonoBehaviour
     {
@@ -13,25 +11,26 @@ namespace Runtime.Controllers.Beast
         public Transform player;
 
         [SerializeField] private Transform beastSpawnPoint;
-
         [SerializeField] private StaminaController _staminaController;
         [SerializeField] private CapturePhotoController _capturePhotoController;
-        private bool isChasingPlayer;
+
+       
+        private float timeSinceChaseStarted;
+
+        [SerializeField] private float timeToWaitBeforeReturn = 5f;
 
         private void Update()
         {
-            if (_staminaController.mentalStamina <=0 || _capturePhotoController.photoRemainCount ==0)
+            if (_staminaController.mentalStamina <= 0 || _capturePhotoController.photoRemainCount == 0)
             {
                 ChasePlayer();
-                
             }
-
-            else 
+            else
             {
-                ReturnSpawnPoint();
+                StartCoroutine(WaitAndReturn());
             }
         }
-
+// 3 foto çektikten sonra canavar oyuncuyu kabinin içine girene kadar kovalıyor
         private void Start()
         {
             _staminaController = FindObjectOfType<StaminaController>();
@@ -41,26 +40,22 @@ namespace Runtime.Controllers.Beast
         private void ChasePlayer()
         {
             beast.SetDestination(player.position);
+            StopAllCoroutines();
         }
-
-        private void ReturnSpawnPoint()
-        {
-            
-            //beast.SetDestination(beastSpawnPoint.position); 
-            StartCoroutine(WaitAndReturn());
-        }
+        
         private IEnumerator WaitAndReturn()
         {
-            //beast.velocity = Vector3.zero;
-            yield return new WaitForSeconds(3);
-            beast.SetDestination(beastSpawnPoint.position);
             
+            yield return new WaitForSeconds(timeToWaitBeforeReturn);
+            beast.speed=0;
+            yield return new WaitForSeconds(timeToWaitBeforeReturn);
+            beast.SetDestination(beastSpawnPoint.position);
+            beast.speed=10;
         }
+
         private void Jumpscare()
         {
-           //jumpscare
+            // Jumpscare işlemleri
         }
-        
-        
     }
 }
