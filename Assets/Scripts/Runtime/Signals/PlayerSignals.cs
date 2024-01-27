@@ -1,4 +1,5 @@
-﻿using Runtime.Extensions;
+﻿using Runtime.Enums;
+using Runtime.Extensions;
 
 using UnityEngine.Events;
 
@@ -13,5 +14,6 @@ namespace Runtime.Signals
         public UnityAction onIncreaseStamina = delegate { };
         public UnityAction onIncreaseMentalHealth = delegate { };
         public UnityAction onDecreaseMentalHealth = delegate { };
+        
     }
 }

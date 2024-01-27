@@ -1,4 +1,5 @@
-﻿using Runtime.Extensions;
+﻿using Runtime.Enums;
+using Runtime.Extensions;
 using UnityEngine.Events;
 
 namespace Runtime.Signals
@@ -8,5 +9,7 @@ namespace Runtime.Signals
         public UnityAction onBeastChase = delegate { };
         public UnityAction onBeastReturn = delegate { };
         public UnityAction onBeastJumpscare = delegate { };
+        public UnityAction<BeastAnimationStates> onChangeBeastAnimationState = delegate { };
+        
     }
 }

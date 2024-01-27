@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using Runtime.Controllers.Stamina;
+using Runtime.Enums;
+using Runtime.Signals;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -39,8 +41,10 @@ namespace Runtime.Controllers.Beast
 
         private void ChasePlayer()
         {
+            BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Run);
             beast.SetDestination(player.position);
             StopAllCoroutines();
+            
         }
         
         private IEnumerator WaitAndReturn()
@@ -48,9 +52,14 @@ namespace Runtime.Controllers.Beast
             
             yield return new WaitForSeconds(timeToWaitBeforeReturn);
             beast.speed=0;
+            transform.LookAt(player);
+            BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Idle);
             yield return new WaitForSeconds(timeToWaitBeforeReturn);
+            
             beast.SetDestination(beastSpawnPoint.position);
-            beast.speed=10;
+            beast.speed=15;
+            
+            
         }
 
         private void Jumpscare()

@@ -1,3 +1,4 @@
+using Runtime.Controllers.Beast;
 using Runtime.Controllers.Player;
 using Runtime.Controllers.Stamina;
 using Runtime.Data.UnityObjects;
@@ -20,7 +21,7 @@ namespace Runtime.Managers
         #endregion
 
         #region Serialized Variables
-
+       
         [SerializeField] private PlayerMovementController movementController;
         [SerializeField] private StaminaController staminaController;
         #endregion
