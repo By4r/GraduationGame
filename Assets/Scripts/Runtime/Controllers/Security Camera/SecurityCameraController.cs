@@ -43,7 +43,7 @@ namespace Runtime.Controllers.Security_Camera
             cameraSelected = (cameraSelected + 1) % cameras.Count; 
 
             cameras[cameraSelected].SetActive(true); 
-            Debug.Log("Selected Camera: " + cameraSelected);
+            //Debug.Log("Selected Camera: " + cameraSelected);
         }
 
         private void PreviousCam()
@@ -53,7 +53,7 @@ namespace Runtime.Controllers.Security_Camera
             cameraSelected = (cameraSelected - 1 + cameras.Count) % cameras.Count;
 
             cameras[cameraSelected].SetActive(true); 
-            Debug.Log("Selected Camera: " + cameraSelected);
+           // Debug.Log("Selected Camera: " + cameraSelected);
         }
         
         private void SecurityCamOpen()
@@ -73,28 +73,28 @@ namespace Runtime.Controllers.Security_Camera
             _cameraController.mouseState = true;
         }
         
-        private void SubscribeEvents()
-        {
-            SecurityCameraSignals.Instance.onNextCamera += NextCam;
-            SecurityCameraSignals.Instance.onPreviousCamera += PreviousCam;
-            SecurityCameraSignals.Instance.onSecurityCameraOpen += SecurityCamOpen;
-            SecurityCameraSignals.Instance.onSecurityCameraClose += SecurityCamClose;
-        }
-        private void UnSubscribeEvents()
-        {
-            SecurityCameraSignals.Instance.onNextCamera -= NextCam;
-            SecurityCameraSignals.Instance.onPreviousCamera -= PreviousCam;
-            SecurityCameraSignals.Instance.onSecurityCameraOpen -= SecurityCamOpen;
-            SecurityCameraSignals.Instance.onSecurityCameraClose -= SecurityCamClose;
-        }
-        private void OnDisable()
-        {
-            UnSubscribeEvents();
-        }
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
+        // private void SubscribeEvents()
+        // {
+        //     SecurityCameraSignals.Instance.onNextCamera += NextCam;
+        //     SecurityCameraSignals.Instance.onPreviousCamera += PreviousCam;
+        //     SecurityCameraSignals.Instance.onSecurityCameraOpen += SecurityCamOpen;
+        //     SecurityCameraSignals.Instance.onSecurityCameraClose += SecurityCamClose;
+        // }
+        // private void UnSubscribeEvents()
+        // {
+        //     SecurityCameraSignals.Instance.onNextCamera -= NextCam;
+        //     SecurityCameraSignals.Instance.onPreviousCamera -= PreviousCam;
+        //     SecurityCameraSignals.Instance.onSecurityCameraOpen -= SecurityCamOpen;
+        //     SecurityCameraSignals.Instance.onSecurityCameraClose -= SecurityCamClose;
+        // }
+        // private void OnDisable()
+        // {
+        //     UnSubscribeEvents();
+        // }
+        // private void OnEnable()
+        // {
+        //     SubscribeEvents();
+        // }
     }
     
 }

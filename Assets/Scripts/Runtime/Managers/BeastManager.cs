@@ -39,7 +39,7 @@ namespace Runtime.Managers
         private void OnBeastChase()
         {
             BeastSignals.Instance.onBeastChase?.Invoke();
-            
+            Debug.Log("ewqewqewqe1");
         }
 
         private void OnBeastJumpscare()
@@ -50,7 +50,7 @@ namespace Runtime.Managers
         private void OnBeastReturn()
         {
             BeastSignals.Instance.onBeastReturn?.Invoke();
-            BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Walk);
+            
         }
         private void OnReset()
         {

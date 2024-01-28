@@ -16,23 +16,32 @@ namespace Runtime.Controllers.Beast
         [SerializeField] private StaminaController _staminaController;
         [SerializeField] private CapturePhotoController _capturePhotoController;
 
-       
+        private bool isChasingPlayer;
         private float timeSinceChaseStarted;
 
         [SerializeField] private float timeToWaitBeforeReturn = 5f;
 
         private void Update()
         {
+           
+
             if (_staminaController.mentalStamina <= 0 || _capturePhotoController.photoRemainCount == 0)
             {
-                ChasePlayer();
+                if (!isChasingPlayer)
+                {
+                    ChasePlayer();
+                }
             }
             else
             {
+                if (isChasingPlayer)
+                {
+                    StopChasingPlayer();
+                }
                 StartCoroutine(WaitAndReturn());
             }
         }
-// 3 foto çektikten sonra canavar oyuncuyu kabinin içine girene kadar kovalıyor
+
         private void Start()
         {
             _staminaController = FindObjectOfType<StaminaController>();
@@ -42,24 +51,41 @@ namespace Runtime.Controllers.Beast
         private void ChasePlayer()
         {
             BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Run);
+            Debug.Log("running chasing");
             beast.SetDestination(player.position);
             StopAllCoroutines();
-            
+            beast.transform.LookAt(player);
         }
-        
+
+       
+
+        private void StopChasingPlayer()
+        {
+            isChasingPlayer = false;
+            beast.SetDestination(transform.position); 
+            BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Idle);
+            Debug.Log("Idle");
+        }
+
         private IEnumerator WaitAndReturn()
         {
-            
             yield return new WaitForSeconds(timeToWaitBeforeReturn);
-            beast.speed=0;
-            transform.LookAt(player);
-            BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Idle);
+
+            BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Walk);
+            Debug.Log("walking");
+
             yield return new WaitForSeconds(timeToWaitBeforeReturn);
-            
+
+            Debug.Log("going spawn point by walking");
             beast.SetDestination(beastSpawnPoint.position);
-            beast.speed=15;
-            
-            
+            //beast.transform.LookAt(beastSpawnPoint.position);
+            while (beast.remainingDistance > beast.stoppingDistance)
+            {
+                yield return null;
+            }
+
+            BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Idle);
+            Debug.Log("Idle at spawn point");
         }
 
         private void Jumpscare()
