@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Runtime.Controllers.Stamina;
 using Runtime.Enums;
 using Runtime.Signals;
@@ -11,20 +12,20 @@ namespace Runtime.Controllers.Beast
     {
         public NavMeshAgent beast;
         public Transform player;
-
+        [SerializeField] private float distanceToIdle;
         [SerializeField] private Transform beastSpawnPoint;
         [SerializeField] private StaminaController _staminaController;
         [SerializeField] private CapturePhotoController _capturePhotoController;
-
+        readonly string inSpawnPoint = "inSpawnPoint";
+        readonly string _insideLight = "InsideLight";
         private bool isChasingPlayer;
         private float timeSinceChaseStarted;
 
-        [SerializeField] private float timeToWaitBeforeReturn = 5f;
-
+        [SerializeField] private float timeToWaitBeforeReturn;
+        [SerializeField] private float rotationSpeed;
         private void Update()
         {
-           
-
+            RotateTowardsMovementDirection();
             if (_staminaController.mentalStamina <= 0 || _capturePhotoController.photoRemainCount == 0)
             {
                 if (!isChasingPlayer)
@@ -40,12 +41,21 @@ namespace Runtime.Controllers.Beast
                 }
                 StartCoroutine(WaitAndReturn());
             }
+
+        }
+        private void RotateTowardsMovementDirection()
+        {
+            Vector3 moveDirection = beast.velocity.normalized;
+            Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+            
+            beast.transform.rotation = Quaternion.Slerp(beast.transform.rotation, toRotation, Time.deltaTime * rotationSpeed);
         }
 
         private void Start()
         {
             _staminaController = FindObjectOfType<StaminaController>();
             _capturePhotoController = FindObjectOfType<CapturePhotoController>();
+            beast.SetDestination(beastSpawnPoint.position);
         }
 
         private void ChasePlayer()
@@ -54,10 +64,9 @@ namespace Runtime.Controllers.Beast
             Debug.Log("running chasing");
             beast.SetDestination(player.position);
             StopAllCoroutines();
+            beast.speed = 20;
             beast.transform.LookAt(player);
         }
-
-       
 
         private void StopChasingPlayer()
         {
@@ -69,28 +78,19 @@ namespace Runtime.Controllers.Beast
 
         private IEnumerator WaitAndReturn()
         {
+           
             yield return new WaitForSeconds(timeToWaitBeforeReturn);
-
-            BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Walk);
-            Debug.Log("walking");
-
-            yield return new WaitForSeconds(timeToWaitBeforeReturn);
-
             Debug.Log("going spawn point by walking");
+            beast.speed = 10;
             beast.SetDestination(beastSpawnPoint.position);
-            //beast.transform.LookAt(beastSpawnPoint.position);
-            while (beast.remainingDistance > beast.stoppingDistance)
-            {
-                yield return null;
-            }
+            BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Walk);
 
-            BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Idle);
-            Debug.Log("Idle at spawn point");
+           
         }
 
         private void Jumpscare()
         {
-            // Jumpscare işlemleri
+           
         }
     }
 }

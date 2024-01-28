@@ -402,7 +402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startButton: {fileID: 1759817772600465441}
   loadingText: {fileID: 8480736986007310575}
-  delayRange: {x: 2.8598852, y: 3.7811904}
+  delayRange: {x: 1.0017855, y: 1.3231503}
 --- !u!1 &8480736986007310575
 GameObject:
   m_ObjectHideFlags: 0
