@@ -7,6 +7,7 @@ namespace Runtime.Data.ValueObjects
     public struct PlayerData
     {
         public PlayerMovementData MovementData;
+        public PlayerFOVData PlayerFOVData;
     }
 
     [Serializable]
@@ -15,4 +16,11 @@ namespace Runtime.Data.ValueObjects
         public float ForwardSpeed;
         public float SprintSpeed;
     }
+    [Serializable]
+    public struct PlayerFOVData
+    {
+        public float NormalFOV;
+        public float SprintFOV;
+    }
+    
 }

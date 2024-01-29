@@ -16,3 +16,6 @@ MonoBehaviour:
     MovementData:
       ForwardSpeed: 15
       SprintSpeed: 30
+    PlayerFOVData:
+      NormalFOV: 60
+      SprintFOV: 70

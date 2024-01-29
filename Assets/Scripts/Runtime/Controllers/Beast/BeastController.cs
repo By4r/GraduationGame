@@ -74,18 +74,17 @@ namespace Runtime.Controllers.Beast
             beast.SetDestination(transform.position); 
             BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Idle);
             Debug.Log("Idle");
+            
         }
 
         private IEnumerator WaitAndReturn()
         {
-           
             yield return new WaitForSeconds(timeToWaitBeforeReturn);
             Debug.Log("going spawn point by walking");
             beast.speed = 10;
             beast.SetDestination(beastSpawnPoint.position);
             BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Walk);
-
-           
+            
         }
 
         private void Jumpscare()

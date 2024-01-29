@@ -5,6 +5,7 @@ using Runtime.Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
+
 namespace Runtime.Controllers.Player
 {
     public class PlayerMovementController : MonoBehaviour
@@ -12,29 +13,41 @@ namespace Runtime.Controllers.Player
         #region Self Variables
 
         #region Serialized Variables
-        
+        [SerializeField] private UnityEngine.Camera playerCamera;
         [SerializeField] public  CharacterController characterController;
-
         [SerializeField] private StaminaController _staminaController;
         [SerializeField] private bool canRun;
         [SerializeField] public bool canMove =true;
         #endregion
 
         #region Private Variables
-
+        
+        #endregion
+        
+        #region ShowInInspector Variables
         [ShowInInspector] private PlayerMovementData _data;
-
+        [ShowInInspector] private PlayerFOVData _fovData;
         #endregion
-
+        
         #endregion
+        
+       
 
-        internal void SetData(PlayerMovementData data)
+        internal void SetData(PlayerMovementData movementData)
         {
-            _data = data;
+            _data = movementData;
+        }
+        internal void SetData(PlayerFOVData fovData)
+        {
+            _fovData = fovData;
         }
 
         private void Start()
         {
+            if (CompareTag("MainCamera"))
+            {
+                playerCamera = FindObjectOfType<UnityEngine.Camera>();
+            }
             characterController = GetComponent<CharacterController>();
             _staminaController = FindObjectOfType<StaminaController>();
         }
@@ -82,16 +95,18 @@ namespace Runtime.Controllers.Player
             {
                 SprintPlayer();
                 Debug.Log("DecreaseStamina and run");
+                playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, _fovData.SprintFOV, Time.deltaTime * 2f);
             }
             else 
             {
                 MovePlayer();
                 Debug.Log("IncreaseStamina and move");
+                playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, _fovData.NormalFOV, Time.deltaTime * 2f);
             }
 
             if (!shift)
             {
-                canRun = true; // Reset canRun when shift key is released
+                canRun = true; 
             }
 
         }
@@ -113,7 +128,7 @@ namespace Runtime.Controllers.Player
 
                 if (_staminaController.sprintStamina <= 0.01f)
                 {
-                    canRun = false; // Disable running when stamina is depleted
+                    canRun = false; 
                 }
             }
             
