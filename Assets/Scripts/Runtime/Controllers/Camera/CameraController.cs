@@ -15,6 +15,11 @@ namespace Runtime.Controllers.Camera
         [SerializeField] private PlayerMovementController playerMovementController;
         public bool mouseState = true;
         [SerializeField] private float smoothMouseSpeed;
+        [SerializeField] private float cameraAcceleration;
+        [SerializeField] private Transform _hand;
+        [SerializeField] private Transform _camera;
+        
+        
         
         #endregion
 
@@ -107,26 +112,42 @@ namespace Runtime.Controllers.Camera
         }
         private void UpdateSmoothMouseAxis()
         {
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+                float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
 
-            _smoothMouseInput.x = Mathf.Lerp(_smoothMouseInput.x, mouseX, 1f / smoothMouseSpeed);
-            _smoothMouseInput.y = Mathf.Lerp(_smoothMouseInput.y, mouseY, 1f / smoothMouseSpeed);
+                // Uncomment to smooth mouse input
+                _smoothMouseInput.x = Mathf.Lerp(_smoothMouseInput.x, mouseX, 1f / smoothMouseSpeed);
+                _smoothMouseInput.y = Mathf.Lerp(_smoothMouseInput.y, mouseY, 1f / smoothMouseSpeed);
 
-            _xRotation -= _smoothMouseInput.y;
-            _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
+                // Adjust _xRotation based on vertical mouse movement
+                _xRotation -= _smoothMouseInput.y;
+                _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
 
-            transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+                // Use _smoothMouseInput.x and _smoothMouseInput.y for rotation
+                _hand.localRotation = Quaternion.Euler(_xRotation, _smoothMouseInput.y, 0);
 
-            if (mouseState)
-            {
-                playerMovementController.characterController.transform.Rotate(Vector3.up * _smoothMouseInput.x);
-            }
-            else
-            {
-                playerMovementController.characterController.transform.rotation = Quaternion.identity;
-            }
+                // Use _smoothMouseInput.x for player rotation
+                transform.localRotation = Quaternion.Lerp(transform.localRotation,
+                    Quaternion.Euler(0, _smoothMouseInput.x, 0f), cameraAcceleration * Time.deltaTime);
+
+                // Use -_smoothMouseInput.y for camera rotation
+                _camera.localRotation = Quaternion.Lerp(_camera.localRotation,
+                    Quaternion.Euler(-_xRotation, 0, 0f), cameraAcceleration * Time.deltaTime);
+
+                if (mouseState)
+                {
+                    // Uncomment if you want to rotate the character controller
+                    playerMovementController.characterController.transform.Rotate(Vector3.up * _smoothMouseInput.x);
+                }
+                else
+                {
+                    // Uncomment if you want to reset character controller rotation
+                    // playerMovementController.characterController.transform.rotation = Quaternion.identity;
+                }
+            
+
         }
+
         
     }
 }
