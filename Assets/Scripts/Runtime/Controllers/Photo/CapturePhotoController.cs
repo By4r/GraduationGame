@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Runtime.Controllers.Player;
-using Runtime.Controllers.Security_Camera;
+using Runtime.Controllers.Security_Room;
 using Runtime.Data.UnityObjects;
 using Runtime.Data.ValueObjects;
 using Runtime.Managers;
@@ -36,7 +36,7 @@ public class CapturePhotoController : MonoBehaviour
 
     [SerializeField] private PlayerManager _playerManager;
     [SerializeField] private PlayerAnomalyReportController _playerAnomalyReport;
-    [SerializeField] private SecurityCameraController _securityCameraController;
+    [SerializeField] private SecurityRoomController securityRoomController;
     [SerializeField] private PlayerPhysicsController _playerPhysicsController;
     private Texture2D screenCapture;
     private bool viewingPhoto;
@@ -87,13 +87,13 @@ public class CapturePhotoController : MonoBehaviour
         _playerManager = FindObjectOfType<PlayerManager>();
         _playerAnomalyReport = FindObjectOfType<PlayerAnomalyReportController>();
         cameraFlash = _playerManager.light;
-        _securityCameraController = FindObjectOfType<SecurityCameraController>();
+        securityRoomController = FindObjectOfType<SecurityRoomController>();
         _playerPhysicsController = FindObjectOfType<PlayerPhysicsController>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !_securityCameraController.isSecurityPanelOpen && !isPauseState)
+        if (Input.GetKeyDown(KeyCode.R) && !securityRoomController.isSecurityPanelOpen && !isPauseState)
         {
             OpenPhotoMode();
         }
