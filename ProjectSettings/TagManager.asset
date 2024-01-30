@@ -13,6 +13,7 @@ TagManager:
   - OutsideLight
   - inSpawnPoint
   - InsideSecurityRoom
+  - SecurityCamera
   layers:
   - Default
   - TransparentFX

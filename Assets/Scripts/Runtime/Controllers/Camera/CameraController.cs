@@ -142,7 +142,7 @@ namespace Runtime.Controllers.Camera
                 else
                 {
                     // Uncomment if you want to reset character controller rotation
-                    // playerMovementController.characterController.transform.rotation = Quaternion.identity;
+                     playerMovementController.characterController.transform.rotation = Quaternion.identity;
                 }
             
 

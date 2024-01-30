@@ -28,13 +28,14 @@ namespace Runtime.Managers
         {
             SecurityCameraSignals.Instance.onSecurityCameraClose?.Invoke();
         }
-
+        
         private void SubscribeEvents()
         {
             SecurityCameraSignals.Instance.onNextCamera += OnNextCamera;
             SecurityCameraSignals.Instance.onPreviousCamera += OnPreviousCamera;
             SecurityCameraSignals.Instance.onSecurityCameraOpen += OnSecurityCameraOpen;
             SecurityCameraSignals.Instance.onSecurityCameraClose += OnSecurityCameraClose;
+            
         }
         private void UnSubscribeEvents()
         {
@@ -42,6 +43,7 @@ namespace Runtime.Managers
             SecurityCameraSignals.Instance.onPreviousCamera -= OnPreviousCamera;
             SecurityCameraSignals.Instance.onSecurityCameraOpen -= OnSecurityCameraOpen;
             SecurityCameraSignals.Instance.onSecurityCameraClose -= OnSecurityCameraClose;
+            
         }
         
         private void OnDisable()
