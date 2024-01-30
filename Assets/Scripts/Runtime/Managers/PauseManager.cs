@@ -55,7 +55,7 @@ namespace Runtime.Managers
         {
             CoreGameSignals.Instance.onPause?.Invoke();
             CameraSignals.Instance.onCameraConfine?.Invoke();
-            PauseSignals.Instance.onPhotoModeState?.Invoke(false);
+            PauseSignals.Instance.onPhotoPanelState?.Invoke(false);
             
             PauseSignals.Instance.onPauseState?.Invoke(true);
 
@@ -69,7 +69,7 @@ namespace Runtime.Managers
         {
             CoreGameSignals.Instance.onResume?.Invoke();
             CameraSignals.Instance.onCameraLocked?.Invoke();
-            PauseSignals.Instance.onPhotoModeState?.Invoke(true);
+            PauseSignals.Instance.onPhotoPanelState?.Invoke(true);
             
             PauseSignals.Instance.onPauseState?.Invoke(false);
 

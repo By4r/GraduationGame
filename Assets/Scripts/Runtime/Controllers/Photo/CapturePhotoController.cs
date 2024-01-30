@@ -19,7 +19,7 @@ public class CapturePhotoController : MonoBehaviour
     private Image photoDisplayArea;
 
     [SerializeField] private GameObject photoFrame;
-    [SerializeField] private bool isPhotoModeOpen;
+    [SerializeField] private bool isPhotoPanelOpen;
 
     [ShowInInspector] private bool isPauseState;
 
@@ -51,8 +51,12 @@ public class CapturePhotoController : MonoBehaviour
 
     private void SubscribeEvents()
     {
-        PauseSignals.Instance.onPhotoModeState += OnPhotoModeState;
+        PauseSignals.Instance.onPhotoPanelState += OnPhotoPanelState;
         PauseSignals.Instance.onPauseState += OnPauseState;
+        CaptureCameraSignals.Instance.onRemovePhoto += RemovePhoto;
+        CaptureCameraSignals.Instance.onOpenPhotoMode += OpenPhotoMode;
+        CaptureCameraSignals.Instance.onRemovePhoto += RemovePhoto;
+        CaptureCameraSignals.Instance.onShowPhoto += ShowPhoto;
     }
 
     private void OnPauseState(bool state)
@@ -63,9 +67,11 @@ public class CapturePhotoController : MonoBehaviour
 
     private void UnSubscribeEvents()
     {
-        PauseSignals.Instance.onPhotoModeState -= OnPhotoModeState;
+        PauseSignals.Instance.onPhotoPanelState -= OnPhotoPanelState;
         PauseSignals.Instance.onPauseState -= OnPauseState;
-
+        CaptureCameraSignals.Instance.onOpenPhotoMode -= OpenPhotoMode;
+        CaptureCameraSignals.Instance.onRemovePhoto -= RemovePhoto;
+        CaptureCameraSignals.Instance.onShowPhoto -= ShowPhoto;
     }
 
     private void OnDisable()
@@ -91,7 +97,7 @@ public class CapturePhotoController : MonoBehaviour
             OpenPhotoMode();
         }
 
-        if (isPhotoModeOpen)
+        if (isPhotoPanelOpen)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -105,15 +111,15 @@ public class CapturePhotoController : MonoBehaviour
 
     private void OpenPhotoMode()
     {
-        if (!isPhotoModeOpen)
+        if (!isPhotoPanelOpen)
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Photo, 2);
-            isPhotoModeOpen = true;
+            isPhotoPanelOpen = true;
         }
-        else if (isPhotoModeOpen)
+        else if (isPhotoPanelOpen)
         {
             CoreUISignals.Instance.onClosePanel.Invoke(2);
-            isPhotoModeOpen = false;
+            isPhotoPanelOpen = false;
             Debug.Log("panel closed");
         }
     }
@@ -171,8 +177,8 @@ public class CapturePhotoController : MonoBehaviour
         cameraFlash.SetActive(false);
     }
 
-    private void OnPhotoModeState(bool state)
+    private void OnPhotoPanelState(bool state)
     {
-        isPhotoModeOpen = state;
+        isPhotoPanelOpen = state;
     }
 }
