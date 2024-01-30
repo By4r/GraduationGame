@@ -19,7 +19,7 @@ public class CapturePhotoController : MonoBehaviour
     private Image photoDisplayArea;
 
     [SerializeField] private GameObject photoFrame;
-    [SerializeField] private bool isPhotoPanelOpen;
+    [SerializeField] private bool isPhotoPanelOpen=false;
 
     [ShowInInspector] private bool isPauseState;
 
@@ -37,7 +37,7 @@ public class CapturePhotoController : MonoBehaviour
     [SerializeField] private PlayerManager _playerManager;
     [SerializeField] private PlayerAnomalyReportController _playerAnomalyReport;
     [SerializeField] private SecurityCameraController _securityCameraController;
-
+    [SerializeField] private PlayerPhysicsController _playerPhysicsController;
     private Texture2D screenCapture;
     private bool viewingPhoto;
 
@@ -88,6 +88,7 @@ public class CapturePhotoController : MonoBehaviour
         _playerAnomalyReport = FindObjectOfType<PlayerAnomalyReportController>();
         cameraFlash = _playerManager.light;
         _securityCameraController = FindObjectOfType<SecurityCameraController>();
+        _playerPhysicsController = FindObjectOfType<PlayerPhysicsController>();
     }
 
     void Update()
@@ -142,7 +143,10 @@ public class CapturePhotoController : MonoBehaviour
         screenCapture.ReadPixels(regionToRead, 0, 0, false);
         screenCapture.Apply();
         ShowPhoto();
-        photoRemainCount--;
+        if (!_playerPhysicsController.isInsideSecRoom)
+        {
+            photoRemainCount--;
+        }
         Debug.Log("Photo Taken");
         StartCoroutine(PhotoRemoveEffect());
         StartCoroutine(_playerAnomalyReport.AnomalyReported());

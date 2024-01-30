@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Runtime.Controllers.Pool;
 using Runtime.Managers;
 using Runtime.Signals;
@@ -12,7 +13,13 @@ namespace Runtime.Controllers.Player
         private readonly string _inSecRoom = "InsideSecurityRoom";
         
         private bool isInsideLight;
-        private bool isInsideSecRoom;
+        public bool isInsideSecRoom;
+        [SerializeField] private CapturePhotoController _capturePhotoController;
+
+        private void Start()
+        {
+            _capturePhotoController = FindObjectOfType<CapturePhotoController>();
+        }
 
         private void Update()
         {
@@ -35,6 +42,8 @@ namespace Runtime.Controllers.Player
             else if (other.CompareTag(_inSecRoom))
             {
                 isInsideSecRoom = true;
+                _capturePhotoController.photoRemainCount = 3;
+
             }
         }
 

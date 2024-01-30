@@ -20,6 +20,7 @@ namespace Runtime.Controllers.Security_Camera
         [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private List<GameObject> cameras;
         [SerializeField] private bool isPauseState;
+        [SerializeField] private GameObject _pressEtext;
         #endregion
         
         #region Private Variables
@@ -46,8 +47,9 @@ namespace Runtime.Controllers.Security_Camera
             
             if (Physics.Raycast(theRaycast, out RaycastHit hit,range))
             {
+                
                 if (hit.collider.CompareTag(_secCam)&& !isPauseState)
-                {
+                {_pressEtext.SetActive(true);
                     Debug.Log("sec cam hit raycast");
                     if (Input.GetKeyDown(KeyCode.D))
                     {
@@ -72,7 +74,7 @@ namespace Runtime.Controllers.Security_Camera
                         }
                     }
                 }
-            }
+            }else _pressEtext.SetActive(false);
             
            
         }

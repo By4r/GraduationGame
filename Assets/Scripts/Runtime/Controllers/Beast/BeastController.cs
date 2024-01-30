@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Runtime.Controllers.Player;
 using Runtime.Controllers.Stamina;
 using Runtime.Enums;
 using Runtime.Signals;
@@ -16,6 +17,7 @@ namespace Runtime.Controllers.Beast
         [SerializeField] private Transform beastSpawnPoint;
         [SerializeField] private StaminaController _staminaController;
         [SerializeField] private CapturePhotoController _capturePhotoController;
+        [SerializeField] private PlayerPhysicsController _playerPhysicsController;
         readonly string inSpawnPoint = "inSpawnPoint";
         readonly string _insideLight = "InsideLight";
         private bool isChasingPlayer;
@@ -26,7 +28,9 @@ namespace Runtime.Controllers.Beast
         private void Update()
         {
             RotateTowardsMovementDirection();
-            if (_staminaController.mentalStamina <= 0 || _capturePhotoController.photoRemainCount == 0)
+            if (_staminaController.mentalStamina <= 0 
+                || _capturePhotoController.photoRemainCount == 0 
+                && !_playerPhysicsController.isInsideSecRoom )
             {
                 if (!isChasingPlayer)
                 {
@@ -55,6 +59,7 @@ namespace Runtime.Controllers.Beast
         {
             _staminaController = FindObjectOfType<StaminaController>();
             _capturePhotoController = FindObjectOfType<CapturePhotoController>();
+            _playerPhysicsController = FindObjectOfType<PlayerPhysicsController>();
             beast.SetDestination(beastSpawnPoint.position);
         }
 
