@@ -19,7 +19,7 @@ public class CapturePhotoController : MonoBehaviour
     private Image photoDisplayArea;
 
     [SerializeField] private GameObject photoFrame;
-    [SerializeField] private bool isPhotoPanelOpen=false;
+    [SerializeField] 
 
     [ShowInInspector] private bool isPauseState;
 
@@ -41,8 +41,8 @@ public class CapturePhotoController : MonoBehaviour
     private Texture2D screenCapture;
     private bool viewingPhoto;
 
-    [SerializeField] public int photoRemainCount;
-
+    public int photoRemainCount;
+    public bool isPhotoPanelOpen=false;   
 
     private void OnEnable()
     {

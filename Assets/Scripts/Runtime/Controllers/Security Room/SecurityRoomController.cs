@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Runtime.Controllers.Camera;
 using Runtime.Controllers.Player;
 using Runtime.Enums;
@@ -15,6 +16,7 @@ namespace Runtime.Controllers.Security_Room
         #region Serialized Variables
         [SerializeField] private PlayerMovementController _playerMovementController;
         [SerializeField] private CameraController _cameraController;
+        [SerializeField] private CapturePhotoController _capturePhotoController;
         [SerializeField] private float range;
         [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private List<GameObject> cameras;
@@ -128,16 +130,22 @@ namespace Runtime.Controllers.Security_Room
             UnSubscribeEvents();
         }
 
+        private void Start()
+        {
+            _capturePhotoController = FindObjectOfType<CapturePhotoController>();
+        }
+
         private void InfoPaperPanelOpen()
         {
-            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.PaperInfo, 1);
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.PaperInfo, 4);
             isInfoPaperPanelOpen = true;
             _playerMovementController.canMove=false;
             _cameraController.mouseState = false;
+            _capturePhotoController.isPhotoPanelOpen = false;
         }
         private void InfoPaperPanelClose()
         {
-            CoreUISignals.Instance.onClosePanel?.Invoke(1);
+            CoreUISignals.Instance.onClosePanel?.Invoke(4);
             isInfoPaperPanelOpen = false;
             _playerMovementController.canMove=true;
             _cameraController.mouseState = true;
@@ -166,15 +174,16 @@ namespace Runtime.Controllers.Security_Room
         private void SecurityCamOpen()
         {
             Debug.Log("SecurityCam OPENED");
-            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.SecurityCamera, 1);
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.SecurityCamera, 4);
             isSecurityPanelOpen = true;
             _playerMovementController.canMove=false;
             _cameraController.mouseState = false;
+            
         }
 
         private void SecurityCamClose()
         {
-            CoreUISignals.Instance.onClosePanel?.Invoke(1);
+            CoreUISignals.Instance.onClosePanel?.Invoke(4);
             isSecurityPanelOpen = false;
             _playerMovementController.canMove=true;
             _cameraController.mouseState = true;
