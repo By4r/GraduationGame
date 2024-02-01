@@ -75,6 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19093c4e7ea49f5a53a3e069624633c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInsideSecRoom: 0
+  _capturePhotoController: {fileID: 0}
 --- !u!1 &205884047143833462
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebfed1d454e4c8a8fd45c770f04895d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
   characterController: {fileID: 0}
   _staminaController: {fileID: 0}
   canRun: 0

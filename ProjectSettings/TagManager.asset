@@ -11,6 +11,10 @@ TagManager:
   - MiniGameArea
   - InsideLight
   - OutsideLight
+  - inSpawnPoint
+  - InsideSecurityRoom
+  - SecurityCamera
+  - InfoPaper
   layers:
   - Default
   - TransparentFX

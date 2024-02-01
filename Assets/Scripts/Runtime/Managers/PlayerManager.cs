@@ -3,6 +3,7 @@ using Runtime.Controllers.Player;
 using Runtime.Controllers.Stamina;
 using Runtime.Data.UnityObjects;
 using Runtime.Data.ValueObjects;
+using Runtime.Enums;
 using Runtime.Signals;
 using UnityEngine;
 
@@ -55,6 +56,7 @@ namespace Runtime.Managers
         private void SendDataToControllers()
         {
             movementController.SetData(_data.MovementData);
+            movementController.SetData(_data.PlayerFOVData);
         }
 
 
@@ -129,6 +131,7 @@ namespace Runtime.Managers
         }
         private void OnIncreaseMentalHealth()
         {
+           
             //PlayerSignals.Instance.onIncreaseMentalHealth?.Invoke();
             staminaController.IncreaseMentalHealth();
         }

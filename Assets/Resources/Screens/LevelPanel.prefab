@@ -1174,13 +1174,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30434a937ecf3054e99d158851a59337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprintStamina: 0
+  sprintStamina: 1
   maxSprintStamina: 1
   sprintMultiplier: 0.08
   image1: {fileID: 6907844879510208684}
-  mentalStamina: 1
-  maxMentalStamina: 1
-  mentalMultiplier: 0.05
+  mentalStamina: 100
+  maxMentalStamina: 100
+  mentalMultiplier: 10
 --- !u!114 &3667049849109311587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1195,7 +1195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photoDisplayArea: {fileID: 5431879184295985912}
   photoFrame: {fileID: 1028691758085027481}
-  isPhotoModeOpen: 0
+  isPauseState: 0
   cameraFlash: {fileID: 0}
   flashTime: 0.2
   fadingAnimation: {fileID: 2003674887816832826}
@@ -1204,8 +1204,10 @@ MonoBehaviour:
     type: 3}
   _playerAnomalyReport: {fileID: 1827650969363417841, guid: 4781ee214aaf6f5459b6cd29f669ba4c,
     type: 3}
-  _securityCameraController: {fileID: 0}
+  securityRoomController: {fileID: 0}
+  _playerPhysicsController: {fileID: 0}
   photoRemainCount: 3
+  isPhotoPanelOpen: 0
 --- !u!114 &730799531077369667
 MonoBehaviour:
   m_ObjectHideFlags: 0

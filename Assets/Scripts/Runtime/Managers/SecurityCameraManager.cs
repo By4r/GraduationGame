@@ -1,5 +1,4 @@
 ﻿using Runtime.Signals;
-using Runtime.Controllers.Security_Camera;
 using UnityEngine;
 
 namespace Runtime.Managers
@@ -12,36 +11,50 @@ namespace Runtime.Managers
         
         private void OnNextCamera()
         {
-            SecurityCameraSignals.Instance.onNextCamera?.Invoke();
+            SecurityRoomSignals.Instance.onNextCamera?.Invoke();
         }
         private void OnPreviousCamera()
         {
-            SecurityCameraSignals.Instance.onPreviousCamera?.Invoke();
+            SecurityRoomSignals.Instance.onPreviousCamera?.Invoke();
         }
 
         private void OnSecurityCameraOpen()
         {
-            SecurityCameraSignals.Instance.onSecurityCameraOpen?.Invoke();
+            SecurityRoomSignals.Instance.onSecurityCameraOpen?.Invoke();
         }
 
         private void OnSecurityCameraClose()
         {
-            SecurityCameraSignals.Instance.onSecurityCameraClose?.Invoke();
+            SecurityRoomSignals.Instance.onSecurityCameraClose?.Invoke();
         }
-
+        private void OnInfoPaperOpen()
+        {
+            SecurityRoomSignals.Instance.onInfoPaperPanelOpen?.Invoke();
+        }
+        private void OnInfoPaperClose()
+        {
+            SecurityRoomSignals.Instance.onInfoPaperPanelClose?.Invoke();
+        }
+        
         private void SubscribeEvents()
         {
-            SecurityCameraSignals.Instance.onNextCamera += OnNextCamera;
-            SecurityCameraSignals.Instance.onPreviousCamera += OnPreviousCamera;
-            SecurityCameraSignals.Instance.onSecurityCameraOpen += OnSecurityCameraOpen;
-            SecurityCameraSignals.Instance.onSecurityCameraClose += OnSecurityCameraClose;
+            SecurityRoomSignals.Instance.onNextCamera += OnNextCamera;
+            SecurityRoomSignals.Instance.onPreviousCamera += OnPreviousCamera;
+            SecurityRoomSignals.Instance.onSecurityCameraOpen += OnSecurityCameraOpen;
+            SecurityRoomSignals.Instance.onSecurityCameraClose += OnSecurityCameraClose;
+            SecurityRoomSignals.Instance.onInfoPaperPanelOpen += OnInfoPaperOpen;
+            SecurityRoomSignals.Instance.onInfoPaperPanelClose += OnInfoPaperClose;
+
         }
         private void UnSubscribeEvents()
         {
-            SecurityCameraSignals.Instance.onNextCamera -= OnNextCamera;
-            SecurityCameraSignals.Instance.onPreviousCamera -= OnPreviousCamera;
-            SecurityCameraSignals.Instance.onSecurityCameraOpen -= OnSecurityCameraOpen;
-            SecurityCameraSignals.Instance.onSecurityCameraClose -= OnSecurityCameraClose;
+            SecurityRoomSignals.Instance.onNextCamera -= OnNextCamera;
+            SecurityRoomSignals.Instance.onPreviousCamera -= OnPreviousCamera;
+            SecurityRoomSignals.Instance.onSecurityCameraOpen -= OnSecurityCameraOpen;
+            SecurityRoomSignals.Instance.onSecurityCameraClose -= OnSecurityCameraClose;
+            SecurityRoomSignals.Instance.onInfoPaperPanelOpen -= OnInfoPaperOpen;
+            SecurityRoomSignals.Instance.onInfoPaperPanelClose -= OnInfoPaperClose;
+            
         }
         
         private void OnDisable()

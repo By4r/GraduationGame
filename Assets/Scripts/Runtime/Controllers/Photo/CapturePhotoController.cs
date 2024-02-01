@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Runtime.Controllers.Player;
-using Runtime.Controllers.Security_Camera;
+using Runtime.Controllers.Security_Room;
 using Runtime.Data.UnityObjects;
 using Runtime.Data.ValueObjects;
 using Runtime.Managers;
@@ -19,7 +19,7 @@ public class CapturePhotoController : MonoBehaviour
     private Image photoDisplayArea;
 
     [SerializeField] private GameObject photoFrame;
-    [SerializeField] private bool isPhotoModeOpen;
+    [SerializeField] 
 
     [ShowInInspector] private bool isPauseState;
 
@@ -36,13 +36,13 @@ public class CapturePhotoController : MonoBehaviour
 
     [SerializeField] private PlayerManager _playerManager;
     [SerializeField] private PlayerAnomalyReportController _playerAnomalyReport;
-    [SerializeField] private SecurityCameraController _securityCameraController;
-
+    [SerializeField] private SecurityRoomController securityRoomController;
+    [SerializeField] private PlayerPhysicsController _playerPhysicsController;
     private Texture2D screenCapture;
     private bool viewingPhoto;
 
-    [SerializeField] public int photoRemainCount;
-
+    public int photoRemainCount;
+    public bool isPhotoPanelOpen=false;   
 
     private void OnEnable()
     {
@@ -51,8 +51,12 @@ public class CapturePhotoController : MonoBehaviour
 
     private void SubscribeEvents()
     {
-        PauseSignals.Instance.onPhotoModeState += OnPhotoModeState;
+        PauseSignals.Instance.onPhotoPanelState += OnPhotoPanelState;
         PauseSignals.Instance.onPauseState += OnPauseState;
+        CaptureCameraSignals.Instance.onRemovePhoto += RemovePhoto;
+        CaptureCameraSignals.Instance.onOpenPhotoMode += OpenPhotoMode;
+        CaptureCameraSignals.Instance.onRemovePhoto += RemovePhoto;
+        CaptureCameraSignals.Instance.onShowPhoto += ShowPhoto;
     }
 
     private void OnPauseState(bool state)
@@ -63,9 +67,11 @@ public class CapturePhotoController : MonoBehaviour
 
     private void UnSubscribeEvents()
     {
-        PauseSignals.Instance.onPhotoModeState -= OnPhotoModeState;
+        PauseSignals.Instance.onPhotoPanelState -= OnPhotoPanelState;
         PauseSignals.Instance.onPauseState -= OnPauseState;
-
+        CaptureCameraSignals.Instance.onOpenPhotoMode -= OpenPhotoMode;
+        CaptureCameraSignals.Instance.onRemovePhoto -= RemovePhoto;
+        CaptureCameraSignals.Instance.onShowPhoto -= ShowPhoto;
     }
 
     private void OnDisable()
@@ -81,17 +87,18 @@ public class CapturePhotoController : MonoBehaviour
         _playerManager = FindObjectOfType<PlayerManager>();
         _playerAnomalyReport = FindObjectOfType<PlayerAnomalyReportController>();
         cameraFlash = _playerManager.light;
-        _securityCameraController = FindObjectOfType<SecurityCameraController>();
+        securityRoomController = FindObjectOfType<SecurityRoomController>();
+        _playerPhysicsController = FindObjectOfType<PlayerPhysicsController>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && !_securityCameraController.isSecurityPanelOpen && !isPauseState)
+        if (Input.GetKeyDown(KeyCode.R) && !securityRoomController.isSecurityPanelOpen && !isPauseState)
         {
             OpenPhotoMode();
         }
 
-        if (isPhotoModeOpen)
+        if (isPhotoPanelOpen)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -105,15 +112,15 @@ public class CapturePhotoController : MonoBehaviour
 
     private void OpenPhotoMode()
     {
-        if (!isPhotoModeOpen)
+        if (!isPhotoPanelOpen)
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Photo, 2);
-            isPhotoModeOpen = true;
+            isPhotoPanelOpen = true;
         }
-        else if (isPhotoModeOpen)
+        else if (isPhotoPanelOpen)
         {
             CoreUISignals.Instance.onClosePanel.Invoke(2);
-            isPhotoModeOpen = false;
+            isPhotoPanelOpen = false;
             Debug.Log("panel closed");
         }
     }
@@ -136,7 +143,10 @@ public class CapturePhotoController : MonoBehaviour
         screenCapture.ReadPixels(regionToRead, 0, 0, false);
         screenCapture.Apply();
         ShowPhoto();
-        photoRemainCount--;
+        if (!_playerPhysicsController.isInsideSecRoom)
+        {
+            photoRemainCount--;
+        }
         Debug.Log("Photo Taken");
         StartCoroutine(PhotoRemoveEffect());
         StartCoroutine(_playerAnomalyReport.AnomalyReported());
@@ -171,8 +181,8 @@ public class CapturePhotoController : MonoBehaviour
         cameraFlash.SetActive(false);
     }
 
-    private void OnPhotoModeState(bool state)
+    private void OnPhotoPanelState(bool state)
     {
-        isPhotoModeOpen = state;
+        isPhotoPanelOpen = state;
     }
 }
