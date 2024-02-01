@@ -1,6 +1,7 @@
 ﻿using System;
 using DG.Tweening;
 using Runtime.Controllers.Pool;
+using Runtime.Enums;
 using Runtime.Managers;
 using Runtime.Signals;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace Runtime.Controllers.Player
         private readonly string _inLight = "InsideLight";
         private readonly string _inSecRoom = "InsideSecurityRoom";
         
-        private bool isInsideLight;
+        public bool isInsideLight;
         public bool isInsideSecRoom;
         [SerializeField] private CapturePhotoController _capturePhotoController;
 
@@ -38,6 +39,7 @@ namespace Runtime.Controllers.Player
             if (other.CompareTag(_inLight))
             {
                 isInsideLight = true;
+                
             }
             else if (other.CompareTag(_inSecRoom))
             {

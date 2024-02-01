@@ -18,8 +18,8 @@ namespace Runtime.Controllers.Beast
         [SerializeField] private StaminaController _staminaController;
         [SerializeField] private CapturePhotoController _capturePhotoController;
         [SerializeField] private PlayerPhysicsController _playerPhysicsController;
-        readonly string inSpawnPoint = "inSpawnPoint";
-        readonly string _insideLight = "InsideLight";
+        // readonly string inSpawnPoint = "inSpawnPoint";
+        // readonly string _insideLight = "InsideLight";
         private bool isChasingPlayer;
         private float timeSinceChaseStarted;
 
@@ -30,19 +30,16 @@ namespace Runtime.Controllers.Beast
             RotateTowardsMovementDirection();
             if (_staminaController.mentalStamina <= 0 
                 || _capturePhotoController.photoRemainCount == 0 
-                && !_playerPhysicsController.isInsideSecRoom )
+                && (!_playerPhysicsController.isInsideSecRoom || !_playerPhysicsController.isInsideLight))
             {
                 if (!isChasingPlayer)
                 {
                     ChasePlayer();
+                    
                 }
             }
             else
             {
-                if (isChasingPlayer)
-                {
-                    StopChasingPlayer();
-                }
                 StartCoroutine(WaitAndReturn());
             }
 
@@ -68,15 +65,17 @@ namespace Runtime.Controllers.Beast
             BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Run);
             Debug.Log("running chasing");
             beast.SetDestination(player.position);
-            StopAllCoroutines();
+            //StopAllCoroutines();
             beast.speed = 20;
-            beast.transform.LookAt(player);
+            //beast.transform.LookAt(player);
         }
 
         private void StopChasingPlayer()
         {
             isChasingPlayer = false;
-            beast.SetDestination(transform.position); 
+            //beast.SetDestination(transform.position); 
+            beast.speed = 0;
+            beast.transform.LookAt(player);
             BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Idle);
             Debug.Log("Idle");
             
@@ -84,11 +83,14 @@ namespace Runtime.Controllers.Beast
 
         private IEnumerator WaitAndReturn()
         {
+            StopChasingPlayer();
             yield return new WaitForSeconds(timeToWaitBeforeReturn);
+            BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Walk);
             Debug.Log("going spawn point by walking");
             beast.speed = 10;
             beast.SetDestination(beastSpawnPoint.position);
-            BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Walk);
+            beast.transform.LookAt(beastSpawnPoint);
+            
             
         }
 
