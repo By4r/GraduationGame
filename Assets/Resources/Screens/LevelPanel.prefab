@@ -1183,6 +1183,7 @@ MonoBehaviour:
   maxMentalStamina: 1
   mentalMultiplier: 0.05
   mentalHealthImage: {fileID: 8223105738498671413}
+  mentalImageMultiplier: 0
 --- !u!114 &3667049849109311587
 MonoBehaviour:
   m_ObjectHideFlags: 0
