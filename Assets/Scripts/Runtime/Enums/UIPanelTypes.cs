@@ -11,6 +11,5 @@ namespace Runtime.Enums
         Pause,
         Loading,
         PaperInfo
-
     }
 }
