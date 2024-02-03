@@ -10,7 +10,7 @@ namespace Runtime.Managers
         
         #region Serialized Variables
         [SerializeField] private BeastAnimationController beastAnimationController;
-       
+        [SerializeField] private BeastController beastController;
         #endregion
         private void OnEnable()
         {
@@ -39,12 +39,11 @@ namespace Runtime.Managers
         private void OnBeastChase()
         {
             BeastSignals.Instance.onBeastChase?.Invoke();
-            Debug.Log("ewqewqewqe1");
         }
 
-        private void OnBeastJumpscare()
+        private void OnBeastJumpscare(GameObject jumpscarePrefab)
         {
-            BeastSignals.Instance.onBeastJumpscare?.Invoke();
+            BeastSignals.Instance.onBeastJumpscare?.Invoke(jumpscarePrefab);
         }
 
         private void OnBeastReturn()

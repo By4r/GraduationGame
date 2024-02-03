@@ -11,6 +11,7 @@ namespace Runtime.Controllers.Beast
 {
     public class BeastController : MonoBehaviour
     {
+        #region Serialized Variables
         public NavMeshAgent beast;
         public Transform player;
         [SerializeField] private float distanceToIdle;
@@ -18,13 +19,24 @@ namespace Runtime.Controllers.Beast
         [SerializeField] private StaminaController _staminaController;
         [SerializeField] private CapturePhotoController _capturePhotoController;
         [SerializeField] private PlayerPhysicsController _playerPhysicsController;
-        // readonly string inSpawnPoint = "inSpawnPoint";
-        // readonly string _insideLight = "InsideLight";
-        private bool isChasingPlayer;
-        private float timeSinceChaseStarted;
-
         [SerializeField] private float timeToWaitBeforeReturn;
         [SerializeField] private float rotationSpeed;
+        [SerializeField] private Transform jumpscareHolder;
+        
+        
+        #endregion
+        // readonly string inSpawnPoint = "inSpawnPoint";
+        // readonly string _insideLight = "InsideLight";
+        #region Private
+
+        private int _currentHolder;
+        private bool isChasingPlayer;
+        private float timeSinceChaseStarted;
+        
+        #endregion
+       
+
+       
         private void Update()
         {
             RotateTowardsMovementDirection();
@@ -99,9 +111,45 @@ namespace Runtime.Controllers.Beast
             
         }
 
-        private void Jumpscare()
+        internal void Jumpscare(GameObject jumpscarePrefab)
         {
-           
+            
+
+            Debug.LogWarning("Current Holder: " + _currentHolder);
+            
+            Transform holderTransform = jumpscareHolder;
+
+            // If there is already a child (anomaly) under this holder, do not instantiate again
+            if (holderTransform.childCount > 0)
+            {
+                Debug.LogWarning("jumpscare already exists in the holder: " + holderTransform.GetChild(0).name);
+                return;
+            }
+
+            // Instantiate a new anomaly under the specified holder
+            var spawnJumpscare = Instantiate(jumpscarePrefab, holderTransform);
+
+            Debug.LogWarning("jumpscare spawned and parented to the holder: " + spawnJumpscare.name);
         }
+       
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+        private void UnSubscribeEvents()
+        {
+            //BeastSignals.Instance.onBeastJumpscare -= Jumpscare;
+        }
+
+        private void OnDisable()
+        {
+            UnSubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            //BeastSignals.Instance.onBeastJumpscare += Jumpscare;
+        }
+
     }
 }

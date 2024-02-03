@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using Runtime.Controllers.Beast;
 using Runtime.Controllers.Pool;
 using Runtime.Enums;
 using Runtime.Managers;
@@ -13,10 +14,13 @@ namespace Runtime.Controllers.Player
         private readonly string _inLight = "InsideLight";
         private readonly string _inSecRoom = "InsideSecurityRoom";
         
+        
         public bool isInsideLight;
         public bool isInsideSecRoom;
         [SerializeField] private CapturePhotoController _capturePhotoController;
-
+        
+        
+       
         private void Start()
         {
             _capturePhotoController = FindObjectOfType<CapturePhotoController>();
@@ -33,6 +37,17 @@ namespace Runtime.Controllers.Player
                 DecreaseMentalHealth();
             }
         }
+        private void IncreaseMentalHealth()
+        {
+            PlayerSignals.Instance.onIncreaseMentalHealth?.Invoke();
+            Debug.Log("IncreaseMental");
+        }
+
+        private void DecreaseMentalHealth()
+        {
+            PlayerSignals.Instance.onDecreaseMentalHealth?.Invoke();
+            Debug.Log("DecreaseMental");
+        }
         
         private void OnTriggerEnter(Collider other)
         {
@@ -47,8 +62,9 @@ namespace Runtime.Controllers.Player
                 _capturePhotoController.photoRemainCount = 3;
 
             }
+            
         }
-
+        
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag(_inLight))
@@ -61,17 +77,6 @@ namespace Runtime.Controllers.Player
             }
         }
 
-        private void IncreaseMentalHealth()
-        {
-            PlayerSignals.Instance.onIncreaseMentalHealth?.Invoke();
-            Debug.Log("IncreaseMental");
-        }
-
-        private void DecreaseMentalHealth()
-        {
-            PlayerSignals.Instance.onDecreaseMentalHealth?.Invoke();
-            Debug.Log("DecreaseMental");
-        }
     }
 }
 
