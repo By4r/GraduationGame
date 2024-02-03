@@ -34,6 +34,7 @@ namespace Runtime.Controllers.Beast
             {
                 if (!isChasingPlayer)
                 {
+                    StopAllCoroutines();
                     ChasePlayer();
                     
                 }
@@ -68,14 +69,17 @@ namespace Runtime.Controllers.Beast
             //StopAllCoroutines();
             beast.speed = 20;
             //beast.transform.LookAt(player);
+            
         }
 
         private void StopChasingPlayer()
         {
+            
             isChasingPlayer = false;
             //beast.SetDestination(transform.position); 
             beast.speed = 0;
             beast.transform.LookAt(player);
+
             BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Idle);
             Debug.Log("Idle");
             
@@ -89,7 +93,8 @@ namespace Runtime.Controllers.Beast
             Debug.Log("going spawn point by walking");
             beast.speed = 10;
             beast.SetDestination(beastSpawnPoint.position);
-            beast.transform.LookAt(beastSpawnPoint);
+            
+            //beast.transform.LookAt(beastSpawnPoint);
             
             
         }

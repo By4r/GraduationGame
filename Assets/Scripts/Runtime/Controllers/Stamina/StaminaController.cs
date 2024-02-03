@@ -19,8 +19,9 @@ namespace Runtime.Controllers.Stamina
         [SerializeField] public float mentalStamina;
         [SerializeField] private float maxMentalStamina;
         [SerializeField] private float mentalMultiplier;
+
+        [SerializeField] private Image mentalHealthImage;
         
-        //[SerializeField] private PlayerMovementController playerMovementController;
         #endregion
         
         #endregion
@@ -56,6 +57,9 @@ namespace Runtime.Controllers.Stamina
             {
                 mentalStamina += mentalMultiplier * Time.deltaTime;
                 //Debug.Log(mentalStamina+"IncreaseMentalHealth");
+                Color mentalAlpha = mentalHealthImage.color;
+                mentalAlpha.a = 0.8f - mentalStamina;
+                mentalHealthImage.color = mentalAlpha;
             }
         }
         
@@ -65,6 +69,10 @@ namespace Runtime.Controllers.Stamina
             {
                 mentalStamina -= mentalMultiplier * Time.deltaTime;
                 //Debug.Log(mentalStamina+"DecreaseMentalHealth");
+                
+                Color mentalAlpha = mentalHealthImage.color;
+                mentalAlpha.a = 0.8f - mentalStamina;
+                mentalHealthImage.color = mentalAlpha;
             }
         }
         private void OnEnable()
