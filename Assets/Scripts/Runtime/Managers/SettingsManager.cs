@@ -10,7 +10,7 @@ namespace Runtime.Managers
     public class SettingsManager : MonoBehaviour
     {
         public AudioMixer audioMixer;
-
+        
         public TMP_Dropdown resolutionDropdown;
 
         private Resolution[] resolutions;
