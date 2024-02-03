@@ -11,7 +11,6 @@ namespace Runtime.Controllers.Beast
 {
     public class BeastPhysicsController : MonoBehaviour
     {
-        private readonly string _beastJumpscare = "BeastJumpscare";
         private readonly string _player = "Player";
         [SerializeField] private BeastController beastController;
         [SerializeField] private GameObject jumpscarePrefab;
