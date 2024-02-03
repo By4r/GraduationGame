@@ -106,12 +106,6 @@ namespace Runtime.Managers
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
         }
 
-        public void QuitGame()
-        {
-            Debug.LogWarning("Quit Game!");
-            Application.Quit();
-        }
-
 
         [Button("RESUME BUTTON")]
         public void Resume()
