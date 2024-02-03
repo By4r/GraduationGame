@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 2447093018515720091}
   - component: {fileID: 5591671406067316595}
   - component: {fileID: 8921097309276644495}
+  - component: {fileID: 2010180413942759094}
   m_Layer: 0
-  m_Name: Physics
-  m_TagString: Untagged
+  m_Name: Beast Physics
+  m_TagString: BeastJumpscare
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,10 +60,25 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1.5981064
-  m_Height: 10.999763
+  m_Radius: 7.695424
+  m_Height: 15.390848
   m_Direction: 1
-  m_Center: {x: 0, y: 5.50874, z: 0.16205597}
+  m_Center: {x: -0.028788567, y: 5.5087404, z: 0.16205597}
+--- !u!114 &2010180413942759094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362461703574644437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb44457696f7484ab4945217f46f9b99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beastController: {fileID: 6953433761885058188}
+  jumpscarePrefab: {fileID: 5666264920915243882, guid: 30ffd563daa8335468c4799ff10fe507,
+    type: 3}
 --- !u!1 &2171563249056405505
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +134,7 @@ MonoBehaviour:
   _playerPhysicsController: {fileID: 0}
   timeToWaitBeforeReturn: 3
   rotationSpeed: 5
+  jumpscareHolder: {fileID: 0}
 --- !u!114 &3731141837769035325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,3 +148,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beastAnimationController: {fileID: 0}
+  beastController: {fileID: 6953433761885058188}

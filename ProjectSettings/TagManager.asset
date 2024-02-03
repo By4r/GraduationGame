@@ -15,6 +15,7 @@ TagManager:
   - InsideSecurityRoom
   - SecurityCamera
   - InfoPaper
+  - BeastJumpscare
   layers:
   - Default
   - TransparentFX
