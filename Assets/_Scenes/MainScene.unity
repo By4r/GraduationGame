@@ -992,7 +992,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &191099823
 GameObject:
@@ -2731,6 +2731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a9b9d624014ff42906b87a52df6925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
 --- !u!1 &773961324
 GameObject:
   m_ObjectHideFlags: 0
@@ -2773,6 +2774,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> e937ec82902cf6596c0a4968dfd28c82100b57e1
 --- !u!1 &830165482
 GameObject:
   m_ObjectHideFlags: 0
@@ -5052,7 +5055,7 @@ Transform:
   - {fileID: 2122462425}
   - {fileID: 622492251}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1488715374
 MonoBehaviour:
@@ -6177,7 +6180,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 12.141, y: 0, z: 0}
 --- !u!114 &1747086862
 MonoBehaviour:
@@ -7595,7 +7598,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2100070028
 GameObject:
@@ -7785,7 +7788,7 @@ Transform:
   - {fileID: 1919788227}
   - {fileID: 2020574379}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2122462424
 GameObject:
@@ -8033,9 +8036,25 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
+<<<<<<< HEAD
   m_Children: []
   m_Father: {fileID: 773961325}
   m_RootOrder: 10
+=======
+  m_Children:
+  - {fileID: 1554189650}
+  - {fileID: 860451170}
+  - {fileID: 82706525}
+  - {fileID: 430179449}
+  - {fileID: 618481525}
+  - {fileID: 1484825131}
+  - {fileID: 1284656841}
+  - {fileID: 123694681}
+  - {fileID: 1445301318}
+  - {fileID: 1078067585}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+>>>>>>> e937ec82902cf6596c0a4968dfd28c82100b57e1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5599630008400881706
 MeshFilter:
