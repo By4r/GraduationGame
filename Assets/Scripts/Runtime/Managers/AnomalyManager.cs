@@ -28,6 +28,11 @@ namespace Runtime.Managers
             UpdateCurrentStage();
         }
 
+        private void Start()
+        {
+            Debug.LogWarning("ANOMALY AMOUNT: " + GetTotalAnomalyCount());
+        }
+
         private void OnEnable()
         {
             SubscribeEvents();
@@ -85,7 +90,7 @@ namespace Runtime.Managers
 
         private void OnCheckAnomalyResult()
         {
-            if (_reportedAnomalyValue == GetTotalAnomalyCount())
+            if (_reportedAnomalyValue >= GetTotalAnomalyCount())
             {
                 Debug.LogWarning("All anomalies reported!");
                 CoreGameSignals.Instance.onLevelSuccessful?.Invoke();
@@ -146,6 +151,8 @@ namespace Runtime.Managers
                     break;
             }
 
+
+            if (_currentAnomalyIndex > 6) return;
             _currentAnomalyIndex++;
             Debug.Log("Anomaly Spawned !");
             UpdateCurrentStage(); // Update stage after spawning
