@@ -1967,7 +1967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a2635728104c879ccbf25631a49c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 420
+  totalTime: 360
   timerText: {fileID: 463471656015196937}
   stageAnomalyUIController: {fileID: 6156980308100176824}
 --- !u!1 &6168307964927179241
