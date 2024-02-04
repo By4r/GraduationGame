@@ -23,12 +23,15 @@ namespace Runtime.Controllers.Beast
         [SerializeField] private Transform jumpscareHolder;
         [SerializeField] private AudioSource beastAudioSource;
         [SerializeField] private AudioClip wakingupSound;
+        [SerializeField] private AudioClip beastFollowSound
+            ;
         
         #endregion
        
         #region Private
         private bool isChasingPlayer;
-
+        private bool hasPlayedBeastFollowSound = false;
+        
         #endregion
        
 
@@ -42,7 +45,7 @@ namespace Runtime.Controllers.Beast
             {
                 if (!isChasingPlayer)
                 {
-                    //StopAllCoroutines();
+                    StopAllCoroutines();
                     ChasePlayer();
                     
                 }
@@ -76,8 +79,12 @@ namespace Runtime.Controllers.Beast
             beast.SetDestination(player.position);
             //StopAllCoroutines();
             beast.speed = 20;
-            //beast.transform.LookAt(player);
-            beastAudioSource.PlayOneShot(wakingupSound);
+            if (!hasPlayedBeastFollowSound)
+            {
+                beastAudioSource.PlayOneShot(wakingupSound);
+                beastAudioSource.PlayOneShot(beastFollowSound);
+                hasPlayedBeastFollowSound = true; // Ses çalındıktan sonra bayrağı true yap
+            }
             
         }
 
@@ -88,7 +95,7 @@ namespace Runtime.Controllers.Beast
             //beast.SetDestination(transform.position); 
             beast.speed = 0;
             beast.transform.LookAt(player);
-
+            hasPlayedBeastFollowSound = false;
             BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Idle);
             Debug.Log("Idle");
             
