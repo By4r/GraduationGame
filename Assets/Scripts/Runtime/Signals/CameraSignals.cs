@@ -8,5 +8,6 @@ namespace Runtime.Signals
         public UnityAction onSetCameraTarget = delegate { };
         public UnityAction onCameraLocked = delegate { };
         public UnityAction onCameraConfine = delegate { };
+        
     }
 }
