@@ -230,7 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3726627279847082896}
   m_Layer: 0
-  m_Name: Jumpscare 1
+  m_Name: Jumpscare_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
