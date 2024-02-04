@@ -13,6 +13,9 @@ namespace Runtime.Controllers.Player
         #region Self Variables
 
         #region Serialized Variables
+
+        // [SerializeField] private AudioSource playerAudioSource;
+        // [SerializeField] private AudioClip walkSound;
         [SerializeField] private UnityEngine.Camera playerCamera;
         [SerializeField] public  CharacterController characterController;
         [SerializeField] private StaminaController _staminaController;
@@ -67,7 +70,7 @@ namespace Runtime.Controllers.Player
             canMove = true;
             Vector3 move = CalculateMoveVector();
             characterController.Move(move * _data.ForwardSpeed * Time.deltaTime);
-
+            //playerAudioSource.PlayOneShot(walkSound);
             if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.RightShift))
             {
                 _staminaController.IncreaseStamina();
