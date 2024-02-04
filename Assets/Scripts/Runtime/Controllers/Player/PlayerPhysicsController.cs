@@ -13,12 +13,13 @@ namespace Runtime.Controllers.Player
     {
         private readonly string _inLight = "InsideLight";
         private readonly string _inSecRoom = "InsideSecurityRoom";
-        
+        [SerializeField] private AudioSource playerAudioSource;
+        [SerializeField] private AudioClip mentalDecreaseSound;
         
         public bool isInsideLight;
         public bool isInsideSecRoom;
         [SerializeField] private CapturePhotoController _capturePhotoController;
-        
+        private bool hasPlayedMentalDecreaseSound = false;
         
        
         private void Start()
@@ -41,12 +42,20 @@ namespace Runtime.Controllers.Player
         {
             PlayerSignals.Instance.onIncreaseMentalHealth?.Invoke();
             Debug.Log("IncreaseMental");
+            hasPlayedMentalDecreaseSound = false;
+            playerAudioSource.Stop();
         }
 
         private void DecreaseMentalHealth()
         {
             PlayerSignals.Instance.onDecreaseMentalHealth?.Invoke();
-            Debug.Log("DecreaseMental");
+            if (!hasPlayedMentalDecreaseSound)
+            {
+               
+                Debug.Log("DecreaseMental");
+                playerAudioSource.PlayOneShot(mentalDecreaseSound);
+                hasPlayedMentalDecreaseSound = true;
+            }
         }
         
         private void OnTriggerEnter(Collider other)
