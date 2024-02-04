@@ -47,12 +47,12 @@ namespace Runtime.Managers
 
         private void OnLevelSuccessful()
         {
-            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Photo, 2);
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Win, 4);
         }
 
         private void OnLevelFailed()
         {
-            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Fail, 2);
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Fail, 4);
         }
 
         private void OnSettingsPanel()

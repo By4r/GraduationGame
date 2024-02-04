@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Runtime.Managers;
+using Runtime.Signals;
 
 namespace Runtime.Controllers.Player
 {
@@ -61,8 +62,14 @@ namespace Runtime.Controllers.Player
             AnomalyDetectionAnim.Play("AnomalyReported", -1, 0f);
             anomalyDetectionText.text = "Checking Anomaly...";
             yield return new WaitForSeconds(5f);
-            
-            anomalyDetectionText.text = isAnomalyDetected ? "Anomaly Fixed." : "Anomaly Not Found.";
+
+            if (isAnomalyDetected)
+            {
+                anomalyDetectionText.text = "Anomaly Fixed.";
+                AnomalySignals.Instance.onAnomalyReport?.Invoke();
+            }
+            else
+                anomalyDetectionText.text = "Anomaly Not Found.";
             yield return new WaitForSeconds(3f);
             AnomalyDetectionAnim.enabled = false;
             anomalyOnReport = false;

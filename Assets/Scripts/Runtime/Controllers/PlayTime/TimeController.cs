@@ -73,6 +73,8 @@ namespace Runtime.Controllers.PlayTime
                     currentTime = 0f;
                     isCounting = false;
                     ShowTimeUpMessage();
+
+                    CheckGameResult();
                 }
 
                 if (stageTime >= _stageIncrementDuration)
@@ -111,6 +113,14 @@ namespace Runtime.Controllers.PlayTime
                 //     //ResetStageTime();
                 // }
             }
+        }
+
+        private void CheckGameResult()
+        {
+            Debug.LogWarning("Checking Result!");
+            
+            AnomalySignals.Instance.onCheckAnomalyResult?.Invoke();
+            
         }
 
         internal void StartTimer()

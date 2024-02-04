@@ -10,5 +10,9 @@ namespace Runtime.Signals
         public UnityAction onAnomalySpawn = delegate { };
 
         public UnityAction<AnomalyStageTypes> onAnomalyStage = delegate { };
+
+        public UnityAction onAnomalyReport = delegate { };
+
+        public UnityAction onCheckAnomalyResult = delegate { };
     }
 }

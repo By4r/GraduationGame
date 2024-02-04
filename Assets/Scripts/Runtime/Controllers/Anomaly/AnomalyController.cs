@@ -44,61 +44,12 @@ namespace Runtime.Controllers
 
             Debug.LogWarning("Anomaly spawned and parented to the holder: " + newAnomaly.name);
         }
-
         
-        
-        /*internal void SpawnAnomaly(GameObject anomalyPrefab, int currentHolder)
+        internal int GetAnomalyCount()
         {
-            _currentHolder = currentHolder;
-
-            Debug.LogWarning("Current Holder: " + _currentHolder);
-
-            // If anomalyHolder is null or _currentHolder is out of range, return early
-            if (anomalyHolder == null || _currentHolder < 0 || _currentHolder >= anomalyHolder.Count)
-            {
-                Debug.LogWarning("ANOMALY CONTROLLER HOLDER WARNING");
-                return;
-            }
-
-            // If there is already an anomaly at this location, do not instantiate again
-            if (anomalyHolder[_currentHolder] != null)
-            {
-                Debug.LogWarning("Anomaly already exists in the holder: " + anomalyHolder[_currentHolder].name);
-                return;
-            }
-
-            // Instantiate a new anomaly at the specified index
-            var newAnomaly = Instantiate(anomalyPrefab, anomalyHolder[_currentHolder]);
-
-            Debug.LogWarning("Anomaly spawned and parented to the holder: " + newAnomaly.name);
-        }*/
-
+            // Return the total number of anomalies (number of elements in anomalyHolder list)
+            return anomalyHolder.Count;
+        }
         
-        /*internal void SpawnAnomaly(GameObject anomalyPrefab, int currentHolder)
-        {
-            _currentHolder = currentHolder;
-            
-            Debug.LogWarning("Current Holder : " + _currentHolder);
-
-            // If anomalyHolder is null, return early
-            if (anomalyHolder == null)
-            {
-                Debug.LogWarning("ANOMALY CONTROLLER HOLDER WARNING");
-
-                return;
-            }
-
-            // If there is already an anomaly at this location, do not instantiate again
-            if (anomalyHolder.Count > _currentHolder && anomalyHolder[_currentHolder] != null)
-            {
-                Debug.LogWarning("Anomaly already exists in the holder: " + anomalyHolder[_currentHolder].name);
-                return;
-            }
-
-            // Instantiate a new anomaly at the specified index
-            var newAnomaly = Instantiate(anomalyPrefab, anomalyHolder[_currentHolder]);
-
-            Debug.LogWarning("Anomaly spawned and parented to the holder: " + newAnomaly.name);
-        }*/
     }
 }
