@@ -21,7 +21,8 @@ namespace Runtime.Controllers.Beast
         [SerializeField] private float timeToWaitBeforeReturn;
         [SerializeField] private float rotationSpeed;
         [SerializeField] private Transform jumpscareHolder;
-        
+        [SerializeField] private AudioSource beastAudioSource;
+        [SerializeField] private AudioClip wakingupSound;
         
         #endregion
        
@@ -76,6 +77,7 @@ namespace Runtime.Controllers.Beast
             //StopAllCoroutines();
             beast.speed = 20;
             //beast.transform.LookAt(player);
+            beastAudioSource.PlayOneShot(wakingupSound);
             
         }
 

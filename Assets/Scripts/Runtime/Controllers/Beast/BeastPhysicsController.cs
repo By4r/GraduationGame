@@ -14,6 +14,10 @@ namespace Runtime.Controllers.Beast
         private readonly string _player = "Player";
         [SerializeField] private BeastController beastController;
         [SerializeField] private GameObject jumpscarePrefab;
+        [SerializeField] private AudioSource beastAudioSource;
+        [SerializeField] private AudioClip jumpscareSound;
+        [SerializeField] private AudioClip laughSound;
+        
         
         private void OnTriggerEnter(Collider other)
         {
@@ -22,6 +26,9 @@ namespace Runtime.Controllers.Beast
             { 
                 beastController.Jumpscare(jumpscarePrefab);
                 Debug.Log("JUMPSCARE");
+                beastAudioSource.PlayOneShot(jumpscareSound);
+                beastAudioSource.PlayOneShot(laughSound);
+                CoreGameSignals.Instance.onLevelFailed.Invoke();
             }
         }
         

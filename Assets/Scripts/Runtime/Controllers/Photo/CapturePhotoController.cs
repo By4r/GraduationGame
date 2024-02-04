@@ -23,7 +23,12 @@ public class CapturePhotoController : MonoBehaviour
 
     [ShowInInspector] private bool isPauseState;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource photoAudioSource;
 
+    [SerializeField] private AudioClip photoTakenSound;
+    [SerializeField] private AudioClip photoPanelOpenSound;
+    
     [Header("Flash Effect")] [SerializeField]
     private GameObject cameraFlash;
 
@@ -117,6 +122,7 @@ public class CapturePhotoController : MonoBehaviour
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Photo, 2);
             isPhotoPanelOpen = true;
+            photoAudioSource.PlayOneShot(photoPanelOpenSound);
         }
         else if (isPhotoPanelOpen)
         {
@@ -148,6 +154,7 @@ public class CapturePhotoController : MonoBehaviour
         {
             photoRemainCount--;
         }
+        photoAudioSource.PlayOneShot(photoTakenSound);
         Debug.Log("Photo Taken");
         StartCoroutine(PhotoRemoveEffect());
         StartCoroutine(_playerAnomalyReport.AnomalyReported());
