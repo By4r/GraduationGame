@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Runtime.Controllers.Player;
 using Runtime.Controllers.Stamina;
 using Runtime.Enums;
@@ -14,7 +13,7 @@ namespace Runtime.Controllers.Beast
         #region Serialized Variables
         public NavMeshAgent beast;
         public Transform player;
-        [SerializeField] private float distanceToIdle;
+       
         [SerializeField] private Transform beastSpawnPoint;
         [SerializeField] private StaminaController _staminaController;
         [SerializeField] private CapturePhotoController _capturePhotoController;
@@ -25,14 +24,10 @@ namespace Runtime.Controllers.Beast
         
         
         #endregion
-        // readonly string inSpawnPoint = "inSpawnPoint";
-        // readonly string _insideLight = "InsideLight";
+       
         #region Private
-
-        private int _currentHolder;
         private bool isChasingPlayer;
-        private float timeSinceChaseStarted;
-        
+
         #endregion
        
 
@@ -46,7 +41,7 @@ namespace Runtime.Controllers.Beast
             {
                 if (!isChasingPlayer)
                 {
-                    StopAllCoroutines();
+                    //StopAllCoroutines();
                     ChasePlayer();
                     
                 }
@@ -113,23 +108,8 @@ namespace Runtime.Controllers.Beast
 
         internal void Jumpscare(GameObject jumpscarePrefab)
         {
-            
-
-            Debug.LogWarning("Current Holder: " + _currentHolder);
-            
             Transform holderTransform = jumpscareHolder;
-
-            // If there is already a child (anomaly) under this holder, do not instantiate again
-            if (holderTransform.childCount > 0)
-            {
-                Debug.LogWarning("jumpscare already exists in the holder: " + holderTransform.GetChild(0).name);
-                return;
-            }
-
-            // Instantiate a new anomaly under the specified holder
-            var spawnJumpscare = Instantiate(jumpscarePrefab, holderTransform);
-
-            Debug.LogWarning("jumpscare spawned and parented to the holder: " + spawnJumpscare.name);
+            Instantiate(jumpscarePrefab, holderTransform);
         }
        
         private void OnEnable()

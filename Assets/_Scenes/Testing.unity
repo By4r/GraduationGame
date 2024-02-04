@@ -771,7 +771,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beast: {fileID: 7577830949912275591}
   player: {fileID: 715171523}
-  distanceToIdle: 0
   beastSpawnPoint: {fileID: 7880529559044542732}
   _staminaController: {fileID: 1738197609}
   _capturePhotoController: {fileID: 0}
@@ -4337,7 +4336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beastAnimationController: {fileID: 749201245418663589}
-  beastController: {fileID: 0}
+  beastController: {fileID: 1644930929743658}
 --- !u!1 &7313265096210072947
 GameObject:
   m_ObjectHideFlags: 0
