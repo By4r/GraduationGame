@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Runtime.Controllers.UI;
 using Runtime.Enums;
 using Runtime.Signals;
@@ -177,7 +178,19 @@ namespace Runtime.Controllers.PlayTime
             AnomalySignals.Instance.onAnomalyStage?.Invoke((AnomalyStageTypes)currentStage);
             Debug.Log("INCREMENT STAGE");
         }
+        
+        internal void StartTimeWithDelay(float delayValue)
+        {
+            StartCoroutine(StartTimerWithDelayCoroutine(delayValue));
+        }
 
+        private IEnumerator StartTimerWithDelayCoroutine(float delayDuration)
+        {
+            yield return new WaitForSeconds(delayDuration);
+
+            isCounting = true;
+        }
+        
         private void ResetStageTime()
         {
             stageTime = 0f;

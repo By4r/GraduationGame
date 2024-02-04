@@ -95,6 +95,7 @@ namespace Runtime.Managers
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
             InputSignals.Instance.onEnableInput?.Invoke();
             StateSignals.Instance.onSetGameState?.Invoke(GameStates.Gameplay);
+            TimeSignals.Instance.onTimeStarted?.Invoke();
 
             //CameraSignals.Instance.onCameraLocked?.Invoke();
         }
