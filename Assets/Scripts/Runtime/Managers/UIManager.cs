@@ -1,3 +1,4 @@
+using Enums;
 using Runtime.Enums;
 using Runtime.Signals;
 using UnityEngine;
@@ -48,11 +49,13 @@ namespace Runtime.Managers
         private void OnLevelSuccessful()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Win, 4);
+            StateSignals.Instance.onSetGameState?.Invoke(GameStates.UI);
         }
 
         private void OnLevelFailed()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Fail, 4);
+            StateSignals.Instance.onSetGameState?.Invoke(GameStates.UI);
         }
 
         private void OnSettingsPanel()
@@ -91,6 +94,8 @@ namespace Runtime.Managers
             CoreUISignals.Instance.onClosePanel?.Invoke(1);
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
             InputSignals.Instance.onEnableInput?.Invoke();
+            StateSignals.Instance.onSetGameState?.Invoke(GameStates.Gameplay);
+
             //CameraSignals.Instance.onCameraLocked?.Invoke();
         }
 
@@ -124,6 +129,7 @@ namespace Runtime.Managers
         {
             PauseSignals.Instance.onMainMenuGame?.Invoke();
             CoreGameSignals.Instance.onCancelLevel?.Invoke();
+            StateSignals.Instance.onSetGameState?.Invoke(GameStates.UI);
         }
 
         public void LoadGame()

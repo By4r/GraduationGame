@@ -11,6 +11,8 @@ namespace Runtime.Managers
 
         private bool _isPaused = false;
 
+        private bool _isCanPause;
+
         #endregion
 
         private void OnEnable()
@@ -23,6 +25,12 @@ namespace Runtime.Managers
             PauseSignals.Instance.onPauseGame += OnPauseGame;
             PauseSignals.Instance.onResumeGame += OnResumeGame;
             PauseSignals.Instance.onMainMenuGame += OnMainMenuGame;
+            PauseSignals.Instance.onCanPause += OnCanPause;
+        }
+
+        private void OnCanPause(bool state)
+        {
+            _isCanPause = state;
         }
 
 
@@ -31,6 +39,8 @@ namespace Runtime.Managers
             PauseSignals.Instance.onPauseGame -= OnPauseGame;
             PauseSignals.Instance.onResumeGame -= OnResumeGame;
             PauseSignals.Instance.onMainMenuGame -= OnMainMenuGame;
+            PauseSignals.Instance.onCanPause -= OnCanPause;
+
         }
 
         private void OnDisable()
@@ -41,7 +51,7 @@ namespace Runtime.Managers
         void Update()
         {
             // Check if the 'Escape' key is pressed
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && _isCanPause)
             {
                 // Toggle between pausing and resuming the game
                 if (_isPaused)
