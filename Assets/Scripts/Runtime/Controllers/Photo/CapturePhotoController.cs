@@ -51,7 +51,7 @@ public class CapturePhotoController : MonoBehaviour
 
     private void SubscribeEvents()
     {
-        PauseSignals.Instance.onPhotoPanelState += OnPhotoPanelState;
+        CaptureCameraSignals.Instance.onPhotoPanelState += OnPhotoPanelState;
         PauseSignals.Instance.onPauseState += OnPauseState;
         CaptureCameraSignals.Instance.onRemovePhoto += RemovePhoto;
         CaptureCameraSignals.Instance.onOpenPhotoMode += OpenPhotoMode;
@@ -67,7 +67,7 @@ public class CapturePhotoController : MonoBehaviour
 
     private void UnSubscribeEvents()
     {
-        PauseSignals.Instance.onPhotoPanelState -= OnPhotoPanelState;
+        CaptureCameraSignals.Instance.onPhotoPanelState -= OnPhotoPanelState;
         PauseSignals.Instance.onPauseState -= OnPauseState;
         CaptureCameraSignals.Instance.onOpenPhotoMode -= OpenPhotoMode;
         CaptureCameraSignals.Instance.onRemovePhoto -= RemovePhoto;
@@ -98,8 +98,9 @@ public class CapturePhotoController : MonoBehaviour
             OpenPhotoMode();
         }
 
-        if (isPhotoPanelOpen)
+        if (isPhotoPanelOpen && !isPauseState)
         {
+            Debug.LogWarning("IS PHOTO PANEL OPEN! "+ isPhotoPanelOpen);
             if (Input.GetMouseButtonDown(0))
             {
                 if (!viewingPhoto && !_playerAnomalyReport.anomalyOnReport)
