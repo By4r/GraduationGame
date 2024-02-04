@@ -56,6 +56,7 @@ namespace Runtime.Managers
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Fail, 4);
             StateSignals.Instance.onSetGameState?.Invoke(GameStates.UI);
+            CameraSignals.Instance.onCameraConfine?.Invoke();
         }
 
         private void OnSettingsPanel()

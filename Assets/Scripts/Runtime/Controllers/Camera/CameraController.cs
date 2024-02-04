@@ -51,14 +51,14 @@ namespace Runtime.Controllers.Camera
         internal void RemoveMouseCursor()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            //mouseState = true;
+            mouseState = true;
         }
 
         internal void EnableMouseCursor()
         {
             Cursor.lockState = CursorLockMode.Confined;
             //Cursor.lockState = CursorLockMode.None;
-            //mouseState = false;
+            mouseState = false;
 
         }
 
