@@ -14,7 +14,7 @@ namespace Runtime.Controllers.PlayTime
     {
         #region TimeController Variables
 
-        [SerializeField] private float totalTime = 3f; // 30 minutes in seconds // 1800f
+        [SerializeField] private float totalTime; // 30 minutes in seconds // 1800f
         private float currentTime;
         private bool isCounting = false;
         [SerializeField] private TextMeshProUGUI timerText;
@@ -42,7 +42,7 @@ namespace Runtime.Controllers.PlayTime
         {
             if (totalTime != 0)
             {
-                _stageIncrementDuration = totalTime / 120f;
+                _stageIncrementDuration = totalTime / 20f;
                 
                 Debug.LogWarning("STAGE INCREMENT DURATION " + _stageIncrementDuration);
             }
@@ -64,6 +64,7 @@ namespace Runtime.Controllers.PlayTime
 
         void Update()
         {
+            Debug.LogWarning(totalTime);
             if (isCounting)
             {
                 currentTime += Time.deltaTime;

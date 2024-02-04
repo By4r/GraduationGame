@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections;
 using DG.Tweening;
 using Runtime.Controllers.Beast;
 using Runtime.Controllers.Pool;
@@ -18,19 +18,29 @@ namespace Runtime.Controllers.Beast
         [SerializeField] private AudioClip jumpscareSound;
         [SerializeField] private AudioClip laughSound;
         
-        
         private void OnTriggerEnter(Collider other)
         {
-            
             if (other.CompareTag(_player))
             { 
                 beastController.Jumpscare(jumpscarePrefab);
                 Debug.Log("JUMPSCARE");
                 beastAudioSource.PlayOneShot(jumpscareSound);
                 beastAudioSource.PlayOneShot(laughSound);
-                CoreGameSignals.Instance.onLevelFailed.Invoke();
+                StartCoroutine(ShowFailedPanelWithDelay());
             }
         }
-        
+
+        private IEnumerator ShowFailedPanelWithDelay()
+        {
+            // Wait for a specified delay before showing the failed panel
+            yield return new WaitForSeconds(2f); // Adjust the delay as needed
+
+            ShowFailedPanel();
+        }
+
+        private void ShowFailedPanel()
+        {
+            CoreGameSignals.Instance.onLevelFailed.Invoke();
+        }
     }
 }
