@@ -23,12 +23,20 @@ namespace Runtime.Controllers.Security_Room
         [SerializeField] private bool isPauseState;
         [SerializeField] private GameObject _secCameraPressEtext;
         [SerializeField] private GameObject _infoPaperPressEtext;
+        [SerializeField] private AudioSource secRoomAudioSource;
+        [SerializeField] private AudioClip monitorSound;
+        [SerializeField] private AudioClip paperSound;
+        
+        
         #endregion
         
         #region Private Variables
         private int cameraSelected;
         private bool isSecurityCamOpen;
         private bool isInfoPaperPanelOpen;
+        
+        private bool hasPlayedMonitorFollowSound = false;
+        private bool hasPlayedPaperFollowSound = false;
         
         #endregion
 
@@ -72,6 +80,7 @@ namespace Runtime.Controllers.Security_Room
                         {
                             SecurityCamOpen();
                             isSecurityCamOpen = true;
+                            
                         }
                         else
                         {
@@ -89,6 +98,7 @@ namespace Runtime.Controllers.Security_Room
                         if (!isInfoPaperPanelOpen)
                         {
                             InfoPaperPanelOpen();
+                            
                         }
                         else
                         {
@@ -142,6 +152,12 @@ namespace Runtime.Controllers.Security_Room
             _playerMovementController.canMove=false;
             _cameraController.mouseState = false;
             _capturePhotoController.isPhotoPanelOpen = false;
+            if (!hasPlayedPaperFollowSound)
+            {
+                secRoomAudioSource.PlayOneShot(paperSound);
+                hasPlayedPaperFollowSound = true;
+            }
+            
         }
         private void InfoPaperPanelClose()
         {
@@ -149,6 +165,7 @@ namespace Runtime.Controllers.Security_Room
             isInfoPaperPanelOpen = false;
             _playerMovementController.canMove=true;
             _cameraController.mouseState = true;
+            hasPlayedPaperFollowSound = false;
         }
 //  e basınca ekranın önüne 
         private void NextCam()
@@ -178,6 +195,12 @@ namespace Runtime.Controllers.Security_Room
             isSecurityPanelOpen = true;
             _playerMovementController.canMove=false;
             _cameraController.mouseState = false;
+            if (!hasPlayedMonitorFollowSound)
+            {
+                secRoomAudioSource.PlayOneShot(monitorSound);
+                hasPlayedMonitorFollowSound = true;
+            }
+            
             
         }
 
@@ -187,6 +210,7 @@ namespace Runtime.Controllers.Security_Room
             isSecurityPanelOpen = false;
             _playerMovementController.canMove=true;
             _cameraController.mouseState = true;
+            hasPlayedMonitorFollowSound = false;
         }
         
     }

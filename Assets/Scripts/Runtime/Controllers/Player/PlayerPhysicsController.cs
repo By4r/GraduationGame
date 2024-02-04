@@ -1,10 +1,4 @@
-﻿using System;
-using DG.Tweening;
-using Runtime.Controllers.Beast;
-using Runtime.Controllers.Pool;
-using Runtime.Enums;
-using Runtime.Managers;
-using Runtime.Signals;
+﻿using Runtime.Signals;
 using UnityEngine;
 
 namespace Runtime.Controllers.Player
@@ -14,7 +8,9 @@ namespace Runtime.Controllers.Player
         private readonly string _inLight = "InsideLight";
         private readonly string _inSecRoom = "InsideSecurityRoom";
         [SerializeField] private AudioSource playerAudioSource;
+        [SerializeField] private AudioSource backgroundArudiosource;
         [SerializeField] private AudioClip mentalDecreaseSound;
+        [SerializeField] private AudioClip mallBackgroundSound;
         
         public bool isInsideLight;
         public bool isInsideSecRoom;
@@ -25,6 +21,7 @@ namespace Runtime.Controllers.Player
         private void Start()
         {
             _capturePhotoController = FindObjectOfType<CapturePhotoController>();
+            backgroundArudiosource.PlayOneShot(mallBackgroundSound);
         }
 
         private void Update()
