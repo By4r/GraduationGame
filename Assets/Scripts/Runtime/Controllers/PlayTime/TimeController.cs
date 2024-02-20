@@ -42,7 +42,7 @@ namespace Runtime.Controllers.PlayTime
         {
             if (totalTime != 0)
             {
-                _stageIncrementDuration = totalTime / 20f;
+                _stageIncrementDuration = totalTime / 10f;
                 
                 Debug.LogWarning("STAGE INCREMENT DURATION " + _stageIncrementDuration);
             }

@@ -53,6 +53,7 @@ namespace Runtime.Controllers.Player
             }
             characterController = GetComponent<CharacterController>();
             _staminaController = FindObjectOfType<StaminaController>();
+            
         }
         private void FixedUpdate()
         {

@@ -1307,11 +1307,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprintStamina: 1
   maxSprintStamina: 1
-  sprintMultiplier: 0.08
+  sprintMultiplier: 0.15
   image1: {fileID: 6907844879510208684}
   mentalStamina: 1
   maxMentalStamina: 1
-  mentalMultiplier: 0.2
+  mentalMultiplier: 0.08
   mentalHealthImage: {fileID: 8223105738498671413}
 --- !u!114 &3667049849109311587
 MonoBehaviour:
@@ -1967,7 +1967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a2635728104c879ccbf25631a49c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 420
+  totalTime: 360
   timerText: {fileID: 463471656015196937}
   stageAnomalyUIController: {fileID: 6156980308100176824}
 --- !u!1 &6168307964927179241
@@ -2026,7 +2026,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6085785842904583044
 RectTransform:
   m_ObjectHideFlags: 0

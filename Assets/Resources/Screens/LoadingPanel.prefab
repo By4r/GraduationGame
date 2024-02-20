@@ -196,14 +196,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 28aaa623d38514c43b1bbc6719e80845, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1517,7 +1517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startButton: {fileID: 3803457602994359757}
   loadingText: {fileID: 8480736986007310575}
-  delayRange: {x: 1.0017855, y: 1.3231503}
+  delayRange: {x: 5.3093033, y: 8.20263}
 --- !u!1 &8480736986007310575
 GameObject:
   m_ObjectHideFlags: 0

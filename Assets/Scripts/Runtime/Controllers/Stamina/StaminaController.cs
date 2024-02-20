@@ -58,7 +58,7 @@ namespace Runtime.Controllers.Stamina
                 mentalStamina += mentalMultiplier * Time.deltaTime;
                 //Debug.Log(mentalStamina+"IncreaseMentalHealth");
                 Color mentalAlpha = mentalHealthImage.color;
-                mentalAlpha.a = 0.8f - mentalStamina;
+                mentalAlpha.a = 0.2f - mentalStamina;
                 mentalHealthImage.color = mentalAlpha;
             }
         }
@@ -71,7 +71,7 @@ namespace Runtime.Controllers.Stamina
                 //Debug.Log(mentalStamina+"DecreaseMentalHealth");
                 
                 Color mentalAlpha = mentalHealthImage.color;
-                mentalAlpha.a = 0.8f - mentalStamina;
+                mentalAlpha.a = 0.2f - mentalStamina;
                 mentalHealthImage.color = mentalAlpha;
             }
         }
