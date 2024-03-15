@@ -14,7 +14,7 @@ namespace Runtime.Controllers.Stamina
         [SerializeField] public float sprintStamina;
         [SerializeField] private float maxSprintStamina;
         [SerializeField] private float sprintMultiplier;
-        [SerializeField] public Image image1;
+        [SerializeField] public Image staminaImage;
         
         [SerializeField] public float mentalStamina;
         [SerializeField] private float maxMentalStamina;
@@ -29,7 +29,7 @@ namespace Runtime.Controllers.Stamina
 
         void Start()
         {
-            image1.fillAmount = maxSprintStamina;
+            staminaImage.fillAmount = maxSprintStamina;
         }
 
         public void DecreaseStamina()
@@ -37,7 +37,7 @@ namespace Runtime.Controllers.Stamina
             if (sprintStamina >= 0 )
             {
                 sprintStamina -= sprintMultiplier * Time.deltaTime;
-                image1.fillAmount = sprintStamina;
+                staminaImage.fillAmount = sprintStamina;
             }
         }
         
@@ -47,7 +47,7 @@ namespace Runtime.Controllers.Stamina
             if (sprintStamina <= maxSprintStamina)
             {
                 sprintStamina += sprintMultiplier * Time.deltaTime;
-                image1.fillAmount = sprintStamina;
+                staminaImage.fillAmount = sprintStamina;
             }
         }
 
@@ -75,28 +75,6 @@ namespace Runtime.Controllers.Stamina
                 mentalHealthImage.color = mentalAlpha;
             }
         }
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
-        private void SubscribeEvents()
-        {
-            PlayerSignals.Instance.onDecreaseStamina += DecreaseStamina;
-            PlayerSignals.Instance.onIncreaseStamina += IncreaseStamina;
-            PlayerSignals.Instance.onIncreaseMentalHealth += IncreaseMentalHealth;
-            PlayerSignals.Instance.onDecreaseMentalHealth += DecreaseMentalHealth;
-            
-        }
-        private void OnDisable()
-        {
-            UnSubscribeEvents();
-        }
-        private void UnSubscribeEvents()
-        {
-            PlayerSignals.Instance.onDecreaseStamina -= DecreaseStamina;
-            PlayerSignals.Instance.onIncreaseStamina -= IncreaseStamina;
-            PlayerSignals.Instance.onIncreaseMentalHealth -= IncreaseMentalHealth;
-            PlayerSignals.Instance.onDecreaseMentalHealth -= DecreaseMentalHealth;
-        }
+        
     }
 }

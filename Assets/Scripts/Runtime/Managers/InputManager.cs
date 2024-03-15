@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Runtime.Data.UnityObjects;
 using Runtime.Data.ValueObjects;
-using Runtime.Keys;
+//using Runtime.Keys;
 using Runtime.Signals;
 using Sirenix.OdinInspector;
 using Unity.Mathematics;
@@ -84,67 +84,6 @@ namespace Runtime.Managers
             {
                 TimeSignals.Instance.onTimeStarted?.Invoke();
             }
-
-
-            /*if (!_isAvailableForTouch) return;
-
-            if (Input.GetMouseButtonUp(0) && !IsPointerOverUIElement())
-            {
-                _isTouching = false;
-                InputSignals.Instance.onInputReleased?.Invoke();
-            }
-
-            if (Input.GetMouseButtonDown(0) && !IsPointerOverUIElement())
-            {
-                _isTouching = true;
-                InputSignals.Instance.onInputTaken?.Invoke();
-                if (!_isFirstTimeTouchTaken)
-                {
-                    _isFirstTimeTouchTaken = true;
-                    InputSignals.Instance.onFirstTimeTouchTaken?.Invoke();
-                }
-
-                _mousePosition = Input.mousePosition;
-            }
-
-            if (Input.GetMouseButton(0) && !IsPointerOverUIElement())
-            {
-                if (_isTouching)
-                {
-                    if (_mousePosition != null)
-                    {
-                        Vector2 mouseDeltaPos = (Vector2)Input.mousePosition - _mousePosition.Value;
-                        if (mouseDeltaPos.x > _data.HorizontalInputSpeed)
-                            _moveVector.x = _data.HorizontalInputSpeed / 10f * mouseDeltaPos.x;
-                        else if (mouseDeltaPos.x < -_data.HorizontalInputSpeed)
-                            _moveVector.x = -_data.HorizontalInputSpeed / 10f * -mouseDeltaPos.x;
-                        else
-                            _moveVector.x = Mathf.SmoothDamp(_moveVector.x, 0f, ref _currentVelocity,
-                                _data.ClampSpeed);
-
-                        _moveVector.x = mouseDeltaPos.x;
-
-                        _mousePosition = Input.mousePosition;
-
-                        InputSignals.Instance.onInputDragged?.Invoke(new HorizontalInputParams()
-                        {
-                            HorizontalValue = _moveVector.x,
-                            ClampValues = _data.ClampValues
-                        });
-                    }
-                }
-            }*/
-        }
-
-        private bool IsPointerOverUIElement()
-        {
-            var eventData = new PointerEventData(EventSystem.current)
-            {
-                position = Input.mousePosition
-            };
-            var results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(eventData, results);
-            return results.Count > 0;
         }
     }
 }

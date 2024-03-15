@@ -53,25 +53,22 @@ namespace Runtime.Controllers.Player
             }
             characterController = GetComponent<CharacterController>();
             _staminaController = FindObjectOfType<StaminaController>();
-            
         }
+        
         private void FixedUpdate()
         {
             if (canMove)
             {
                 RunOrSprint();
             }else StopPlayer();
-
-            
         }
-
 
         private void MovePlayer()
         {
             canMove = true;
             Vector3 move = CalculateMoveVector();
             characterController.Move(move * _data.ForwardSpeed * Time.deltaTime);
-            //playerAudioSource.PlayOneShot(walkSound);
+            
             if (!Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.RightShift))
             {
                 _staminaController.IncreaseStamina();
@@ -117,11 +114,9 @@ namespace Runtime.Controllers.Player
         public void StopPlayer()
         {
             canMove=false;
-            // rigidbody.velocity = Vector3.zero;
-            // rigidbody.angularVelocity = Vector3.zero;
             characterController.Move(Vector3.zero);
-            //characterController.transform.Rotate(Vector3.up * mouseX);
         }
+        
         private void SprintPlayer()
         {
             if (CanSprint())

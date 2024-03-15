@@ -1,12 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using Runtime.Controllers.Player;
 using Runtime.Controllers.Security_Room;
-using Runtime.Data.UnityObjects;
-using Runtime.Data.ValueObjects;
 using Runtime.Managers;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Runtime.Enums;
 using Runtime.Signals;
@@ -47,43 +43,7 @@ public class CapturePhotoController : MonoBehaviour
     private bool viewingPhoto;
 
     public int photoRemainCount;
-    public bool isPhotoPanelOpen=false;   
-
-    private void OnEnable()
-    {
-        SubscribeEvents();
-    }
-
-    private void SubscribeEvents()
-    {
-        CaptureCameraSignals.Instance.onPhotoPanelState += OnPhotoPanelState;
-        PauseSignals.Instance.onPauseState += OnPauseState;
-        CaptureCameraSignals.Instance.onRemovePhoto += RemovePhoto;
-        CaptureCameraSignals.Instance.onOpenPhotoMode += OpenPhotoMode;
-        CaptureCameraSignals.Instance.onRemovePhoto += RemovePhoto;
-        CaptureCameraSignals.Instance.onShowPhoto += ShowPhoto;
-    }
-
-    private void OnPauseState(bool state)
-    {
-        isPauseState = state;
-    }
-
-
-    private void UnSubscribeEvents()
-    {
-        CaptureCameraSignals.Instance.onPhotoPanelState -= OnPhotoPanelState;
-        PauseSignals.Instance.onPauseState -= OnPauseState;
-        CaptureCameraSignals.Instance.onOpenPhotoMode -= OpenPhotoMode;
-        CaptureCameraSignals.Instance.onRemovePhoto -= RemovePhoto;
-        CaptureCameraSignals.Instance.onShowPhoto -= ShowPhoto;
-    }
-
-    private void OnDisable()
-    {
-        UnSubscribeEvents();
-    }
-
+    public bool isPhotoPanelOpen;
 
     void Start()
     {
@@ -188,9 +148,5 @@ public class CapturePhotoController : MonoBehaviour
         yield return new WaitForSeconds(flashTime);
         cameraFlash.SetActive(false);
     }
-
-    private void OnPhotoPanelState(bool state)
-    {
-        isPhotoPanelOpen = state;
-    }
+    
 }

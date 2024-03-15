@@ -1201,7 +1201,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3564596180467253868}
-  - component: {fileID: 4368521316361777649}
   - component: {fileID: 896987214262154097}
   - component: {fileID: 8231132819775878459}
   - component: {fileID: 912622783868503511}
@@ -1245,25 +1244,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4368521316361777649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3564596180467253869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2fbb961c50d7f54bb7cee5f9b1d9092, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stageImages:
-  - {fileID: 1676582184996136782}
-  - {fileID: 2009476252257933726}
-  - {fileID: 3722376150612160554}
-  levelTexts:
-  - {fileID: 3564596180356120784}
-  - {fileID: 4504185754411218001}
 --- !u!114 &896987214262154097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1308,7 +1288,7 @@ MonoBehaviour:
   sprintStamina: 1
   maxSprintStamina: 1
   sprintMultiplier: 0.15
-  image1: {fileID: 6907844879510208684}
+  staminaImage: {fileID: 6907844879510208684}
   mentalStamina: 1
   maxMentalStamina: 1
   mentalMultiplier: 0.08

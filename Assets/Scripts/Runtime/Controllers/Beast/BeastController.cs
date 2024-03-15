@@ -10,66 +10,61 @@ namespace Runtime.Controllers.Beast
 {
     public class BeastController : MonoBehaviour
     {
-        #region Serialized Variables
         public NavMeshAgent beast;
         public Transform player;
-       
-        [SerializeField] private Transform beastSpawnPoint;
-        [SerializeField] private StaminaController _staminaController;
-        [SerializeField] private CapturePhotoController _capturePhotoController;
-        [SerializeField] private PlayerPhysicsController _playerPhysicsController;
-        [SerializeField] private float timeToWaitBeforeReturn;
-        [SerializeField] private float rotationSpeed;
-        [SerializeField] private Transform jumpscareHolder;
-        [SerializeField] private AudioSource beastAudioSource;
-        [SerializeField] private AudioClip wakingupSound;
-        [SerializeField] private AudioClip beastFollowSound
-            ;
-        
-        #endregion
-       
-        #region Private
-        private bool isChasingPlayer;
-        private bool hasPlayedBeastFollowSound = false;
-        
-        #endregion
-       
+        public Transform beastSpawnPoint;
+        public float timeToWaitBeforeReturn;
+        public float rotationSpeed;
+        public Transform jumpscareHolder;
+        public AudioSource beastAudioSource;
+        public AudioClip wakingupSound;
+        public AudioClip beastFollowSound;
 
-       
+        private StaminaController _staminaController;
+        private CapturePhotoController _capturePhotoController;
+        private PlayerPhysicsController _playerPhysicsController;
+        private bool isChasingPlayer;
+        private bool hasPlayedBeastFollowSound;
+
         private void Update()
         {
             RotateTowardsMovementDirection();
-            if (_staminaController.mentalStamina <= 0 
-                || _capturePhotoController.photoRemainCount == 0 
-                && (!_playerPhysicsController.isInsideSecRoom || !_playerPhysicsController.isInsideLight))
+            if (ShouldChasePlayer())
             {
-                if (!isChasingPlayer)
-                {
-                    StopAllCoroutines();
-                    ChasePlayer();
-                    
-                }
+                StopAllCoroutines();
+                ChasePlayer();
             }
             else
             {
                 StartCoroutine(WaitAndReturn());
             }
-
         }
+
+        private bool ShouldChasePlayer()
+        {
+            return _staminaController.mentalStamina <= 0
+                || _capturePhotoController.photoRemainCount == 0
+                && (!_playerPhysicsController.isInsideSecRoom || !_playerPhysicsController.isInsideLight);
+        }
+
         private void RotateTowardsMovementDirection()
         {
             Vector3 moveDirection = beast.velocity.normalized;
             Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-            
             beast.transform.rotation = Quaternion.Slerp(beast.transform.rotation, toRotation, Time.deltaTime * rotationSpeed);
         }
 
         private void Start()
         {
+            InitializeControllers();
+            beast.SetDestination(beastSpawnPoint.position);
+        }
+
+        private void InitializeControllers()
+        {
             _staminaController = FindObjectOfType<StaminaController>();
             _capturePhotoController = FindObjectOfType<CapturePhotoController>();
             _playerPhysicsController = FindObjectOfType<PlayerPhysicsController>();
-            beast.SetDestination(beastSpawnPoint.position);
         }
 
         private void ChasePlayer()
@@ -77,28 +72,23 @@ namespace Runtime.Controllers.Beast
             BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Run);
             Debug.Log("running chasing");
             beast.SetDestination(player.position);
-            //StopAllCoroutines();
             beast.speed = 20;
             if (!hasPlayedBeastFollowSound)
             {
                 beastAudioSource.PlayOneShot(wakingupSound);
                 beastAudioSource.PlayOneShot(beastFollowSound);
-                hasPlayedBeastFollowSound = true; // Ses çalındıktan sonra bayrağı true yap
+                hasPlayedBeastFollowSound = true;
             }
-            
         }
 
         private void StopChasingPlayer()
         {
-            
             isChasingPlayer = false;
-            //beast.SetDestination(transform.position); 
             beast.speed = 0;
             beast.transform.LookAt(player);
             hasPlayedBeastFollowSound = false;
             BeastSignals.Instance.onChangeBeastAnimationState?.Invoke(BeastAnimationStates.Idle);
             Debug.Log("Idle");
-            
         }
 
         private IEnumerator WaitAndReturn()
@@ -109,36 +99,12 @@ namespace Runtime.Controllers.Beast
             Debug.Log("going spawn point by walking");
             beast.speed = 10;
             beast.SetDestination(beastSpawnPoint.position);
-            
-            //beast.transform.LookAt(beastSpawnPoint);
-            
-            
         }
 
         internal void Jumpscare(GameObject jumpscarePrefab)
         {
-            Transform holderTransform = jumpscareHolder;
-            Instantiate(jumpscarePrefab, holderTransform);
+            Instantiate(jumpscarePrefab, jumpscareHolder);
         }
-       
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
-        private void UnSubscribeEvents()
-        {
-            //BeastSignals.Instance.onBeastJumpscare -= Jumpscare;
-        }
-
-        private void OnDisable()
-        {
-            UnSubscribeEvents();
-        }
-
-        private void SubscribeEvents()
-        {
-            //BeastSignals.Instance.onBeastJumpscare += Jumpscare;
-        }
-
+        
     }
 }

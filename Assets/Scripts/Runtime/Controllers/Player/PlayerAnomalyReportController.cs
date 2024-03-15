@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Runtime.Managers;
@@ -18,22 +17,13 @@ namespace Runtime.Controllers.Player
         [SerializeField] private PlayerManager _playerManager;
 
         public bool anomalyOnReport;
-        // Start is called before the first frame update
+        
         void Start()
         {
-            // _capturePhoto.animatorr = FindObjectOfType<Animator>();
-            // AnomalyDetectionAnim = _capturePhoto.animatorr;
             _playerManager = FindObjectOfType<PlayerManager>();
             playerlook = _playerManager.playerEyes;
         }
 
-        
-        // Update is called once per frame
-        void Update()
-        {
-            //PlayerRaycast();
-        }
-        
         public void PlayerRaycast()
         {
             if (Physics.Raycast(playerlook.transform.position, playerlook.transform.TransformDirection(Vector3.forward),
@@ -52,7 +42,7 @@ namespace Runtime.Controllers.Player
                     Color.red);
                 isAnomalyDetected = false;
             }
-            //StartCoroutine(AnomalyReported());
+            
         }
         
         public IEnumerator AnomalyReported()
