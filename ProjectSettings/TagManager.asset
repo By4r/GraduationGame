@@ -17,6 +17,7 @@ TagManager:
   - InfoPaper
   - BeastJumpscare
   - tasks
+  - Phone
   layers:
   - Default
   - TransparentFX
