@@ -16,6 +16,7 @@ TagManager:
   - SecurityCamera
   - InfoPaper
   - BeastJumpscare
+  - tasks
   layers:
   - Default
   - TransparentFX
