@@ -23,10 +23,10 @@ public class DayManager : MonoBehaviour
             UpdateLighting(TimeOfDay / 24f);
 
 
-            if (TimeOfDay >= 2f)
-            {
-                _cycleActive = false;
-            }
+            // if (TimeOfDay >= 2f)
+            // {
+            //     _cycleActive = false;
+            // }
         }
 
         if (Input.GetKeyDown(KeyCode.N))
