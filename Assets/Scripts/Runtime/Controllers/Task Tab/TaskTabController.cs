@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Runtime.Controllers.Player;
 using Runtime.Data.ValueObjects;
 using Runtime.Enums;
 using Runtime.Managers;
@@ -14,8 +15,8 @@ namespace Runtime.Controllers.Task_Tab
         [SerializeField] private TextMeshProUGUI taskText;
         [SerializeField] private Animator taskTabAnim;
         [SerializeField] private PlayerManager playerManager;
-
-        [SerializeField] private float range;
+        [SerializeField] private PlayerPhysicsController playerPhysicsController;
+        
         [SerializeField] private GameObject pressEtext;
 
         [ShowInInspector] private TaskData _taskData;
@@ -28,14 +29,16 @@ namespace Runtime.Controllers.Task_Tab
         private void Start()
         {
             Invoke("PickUpPhone", 5f);
+            
         }
-
+       
         private void Update()
         {
-            Ray raycast = new Ray(playerManager.playerEyes.transform.position,
-                playerManager.playerEyes.transform.TransformDirection(Vector3.forward * range));
-
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward * range), Color.green);
+           
+            Ray raycast = playerPhysicsController.GetRaycast();
+            float range = playerPhysicsController.range;
+            
+            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward * range), Color.green);
 
             if (Physics.Raycast(raycast, out RaycastHit hit, range))
             {

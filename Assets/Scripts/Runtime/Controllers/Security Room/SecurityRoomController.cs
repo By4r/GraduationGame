@@ -14,7 +14,7 @@ namespace Runtime.Controllers.Security_Room
         [SerializeField] private CameraController cameraController;
         [SerializeField] private CapturePhotoController capturePhotoController;
         [SerializeField] private float range;
-        [SerializeField] private PlayerManager playerManager;
+        [SerializeField] private PlayerPhysicsController playerPhysicsController;
         [SerializeField] private List<GameObject> cameras;
         [SerializeField] private bool isPauseState;
         [SerializeField] private GameObject secCameraPressEtext;
@@ -39,8 +39,8 @@ namespace Runtime.Controllers.Security_Room
         #endregion
         private void Update()
         {
-            Ray raycast = new Ray(playerManager.playerEyes.transform.position,
-                playerManager.playerEyes.transform.TransformDirection(Vector3.forward * range));
+            Ray raycast = new Ray(playerPhysicsController.playerEyes.transform.position,
+                playerPhysicsController.playerEyes.transform.TransformDirection(Vector3.forward * range));
 
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward * range), Color.green);
 

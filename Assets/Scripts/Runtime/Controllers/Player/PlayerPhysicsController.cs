@@ -1,4 +1,5 @@
-﻿using Runtime.Signals;
+﻿using Runtime.Managers;
+using Runtime.Signals;
 using UnityEngine;
 
 namespace Runtime.Controllers.Player
@@ -11,12 +12,14 @@ namespace Runtime.Controllers.Player
         [SerializeField] private AudioSource backgroundArudiosource;
         [SerializeField] private AudioClip mentalDecreaseSound;
         [SerializeField] private AudioClip mallBackgroundSound;
-        
+        [SerializeField] private PlayerManager playerManager;
         public bool isInsideLight;
         public bool isInsideSecRoom;
         [SerializeField] private CapturePhotoController _capturePhotoController;
         private bool hasPlayedMentalDecreaseSound = false;
         
+        [SerializeField] public GameObject playerEyes;
+        [SerializeField] public float range;
        
         private void Start()
         {
@@ -43,6 +46,11 @@ namespace Runtime.Controllers.Player
             playerAudioSource.Stop();
         }
 
+        public Ray GetRaycast()
+        {
+            return new Ray(playerEyes.transform.position, playerEyes.transform.TransformDirection(Vector3.forward * range));
+        }
+        
         private void DecreaseMentalHealth()
         {
             PlayerSignals.Instance.onDecreaseMentalHealth?.Invoke();

@@ -37,15 +37,18 @@ namespace Runtime.Controllers.Camera
 
         private void Start()
         {
-            //RemoveMouseCursor(); //Set Active !!!
+            RemoveMouseCursor(); //Set Active !!!
         }
 
         private void LateUpdate()
         {
             if (mouseState)
             {
-                //UpdateSmoothMouseAxis();
+                UpdateSmoothMouseAxis();
             }
+            
+            
+            
             
         }
 

@@ -10,13 +10,14 @@ namespace Runtime.Controllers.Player
         [SerializeField] private LayerMask _layerMask;
         [SerializeField] private GameObject playerLook;
         [SerializeField] private PlayerManager _playerManager;
-
+        [SerializeField] private PlayerPhysicsController playerPhysicsController;
+        
         private ItemPickUpController itemPickUpController;
 
         private void Start()
         {
             _playerManager = FindObjectOfType<PlayerManager>();
-            playerLook = _playerManager.playerEyes;
+            playerLook = playerPhysicsController.playerEyes;
         }
 
         private void Update()
@@ -29,15 +30,17 @@ namespace Runtime.Controllers.Player
 
         public void PlayerPickUp()
         {
-            if (Physics.Raycast(playerLook.transform.position, playerLook.transform.TransformDirection(Vector3.forward),
-                    out RaycastHit hitInfo, 20f,_layerMask,QueryTriggerInteraction.Collide))
+            Ray raycast = playerPhysicsController.GetRaycast();
+            float range = playerPhysicsController.range;
+            
+            if (Physics.Raycast(raycast, out RaycastHit hit, range))
             {
                 Debug.LogWarning("Pickable Item");
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hitInfo.distance,
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance,
                     Color.green);
 
                 
-                itemPickUpController = hitInfo.collider.GetComponent<ItemPickUpController>();
+                itemPickUpController = hit.collider.GetComponent<ItemPickUpController>();
                 if(itemPickUpController != null)
                 {
                     itemPickUpController.Pickup();

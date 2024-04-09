@@ -15,13 +15,13 @@ namespace Runtime.Controllers.Player
         [SerializeField] private GameObject playerlook;
         //[SerializeField] private CapturePhoto _capturePhoto;
         [SerializeField] private PlayerManager _playerManager;
-
+        [SerializeField] private PlayerPhysicsController playerPhysicsController;
         public bool anomalyOnReport;
         
         void Start()
         {
             _playerManager = FindObjectOfType<PlayerManager>();
-            playerlook = _playerManager.playerEyes;
+            playerlook = playerPhysicsController.playerEyes;
         }
 
         public void PlayerRaycast()

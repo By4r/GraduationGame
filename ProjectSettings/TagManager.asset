@@ -18,6 +18,7 @@ TagManager:
   - BeastJumpscare
   - tasks
   - Phone
+  - Selectable
   layers:
   - Default
   - TransparentFX
