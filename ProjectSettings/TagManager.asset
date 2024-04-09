@@ -19,6 +19,7 @@ TagManager:
   - tasks
   - Phone
   - Selectable
+  - Broom
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Anomaly1
   - Water
   - UI
-  - Pickable
+  - Broom
   - 
   - 
   - 

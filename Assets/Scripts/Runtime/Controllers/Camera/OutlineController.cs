@@ -11,7 +11,6 @@ namespace Runtime.Controllers.Camera
     public class OutlineController : MonoBehaviour
 {
     private Transform highlight;
-    
     //private RaycastHit raycastHit;
     
     [SerializeField] private PlayerPhysicsController playerPhysicsController;
