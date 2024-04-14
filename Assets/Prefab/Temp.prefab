@@ -75,9 +75,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19093c4e7ea49f5a53a3e069624633c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAudioSource: {fileID: 0}
+  backgroundArudiosource: {fileID: 0}
+  mentalDecreaseSound: {fileID: 0}
+  mallBackgroundSound: {fileID: 0}
+  playerManager: {fileID: 0}
   isInsideLight: 0
   isInsideSecRoom: 0
   _capturePhotoController: {fileID: 0}
+  playerEyes: {fileID: 0}
+  range: 0
 --- !u!1 &205884047143833462
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +186,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StageValue: 0
   light: {fileID: 0}
-  playerEyes: {fileID: 0}
   movementController: {fileID: 1335139585367996292}
   staminaController: {fileID: 0}
 --- !u!114 &1335139585367996292
