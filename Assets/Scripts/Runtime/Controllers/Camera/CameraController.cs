@@ -46,6 +46,10 @@ namespace Runtime.Controllers.Camera
             {
                 UpdateSmoothMouseAxis();
             }
+            
+            
+            
+            
         }
 
         internal void RemoveMouseCursor()

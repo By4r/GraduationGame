@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: ac11e2dd2facd4b46a4b7a313c2c7126
+guid: 54cfb04d80e6ace4cadd67a44dbed36e
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat-pic
+    second: {fileID: 2100000, guid: 641c0c85cb436884890f04991f0ae59c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_picture
+    second: {fileID: 2100000, guid: d3f94fa043033b044b229d62ae972152, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
