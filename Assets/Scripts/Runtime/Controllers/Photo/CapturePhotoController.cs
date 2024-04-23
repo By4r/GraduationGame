@@ -1,12 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using Runtime.Controllers.Player;
 using Runtime.Controllers.Security_Room;
-using Runtime.Data.UnityObjects;
-using Runtime.Data.ValueObjects;
 using Runtime.Managers;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Runtime.Enums;
 using Runtime.Signals;
@@ -23,7 +19,12 @@ public class CapturePhotoController : MonoBehaviour
 
     [ShowInInspector] private bool isPauseState;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource photoAudioSource;
 
+    [SerializeField] private AudioClip photoTakenSound;
+    [SerializeField] private AudioClip photoPanelOpenSound;
+    
     [Header("Flash Effect")] [SerializeField]
     private GameObject cameraFlash;
 
@@ -42,43 +43,7 @@ public class CapturePhotoController : MonoBehaviour
     private bool viewingPhoto;
 
     public int photoRemainCount;
-    public bool isPhotoPanelOpen=false;   
-
-    private void OnEnable()
-    {
-        SubscribeEvents();
-    }
-
-    private void SubscribeEvents()
-    {
-        PauseSignals.Instance.onPhotoPanelState += OnPhotoPanelState;
-        PauseSignals.Instance.onPauseState += OnPauseState;
-        CaptureCameraSignals.Instance.onRemovePhoto += RemovePhoto;
-        CaptureCameraSignals.Instance.onOpenPhotoMode += OpenPhotoMode;
-        CaptureCameraSignals.Instance.onRemovePhoto += RemovePhoto;
-        CaptureCameraSignals.Instance.onShowPhoto += ShowPhoto;
-    }
-
-    private void OnPauseState(bool state)
-    {
-        isPauseState = state;
-    }
-
-
-    private void UnSubscribeEvents()
-    {
-        PauseSignals.Instance.onPhotoPanelState -= OnPhotoPanelState;
-        PauseSignals.Instance.onPauseState -= OnPauseState;
-        CaptureCameraSignals.Instance.onOpenPhotoMode -= OpenPhotoMode;
-        CaptureCameraSignals.Instance.onRemovePhoto -= RemovePhoto;
-        CaptureCameraSignals.Instance.onShowPhoto -= ShowPhoto;
-    }
-
-    private void OnDisable()
-    {
-        UnSubscribeEvents();
-    }
-
+    public bool isPhotoPanelOpen;
 
     void Start()
     {
@@ -98,8 +63,9 @@ public class CapturePhotoController : MonoBehaviour
             OpenPhotoMode();
         }
 
-        if (isPhotoPanelOpen)
+        if (isPhotoPanelOpen && !isPauseState)
         {
+            Debug.LogWarning("IS PHOTO PANEL OPEN! "+ isPhotoPanelOpen);
             if (Input.GetMouseButtonDown(0))
             {
                 if (!viewingPhoto && !_playerAnomalyReport.anomalyOnReport)
@@ -116,6 +82,7 @@ public class CapturePhotoController : MonoBehaviour
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Photo, 2);
             isPhotoPanelOpen = true;
+            photoAudioSource.PlayOneShot(photoPanelOpenSound);
         }
         else if (isPhotoPanelOpen)
         {
@@ -147,6 +114,7 @@ public class CapturePhotoController : MonoBehaviour
         {
             photoRemainCount--;
         }
+        photoAudioSource.PlayOneShot(photoTakenSound);
         Debug.Log("Photo Taken");
         StartCoroutine(PhotoRemoveEffect());
         StartCoroutine(_playerAnomalyReport.AnomalyReported());
@@ -180,9 +148,5 @@ public class CapturePhotoController : MonoBehaviour
         yield return new WaitForSeconds(flashTime);
         cameraFlash.SetActive(false);
     }
-
-    private void OnPhotoPanelState(bool state)
-    {
-        isPhotoPanelOpen = state;
-    }
+    
 }

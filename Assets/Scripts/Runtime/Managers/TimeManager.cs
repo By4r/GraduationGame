@@ -13,6 +13,8 @@ namespace Runtime.Managers
 
         [SerializeField] private TimeController timeController;
 
+        [SerializeField] private float _startTimeDelay;
+
         #endregion
 
         #endregion
@@ -29,7 +31,8 @@ namespace Runtime.Managers
 
         private void OnTimeStarted()
         {
-            timeController.StartTimer();
+            //timeController.StartTimer();
+            timeController.StartTimeWithDelay(_startTimeDelay);
         }
 
         private void UnSubscribeEvents()

@@ -8,6 +8,6 @@ namespace Runtime.Signals
         public UnityAction onOpenPhotoMode = delegate { };
         public UnityAction onRemovePhoto = delegate { };
         public UnityAction onShowPhoto = delegate { };
-        
+        public UnityAction<bool> onPhotoPanelState = delegate { };
     }
 }

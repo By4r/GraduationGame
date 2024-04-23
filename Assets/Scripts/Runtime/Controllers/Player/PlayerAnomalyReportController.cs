@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Runtime.Managers;
+using Runtime.Signals;
 
 namespace Runtime.Controllers.Player
 {
@@ -15,24 +15,15 @@ namespace Runtime.Controllers.Player
         [SerializeField] private GameObject playerlook;
         //[SerializeField] private CapturePhoto _capturePhoto;
         [SerializeField] private PlayerManager _playerManager;
-
+        [SerializeField] private PlayerPhysicsController playerPhysicsController;
         public bool anomalyOnReport;
-        // Start is called before the first frame update
+        
         void Start()
         {
-            // _capturePhoto.animatorr = FindObjectOfType<Animator>();
-            // AnomalyDetectionAnim = _capturePhoto.animatorr;
             _playerManager = FindObjectOfType<PlayerManager>();
-            playerlook = _playerManager.playerEyes;
+            playerlook = playerPhysicsController.playerEyes;
         }
 
-        
-        // Update is called once per frame
-        void Update()
-        {
-            //PlayerRaycast();
-        }
-        
         public void PlayerRaycast()
         {
             if (Physics.Raycast(playerlook.transform.position, playerlook.transform.TransformDirection(Vector3.forward),
@@ -51,7 +42,7 @@ namespace Runtime.Controllers.Player
                     Color.red);
                 isAnomalyDetected = false;
             }
-            //StartCoroutine(AnomalyReported());
+            
         }
         
         public IEnumerator AnomalyReported()
@@ -61,8 +52,14 @@ namespace Runtime.Controllers.Player
             AnomalyDetectionAnim.Play("AnomalyReported", -1, 0f);
             anomalyDetectionText.text = "Checking Anomaly...";
             yield return new WaitForSeconds(5f);
-            
-            anomalyDetectionText.text = isAnomalyDetected ? "Anomaly Fixed." : "Anomaly Not Found.";
+
+            if (isAnomalyDetected)
+            {
+                anomalyDetectionText.text = "Anomaly Fixed.";
+                AnomalySignals.Instance.onAnomalyReport?.Invoke();
+            }
+            else
+                anomalyDetectionText.text = "Anomaly Not Found.";
             yield return new WaitForSeconds(3f);
             AnomalyDetectionAnim.enabled = false;
             anomalyOnReport = false;

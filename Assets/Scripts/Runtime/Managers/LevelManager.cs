@@ -25,7 +25,7 @@ namespace Runtime.Managers
         private OnLevelDestroyerCommand _levelDestroyerCommand;
 
         private short _currentLevel;
-        private LevelData _levelData;
+        
 
         #endregion
 
@@ -33,7 +33,6 @@ namespace Runtime.Managers
 
         private void Awake()
         {
-            _levelData = GetLevelData();
             _currentLevel = GetActiveLevel();
 
             Init();
@@ -43,11 +42,6 @@ namespace Runtime.Managers
         {
             _levelLoaderCommand = new OnLevelLoaderCommand(levelHolder);
             _levelDestroyerCommand = new OnLevelDestroyerCommand(levelHolder);
-        }
-
-        private LevelData GetLevelData()
-        {
-            return Resources.Load<CD_Level>("Data/CD_Level").Levels[_currentLevel];
         }
 
         private byte GetActiveLevel()
@@ -66,18 +60,9 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onClearActiveLevel += _levelDestroyerCommand.Execute;
             CoreGameSignals.Instance.onLevelStart += OnLevelStart;
             CoreGameSignals.Instance.onGetLevelValue += OnGetLevelValue;
-            CoreGameSignals.Instance.onNextLevel += OnNextLevel;
+            
             CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
             CoreGameSignals.Instance.onCancelLevel += OnCancelLevel;
-        }
-
-        [Button]
-        private void OnNextLevel()
-        {
-            _currentLevel++;
-            CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            CoreGameSignals.Instance.onReset?.Invoke();
-            CoreGameSignals.Instance.onLevelInitialize?.Invoke((byte)(_currentLevel % totalLevelCount));
         }
 
         [Button]
@@ -105,7 +90,7 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onClearActiveLevel -= _levelDestroyerCommand.Execute;
             CoreGameSignals.Instance.onLevelStart -= OnLevelStart;
             CoreGameSignals.Instance.onGetLevelValue -= OnGetLevelValue;
-            CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
+            
             CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
             CoreGameSignals.Instance.onCancelLevel -= OnCancelLevel;
         }

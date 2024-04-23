@@ -10,7 +10,7 @@ namespace Runtime.Enums
         Settings,
         Pause,
         Loading,
-        PaperInfo
-
+        PaperInfo,
+        Win
     }
 }

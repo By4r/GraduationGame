@@ -7,25 +7,18 @@ namespace Runtime.Managers
 {
     public class BeastManager : MonoBehaviour
     {
-        
-        #region Serialized Variables
-        [SerializeField] private BeastAnimationController beastAnimationController;
-       
-        #endregion
         private void OnEnable()
         {
             SubscribeEvents();
         }
         private void SubscribeEvents()
         {
-            //CoreGameSignals.Instance.onReset += OnReset;
             BeastSignals.Instance.onBeastChase += OnBeastChase;
             BeastSignals.Instance.onBeastJumpscare += OnBeastJumpscare;
             BeastSignals.Instance.onBeastReturn += OnBeastReturn;
         }
         private void UnSubscribeEvents()
         {
-           // CoreGameSignals.Instance.onReset -= OnReset;
             BeastSignals.Instance.onBeastChase -= OnBeastChase;
             BeastSignals.Instance.onBeastJumpscare -= OnBeastJumpscare;
             BeastSignals.Instance.onBeastReturn -= OnBeastReturn;
@@ -39,22 +32,17 @@ namespace Runtime.Managers
         private void OnBeastChase()
         {
             BeastSignals.Instance.onBeastChase?.Invoke();
-            Debug.Log("ewqewqewqe1");
         }
 
-        private void OnBeastJumpscare()
+        private void OnBeastJumpscare(GameObject jumpscarePrefab)
         {
-            BeastSignals.Instance.onBeastJumpscare?.Invoke();
+            BeastSignals.Instance.onBeastJumpscare?.Invoke(jumpscarePrefab);
         }
 
         private void OnBeastReturn()
         {
             BeastSignals.Instance.onBeastReturn?.Invoke();
             
-        }
-        private void OnReset()
-        {
-            beastAnimationController.OnReset();
         }
 
     }

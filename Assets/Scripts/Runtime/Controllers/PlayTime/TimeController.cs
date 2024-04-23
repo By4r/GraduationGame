@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections;
 using Runtime.Controllers.UI;
 using Runtime.Enums;
 using Runtime.Signals;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Runtime.Controllers.PlayTime
@@ -13,7 +13,7 @@ namespace Runtime.Controllers.PlayTime
     {
         #region TimeController Variables
 
-        [SerializeField] private float totalTime = 3f; // 30 minutes in seconds // 1800f
+        [SerializeField] private float totalTime; // 30 minutes in seconds // 1800f
         private float currentTime;
         private bool isCounting = false;
         [SerializeField] private TextMeshProUGUI timerText;
@@ -41,7 +41,7 @@ namespace Runtime.Controllers.PlayTime
         {
             if (totalTime != 0)
             {
-                _stageIncrementDuration = totalTime / 120f;
+                _stageIncrementDuration = totalTime / 10f;
                 
                 Debug.LogWarning("STAGE INCREMENT DURATION " + _stageIncrementDuration);
             }
@@ -63,6 +63,7 @@ namespace Runtime.Controllers.PlayTime
 
         void Update()
         {
+            Debug.LogWarning(totalTime);
             if (isCounting)
             {
                 currentTime += Time.deltaTime;
@@ -73,6 +74,8 @@ namespace Runtime.Controllers.PlayTime
                     currentTime = 0f;
                     isCounting = false;
                     ShowTimeUpMessage();
+
+                    CheckGameResult();
                 }
 
                 if (stageTime >= _stageIncrementDuration)
@@ -111,6 +114,14 @@ namespace Runtime.Controllers.PlayTime
                 //     //ResetStageTime();
                 // }
             }
+        }
+
+        private void CheckGameResult()
+        {
+            Debug.LogWarning("Checking Result!");
+            
+            AnomalySignals.Instance.onCheckAnomalyResult?.Invoke();
+            
         }
 
         internal void StartTimer()
@@ -167,7 +178,19 @@ namespace Runtime.Controllers.PlayTime
             AnomalySignals.Instance.onAnomalyStage?.Invoke((AnomalyStageTypes)currentStage);
             Debug.Log("INCREMENT STAGE");
         }
+        
+        internal void StartTimeWithDelay(float delayValue)
+        {
+            StartCoroutine(StartTimerWithDelayCoroutine(delayValue));
+        }
 
+        private IEnumerator StartTimerWithDelayCoroutine(float delayDuration)
+        {
+            yield return new WaitForSeconds(delayDuration);
+
+            isCounting = true;
+        }
+        
         private void ResetStageTime()
         {
             stageTime = 0f;

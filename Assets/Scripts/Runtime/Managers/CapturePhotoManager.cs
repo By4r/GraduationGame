@@ -12,6 +12,8 @@ namespace Runtime.Managers
 
         private void SubscribeEvents()
         {
+            CaptureCameraSignals.Instance.onPhotoPanelState += OnPhotoPanelState;
+            PauseSignals.Instance.onPauseState += OnPauseState;
             CaptureCameraSignals.Instance.onOpenPhotoMode += OnPhotoModeOpen;
             CaptureCameraSignals.Instance.onRemovePhoto += onRemovePhoto;
             CaptureCameraSignals.Instance.onShowPhoto += onShowPhoto;
@@ -20,6 +22,8 @@ namespace Runtime.Managers
 
         private void UnSubscribeEvents()
         {
+            CaptureCameraSignals.Instance.onPhotoPanelState -= OnPhotoPanelState;
+            PauseSignals.Instance.onPauseState -= OnPauseState;
             CaptureCameraSignals.Instance.onOpenPhotoMode -= OnPhotoModeOpen;
             CaptureCameraSignals.Instance.onRemovePhoto -= onRemovePhoto;
             CaptureCameraSignals.Instance.onShowPhoto -= onShowPhoto;
@@ -44,6 +48,17 @@ namespace Runtime.Managers
         private void onShowPhoto()
         {
             CaptureCameraSignals.Instance.onShowPhoto?.Invoke();
+        }
+        
+        private void OnPhotoPanelState(bool state)
+        {
+            CaptureCameraSignals.Instance.onPhotoPanelState?.Invoke(state);
+            
+        }
+        private void OnPauseState(bool state)
+        {
+            PauseSignals.Instance.onPauseState?.Invoke(state);
+            
         }
         
     }

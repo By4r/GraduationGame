@@ -1,3 +1,4 @@
+using Enums;
 using Runtime.Enums;
 using Runtime.Signals;
 using UnityEngine;
@@ -47,12 +48,15 @@ namespace Runtime.Managers
 
         private void OnLevelSuccessful()
         {
-            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Photo, 2);
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Win, 4);
+            StateSignals.Instance.onSetGameState?.Invoke(GameStates.UI);
         }
 
         private void OnLevelFailed()
         {
-            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Fail, 2);
+            CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Fail, 4);
+            StateSignals.Instance.onSetGameState?.Invoke(GameStates.UI);
+            CameraSignals.Instance.onCameraConfine?.Invoke();
         }
 
         private void OnSettingsPanel()
@@ -91,6 +95,9 @@ namespace Runtime.Managers
             CoreUISignals.Instance.onClosePanel?.Invoke(1);
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
             InputSignals.Instance.onEnableInput?.Invoke();
+            StateSignals.Instance.onSetGameState?.Invoke(GameStates.Gameplay);
+            TimeSignals.Instance.onTimeStarted?.Invoke();
+
             //CameraSignals.Instance.onCameraLocked?.Invoke();
         }
 
@@ -106,6 +113,12 @@ namespace Runtime.Managers
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 1);
         }
 
+        public void QuitGame()
+        {
+            Debug.LogWarning("Quit Game!");
+            Application.Quit();
+        }
+
 
         [Button("RESUME BUTTON")]
         public void Resume()
@@ -118,6 +131,7 @@ namespace Runtime.Managers
         {
             PauseSignals.Instance.onMainMenuGame?.Invoke();
             CoreGameSignals.Instance.onCancelLevel?.Invoke();
+            StateSignals.Instance.onSetGameState?.Invoke(GameStates.UI);
         }
 
         public void LoadGame()

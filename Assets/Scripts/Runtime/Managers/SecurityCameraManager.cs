@@ -35,6 +35,10 @@ namespace Runtime.Managers
         {
             SecurityRoomSignals.Instance.onInfoPaperPanelClose?.Invoke();
         }
+        private void OnPauseState(bool state)
+        {
+            PauseSignals.Instance.onPauseState?.Invoke(state);
+        }
         
         private void SubscribeEvents()
         {
@@ -44,6 +48,7 @@ namespace Runtime.Managers
             SecurityRoomSignals.Instance.onSecurityCameraClose += OnSecurityCameraClose;
             SecurityRoomSignals.Instance.onInfoPaperPanelOpen += OnInfoPaperOpen;
             SecurityRoomSignals.Instance.onInfoPaperPanelClose += OnInfoPaperClose;
+            PauseSignals.Instance.onPauseState += OnPauseState;
 
         }
         private void UnSubscribeEvents()
@@ -54,6 +59,7 @@ namespace Runtime.Managers
             SecurityRoomSignals.Instance.onSecurityCameraClose -= OnSecurityCameraClose;
             SecurityRoomSignals.Instance.onInfoPaperPanelOpen -= OnInfoPaperOpen;
             SecurityRoomSignals.Instance.onInfoPaperPanelClose -= OnInfoPaperClose;
+            PauseSignals.Instance.onPauseState -= OnPauseState;
             
         }
         

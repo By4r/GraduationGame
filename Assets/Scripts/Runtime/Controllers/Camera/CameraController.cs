@@ -2,6 +2,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 using Runtime.Data.ValueObjects;
+using Sirenix.OdinInspector;
 
 namespace Runtime.Controllers.Camera
 {
@@ -36,7 +37,7 @@ namespace Runtime.Controllers.Camera
 
         private void Start()
         {
-            RemoveMouseCursor();
+            RemoveMouseCursor(); //Set Active !!!
         }
 
         private void LateUpdate()
@@ -45,52 +46,27 @@ namespace Runtime.Controllers.Camera
             {
                 UpdateSmoothMouseAxis();
             }
-            //else FreezeMouseAxis();
+            
+            
+            
+            
         }
 
         internal void RemoveMouseCursor()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            //mouseState = true;
+            mouseState = true;
         }
 
+        
+        [Button ("EnableMouse Cursor")]
         internal void EnableMouseCursor()
         {
             Cursor.lockState = CursorLockMode.Confined;
-            //Cursor.lockState = CursorLockMode.None;
-            //mouseState = false;
+            mouseState = false;
 
         }
 
-        // private void MoveMouseAxis()
-        // {
-        //     
-        //     float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        //     float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-        //
-        //     xRotation -= mouseY;
-        //     xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        //
-        //     transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        //
-        //     _playerMovementController.characterController.transform.Rotate(Vector3.up * mouseX);
-        // }
-
-        //uçak oldu amk
-        // private void UpdateMouseAxis()
-        // {
-        //     float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        //     float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-        //
-        //     xRotation -= mouseY;
-        //     xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        //
-        //     transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        //
-        //     Vector3 rotationAmount = mouseState ? new Vector3(-mouseY, mouseX, 0f) : Vector3.zero;
-        //
-        //     _playerMovementController.characterController.transform.Rotate(rotationAmount);
-        // }
         private void UpdateMouseAxis()
         {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
