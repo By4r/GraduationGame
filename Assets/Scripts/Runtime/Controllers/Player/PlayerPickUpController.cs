@@ -14,8 +14,7 @@ namespace Runtime.Controllers.Player
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Transform itemContainer;
         
-        private bool pickedUp;
-        //oyuncunun elinde tool var ise elindekini bırakmadan yeni tool alamasın
+        private bool pickedUp; //oyuncunun elinde tool var ise elindekini bırakmadan yeni tool alamasın
         private void Update()
         {
             
@@ -42,7 +41,7 @@ namespace Runtime.Controllers.Player
             
             if (Physics.Raycast(raycast, out RaycastHit hit, range,layerMask) )//&& hit.collider.CompareTag("Broom"))
             {
-                Debug.LogWarning("Pickabdsale Item");
+                Debug.LogWarning("Pickable Item");
 
                 // Nesneyi itemContainer'ın pozisyonuna ve rotasyonuna getir
                 hit.transform.SetParent(itemContainer);

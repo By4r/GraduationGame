@@ -1,6 +1,7 @@
 ﻿using Runtime.Controllers.Task_Tab;
 using Runtime.Data.UnityObjects;
 using Runtime.Data.ValueObjects;
+using Runtime.Signals;
 using UnityEngine;
 
 namespace Runtime.Managers
@@ -24,6 +25,31 @@ namespace Runtime.Managers
         private TaskDatas GetTaskData()
         {
             return Resources.Load<CD_Task>("Data/CD_Task").TaskData;
+        }
+        
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            TaskSignals.Instance.onCollectGarbage += OnCollectGarbage;
+        }
+
+        private void OnCollectGarbage()
+        {
+            taskTabController.IncreaseGarbageAmount();
+        }
+
+        private void UnSubscribeEvents()
+        {
+            TaskSignals.Instance.onCollectGarbage -= OnCollectGarbage;
+        }
+
+        private void OnDisable()
+        {
+            UnSubscribeEvents();
         }
         
         
