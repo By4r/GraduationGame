@@ -15,8 +15,8 @@ MonoBehaviour:
   TaskData:
     taskData:
       sweepAmount: 1
-      garbageAmount: 2
+      garbageAmount: 0
       wateringAmount: 3
       maxSweepAmount: 4
-      maxGarbageAmount: 5
+      maxGarbageAmount: 3
       maxWateringAmount: 6

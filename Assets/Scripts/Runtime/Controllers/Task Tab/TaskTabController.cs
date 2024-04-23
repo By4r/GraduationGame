@@ -28,7 +28,7 @@ namespace Runtime.Controllers.Task_Tab
 
         private void Start()
         {
-            Invoke("PickUpPhone", 5f);
+            //Invoke("PickUpPhone", 5f);
             
         }
        
@@ -70,7 +70,7 @@ namespace Runtime.Controllers.Task_Tab
             if (other.CompareTag("tasks"))
             {
                 BringTaskTab();
-                taskText.text = "Water the flowers " + _taskData.wateringAmount + "/" + _taskData.maxWateringAmount;
+                taskText.text = "Collect the garbages " + _taskData.garbageAmount + "/" + _taskData.maxGarbageAmount;
             }
         }
 
@@ -96,6 +96,12 @@ namespace Runtime.Controllers.Task_Tab
             {
                 taskTabAnim.SetTrigger(TaskAnimationStates.RemoveTask.ToString());
             }
+        }
+
+        internal void IncreaseGarbageAmount()
+        {
+            //_taskData.garbageAmount++;
+            _taskData.garbageAmount += 1;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Runtime.Controllers.Player;
 using Runtime.Controllers.Task_Tab;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,7 +11,7 @@ namespace Runtime.Controllers.Camera
 {
     public class OutlineController : MonoBehaviour
 {
-    private Transform highlight;
+    [ShowInInspector] private Transform highlight;
     //private RaycastHit raycastHit;
     
     [SerializeField] private PlayerPhysicsController playerPhysicsController;
@@ -46,6 +47,20 @@ namespace Runtime.Controllers.Camera
                     highlight.gameObject.GetComponent<Outline>().OutlineWidth = 7.0f;
                 }
             }
+            /*if (highlight.CompareTag("Collectable") )
+            {
+                if (highlight.gameObject.GetComponent<Outline>() != null)
+                {
+                    highlight.gameObject.GetComponent<Outline>().enabled = true;
+                }
+                else
+                {
+                    Outline outline = highlight.gameObject.AddComponent<Outline>();
+                    outline.enabled = true;
+                    highlight.gameObject.GetComponent<Outline>().OutlineColor = Color.cyan;
+                    highlight.gameObject.GetComponent<Outline>().OutlineWidth = 7.0f;
+                }
+            }*/
             else
             {
                 highlight = null;
