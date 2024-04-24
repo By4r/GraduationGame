@@ -18,6 +18,8 @@ namespace Runtime.Controllers.Task_Tab
         [SerializeField] private PlayerManager playerManager;
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
         [SerializeField] private SleepController sleepController;
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip audioClip;
         
         [SerializeField] private GameObject pressEtext;
 
@@ -49,6 +51,18 @@ namespace Runtime.Controllers.Task_Tab
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         Debug.Log("talking audio started");
+
+                        // Check if an audio clip is assigned
+                        if (audioSource.clip != null)
+                        {
+                            // Play the assigned audio clip
+                            audioSource.PlayOneShot(audioClip);
+                        }
+                        else
+                        {
+                            Debug.LogWarning("No audio clip assigned to audioSourceObject.");
+                        }
+
                         RemoveTaskTab();
                     }
                 }

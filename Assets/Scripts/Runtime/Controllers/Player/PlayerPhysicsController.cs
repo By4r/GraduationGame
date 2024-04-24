@@ -27,8 +27,8 @@ namespace Runtime.Controllers.Player
        
         private void Start()
         {
-            _capturePhotoController = FindObjectOfType<CapturePhotoController>();
-            backgroundArudiosource.PlayOneShot(mallBackgroundSound);
+            //_capturePhotoController = FindObjectOfType<CapturePhotoController>();
+            //backgroundArudiosource.PlayOneShot(mallBackgroundSound);
         }
 
         private void Update()
