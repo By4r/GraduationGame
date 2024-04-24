@@ -26,12 +26,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3156603386084185686}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 0.43000004, z: 0}
+  m_LocalPosition: {x: 1.5, y: -0.398, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3840184449084312648}
-  m_RootOrder: 2
+  m_Father: {fileID: 3840184450421729372}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &6906758122709590816
 Light:
@@ -148,7 +148,6 @@ Transform:
   m_Children:
   - {fileID: 3840184451100031785}
   - {fileID: 3840184450421729372}
-  - {fileID: 2759112797267199772}
   - {fileID: 8547427901681558199}
   - {fileID: 1991779572768979084}
   m_Father: {fileID: 0}
@@ -186,7 +185,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StageValue: 0
   light: {fileID: 6571943135570522233}
-  playerEyes: {fileID: 3840184450421729347}
   movementController: {fileID: 3840184449084312649}
   staminaController: {fileID: 0}
 --- !u!114 &3840184449084312649
@@ -207,8 +205,6 @@ MonoBehaviour:
     type: 3}
   canRun: 1
   canMove: 1
-  normalFOV: 0
-  sprintFOV: 0
 --- !u!1 &3840184450421729347
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,7 +237,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.828, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2759112797267199772}
   m_Father: {fileID: 3840184449084312648}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -354,13 +351,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 250
-  _playerMovementController: {fileID: 3840184449084312649}
+  playerMovementController: {fileID: 0}
   mouseState: 1
-  flashlight: {fileID: 0}
-  cameraDelay: 0
   smoothMouseSpeed: 0
-  playerBody: {fileID: 0}
-  rotationSmoothTime: 0.12
+  cameraAcceleration: 0
+  _hand: {fileID: 0}
+  _camera: {fileID: 0}
 --- !u!1 &3840184451100031784
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,7 +472,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3840184449084312648}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2590654308975325249
 MonoBehaviour:
@@ -490,6 +486,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19093c4e7ea49f5a53a3e069624633c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAudioSource: {fileID: 0}
+  backgroundArudiosource: {fileID: 0}
+  mentalDecreaseSound: {fileID: 0}
+  mallBackgroundSound: {fileID: 0}
+  playerManager: {fileID: 0}
+  isInsideLight: 0
+  isInsideSecRoom: 0
+  _capturePhotoController: {fileID: 0}
+  playerEyes: {fileID: 0}
+  range: 0
 --- !u!54 &9184670695526294000
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -551,7 +557,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3840184449084312648}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!108 &7048343482311110753
 Light:

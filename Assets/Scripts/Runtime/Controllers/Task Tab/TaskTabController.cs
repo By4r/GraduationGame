@@ -38,10 +38,9 @@ namespace Runtime.Controllers.Task_Tab
             Ray raycast = playerPhysicsController.GetRaycast();
             float range = playerPhysicsController.range;
             
-            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward * range), Color.green);
 
             if (Physics.Raycast(raycast, out RaycastHit hit, range))
-            {
+            {    
                 if (hit.collider.CompareTag("Phone"))
                 {
                     pressEtext.SetActive(true);
@@ -87,6 +86,7 @@ namespace Runtime.Controllers.Task_Tab
         {
             if (other.CompareTag("tasks"))
             {
+                _taskData.wateringAmount++;
                 RemoveTaskTab();
             }
         }

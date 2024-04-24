@@ -17,11 +17,11 @@ namespace Runtime.Controllers.Player
         private bool pickedUp; //oyuncunun elinde tool var ise elindekini bırakmadan yeni tool alamasın
         private void Update()
         {
+            
             if (Input.GetKeyDown(KeyCode.E))
             {
                 PlayerPickUp();
             }
-            
             if (Input.GetMouseButtonDown(1))
             {
                 DropItem();
@@ -38,7 +38,7 @@ namespace Runtime.Controllers.Player
         {
             Ray raycast = playerPhysicsController.GetRaycast();
             float range = playerPhysicsController.range;
-
+            
             if (Physics.Raycast(raycast, out RaycastHit hit, range,layerMask) )//&& hit.collider.CompareTag("Broom"))
             {
                 Debug.LogWarning("Pickable Item");
@@ -61,8 +61,6 @@ namespace Runtime.Controllers.Player
             else
             {
                 Debug.LogWarning("No Item");
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 20f,
-                    Color.red);
 
             }
         }

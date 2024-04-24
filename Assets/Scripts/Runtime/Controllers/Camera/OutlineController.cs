@@ -29,7 +29,7 @@ namespace Runtime.Controllers.Camera
         Ray raycast = playerPhysicsController.GetRaycast();
         float range = playerPhysicsController.range;
         
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward * range), Color.green);
+       
         if (Physics.Raycast(raycast, out RaycastHit hit, range)) 
         {
             highlight = hit.transform;

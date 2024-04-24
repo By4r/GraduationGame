@@ -1059,7 +1059,7 @@ MonoBehaviour:
   taskText: {fileID: 7586474994603289640}
   taskTabAnim: {fileID: 5246809869579263372}
   playerManager: {fileID: 0}
-  range: 0
+  playerPhysicsController: {fileID: 0}
   pressEtext: {fileID: 0}
 --- !u!1 &3194462765339587271
 GameObject:
@@ -1615,6 +1615,7 @@ MonoBehaviour:
   AnomalyDetectionAnim: {fileID: 5246809869579263372}
   playerlook: {fileID: 0}
   _playerManager: {fileID: 0}
+  playerPhysicsController: {fileID: 0}
   anomalyOnReport: 0
 --- !u!114 &1062162306528913266
 MonoBehaviour:
@@ -1644,11 +1645,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f17850e495e4f5492178d5a308e98de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _layerMask:
+  playerPhysicsController: {fileID: 0}
+  layerMask:
     serializedVersion: 2
-    m_Bits: 64
-  playerLook: {fileID: 0}
-  _playerManager: {fileID: 0}
+    m_Bits: 0
+  _rigidbody: {fileID: 0}
+  itemContainer: {fileID: 0}
 --- !u!1 &3564596181155088247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2283,7 +2285,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7493403523557024277
 RectTransform:
   m_ObjectHideFlags: 0
