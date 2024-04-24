@@ -15,22 +15,22 @@ namespace Runtime.Controllers
             public float endTime;
         }
 
-        public TextMeshProUGUI subtitleText; // UI Text nesnesi
-        public AudioClip speechAudioClip; // Konuşmanın ses dosyası
-        public TextAsset speechTextFile; // Konuşmanın metni
+        public TextMeshProUGUI subtitleText;
+        public AudioClip speechAudioClip;
+        public TextAsset speechTextFile;
 
-        public Subtitle[] subtitles; // Alt yazı dizisi
-        [SerializeField] private AudioSource audioSource; // Ses kaynağı
+        public Subtitle[] subtitles;
+        [SerializeField] private AudioSource audioSource;
 
-        private int currentSubtitleIndex = 1; // Şu anki alt yazı endeksi
-        private bool isPlaying = false; // Ses dosyası oynuyor mu?
+        private int currentSubtitleIndex = 1;
+        private bool isPlaying = false;
 
         void Start()
         {
-            // Metin dosyasından alt yazıları oku
+            
             if (speechTextFile != null)
             {
-                // Alt yazıları parse et ve başlangıç ve bitiş zamanlarını belirle
+                
                 string[] lines = speechTextFile.text.Split('\n');
                 //subtitles = new Subtitle[lines.Length];
                 //float clipLength = speechAudioClip.length;
@@ -50,21 +50,21 @@ namespace Runtime.Controllers
 
         void Update()
         {
-            // Ses dosyası oynuyorsa ve alt yazılar varsa
+            
             if (isPlaying && currentSubtitleIndex < subtitles.Length)
             {
-                // UI'da alt yazıları güncelle
+                
                 if (audioSource.time >= subtitles[currentSubtitleIndex].startTime && audioSource.time <= subtitles[currentSubtitleIndex].endTime)
                 {
                     subtitleText.text = subtitles[currentSubtitleIndex].text;
                 }
 
-                // Bir sonraki alt yazıya geç
+                
                 if (audioSource.time >= subtitles[currentSubtitleIndex].endTime)
                 {
                     currentSubtitleIndex++;
                     
-                    // Tüm alt yazılar tamamlandıysa metni kapat
+                    
                     if (currentSubtitleIndex >= subtitles.Length)
                     {
                         subtitleText.text = "";
@@ -76,7 +76,6 @@ namespace Runtime.Controllers
         [Button("START SPEECH BUTTON")]
         public void StartSpeech()
         {
-            // Ses dosyasını başlat
             audioSource.Play();
 
             isPlaying = true;

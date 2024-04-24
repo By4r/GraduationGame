@@ -6145,7 +6145,7 @@ MonoBehaviour:
       the forest. Take care!
     startTime: 18
     endTime: 24
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1077804530}
 --- !u!4 &1536332226 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7286046801791491725, guid: 46ec1cb08e6439b4b8ed29c6c3c9dede,
