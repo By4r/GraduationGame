@@ -4,6 +4,7 @@ using Runtime.Controllers.Player;
 using Runtime.Data.ValueObjects;
 using Runtime.Enums;
 using Runtime.Managers;
+using Runtime.Signals;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -29,12 +30,11 @@ namespace Runtime.Controllers.Task_Tab
         private void Start()
         {
             //Invoke("PickUpPhone", 5f);
-            
         }
        
         private void Update()
         {
-           
+            taskText.text = string.Format("Collect the garbages {0}/{1}", _taskData.garbageAmount, _taskData.maxGarbageAmount);
             Ray raycast = playerPhysicsController.GetRaycast();
             float range = playerPhysicsController.range;
             
@@ -50,6 +50,15 @@ namespace Runtime.Controllers.Task_Tab
                     {
                         Debug.Log("talking audio started");
                         RemoveTaskTab();
+                    }
+                }
+
+                if (hit.collider.CompareTag("Collectable"))
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        IncreaseGarbageAmount();
+                        Destroy(hit.collider.gameObject);
                     }
                 }
             }
@@ -70,7 +79,7 @@ namespace Runtime.Controllers.Task_Tab
             if (other.CompareTag("tasks"))
             {
                 BringTaskTab();
-                taskText.text = "Collect the garbages " + _taskData.garbageAmount + "/" + _taskData.maxGarbageAmount;
+                //taskText.text = string.Format("Collect the garbages {0}/{1}", _taskData.garbageAmount, _taskData.maxGarbageAmount);
             }
         }
 
@@ -100,7 +109,6 @@ namespace Runtime.Controllers.Task_Tab
 
         internal void IncreaseGarbageAmount()
         {
-            //_taskData.garbageAmount++;
             _taskData.garbageAmount += 1;
         }
     }

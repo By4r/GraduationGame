@@ -43,7 +43,7 @@ namespace Runtime.Controllers.Player
             {
                 Debug.LogWarning("Pickable Item");
 
-                // Nesneyi itemContainer'ın pozisyonuna ve rotasyonuna getir
+
                 hit.transform.SetParent(itemContainer);
                 hit.transform.localPosition = itemContainer.transform.localPosition;
                 hit.transform.localRotation = Quaternion.identity;

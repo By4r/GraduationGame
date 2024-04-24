@@ -20,6 +20,7 @@ TagManager:
   - Phone
   - Selectable
   - Broom
+  - Bed
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - UI
   - TrashCan
   - Garbage
-  - 
+  - Bed
   - 
   - 
   - 
