@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Runtime.Signals;
 
 namespace Runtime.Controllers
 {
@@ -29,6 +30,8 @@ namespace Runtime.Controllers
                     {
                         sleepImage.DOFade(0f, 1f)
                             .SetEase(Ease.InOutQuad);
+                        
+                        TaskSignals.Instance.onSleepDone?.Invoke(true);
                     });
                 });
         }
