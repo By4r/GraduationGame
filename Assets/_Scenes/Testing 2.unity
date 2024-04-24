@@ -6137,9 +6137,11 @@ MonoBehaviour:
     startTime: 0
     endTime: 7
   - text: First, you can start by collecting the garbage outside, and in the evening,
-      visit the house and make sure that there is no one inside. When I come back,
-      if you haven't left, I will give you a large extra paycheck.
+      visit the house and make sure that there is no one inside.
     startTime: 8
+    endTime: 14
+  - text: When I come back, if you haven't left, I will give you a large extra paycheck.
+    startTime: 14
     endTime: 18
   - text: Also, if you see strange things in the evening, it's probably animals in
       the forest. Take care!
@@ -7422,7 +7424,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hello
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
