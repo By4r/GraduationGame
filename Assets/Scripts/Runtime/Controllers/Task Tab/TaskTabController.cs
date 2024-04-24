@@ -20,6 +20,7 @@ namespace Runtime.Controllers.Task_Tab
         [SerializeField] private SleepController sleepController;
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip audioClip;
+        [SerializeField] private SubtitleManager subtitleManager;
         
         [SerializeField] private GameObject pressEtext;
 
@@ -56,7 +57,8 @@ namespace Runtime.Controllers.Task_Tab
                         if (audioSource.clip != null)
                         {
                             // Play the assigned audio clip
-                            audioSource.PlayOneShot(audioClip);
+                            //audioSource.PlayOneShot(audioClip);
+                            subtitleManager.StartSpeech();
                         }
                         else
                         {
