@@ -8,6 +8,8 @@ namespace Runtime.Controllers.Player
     {
         private readonly string _inLight = "InsideLight";
         private readonly string _inSecRoom = "InsideSecurityRoom";
+        private readonly string _paranormalEnter = "ParanormalEnter";
+        private readonly string _paranormalExit = "ParanormalExit";
         [SerializeField] private AudioSource playerAudioSource;
         [SerializeField] private AudioSource backgroundArudiosource;
         [SerializeField] private AudioClip mentalDecreaseSound;
@@ -20,6 +22,8 @@ namespace Runtime.Controllers.Player
         
         [SerializeField] public GameObject playerEyes;
         [SerializeField] public float range;
+
+        public GameObject anomalyPrefab;
        
         private void Start()
         {
@@ -76,6 +80,14 @@ namespace Runtime.Controllers.Player
                 isInsideSecRoom = true;
                 _capturePhotoController.photoRemainCount = 3;
 
+            }
+            else if(other.CompareTag(_paranormalEnter))
+            {
+                anomalyPrefab.SetActive(true);
+            }
+            else if(other.CompareTag(_paranormalExit))
+            {
+                anomalyPrefab.SetActive(false);
             }
             
         }

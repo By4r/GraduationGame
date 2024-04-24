@@ -17,6 +17,7 @@ namespace Runtime.Controllers.Task_Tab
         [SerializeField] private Animator taskTabAnim;
         [SerializeField] private PlayerManager playerManager;
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
+        [SerializeField] private SleepController sleepController;
         
         [SerializeField] private GameObject pressEtext;
 
@@ -58,6 +59,14 @@ namespace Runtime.Controllers.Task_Tab
                     {
                         IncreaseGarbageAmount();
                         Destroy(hit.collider.gameObject);
+                    }
+                }
+
+                if (hit.collider.CompareTag("Bed"))
+                {
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        sleepController.Sleep();
                     }
                 }
             }
