@@ -1060,6 +1060,10 @@ MonoBehaviour:
   taskTabAnim: {fileID: 5246809869579263372}
   playerManager: {fileID: 0}
   playerPhysicsController: {fileID: 0}
+  sleepController: {fileID: 0}
+  audioSource: {fileID: 0}
+  audioClip: {fileID: 0}
+  subtitleManager: {fileID: 0}
   pressEtext: {fileID: 0}
 --- !u!1 &3194462765339587271
 GameObject:
@@ -1609,7 +1613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   isAnomalyDetected: 0
   anomalyDetectionText: {fileID: 7586474994603289640}
   AnomalyDetectionAnim: {fileID: 5246809869579263372}
@@ -1717,7 +1721,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6666747571780803238
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2821,7 +2825,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6085785842904583044
 RectTransform:
   m_ObjectHideFlags: 0
