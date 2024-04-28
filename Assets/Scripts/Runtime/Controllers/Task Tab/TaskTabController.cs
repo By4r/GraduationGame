@@ -7,10 +7,8 @@ using Runtime.Managers;
 using Runtime.Signals;
 using Sirenix.OdinInspector;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
+
 
 namespace Runtime.Controllers.Task_Tab
 {
@@ -29,10 +27,13 @@ namespace Runtime.Controllers.Task_Tab
 
         [ShowInInspector] private TaskData _taskData;
 
+        private int _garbageAmount;
+        private int _wateringAmount;
+
         private bool _isSleepDone;
 
         private bool _isGarbageCollectTask = false;
-        
+
         internal void SetData(TaskData taskData)
         {
             _taskData = taskData;
@@ -42,7 +43,7 @@ namespace Runtime.Controllers.Task_Tab
         {
             Invoke("PickUpPhone", 5f);
         }
-        
+
         private void OnEnable()
         {
             SubscribeEvents();
@@ -60,9 +61,9 @@ namespace Runtime.Controllers.Task_Tab
             if (_isSleepDone)
             {
                 Debug.LogWarning("Sleep Done ! 'At Midnight!");
-                
+
                 TaskState(3);
-                
+
                 RemoveTaskTab();
             }
         }
@@ -71,17 +72,17 @@ namespace Runtime.Controllers.Task_Tab
         {
             TaskSignals.Instance.onSleepDone -= OnSleepDone;
         }
-        
+
         private void OnDisable()
         {
             UnSubscribeEvents();
         }
-        
+
         private void Update()
         {
             if (_isGarbageCollectTask)
             {
-                taskText.text = string.Format("Collect the garbages {0}/{1}", _taskData.garbageAmount,
+                taskText.text = string.Format("Collect the garbages {0}/{1}", _garbageAmount,
                     _taskData.maxGarbageAmount);
             }
 
@@ -157,11 +158,19 @@ namespace Runtime.Controllers.Task_Tab
             _isGarbageCollectTask = false;
         }
 
+        private void SweepFloor()
+        {
+        }
+
+        private void WateringFlowers()
+        {
+        }
+
         private void CollectGarbage()
         {
             _isGarbageCollectTask = true;
             BringTaskTab();
-            taskText.text = string.Format("Collect the garbages {0}/{1}", _taskData.garbageAmount,
+            taskText.text = string.Format("Collect the garbages {0}/{1}", _garbageAmount,
                 _taskData.maxGarbageAmount);
             Debug.LogWarning("Collect Garbage Task!");
         }
@@ -193,7 +202,7 @@ namespace Runtime.Controllers.Task_Tab
         {
             if (other.CompareTag("tasks"))
             {
-                _taskData.wateringAmount++;
+                _wateringAmount++;
                 RemoveTaskTab();
             }
         }
@@ -216,12 +225,12 @@ namespace Runtime.Controllers.Task_Tab
 
         internal void IncreaseGarbageAmount()
         {
-            _taskData.garbageAmount += 1;
+            _garbageAmount += 1;
 
-            if (_taskData.garbageAmount >= _taskData.maxGarbageAmount)
+            if (_garbageAmount >= _taskData.maxGarbageAmount)
             {
                 //RemoveTaskTab();
-                
+
                 FinishGarbageWork();
                 Debug.LogWarning("Finished Garbage Task!");
             }
@@ -235,12 +244,18 @@ namespace Runtime.Controllers.Task_Tab
                     PickUpPhone();
                     break;
                 case 1:
-                    CollectGarbage();
+                    SweepFloor();
                     break;
                 case 2:
-                    GoSleep();
+                    CollectGarbage();
                     break;
                 case 3:
+                    WateringFlowers();
+                    break;
+                case 4:
+                    GoSleep();
+                    break;
+                case 5:
                     CheckHouse();
                     break;
                 default:

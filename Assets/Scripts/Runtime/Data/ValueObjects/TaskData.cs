@@ -12,11 +12,6 @@ namespace Runtime.Data.ValueObjects
     [Serializable]
     public struct TaskData
     {
-        [Title("Current Amount")]
-        public int sweepAmount;
-        public int garbageAmount;
-        public int wateringAmount;
-        
         [Title("Max Amount")]
         public int maxSweepAmount;
         public int maxGarbageAmount;
