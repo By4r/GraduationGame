@@ -25,7 +25,7 @@ namespace Runtime.Controllers.Task_Tab
 
         [SerializeField] private GameObject pressEtext;
 
-        [ShowInInspector] private TaskData _taskData;
+        [ShowInInspector] private WorkData _workData;
 
         private int _garbageAmount;
         private int _wateringAmount;
@@ -34,9 +34,9 @@ namespace Runtime.Controllers.Task_Tab
 
         private bool _isGarbageCollectTask = false;
 
-        internal void SetData(TaskData taskData)
+        internal void SetData(WorkData workData)
         {
-            _taskData = taskData;
+            _workData = workData;
         }
 
         private void Start()
@@ -80,11 +80,11 @@ namespace Runtime.Controllers.Task_Tab
 
         private void Update()
         {
-            if (_isGarbageCollectTask)
-            {
-                taskText.text = string.Format("Collect the garbages {0}/{1}", _garbageAmount,
-                    _taskData.maxGarbageAmount);
-            }
+            // if (_isGarbageCollectTask)
+            // {
+            //     taskText.text = string.Format("Collect the garbages {0}/{1}", _garbageAmount,
+            //         _workData.maxGarbageAmount);
+            // }
 
             Ray raycast = playerPhysicsController.GetRaycast();
             float range = playerPhysicsController.range;
@@ -170,8 +170,8 @@ namespace Runtime.Controllers.Task_Tab
         {
             _isGarbageCollectTask = true;
             BringTaskTab();
-            taskText.text = string.Format("Collect the garbages {0}/{1}", _garbageAmount,
-                _taskData.maxGarbageAmount);
+            // taskText.text = string.Format("Collect the garbages {0}/{1}", _garbageAmount,
+            //     _workData.maxGarbageAmount);
             Debug.LogWarning("Collect Garbage Task!");
         }
 
@@ -227,13 +227,13 @@ namespace Runtime.Controllers.Task_Tab
         {
             _garbageAmount += 1;
 
-            if (_garbageAmount >= _taskData.maxGarbageAmount)
-            {
-                //RemoveTaskTab();
-
-                FinishGarbageWork();
-                Debug.LogWarning("Finished Garbage Task!");
-            }
+            // if (_garbageAmount >= _workData.maxGarbageAmount)
+            // {
+            //     //RemoveTaskTab();
+            //
+            //     FinishGarbageWork();
+            //     Debug.LogWarning("Finished Garbage Task!");
+            // }
         }
 
         private void TaskState(int stateIndex)

@@ -2,13 +2,14 @@
 using Runtime.Controllers.Task_Tab;
 using Runtime.Signals;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Runtime.Controllers.Item
 {
     public class ItemCollectController : MonoBehaviour
     {
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
-        [SerializeField] private TaskTabController taskTabController;
+        //[FormerlySerializedAs("taskTabController")] [SerializeField] private TaskController taskController;
         [SerializeField] LayerMask layerMask;
 
         private void Update()
