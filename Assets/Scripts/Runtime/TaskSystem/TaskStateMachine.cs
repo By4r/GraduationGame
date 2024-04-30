@@ -6,23 +6,24 @@ using Runtime.Controllers.Task_Tab;
 using Runtime.Data.ValueObjects;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Runtime.TaskSystem
 {
     public class TaskStateMachine : MonoBehaviour
     {
         [ShowInInspector] private Dictionary<string, Action> stateActions = new Dictionary<string, Action>();
-        
+
         private string currentState = "PickUpPhone";
 
-        private TaskController controller;
+        [SerializeField] private TaskController taskController;
 
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
 
         [SerializeField] private SleepController sleepController;
 
         [SerializeField] private AudioSource audioSource;
-        
+
         private WorkData _workData;
 
 
@@ -31,11 +32,16 @@ namespace Runtime.TaskSystem
             DefineState();
         }
 
-        private void SetData(WorkData workData)
-        {
-            _workData = workData;
-        }
+        // private void SetData(WorkData workData)
+        // {
+        //     _workData = workData;
+        // }
 
+
+        public void Update()
+        {
+            stateActions[currentState]?.Invoke();
+        }
 
         private void DefineState()
         {
@@ -43,8 +49,64 @@ namespace Runtime.TaskSystem
 
             stateActions["CollectGarbage"] = CollectGarbage;
 
+            stateActions["SweepFloor"] = SweepFloor;
+
+            stateActions["WateringFlowers"] = WateringFlowers;
+
             stateActions["GoSleep"] = GoSleep;
-            
+
+            stateActions["CheckHouse"] = CheckHouse;
+
+            stateActions["CheckCamera"] = CheckCamera;
+
+            stateActions["CheckOffice"] = CheckOffice;
+
+            stateActions["GoCar"] = GoCar;
+
+            stateActions["HeatHouse"] = HeatHouse;
+
+            stateActions["CheckUpstairs"] = CheckUpstairs;
+        }
+
+
+        private void CheckUpstairs()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void HeatHouse()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void GoCar()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CheckOffice()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CheckCamera()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CheckHouse()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void WateringFlowers()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SweepFloor()
+        {
+            throw new NotImplementedException();
         }
 
         private void GoSleep()
@@ -82,6 +144,11 @@ namespace Runtime.TaskSystem
 
             Debug.LogWarning("PICK UP PHONE STATE");
 
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                SetState("CollectGarbage");
+            }
+
             if (Physics.Raycast(raycast, out RaycastHit hit, range))
             {
                 if (hit.collider.CompareTag("Phone"))
@@ -104,8 +171,6 @@ namespace Runtime.TaskSystem
                         {
                             Debug.LogWarning("No audio clip assigned to audioSourceObject.");
                         }
-
-                        RemoveTaskTab();
                     }
                 }
 
@@ -114,21 +179,11 @@ namespace Runtime.TaskSystem
         }
 
 
-        public void Update()
-        {
-            stateActions[currentState]?.Invoke();
-        }
-
         public void SetState(string newState)
         {
             currentState = newState;
             Debug.Log("Current State: " + currentState);
-            controller.TaskInfo(GetTaskTextForState(newState));
-        }
-
-        private void RemoveTaskTab()
-        {
-            // Görev sekmesini kaldırma işlemi
+            taskController.TaskInfo(GetTaskTextForState(newState));
         }
 
         private string GetTaskTextForState(string state)
@@ -137,10 +192,10 @@ namespace Runtime.TaskSystem
             {
                 case "PickUpPhone":
                     return "Pick up the phone";
-                case "SweepFloor":
-                    return "Sweep the floor";
                 case "CollectGarbage":
                     return $"Collect the garbage (/{_workData.MaxGarbageAmount})";
+                case "SweepFloor":
+                    return "Sweep the floor";
                 case "WateringFlowers":
                     return "Water the flowers";
                 case "GoSleep":
@@ -155,12 +210,11 @@ namespace Runtime.TaskSystem
                     return "Get in the car";
                 case "HeatHouse":
                     return "Turn on the heating";
-                case "CheckFloor":
-                    return "Inspect the floor";
+                case "CheckUpstairs":
+                    return "Inspect the Upstairs";
                 default:
                     return "";
             }
         }
-
     }
 }
