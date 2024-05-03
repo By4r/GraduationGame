@@ -1350,18 +1350,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sleepPanel: {fileID: 0}
---- !u!114 &266028137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3840184450328312592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42eed7ae17394c88b4a6f817495226c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &276981920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6645316051555272843, guid: 2d33f86bebeeb1b4689bd58e49ff5a69,
@@ -1741,7 +1729,7 @@ MonoBehaviour:
   flashlightTransform: {fileID: 2759112798707576898}
   followSpeed: 5
   rotationSpeed: 5
-  maxRotationAngle: 20
+  maxRotationAngle: 30
 --- !u!1001 &479061053
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5982,18 +5970,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1367327982257039941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3840184450328312592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42eed7ae17394c88b4a6f817495226c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1376347345460853776
 GameObject:
   m_ObjectHideFlags: 0
@@ -6376,19 +6352,6 @@ Transform:
   m_Father: {fileID: 3840184450328312598}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2804805020894663696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3840184448976412445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ce125c7016e4decadf275b6f8422620, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPhysicsController: {fileID: 2590654309677221663}
 --- !u!4 &2815599455120137148
 Transform:
   m_ObjectHideFlags: 0
@@ -6994,7 +6957,6 @@ GameObject:
   - component: {fileID: 3840184448976412419}
   - component: {fileID: 3840184448976412423}
   - component: {fileID: 2030496}
-  - component: {fileID: 2804805020894663696}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7097,8 +7059,6 @@ GameObject:
   - component: {fileID: 3840184450328312593}
   - component: {fileID: 9192770036591163114}
   - component: {fileID: 3840184450328312599}
-  - component: {fileID: 266028137}
-  - component: {fileID: 1367327982257039941}
   - component: {fileID: 266028133}
   - component: {fileID: 266028131}
   m_Layer: 0
