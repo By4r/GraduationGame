@@ -14,7 +14,22 @@ namespace Runtime.Controllers.Player
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Transform itemContainer;
         
+        
+        private Animator animator;
+        private ParticleSystem particleSystem;
+        
+        private float wateringTime = 0f;
+        private float maxWateringTime = 3f;
+        private bool isWatering = false;
+        private bool hasWatered = false;
         private bool pickedUp; //oyuncunun elinde tool var ise elindekini bırakmadan yeni tool alamasın
+        
+        void Start()
+        {
+            particleSystem = GetComponentInChildren<ParticleSystem>();
+            animator = GetComponentInChildren<Animator>();
+        }
+        
         private void Update()
         {
             
@@ -26,6 +41,9 @@ namespace Runtime.Controllers.Player
             {
                 DropItem();
             }
+            PlayerWateringFlowers();
+            PlayerSweepFloor();
+           
         }
         
         private void DropItem()
@@ -39,7 +57,7 @@ namespace Runtime.Controllers.Player
             Ray raycast = playerPhysicsController.GetRaycast();
             float range = playerPhysicsController.range;
             
-            if (Physics.Raycast(raycast, out RaycastHit hit, range,layerMask) )//&& hit.collider.CompareTag("Broom"))
+            if (Physics.Raycast(raycast, out RaycastHit hit, range,layerMask) )
             {
                 Debug.LogWarning("Pickable Item");
 
@@ -57,6 +75,10 @@ namespace Runtime.Controllers.Player
                 {
                     itemPickUpController.Pickup();
                 }
+                
+                
+                
+                
             }
             else
             {
@@ -64,6 +86,60 @@ namespace Runtime.Controllers.Player
 
             }
         }
+
+        private void PlayerSweepFloor()
+        {
+            if (Input.GetMouseButton(0))
+            {
+                animator.SetTrigger("sweepFloor");
+            }
+            else
+            {
+                animator.ResetTrigger("sweepFloor");
+            }
+            
+        }
+
+        private void PlayerWateringFlowers()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                isWatering = true;
+                animator.SetTrigger("upCan"); 
+                wateringTime = 0f;
+                hasWatered = false; 
+                if (particleSystem != null)
+                {
+                    particleSystem.Play();
+                }
+                else return;
+            }
+
+            if (isWatering)
+            {
+                wateringTime += Time.deltaTime;
+                if (wateringTime >= maxWateringTime && !hasWatered)
+                {
+                    Debug.Log("çiçek sulandı");
+                    hasWatered = true; 
+                }
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                animator.SetTrigger("downCan");
+                isWatering = false;
+                if (particleSystem != null)
+                {
+                    particleSystem.Stop();
+                }
+                
+
+
+
+            }
+        }
+     
 
        
     }
