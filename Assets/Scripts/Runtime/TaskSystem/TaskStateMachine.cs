@@ -6,6 +6,7 @@ using Runtime.Controllers.Task_Tab;
 using Runtime.Data.ValueObjects;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.iOS;
 using UnityEngine.Serialization;
 
 namespace Runtime.TaskSystem
@@ -14,7 +15,7 @@ namespace Runtime.TaskSystem
     {
         [ShowInInspector] private Dictionary<string, Action> stateActions = new Dictionary<string, Action>();
 
-        private string _currentState;
+        [ShowInInspector] private string _currentState;
 
         [SerializeField] private TaskController taskController;
 
@@ -29,7 +30,9 @@ namespace Runtime.TaskSystem
 
         private void Start()
         {
-            _currentState = "PickUpPhone";
+            //_currentState = "PickUpPhone";
+            _currentState = "CollectGarbage";
+
             DefineState();
         }
 
@@ -141,6 +144,24 @@ namespace Runtime.TaskSystem
         private void CollectGarbage()
         {
             Debug.Log("COLLECT GARBAGE STATE");
+            
+            Ray raycast = playerPhysicsController.GetRaycast();
+            float range = playerPhysicsController.range;
+
+            if (Physics.Raycast(raycast, out RaycastHit hit, range))
+            {
+                if (hit.collider.CompareTag("Collectable"))
+                {
+                    Debug.LogWarning("HIT COLLECTABLE");
+                    
+                    
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Destroy(hit.collider.gameObject);
+                    }
+                }
+            }
+            
             // if (controller.GarbageAmount >= controller.MaxGarbageAmount)
             // {
             //     SetState("GoSleep");

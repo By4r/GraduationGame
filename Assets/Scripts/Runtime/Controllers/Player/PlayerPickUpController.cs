@@ -41,8 +41,8 @@ namespace Runtime.Controllers.Player
             {
                 DropItem();
             }
-            PlayerWateringFlowers();
-            PlayerSweepFloor();
+            //PlayerWateringFlowers();
+            //PlayerSweepFloor();
            
         }
         
