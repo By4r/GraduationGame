@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Cinemachine;
 using Runtime.Controllers;
 using Runtime.Controllers.Player;
-using Runtime.Controllers.Task_Tab;
 using Runtime.Data.ValueObjects;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.iOS;
-using UnityEngine.Serialization;
+
 
 namespace Runtime.TaskSystem
 {
@@ -30,16 +27,18 @@ namespace Runtime.TaskSystem
 
         private WorkData _workData;
 
-
+        [Header("TASK MANAGERS")] 
+        [SerializeField] private CheckHouseManager checkHouseManager;
+        
         private void Start()
         {
             //_currentState = "PickUpPhone";
-            
+
             _playerPickUpController = FindObjectOfType<PlayerPickUpController>();
-            
+
             //_currentState = "CollectGarbage";
-            
-            _currentState = "SweepFloor";
+
+            _currentState = "CheckHouse";
 
 
             DefineState();
@@ -86,8 +85,22 @@ namespace Runtime.TaskSystem
             if (_currentState == "SweepFloor" && other.CompareTag("SweepArea"))
             {
                 Debug.Log("SWEEP AREA ENTER");
-                
+
                 _playerPickUpController.InSweepArea(true);
+            }
+
+            if (_currentState == "CheckHouse" && other.CompareTag("ParanormalEnter"))
+            {
+                Debug.Log("PARANORMAL ENTER TAG");
+                
+                checkHouseManager.ShowParanormal();
+            }
+
+            if (_currentState == "CheckHouse" && other.CompareTag("ParanormalExit"))
+            {
+                Debug.Log("PARANORMAL EXIT TAG");
+                
+                checkHouseManager.HideParanormal();
             }
         }
 
@@ -96,10 +109,9 @@ namespace Runtime.TaskSystem
             if (_currentState == "SweepFloor" && other.CompareTag("SweepArea"))
             {
                 Debug.Log("SWEEP AREA EXIT");
-                
+
                 _playerPickUpController.InSweepArea(false);
             }
-            
         }
 
         private void CheckUpstairs()
@@ -129,7 +141,8 @@ namespace Runtime.TaskSystem
 
         private void CheckHouse()
         {
-            throw new NotImplementedException();
+            Debug.Log("CHECK HOUSE STATE!");
+            
         }
 
         private void WateringFlowers()
@@ -148,19 +161,18 @@ namespace Runtime.TaskSystem
 
         private void SweepFloor()
         {
-            
             //_playerPickUpController.SweepFloor();
 
-             Ray raycast = playerPhysicsController.GetRaycast();
-             float range = playerPhysicsController.range;
-            
-             if (Physics.Raycast(raycast, out RaycastHit hit, range))
-             {
-                 if (hit.collider.CompareTag("SweepArea"))
-                 {
-                     _playerPickUpController.SweepFloor();
-                 }
-             }
+            Ray raycast = playerPhysicsController.GetRaycast();
+            float range = playerPhysicsController.range;
+
+            if (Physics.Raycast(raycast, out RaycastHit hit, range))
+            {
+                if (hit.collider.CompareTag("SweepArea"))
+                {
+                    _playerPickUpController.SweepFloor();
+                }
+            }
         }
 
         private void GoSleep()
@@ -185,7 +197,7 @@ namespace Runtime.TaskSystem
         private void CollectGarbage()
         {
             Debug.Log("COLLECT GARBAGE STATE");
-            
+
             Ray raycast = playerPhysicsController.GetRaycast();
             float range = playerPhysicsController.range;
 
@@ -194,15 +206,15 @@ namespace Runtime.TaskSystem
                 if (hit.collider.CompareTag("Collectable"))
                 {
                     Debug.LogWarning("HIT COLLECTABLE");
-                    
-                    
+
+
                     if (Input.GetMouseButtonDown(0))
                     {
                         Destroy(hit.collider.gameObject);
                     }
                 }
             }
-            
+
             // if (controller.GarbageAmount >= controller.MaxGarbageAmount)
             // {
             //     SetState("GoSleep");
