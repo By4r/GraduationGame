@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cinemachine;
 using Runtime.Controllers;
 using Runtime.Controllers.Player;
 using Runtime.Controllers.Task_Tab;
@@ -25,13 +26,21 @@ namespace Runtime.TaskSystem
 
         [SerializeField] private AudioSource audioSource;
 
+        [ShowInInspector] private PlayerPickUpController _playerPickUpController;
+
         private WorkData _workData;
 
 
         private void Start()
         {
             //_currentState = "PickUpPhone";
-            _currentState = "CollectGarbage";
+            
+            _playerPickUpController = FindObjectOfType<PlayerPickUpController>();
+            
+            //_currentState = "CollectGarbage";
+            
+            _currentState = "SweepFloor";
+
 
             DefineState();
         }
@@ -72,6 +81,26 @@ namespace Runtime.TaskSystem
             stateActions["CheckUpstairs"] = CheckUpstairs;
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (_currentState == "SweepFloor" && other.CompareTag("SweepArea"))
+            {
+                Debug.Log("SWEEP AREA ENTER");
+                
+                _playerPickUpController.InSweepArea(true);
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (_currentState == "SweepFloor" && other.CompareTag("SweepArea"))
+            {
+                Debug.Log("SWEEP AREA EXIT");
+                
+                _playerPickUpController.InSweepArea(false);
+            }
+            
+        }
 
         private void CheckUpstairs()
         {
@@ -112,14 +141,26 @@ namespace Runtime.TaskSystem
             {
                 if (hit.collider.CompareTag("Flower"))
                 {
-                    Debug.Log("flower watering triggered");
+                    _playerPickUpController.WaterFlowers();
                 }
             }
         }
 
         private void SweepFloor()
         {
-            throw new NotImplementedException();
+            
+            //_playerPickUpController.SweepFloor();
+
+             Ray raycast = playerPhysicsController.GetRaycast();
+             float range = playerPhysicsController.range;
+            
+             if (Physics.Raycast(raycast, out RaycastHit hit, range))
+             {
+                 if (hit.collider.CompareTag("SweepArea"))
+                 {
+                     _playerPickUpController.SweepFloor();
+                 }
+             }
         }
 
         private void GoSleep()

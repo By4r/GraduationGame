@@ -23,6 +23,8 @@ namespace Runtime.Controllers.Player
         private bool isWatering = false;
         private bool hasWatered = false;
         private bool pickedUp; //oyuncunun elinde tool var ise elindekini bırakmadan yeni tool alamasın
+
+        private bool inSweepArea;
         
         void Start()
         {
@@ -68,17 +70,12 @@ namespace Runtime.Controllers.Player
                 _rigidbody.useGravity = false;
                 _rigidbody.isKinematic = true;
             
-               
                 
                 itemPickUpController = hit.collider.GetComponent<ItemPickUpController>();
                 if(itemPickUpController != null)
                 {
                     itemPickUpController.Pickup();
                 }
-                
-                
-                
-                
             }
             else
             {
@@ -87,20 +84,31 @@ namespace Runtime.Controllers.Player
             }
         }
 
-        private void PlayerSweepFloor()
+        internal void SweepFloor()
         {
-            if (Input.GetMouseButton(0))
+            if (inSweepArea)
             {
-                animator.SetTrigger("sweepFloor");
-            }
-            else
-            {
-                animator.ResetTrigger("sweepFloor");
+                Debug.LogWarning("inSweepArea: " + inSweepArea);
+                if (Input.GetMouseButton(0))
+                {
+                    Debug.Log("Sweeping!");
+                    //animator.SetTrigger("sweepFloor");
+                }
+                else
+                {
+                    //animator.ResetTrigger("sweepFloor");
+                }
+                
             }
             
         }
 
-        private void PlayerWateringFlowers()
+        internal void InSweepArea(bool state)
+        {
+            inSweepArea = state;
+        }
+
+        internal void WaterFlowers()
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -120,7 +128,7 @@ namespace Runtime.Controllers.Player
                 wateringTime += Time.deltaTime;
                 if (wateringTime >= maxWateringTime && !hasWatered)
                 {
-                    Debug.Log("çiçek sulandı");
+                    Debug.Log("Watering Done!");
                     hasWatered = true; 
                 }
             }
@@ -134,9 +142,6 @@ namespace Runtime.Controllers.Player
                     particleSystem.Stop();
                 }
                 
-
-
-
             }
         }
      
