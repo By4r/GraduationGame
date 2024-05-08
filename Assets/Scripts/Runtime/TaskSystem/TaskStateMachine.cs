@@ -14,7 +14,7 @@ namespace Runtime.TaskSystem
     {
         [ShowInInspector] private Dictionary<string, Action> stateActions = new Dictionary<string, Action>();
 
-        private string currentState = "PickUpPhone";
+        private string _currentState;
 
         [SerializeField] private TaskController taskController;
 
@@ -29,6 +29,7 @@ namespace Runtime.TaskSystem
 
         private void Start()
         {
+            _currentState = "PickUpPhone";
             DefineState();
         }
 
@@ -40,7 +41,7 @@ namespace Runtime.TaskSystem
 
         public void Update()
         {
-            stateActions[currentState]?.Invoke();
+            stateActions[_currentState]?.Invoke();
         }
 
         private void DefineState()
@@ -190,8 +191,8 @@ namespace Runtime.TaskSystem
 
         public void SetState(string newState)
         {
-            currentState = newState;
-            Debug.Log("Current State: " + currentState);
+            _currentState = newState;
+            Debug.Log("Current State: " + _currentState);
             taskController.TaskInfo(GetTaskTextForState(newState));
         }
 
