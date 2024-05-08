@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Runtime.Data.UnityObjects;
 using Runtime.Data.ValueObjects;
+using Runtime.Enums;
 //using Runtime.Keys;
 using Runtime.Signals;
 using Sirenix.OdinInspector;
@@ -17,7 +18,7 @@ namespace Runtime.Managers
         #region Private Variables
 
         [ShowInInspector] private InputData _data;
-        [ShowInInspector] private bool _isAvailableForTouch, _isFirstTimeTouchTaken, _isTouching;
+        [ShowInInspector] private bool _isAvailableForTouch, _isFirstTimeTouchTaken, _isTouching, _isInventoryPanelOpen;
 
         private float _currentVelocity;
         private float3 _moveVector;
@@ -83,6 +84,20 @@ namespace Runtime.Managers
             if (Input.GetKeyDown(KeyCode.G))
             {
                 TimeSignals.Instance.onTimeStarted?.Invoke();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                if (_isInventoryPanelOpen)
+                {
+                    // If the inventory panel is open, close it
+                    CoreUISignals.Instance.onClosePanel?.Invoke(5);
+                }
+                else
+                {
+                    // If the inventory panel is closed, open it
+                    CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Inventory, 5); // 5 is optional parameter
+                }
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Runtime.Controllers;
 using Runtime.Controllers.Player;
 using Runtime.Data.ValueObjects;
+using Runtime.Managers;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -27,9 +28,13 @@ namespace Runtime.TaskSystem
 
         private WorkData _workData;
 
-        [Header("TASK MANAGERS")] 
-        [SerializeField] private CheckHouseManager checkHouseManager;
-        
+        [Header("TASK MANAGERS")] [SerializeField]
+        private CheckHouseManager checkHouseManager;
+
+        [SerializeField] private CheckOfficeManager checkOfficeManager;
+
+        [SerializeField] private LetterManager letterManager;
+
         private void Start()
         {
             //_currentState = "PickUpPhone";
@@ -38,7 +43,7 @@ namespace Runtime.TaskSystem
 
             //_currentState = "CollectGarbage";
 
-            _currentState = "CheckHouse";
+            _currentState = "CheckOffice";
 
 
             DefineState();
@@ -92,14 +97,14 @@ namespace Runtime.TaskSystem
             if (_currentState == "CheckHouse" && other.CompareTag("ParanormalEnter"))
             {
                 Debug.Log("PARANORMAL ENTER TAG");
-                
+
                 checkHouseManager.ShowParanormal();
             }
 
             if (_currentState == "CheckHouse" && other.CompareTag("ParanormalExit"))
             {
                 Debug.Log("PARANORMAL EXIT TAG");
-                
+
                 checkHouseManager.HideParanormal();
             }
         }
@@ -131,7 +136,21 @@ namespace Runtime.TaskSystem
 
         private void CheckOffice()
         {
-            throw new NotImplementedException();
+            Debug.Log("CHECK OFFICE STATE!");
+
+            Ray raycast = playerPhysicsController.GetRaycast();
+            float range = playerPhysicsController.range;
+
+            if (Physics.Raycast(raycast, out RaycastHit hit, range))
+            {
+                if (hit.collider.CompareTag("Letter"))
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        letterManager.GetLetterPrefab(0);
+                    }
+                }
+            }
         }
 
         private void CheckCamera()
@@ -142,7 +161,6 @@ namespace Runtime.TaskSystem
         private void CheckHouse()
         {
             Debug.Log("CHECK HOUSE STATE!");
-            
         }
 
         private void WateringFlowers()
