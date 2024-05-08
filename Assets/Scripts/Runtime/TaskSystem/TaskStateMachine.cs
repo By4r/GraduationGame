@@ -35,6 +35,8 @@ namespace Runtime.TaskSystem
 
         [SerializeField] private LetterManager letterManager;
 
+        [SerializeField] private GoCarManager goCarManager;
+
         private void Start()
         {
             //_currentState = "PickUpPhone";
@@ -43,7 +45,7 @@ namespace Runtime.TaskSystem
 
             //_currentState = "CollectGarbage";
 
-            _currentState = "CheckOffice";
+            _currentState = "GoCar";
 
 
             DefineState();
@@ -78,11 +80,30 @@ namespace Runtime.TaskSystem
 
             stateActions["CheckOffice"] = CheckOffice;
 
+            stateActions["Attic"] = Attic;
+            
             stateActions["GoCar"] = GoCar;
 
             stateActions["HeatHouse"] = HeatHouse;
 
             stateActions["CheckUpstairs"] = CheckUpstairs;
+        }
+
+        private void Attic()
+        {
+            Ray raycast = playerPhysicsController.GetRaycast();
+            float range = playerPhysicsController.range;
+
+            if (Physics.Raycast(raycast, out RaycastHit hit, range))
+            {
+                if (hit.collider.CompareTag("Letter"))
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        letterManager.GetLetterPrefab(0);
+                    }
+                }
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -106,6 +127,13 @@ namespace Runtime.TaskSystem
                 Debug.Log("PARANORMAL EXIT TAG");
 
                 checkHouseManager.HideParanormal();
+            }
+
+            if (_currentState == "GoCar" && other.CompareTag("Car"))
+            {
+                Debug.Log("CAR TAG");
+                Debug.Log("YOU SHOULD FULL THE TANK ");
+                
             }
         }
 
@@ -131,7 +159,22 @@ namespace Runtime.TaskSystem
 
         private void GoCar()
         {
-            throw new NotImplementedException();
+            Debug.Log("GO CAR STATE!");
+            
+            Ray raycast = playerPhysicsController.GetRaycast();
+            float range = playerPhysicsController.range;
+
+            if (Physics.Raycast(raycast, out RaycastHit hit, range))
+            {
+                if (hit.collider.CompareTag("Letter"))
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        letterManager.GetLetterPrefab(1);
+                    }
+                }
+            }
+            
         }
 
         private void CheckOffice()
@@ -143,11 +186,11 @@ namespace Runtime.TaskSystem
 
             if (Physics.Raycast(raycast, out RaycastHit hit, range))
             {
-                if (hit.collider.CompareTag("Letter"))
+                if (hit.collider.CompareTag("Key"))
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
-                        letterManager.GetLetterPrefab(0);
+                       checkOfficeManager.KeyReceived();
                     }
                 }
             }
@@ -308,6 +351,8 @@ namespace Runtime.TaskSystem
                     return "Check the security camera";
                 case "CheckOffice":
                     return "Check the office";
+                case "Attic":
+                    return "Check the attic";
                 case "GoCar":
                     return "Get in the car";
                 case "HeatHouse":
