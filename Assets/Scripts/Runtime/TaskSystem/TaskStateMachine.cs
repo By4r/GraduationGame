@@ -102,7 +102,16 @@ namespace Runtime.TaskSystem
 
         private void WateringFlowers()
         {
-            throw new NotImplementedException();
+            Ray raycast = playerPhysicsController.GetRaycast();
+            float range = playerPhysicsController.range;
+
+            if (Physics.Raycast(raycast, out RaycastHit hit, range))
+            {
+                if (hit.collider.CompareTag("Flower"))
+                {
+                    Debug.Log("flower watering triggered");
+                }
+            }
         }
 
         private void SweepFloor()

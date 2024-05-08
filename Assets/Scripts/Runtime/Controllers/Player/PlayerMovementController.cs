@@ -86,7 +86,7 @@ namespace Runtime.Controllers.Player
             return transform.right * x + transform.forward * z;
         }
 
-        private void RunOrSprint()
+        public void RunOrSprint()
         {
             var shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
             var w = Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow);

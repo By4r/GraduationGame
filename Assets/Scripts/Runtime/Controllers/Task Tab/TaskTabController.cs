@@ -22,7 +22,7 @@ namespace Runtime.Controllers.Task_Tab
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip audioClip;
         [SerializeField] private SubtitleManager subtitleManager;
-
+        [SerializeField] private Animator animator;
         [SerializeField] private GameObject pressEtext;
 
         [ShowInInspector] private WorkData _workData;
