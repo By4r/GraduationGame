@@ -33,6 +33,7 @@ namespace Runtime.Controllers.Player
 
         private void Update()
         {
+            Debug.DrawRay(playerEyes.transform.position, playerEyes.transform.TransformDirection(Vector3.forward) * range, Color.green);
             if (isInsideLight || isInsideSecRoom)
             {
                 IncreaseMentalHealth();
@@ -53,6 +54,7 @@ namespace Runtime.Controllers.Player
         public Ray GetRaycast()
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * range, Color.green);
+
             return new Ray(playerEyes.transform.position, playerEyes.transform.TransformDirection(Vector3.forward * range));
         }
         

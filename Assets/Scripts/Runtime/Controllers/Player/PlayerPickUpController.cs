@@ -17,11 +17,12 @@ namespace Runtime.Controllers.Player
         
         private Animator animator;
         private ParticleSystem particleSystem;
-        
-        private float wateringTime = 0f;
+
+        private bool ispickuped; 
+        private float wateringTime;
         private float maxWateringTime = 3f;
-        private bool isWatering = false;
-        private bool hasWatered = false;
+        private bool isWatering;
+        private bool hasWatered;
         private bool pickedUp; //oyuncunun elinde tool var ise elindekini bırakmadan yeni tool alamasın
 
         private bool inSweepArea;
@@ -30,6 +31,7 @@ namespace Runtime.Controllers.Player
         {
             particleSystem = GetComponentInChildren<ParticleSystem>();
             animator = GetComponentInChildren<Animator>();
+            particleSystem.Stop();
         }
         
         private void Update()
@@ -59,10 +61,12 @@ namespace Runtime.Controllers.Player
             Ray raycast = playerPhysicsController.GetRaycast();
             float range = playerPhysicsController.range;
             
+            
+            
             if (Physics.Raycast(raycast, out RaycastHit hit, range,layerMask) )
             {
                 Debug.LogWarning("Pickable Item");
-
+                TogglePickup();
 
                 hit.transform.SetParent(itemContainer);
                 hit.transform.localPosition = itemContainer.transform.localPosition;
@@ -83,7 +87,11 @@ namespace Runtime.Controllers.Player
 
             }
         }
+        public void TogglePickup()
+        {
+            ispickuped = !ispickuped;
 
+        }
         internal void SweepFloor()
         {
             if (inSweepArea)
