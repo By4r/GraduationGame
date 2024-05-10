@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using DG.Tweening;
 using Runtime.Signals;
+using Runtime.TaskStateSystem;
+using Runtime.TaskStateSystem.TaskStates;
 
 namespace Runtime.Controllers
 {
@@ -16,7 +18,7 @@ namespace Runtime.Controllers
             sleepImage = sleepPanel.GetComponent<Image>();
         }
 
-        internal void Sleep()
+        internal void Sleep(TaskStateManager stateManager)
         {
             sleepPanel.SetActive(true);
 
@@ -29,9 +31,13 @@ namespace Runtime.Controllers
                     DOVirtual.DelayedCall(1f, () =>
                     {
                         sleepImage.DOFade(0f, 1f)
-                            .SetEase(Ease.InOutQuad);
-                        
-                        TaskSignals.Instance.onSleepDone?.Invoke(true);
+                            .SetEase(Ease.InOutQuad)
+                            .OnComplete(() =>
+                            {
+                                Debug.Log("SLEEPING DONE!");
+
+                                stateManager.SetState(new CheckHouseState());
+                            });
                     });
                 });
         }

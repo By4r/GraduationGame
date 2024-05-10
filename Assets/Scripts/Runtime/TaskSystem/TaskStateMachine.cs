@@ -249,7 +249,7 @@ namespace Runtime.TaskSystem
                 {
                     if (Input.GetKeyDown(KeyCode.E))
                     {
-                        sleepController.Sleep();
+                        //sleepController.Sleep();
                     }
                 }
             }
@@ -289,10 +289,10 @@ namespace Runtime.TaskSystem
 
             Debug.LogWarning("PICK UP PHONE STATE");
 
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                SetState("CollectGarbage");
-            }
+            // if (Input.GetKeyDown(KeyCode.E))
+            // {
+            //     SetState("CollectGarbage");
+            // }
 
             if (Physics.Raycast(raycast, out RaycastHit hit, range))
             {
