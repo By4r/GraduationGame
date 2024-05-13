@@ -1,5 +1,6 @@
 ﻿using Runtime.Controllers;
 using Runtime.Controllers.Player;
+using Runtime.Signals;
 using UnityEngine;
 
 namespace Runtime.TaskStateSystem.TaskStates
@@ -33,6 +34,7 @@ namespace Runtime.TaskStateSystem.TaskStates
                         Debug.Log("Sleeping...");
                         
                         _sleepController.Sleep(stateManager);
+                        TimeSignals.Instance.onSetHours?.Invoke(18);
                         
                     }
                 }

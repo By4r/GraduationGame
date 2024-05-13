@@ -7,6 +7,6 @@ namespace Runtime.Signals
     public class TimeSignals : MonoSingleton<TimeSignals>
     {
         public UnityAction onTimeStarted = delegate {  };
-        public UnityAction onTimeEnded = delegate {  };
+        public UnityAction<int> onSetHours = delegate { };
     }
 }

@@ -37,6 +37,7 @@ namespace Runtime.TaskStateSystem
         {
             // Initialize the state machine with an initial state
             SetState(new CollectGarbageState());
+            
         }
 
         private void Update()

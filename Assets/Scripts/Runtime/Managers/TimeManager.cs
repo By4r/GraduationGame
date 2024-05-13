@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using Runtime.Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -23,7 +25,7 @@ namespace Runtime.Managers
         public int Minutes
         { get { return minutes; } set { minutes = value; OnMinutesChange(value); } }
  
-        [ShowInInspector] private int hours = 5;
+        [SerializeField] private int hours; // Default 5
  
         public int Hours
         { get { return hours; } set { hours = value; OnHoursChange(value); } }
@@ -34,14 +36,40 @@ namespace Runtime.Managers
         { get { return days; } set { days = value; } }
  
         private float tempSecond;
- 
+
+
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            TimeSignals.Instance.onSetHours += OnSetHours;
+        }
+
+        private void OnSetHours(int value)
+        {
+            Hours = value;
+        }
+
+        private void OnDisable()
+        {
+            UnSubscribeEvents();
+        }
+
+        private void UnSubscribeEvents()
+        {
+            TimeSignals.Instance.onSetHours -= OnSetHours;
+        }
+
         public void Update()
         {
             tempSecond += Time.deltaTime;
  
             if (tempSecond >= 1)
             {
-                Minutes += 1;
+                Minutes += 10; // Normally +1
                 tempSecond = 0;
             }
         }
@@ -62,7 +90,7 @@ namespace Runtime.Managers
                 Days++;
             }
         }
- 
+        
         private void OnHoursChange(int value)
         {
             if (value == 6)
@@ -109,5 +137,41 @@ namespace Runtime.Managers
                 yield return null;
             }
         }
+        
+        
+        
+        [Button("TIME 5 ")]
+        public void TimeFive()
+        {
+            //OnHoursChange(5);
+
+            Hours = 5;
+        }
+        
+
+        [Button("TIME 8 ")]
+        public void TimeEight()
+        {
+            //OnHoursChange(8);
+
+            Hours = 8;
+        }
+        
+        [Button("TIME 18 ")]
+        public void TimeEighteen()
+        {
+            //OnHoursChange(18);
+
+            Hours = 18;
+        }
+        
+        [Button("TIME 22 ")]
+        public void TimeTwentyTwo()
+        {
+            //OnHoursChange(22);
+            
+            Hours = 22;
+        }
+        
     }
 }
