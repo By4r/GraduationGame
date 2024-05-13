@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Runtime.Managers
@@ -22,7 +23,7 @@ namespace Runtime.Managers
         public int Minutes
         { get { return minutes; } set { minutes = value; OnMinutesChange(value); } }
  
-        private int hours = 1;
+        [ShowInInspector] private int hours = 5;
  
         public int Hours
         { get { return hours; } set { hours = value; OnHoursChange(value); } }
@@ -48,6 +49,8 @@ namespace Runtime.Managers
         private void OnMinutesChange(int value)
         {
             globalLight.transform.Rotate(Vector3.up, (1f / (1440f / 4f)) * 360f, Space.World);
+            //globalLight.transform.Rotate(Vector3.up, (1f / (1440f)) * 360f, Space.World);
+
             if (value >= 60)
             {
                 Hours++;
