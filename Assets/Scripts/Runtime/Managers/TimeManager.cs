@@ -22,7 +22,7 @@ namespace Runtime.Managers
         public int Minutes
         { get { return minutes; } set { minutes = value; OnMinutesChange(value); } }
  
-        private int hours = 5;
+        private int hours = 1;
  
         public int Hours
         { get { return hours; } set { hours = value; OnHoursChange(value); } }
