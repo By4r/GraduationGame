@@ -1,20 +1,22 @@
-﻿namespace Runtime.TaskStateSystem.TaskStates
+﻿using UnityEngine;
+
+namespace Runtime.TaskStateSystem.TaskStates
 {
     public class HeatHouseState : ITaskState
     {
         public void EnterState(TaskStateManager stateManager)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Entering HeatHouse State");
         }
 
         public void UpdateState(TaskStateManager stateManager)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("HeatHouse State");
         }
 
         public void ExitState(TaskStateManager stateManager)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Exiting HeatHouse State");
         }
     }
 }
