@@ -1,24 +1,26 @@
 {
-	"lines":
-	[
-		{
-			"key": "pickup_phone",
-			"line": [
-				"Hello. I am the one who hired you and the owner of this house.",
-				"My request from you is to take care of the house for a few days.",
-				"First, you can start by collecting the garbage outside, and in the evening,",
-				"visit the house and make sure that there is no one inside.",
-				"When I come back, if you haven't left, I will give you a large extra paycheck.",
-				"Also, if you see strange things in the evening, it's probably animals in the forest. take care."
-			]
-		},
-		{
-			"key": "speech2",
-			"line": ["222"]
-		},
-		{
-			"key": "speech3",
-			"line": ["333"]
-		}
-	]
+    "lines": [
+        {
+            "key": "pickup_phone",
+            "line": [
+                "Hello. I am the one who hired you and the owner of this house.",
+                "My request from you is to take care of the house for a few days.",
+                "First, you can start by collecting the garbage outside, and in the evening,",
+                "visit the house and make sure that there is no one inside.",
+                "When I come back, if you haven't left, I will give you a large extra paycheck.",
+                "Also, if you see strange things in the evening, it's probably animals in the forest. Take care."
+            ],
+            "duration": [4.0, 3.5, 4.0, 2.8, 4, 6.5]
+        },
+        {
+            "key": "speech2",
+            "line": ["222"],
+            "duration": [3.0]
+        },
+        {
+            "key": "speech3",
+            "line": ["333"],
+            "duration": [4.0]
+        }
+    ]
 }

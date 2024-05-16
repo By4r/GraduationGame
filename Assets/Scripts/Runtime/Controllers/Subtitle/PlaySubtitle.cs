@@ -32,16 +32,15 @@ namespace Runtime.Controllers
 
         private IEnumerator StartSubtitle()
         {
-            var sub = _subtitleManager.GetText(audioSource.clip.name);
+            var (sub, durations)  = _subtitleManager.GetTextWithDurations(audioSource.clip.name);
             var lineDuration = audioSource.clip.length / sub.Length;
 
-            foreach (var line in sub)
+            for (int i = 0; i < sub.Length; i++)
             {
-                _textController.SetText(line);
-                yield return new WaitForSeconds(lineDuration);
+                _textController.SetText(sub[i]);
+                yield return new WaitForSeconds(durations[i]);
             }
-            
-            Debug.Log(sub);
+
             _textController.ClearText();
 
         }
