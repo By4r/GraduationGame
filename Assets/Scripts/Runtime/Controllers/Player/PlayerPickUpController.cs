@@ -5,20 +5,19 @@ using UnityEngine;
 
 namespace Runtime.Controllers.Player
 {
-    public class PlayerPickUpController: MonoBehaviour
+    public class PlayerPickUpController : MonoBehaviour
     {
-        
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
         [SerializeField] LayerMask layerMask;
         private ItemPickUpController itemPickUpController;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Transform itemContainer;
-        
-        
+
+
         private Animator animator;
         private ParticleSystem particleSystem;
 
-        private bool ispickuped; 
+        private bool ispickuped;
         private float wateringTime;
         private float maxWateringTime = 3f;
         private bool isWatering;
@@ -26,44 +25,36 @@ namespace Runtime.Controllers.Player
         private bool pickedUp; //oyuncunun elinde tool var ise elindekini bırakmadan yeni tool alamasın
 
         private bool inSweepArea;
-        
+
         void Start()
         {
             particleSystem = GetComponentInChildren<ParticleSystem>();
             animator = GetComponentInChildren<Animator>();
             particleSystem.Stop();
         }
-        
+
         private void Update()
         {
-            
             if (Input.GetKeyDown(KeyCode.E))
             {
                 PlayerPickUp();
             }
+
             if (Input.GetMouseButtonDown(1))
             {
-                DropItem();
+                LeaveItem();
             }
             //PlayerWateringFlowers();
-            //PlayerSweepFloor();
-           
+            //SweepFloor();
         }
-        
-        private void DropItem()
-        {
-            transform.SetParent(null);
-            _rigidbody.useGravity = true;
-            _rigidbody.isKinematic = false;
-        }
+
         public void PlayerPickUp()
         {
             Ray raycast = playerPhysicsController.GetRaycast();
             float range = playerPhysicsController.range;
-            
-            
-            
-            if (Physics.Raycast(raycast, out RaycastHit hit, range,layerMask) )
+
+
+            if (Physics.Raycast(raycast, out RaycastHit hit, range, layerMask))
             {
                 Debug.LogWarning("Pickable Item");
                 TogglePickup();
@@ -73,10 +64,10 @@ namespace Runtime.Controllers.Player
                 hit.transform.localRotation = Quaternion.identity;
                 _rigidbody.useGravity = false;
                 _rigidbody.isKinematic = true;
-            
-                
+
+
                 itemPickUpController = hit.collider.GetComponent<ItemPickUpController>();
-                if(itemPickUpController != null)
+                if (itemPickUpController != null)
                 {
                     itemPickUpController.Pickup();
                 }
@@ -84,31 +75,35 @@ namespace Runtime.Controllers.Player
             else
             {
                 Debug.LogWarning("No Item");
-
             }
         }
+
+        private void LeaveItem()
+        {
+            transform.SetParent(null);
+            _rigidbody.useGravity = true;
+            _rigidbody.isKinematic = false;
+        }
+
         public void TogglePickup()
         {
             ispickuped = !ispickuped;
-
         }
+
         internal void SweepFloor()
         {
-            if (inSweepArea)
-            {
-                Debug.LogWarning("inSweepArea: " + inSweepArea);
-                if (Input.GetMouseButton(0))
-                {
-                    Debug.Log("Sweeping!");
-                    //animator.SetTrigger("sweepFloor");
-                }
-                else
-                {
-                    //animator.ResetTrigger("sweepFloor");
-                }
-                
-            }
+            // if (Input.GetMouseButtonDown(0))
+            // {
+            //     Debug.Log("Sweeping!");
+            //     animator.SetTrigger("sweepFloor");
+            // }
+            // else
+            // {
+            //     animator.ResetTrigger("sweepFloor");
+            // }
             
+            animator.SetTrigger("sweepFloor");
+
         }
 
         internal void InSweepArea(bool state)
@@ -121,9 +116,9 @@ namespace Runtime.Controllers.Player
             if (Input.GetMouseButtonDown(0))
             {
                 isWatering = true;
-                animator.SetTrigger("upCan"); 
+                animator.SetTrigger("upCan");
                 wateringTime = 0f;
-                hasWatered = false; 
+                hasWatered = false;
                 if (particleSystem != null)
                 {
                     particleSystem.Play();
@@ -137,7 +132,7 @@ namespace Runtime.Controllers.Player
                 if (wateringTime >= maxWateringTime && !hasWatered)
                 {
                     Debug.Log("Watering Done!");
-                    hasWatered = true; 
+                    hasWatered = true;
                 }
             }
 
@@ -149,11 +144,7 @@ namespace Runtime.Controllers.Player
                 {
                     particleSystem.Stop();
                 }
-                
             }
         }
-     
-
-       
     }
 }

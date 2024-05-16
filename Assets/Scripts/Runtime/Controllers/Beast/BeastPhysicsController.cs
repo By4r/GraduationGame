@@ -13,7 +13,7 @@ namespace Runtime.Controllers.Beast
         [SerializeField] private AudioClip jumpscareSound;
         [SerializeField] private AudioClip laughSound;
         
-        private void OnTriggerEnter(Collider other)
+        /*private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(_player))
             { 
@@ -36,6 +36,6 @@ namespace Runtime.Controllers.Beast
         private void ShowFailedPanel()
         {
             CoreGameSignals.Instance.onLevelFailed.Invoke();
-        }
+        }*/
     }
 }

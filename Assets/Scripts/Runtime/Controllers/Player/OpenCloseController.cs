@@ -45,11 +45,7 @@ namespace Runtime.Controllers.Player
                 }
             }
         }
-
-
-
-
-
+        
         private void ToggleInteractable(OpenClose interactableType)
         {
             switch (interactableType)

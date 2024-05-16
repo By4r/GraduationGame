@@ -16,8 +16,6 @@ namespace Runtime.Managers
 
         [ShowInInspector] private CameraController cameraController;
         
-       // [SerializeField] private CinemachineVirtualCamera virtualCamera;
-
         #endregion
 
         #region Private Variables

@@ -69,7 +69,7 @@ namespace Runtime.Managers
  
             if (tempSecond >= 1)
             {
-                Minutes += 10; // Normally +1
+                Minutes += 1; // Normally +1
                 tempSecond = 0;
             }
         }

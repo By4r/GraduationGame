@@ -22,10 +22,6 @@ namespace Runtime.Controllers.Player
         [SerializeField] private bool canRun;
         [SerializeField] public bool canMove =true;
         #endregion
-
-        #region Private Variables
-        
-        #endregion
         
         #region ShowInInspector Variables
         [ShowInInspector] private PlayerMovementData _data;

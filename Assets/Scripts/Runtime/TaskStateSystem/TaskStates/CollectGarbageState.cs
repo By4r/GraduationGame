@@ -7,21 +7,20 @@ namespace Runtime.TaskStateSystem.TaskStates
     {
         private int _currentGarbageAmount;
         private int _maxGarbageAmount;
+        private PlayerPhysicsController _playerPhysicsController;
 
         public void EnterState(TaskStateManager stateManager)
         {
             Debug.Log("Entering Collect Garbage State");
 
             _maxGarbageAmount = stateManager.GetWorkData().MaxGarbageAmount;
+            _playerPhysicsController = stateManager.GetPlayerPhysicsController();
         }
 
         public void UpdateState(TaskStateManager stateManager)
         {
-            PlayerPhysicsController playerPhysicsController = stateManager.GetPlayerPhysicsController();
-
-
-            Ray raycast = playerPhysicsController.GetRaycast();
-            float range = playerPhysicsController.range;
+            Ray raycast = _playerPhysicsController.GetRaycast();
+            float range = _playerPhysicsController.range;
 
             if (Physics.Raycast(raycast, out RaycastHit hit, range))
             {
@@ -38,7 +37,8 @@ namespace Runtime.TaskStateSystem.TaskStates
 
                         if (_currentGarbageAmount >= _maxGarbageAmount)
                         {
-                            stateManager.SetState(new GoSleepState());
+                            //stateManager.SetState(new GoSleepState());
+                            stateManager.SetState(new SweepFloorState());
                         }
                     }
                 }
