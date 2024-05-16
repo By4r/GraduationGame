@@ -105,7 +105,7 @@ namespace Runtime.Controllers.Task_Tab
                         {
                             // Play the assigned audio clip
                             //audioSource.PlayOneShot(audioClip);
-                            subtitleManager.StartSpeech();
+                            //subtitleManager.StartSpeech();
                             Invoke("FinishPhone", 24f);
                         }
                         else
