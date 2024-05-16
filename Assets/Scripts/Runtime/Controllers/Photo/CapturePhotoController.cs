@@ -51,7 +51,7 @@ public class CapturePhotoController : MonoBehaviour
 
         _playerManager = FindObjectOfType<PlayerManager>();
         _playerAnomalyReport = FindObjectOfType<PlayerAnomalyReportController>();
-        cameraFlash = _playerManager.light;
+        //cameraFlash = _playerManager.GetComponent<Light>();
         securityRoomController = FindObjectOfType<SecurityRoomController>();
         _playerPhysicsController = FindObjectOfType<PlayerPhysicsController>();
     }

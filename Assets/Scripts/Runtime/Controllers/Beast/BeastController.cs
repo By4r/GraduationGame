@@ -26,7 +26,7 @@ namespace Runtime.Controllers.Beast
         private bool isChasingPlayer;
         private bool hasPlayedBeastFollowSound;
 
-        private void Update()
+        /*private void Update()
         {
             RotateTowardsMovementDirection();
             if (ShouldChasePlayer())
@@ -104,7 +104,7 @@ namespace Runtime.Controllers.Beast
         internal void Jumpscare(GameObject jumpscarePrefab)
         {
             Instantiate(jumpscarePrefab, jumpscareHolder);
-        }
+        }*/
         
     }
 }

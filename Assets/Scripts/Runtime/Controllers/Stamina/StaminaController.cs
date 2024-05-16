@@ -16,12 +16,6 @@ namespace Runtime.Controllers.Stamina
         [SerializeField] private float sprintMultiplier;
         [SerializeField] public Image staminaImage;
         
-        [SerializeField] public float mentalStamina;
-        [SerializeField] private float maxMentalStamina;
-        [SerializeField] private float mentalMultiplier;
-
-        [SerializeField] private Image mentalHealthImage;
-        
         #endregion
         
         #endregion
@@ -48,31 +42,6 @@ namespace Runtime.Controllers.Stamina
             {
                 sprintStamina += sprintMultiplier * Time.deltaTime;
                 staminaImage.fillAmount = sprintStamina;
-            }
-        }
-
-        public void IncreaseMentalHealth()
-        {
-            if (mentalStamina <= maxMentalStamina)
-            {
-                mentalStamina += mentalMultiplier * Time.deltaTime;
-                //Debug.Log(mentalStamina+"IncreaseMentalHealth");
-                Color mentalAlpha = mentalHealthImage.color;
-                mentalAlpha.a = 0.2f - mentalStamina;
-                mentalHealthImage.color = mentalAlpha;
-            }
-        }
-        
-        public void DecreaseMentalHealth()
-        {
-            if (mentalStamina >= 0)
-            {
-                mentalStamina -= mentalMultiplier * Time.deltaTime;
-                //Debug.Log(mentalStamina+"DecreaseMentalHealth");
-                
-                Color mentalAlpha = mentalHealthImage.color;
-                mentalAlpha.a = 0.2f - mentalStamina;
-                mentalHealthImage.color = mentalAlpha;
             }
         }
         
