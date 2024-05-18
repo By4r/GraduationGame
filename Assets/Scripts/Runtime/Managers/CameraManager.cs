@@ -85,13 +85,15 @@ namespace Runtime.Managers
 
         private void OnHideCursor()
         {
-            Debug.LogWarning("HIDE WORKED !");
-            cameraController.RemoveMouseCursor();
+            Debug.Log("Hiding cursor...");
+            //cameraController.LockMouseCursor();
         }
 
         private void OnEnableCursor()
         {
-            cameraController.EnableMouseCursor();
+            Debug.Log("Enabling cursor...");
+            //cameraController.UnlockMouseCursor();
         }
+
     }
 }

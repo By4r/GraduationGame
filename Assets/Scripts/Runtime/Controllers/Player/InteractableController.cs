@@ -5,7 +5,7 @@ using Runtime.Enums;
 
 namespace Runtime.Controllers.Player
 {
-    public class OpenCloseController : MonoBehaviour
+    public class InteractableController  : MonoBehaviour
     {
 
         [SerializeField] private List<Animator> _animators;

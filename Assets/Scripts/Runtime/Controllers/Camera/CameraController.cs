@@ -37,8 +37,8 @@ namespace Runtime.Controllers.Camera
 
         private void Start()
         {
-            RemoveMouseCursor(); //Set Active !!!
-            //vectorOffset = transform.position - flashlight.transform.position;
+            LockMouseCursor(); //Set Active !!!
+
         }
 
         private void LateUpdate()
@@ -47,23 +47,19 @@ namespace Runtime.Controllers.Camera
             {
                 UpdateMouseAxis();
             }
-
-            // transform.position = flashlight.transform.position + vectorOffset;
-            // transform.rotation =
-            //     Quaternion.Slerp(transform.rotation, flashlight.transform.rotation, speed * Time.deltaTime);
-
-
+           
         }
 
-        internal void RemoveMouseCursor()
+        internal void LockMouseCursor()
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            mouseState = true;
+            
+           // Cursor.lockState = CursorLockMode.Locked;
+           // mouseState = true;
         }
 
         
-        [Button ("EnableMouse Cursor")]
-        internal void EnableMouseCursor()
+        [Button ("UnlockMouseCursor")]
+        public void UnlockMouseCursor()
         {
             Cursor.lockState = CursorLockMode.Confined;
             mouseState = false;
