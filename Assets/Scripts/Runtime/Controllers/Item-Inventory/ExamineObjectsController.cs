@@ -26,7 +26,7 @@ namespace Runtime.Controllers.Item
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (Input.GetKeyDown(KeyCode.E))
         {
 
             Ray raycast = playerPhysicsController.GetRaycast();
@@ -48,7 +48,7 @@ namespace Runtime.Controllers.Item
                         }
                         else
                         {
-                            
+                            StopExamination();
                         }
                     }
                 }
@@ -57,7 +57,7 @@ namespace Runtime.Controllers.Item
         if (!isExamining)
         {
             NonExamine();
-            StopExamination();
+            
         }
         else
         {
@@ -79,6 +79,7 @@ namespace Runtime.Controllers.Item
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         _playerMovementController.canMove = false;
+        Debug.Log("ee panel opened");
     }
     
     void StopExamination()
@@ -87,6 +88,7 @@ namespace Runtime.Controllers.Item
         Cursor.lockState = CursorLockMode.Locked;
        Cursor.visible = false;
        _playerMovementController.canMove = true;
+       Debug.Log("ee panel close");
     }
     
     void Examine()

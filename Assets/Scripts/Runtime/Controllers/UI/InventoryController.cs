@@ -7,7 +7,7 @@ namespace Runtime.Controllers.UI
     public class InventoryController : MonoBehaviour
     {
         [SerializeField] private bool _isInventoryPanelOpen;
-        [SerializeField] private GameObject inventoryPanel;
+        [SerializeField] private GameObject[] inventoryPanel;
         [SerializeField] private CameraController _cameraController;
         [SerializeField] private PlayerMovementController _playerMovementController;
         
@@ -16,16 +16,20 @@ namespace Runtime.Controllers.UI
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 InventoryToggle();
-               
+                if (_isInventoryPanelOpen)
+                {
+                    OpenInventoryPanel();
+                }
+                else
+                {
+                    CloseAllPanels();
+                }
             }
-            if (_isInventoryPanelOpen)
-            {
-                OpenInventoryPanel();
-            }
-            else
-            {
-                CloseInventoryPanel();
-            }
+
+            // if (Input.GetKeyDown(KeyCode.Escape))
+            // {
+            //     CloseAllPanels();
+            // }
         }
 
         private void InventoryToggle()
@@ -35,7 +39,7 @@ namespace Runtime.Controllers.UI
 
         private void OpenInventoryPanel()
         {
-            inventoryPanel.SetActive(true);
+            inventoryPanel[0].SetActive(true);
             _cameraController.mouseState = false;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -45,12 +49,38 @@ namespace Runtime.Controllers.UI
 
         private void CloseInventoryPanel()
         {
-            inventoryPanel.SetActive(false);
+            inventoryPanel[0].SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             _playerMovementController.canMove = true;
             _cameraController.mouseState = true;
             Debug.Log("Inventory panel closed");
+        }
+
+        public void LetterPanel1()
+        {
+            inventoryPanel[1].SetActive(true);
+        }
+        public void LetterPanel2()
+        {
+            inventoryPanel[2].SetActive(true);
+        }
+        public void LetterPanel3()
+        {
+            inventoryPanel[3].SetActive(true);
+        }
+        private void CloseAllPanels()
+        {
+            foreach (var panel in inventoryPanel)
+            {
+                panel.SetActive(false);
+            }
+            _isInventoryPanelOpen = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            _playerMovementController.canMove = true;
+            _cameraController.mouseState = true;
+            Debug.Log("All panels closed");
         }
     }
 }
