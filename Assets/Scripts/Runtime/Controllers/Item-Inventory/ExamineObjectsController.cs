@@ -39,18 +39,17 @@ namespace Runtime.Controllers.Item
                     {
                         ToggleExamination();
                         // Store the currently examined object and its original position and rotation
-                    if (isExamining)
+                        if (isExamining)
                         {
                         
                             examinedObject = hit.transform;
                             originalPositions[examinedObject] = examinedObject.position;
                             originalRotations[examinedObject] = examinedObject.rotation;
                         }
-                    }
-
-                    if (hit.collider.CompareTag("Window"))
-                    {
-                        
+                        else
+                        {
+                            StopExamination();
+                        }
                     }
                 }
         }
@@ -58,12 +57,8 @@ namespace Runtime.Controllers.Item
             {
                 Examine(); 
                 StartExamination();
-            }
-            else
-            {
-                NonExamine(); 
-                StopExamination();
-            }
+            }else NonExamine(); 
+            
     }
 
     private void ToggleExamination()
@@ -74,8 +69,8 @@ namespace Runtime.Controllers.Item
     
     void StartExamination()
     {
-        _cameraController.mouseState = false;
         lastMousePosition = Input.mousePosition;
+        _cameraController.mouseState = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         _playerMovementController.canMove = false;

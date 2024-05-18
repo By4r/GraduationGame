@@ -33,7 +33,7 @@ namespace Runtime.Controllers
         private IEnumerator StartSubtitle()
         {
             var (sub, durations)  = _subtitleManager.GetTextWithDurations(audioSource.clip.name);
-            var lineDuration = audioSource.clip.length / sub.Length;
+            
 
             for (int i = 0; i < sub.Length; i++)
             {

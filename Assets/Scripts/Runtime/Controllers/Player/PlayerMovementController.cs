@@ -43,12 +43,8 @@ namespace Runtime.Controllers.Player
 
         private void Start()
         {
-            if (CompareTag("MainCamera"))
-            {
-                playerCamera = FindObjectOfType<UnityEngine.Camera>();
-            }
             characterController = GetComponent<CharacterController>();
-            _staminaController = FindObjectOfType<StaminaController>();
+            //_staminaController = FindObjectOfType<StaminaController>();
         }
         
         private void FixedUpdate()
@@ -87,7 +83,7 @@ namespace Runtime.Controllers.Player
             var shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
             var w = Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow);
             
-
+        
             if (shift && w && canRun )
             {
                 SprintPlayer();
@@ -107,6 +103,7 @@ namespace Runtime.Controllers.Player
             }
 
         }
+
         public void StopPlayer()
         {
             canMove=false;

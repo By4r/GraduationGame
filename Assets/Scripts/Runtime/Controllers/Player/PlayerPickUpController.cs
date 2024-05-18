@@ -9,7 +9,6 @@ namespace Runtime.Controllers.Player
     {
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
         [SerializeField] LayerMask layerMask;
-        private ItemPickUpController itemPickUpController;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Transform itemContainer;
 
@@ -64,13 +63,7 @@ namespace Runtime.Controllers.Player
                 hit.transform.localRotation = Quaternion.identity;
                 _rigidbody.useGravity = false;
                 _rigidbody.isKinematic = true;
-
-
-                itemPickUpController = hit.collider.GetComponent<ItemPickUpController>();
-                if (itemPickUpController != null)
-                {
-                    itemPickUpController.Pickup();
-                }
+                
             }
             else
             {
@@ -80,9 +73,12 @@ namespace Runtime.Controllers.Player
 
         private void LeaveItem()
         {
-            transform.SetParent(null);
-            _rigidbody.useGravity = true;
-            _rigidbody.isKinematic = false;
+            if (transform.parent == itemContainer)
+            {
+                transform.SetParent(null);
+                _rigidbody.useGravity = true;
+                _rigidbody.isKinematic = false;
+            }
         }
 
         public void TogglePickup()
