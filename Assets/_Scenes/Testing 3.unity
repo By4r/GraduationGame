@@ -4256,10 +4256,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPhysicsController: {fileID: 6589124152756893269}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  _rigidbody: {fileID: 573116632474494948}
   itemContainer: {fileID: 8683678815642692300}
 --- !u!1001 &1070868358
 PrefabInstance:
@@ -5331,10 +5327,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPhysicsController: {fileID: 6589124152756893269}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  _rigidbody: {fileID: 573116632474494948}
   itemContainer: {fileID: 8683678815642692300}
 --- !u!54 &1472368656
 Rigidbody:
@@ -33761,16 +33753,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3890708083386097732}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f17850e495e4f5492178d5a308e98de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerPhysicsController: {fileID: 6589124152756893269}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  _rigidbody: {fileID: 2727723627471651995}
   itemContainer: {fileID: 8683678815642692300}
 --- !u!54 &2727723627471651995
 Rigidbody:
@@ -49658,9 +49646,10 @@ GameObject:
   - component: {fileID: 2727723627471651994}
   - component: {fileID: 2727723627471651995}
   - component: {fileID: 3890708083386097733}
+  - component: {fileID: 3890708083386097735}
   m_Layer: 7
   m_Name: Broom
-  m_TagString: Selectable
+  m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49679,6 +49668,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 9029704559779112535}
   _particle: {fileID: 1280714011722988516}
+--- !u!65 &3890708083386097735
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3890708083386097732}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &3891629273458474732
 Transform:
   m_ObjectHideFlags: 0
@@ -61153,6 +61155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7144581650545671832}
   - component: {fileID: 6589124152756893269}
+  - component: {fileID: 7144581650545671833}
   - component: {fileID: 573116632474494948}
   - component: {fileID: 5089960703868212529}
   m_Layer: 0
@@ -71812,7 +71815,7 @@ GameObject:
   - component: {fileID: 7706663736341723187}
   m_Layer: 3
   m_Name: Trash_apt
-  m_TagString: Selectable
+  m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78423,6 +78426,20 @@ Transform:
   m_Father: {fileID: 5605165927301384796}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7144581650545671833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5580086908584920659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f17850e495e4f5492178d5a308e98de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPhysicsController: {fileID: 6589124152756893269}
+  itemContainer: {fileID: 8683678815642692300}
 --- !u!4 &7151584676578088131
 Transform:
   m_ObjectHideFlags: 0
@@ -82144,16 +82161,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6953984118588379164}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f17850e495e4f5492178d5a308e98de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerPhysicsController: {fileID: 6589124152756893269}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  _rigidbody: {fileID: 7706663736341723187}
   itemContainer: {fileID: 8683678815642692300}
 --- !u!65 &7706663736341723186
 BoxCollider:
@@ -97115,7 +97128,7 @@ GameObject:
   - component: {fileID: 9029704559779112535}
   m_Layer: 7
   m_Name: Object_2
-  m_TagString: Selectable
+  m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

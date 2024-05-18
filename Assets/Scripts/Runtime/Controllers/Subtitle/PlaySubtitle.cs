@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Runtime.Controllers
+namespace Runtime.Controllers.Subtitle
 {
     public class PlaySubtitle : MonoBehaviour
     {
@@ -21,7 +21,12 @@ namespace Runtime.Controllers
 
         private IEnumerator StartSubtitle(AudioSource audioSource)
         {
+<<<<<<< HEAD
             var (sub, durations)  = _subtitleManager.GetTextWithDurations(audioSource.clip.name);
+=======
+            var (sub, durations) = _subtitleManager.GetTextWithDurations(audioSource.clip.name);
+            var lineDuration = audioSource.clip.length / sub.Length;
+>>>>>>> 3a1d574d7b95b317706b0067fd2f8e1cc3213eae
 
             for (int i = 0; i < sub.Length; i++)
             {

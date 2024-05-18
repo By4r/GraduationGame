@@ -81,7 +81,7 @@ namespace Runtime.TaskSystem
             stateActions["CheckOffice"] = CheckOffice;
 
             stateActions["Attic"] = Attic;
-            
+
             stateActions["GoCar"] = GoCar;
 
             stateActions["HeatHouse"] = HeatHouse;
@@ -111,8 +111,6 @@ namespace Runtime.TaskSystem
             if (_currentState == "SweepFloor" && other.CompareTag("SweepArea"))
             {
                 Debug.Log("SWEEP AREA ENTER");
-
-                _playerPickUpController.InSweepArea(true);
             }
 
             if (_currentState == "CheckHouse" && other.CompareTag("ParanormalEnter"))
@@ -133,7 +131,6 @@ namespace Runtime.TaskSystem
             {
                 Debug.Log("CAR TAG");
                 Debug.Log("YOU SHOULD FULL THE TANK ");
-                
             }
         }
 
@@ -143,7 +140,7 @@ namespace Runtime.TaskSystem
             {
                 Debug.Log("SWEEP AREA EXIT");
 
-                _playerPickUpController.InSweepArea(false);
+                //_playerPickUpController.InSweepArea(false);
             }
         }
 
@@ -160,7 +157,7 @@ namespace Runtime.TaskSystem
         private void GoCar()
         {
             Debug.Log("GO CAR STATE!");
-            
+
             Ray raycast = playerPhysicsController.GetRaycast();
             float range = playerPhysicsController.range;
 
@@ -174,7 +171,6 @@ namespace Runtime.TaskSystem
                     }
                 }
             }
-            
         }
 
         private void CheckOffice()
@@ -190,7 +186,7 @@ namespace Runtime.TaskSystem
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
-                       checkOfficeManager.KeyReceived();
+                        checkOfficeManager.KeyReceived();
                     }
                 }
             }
@@ -215,7 +211,7 @@ namespace Runtime.TaskSystem
             {
                 if (hit.collider.CompareTag("Flower"))
                 {
-                    _playerPickUpController.WaterFlowers();
+                    //_playerPickUpController.WaterFlowers();
                 }
             }
         }
@@ -231,7 +227,7 @@ namespace Runtime.TaskSystem
             {
                 if (hit.collider.CompareTag("SweepArea"))
                 {
-                    _playerPickUpController.SweepFloor();
+                    //_playerPickUpController.SweepFloor();
                 }
             }
         }

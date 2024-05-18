@@ -1,6 +1,7 @@
 ﻿using System;
 using Runtime.Controllers;
 using Runtime.Controllers.Player;
+using Runtime.Controllers.Subtitle;
 using Runtime.Data.UnityObjects;
 using Runtime.Data.ValueObjects;
 using Runtime.Managers;
@@ -38,9 +39,7 @@ namespace Runtime.TaskStateSystem
         {
             // Initialize the state machine with an initial state
             SetState(new PickUpPhoneState());
-            //SetState(new CollectGarbageState());
             //SetState(new SweepFloorState());
-            
         }
 
         private void Update()
