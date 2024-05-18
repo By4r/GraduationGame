@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1151422550}
-  m_IndirectSpecularColor: {r: 0.17705244, g: 0.29134724, b: 0.4046244, a: 1}
+  m_IndirectSpecularColor: {r: 0.5490521, g: 0.795813, b: 0.97286266, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -95098,6 +95098,7 @@ MonoBehaviour:
   checkOfficeManager: {fileID: 1917474296}
   letterManager: {fileID: 538497702}
   goCarManager: {fileID: 425976933}
+  playSubtitle: {fileID: 1772296204}
 --- !u!114 &8683678815911376178
 MonoBehaviour:
   m_ObjectHideFlags: 0

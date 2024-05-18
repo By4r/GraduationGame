@@ -25,8 +25,8 @@ namespace Runtime.Controllers.Item
 
     void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.E))
+
+        if (Input.GetKeyDown(KeyCode.Y))
         {
 
             Ray raycast = playerPhysicsController.GetRaycast();
@@ -48,17 +48,22 @@ namespace Runtime.Controllers.Item
                         }
                         else
                         {
-                            StopExamination();
+                            
                         }
                     }
                 }
         }
-        if (isExamining)
-            {
-                Examine(); 
-                StartExamination();
-            }else NonExamine(); 
-            
+
+        if (!isExamining)
+        {
+            NonExamine();
+            StopExamination();
+        }
+        else
+        {
+            Examine();
+            StartExamination();
+        }
     }
 
     private void ToggleExamination()
