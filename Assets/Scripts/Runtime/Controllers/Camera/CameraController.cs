@@ -52,9 +52,8 @@ namespace Runtime.Controllers.Camera
 
         internal void LockMouseCursor()
         {
-            
-           // Cursor.lockState = CursorLockMode.Locked;
-           // mouseState = true;
+           Cursor.lockState = CursorLockMode.Locked;
+           mouseState = true;
         }
 
         
