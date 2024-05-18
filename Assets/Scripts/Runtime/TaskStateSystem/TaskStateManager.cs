@@ -25,6 +25,7 @@ namespace Runtime.TaskStateSystem
         [SerializeField] private CheckOfficeManager checkOfficeManager;
         [SerializeField] private LetterManager letterManager;
         [SerializeField] private GoCarManager goCarManager;
+        [SerializeField] private PlaySubtitle playSubtitle;
 
         [ShowInInspector] private WorkData _workData;
 
@@ -36,8 +37,9 @@ namespace Runtime.TaskStateSystem
         private void Start()
         {
             // Initialize the state machine with an initial state
+            SetState(new PickUpPhoneState());
             //SetState(new CollectGarbageState());
-            SetState(new SweepFloorState());
+            //SetState(new SweepFloorState());
             
         }
 
@@ -69,6 +71,8 @@ namespace Runtime.TaskStateSystem
         public LetterManager GetLetterManager() => letterManager;
         public GoCarManager GetGoCarManager() => goCarManager;
         public WorkData GetWorkData() => _workData;
+
+        public PlaySubtitle GetPlaySubtitle() => playSubtitle;
 
 
         private WorkData GetData()

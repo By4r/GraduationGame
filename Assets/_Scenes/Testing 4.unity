@@ -6513,7 +6513,6 @@ GameObject:
   - component: {fileID: 1890635907}
   - component: {fileID: 1890635909}
   - component: {fileID: 1890635908}
-  - component: {fileID: 1890635910}
   m_Layer: 5
   m_Name: SpeechText
   m_TagString: Untagged
@@ -6638,19 +6637,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890635906}
   m_CullTransparentMesh: 1
---- !u!114 &1890635910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1890635906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94fbce984d214b8da0630274b33a895d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textBox: {fileID: 1890635908}
 --- !u!1001 &1893719130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61405,7 +61391,6 @@ GameObject:
   - component: {fileID: 8683678815911376177}
   - component: {fileID: 8683678815911376178}
   - component: {fileID: 8683678815911376179}
-  - component: {fileID: 8683678815911376180}
   m_Layer: 0
   m_Name: PlayerManager (Main)
   m_TagString: Untagged
@@ -67265,8 +67250,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7e7ce095d262d0d428dfb576565884a2, type: 3}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -94444,7 +94429,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e37edbc659482f882afb8a194fcc51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceFolder: subtitles
+  subtitleText: {fileID: 5793354940878826300}
+  speechAudioClip: {fileID: 8300000, guid: 7e7ce095d262d0d428dfb576565884a2, type: 3}
+  speechTextFile: {fileID: 4900000, guid: af4afb49c7bd33a4ea4489d99fa0bd86, type: 3}
+  subtitles:
+  - text: 'Hello. I am the one who hired you and the owner of this house. My request
+      from you is to take care of the house for a few days. '
+    startTime: 0
+    endTime: 7
+  - text: 'Hello. I am the one who hired you and the owner of this house. My request
+      from you is to take care of the house for a few days. '
+    startTime: 0
+    endTime: 7
+  - text: First, you can start by collecting the garbage outside, and in the evening,
+      visit the house and make sure that there is no one inside.
+    startTime: 8
+    endTime: 14
+  - text: When I come back, if you haven't left, I will give you a large extra paycheck.
+    startTime: 14
+    endTime: 18
+  - text: Also, if you see strange things in the evening, it's probably animals in
+      the forest. Take care!
+    startTime: 18
+    endTime: 24
+  audioSource: {fileID: 6299730605104208447}
 --- !u!114 &8683678815911376175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94479,7 +94487,6 @@ MonoBehaviour:
   checkOfficeManager: {fileID: 1917474296}
   letterManager: {fileID: 538497702}
   goCarManager: {fileID: 425976933}
-  playSubtitle: {fileID: 8683678815911376180}
 --- !u!114 &8683678815911376178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94513,20 +94520,6 @@ MonoBehaviour:
   - {fileID: 413277867}
   - {fileID: 468094839}
   playerPhysicsController: {fileID: 6589124152756893269}
---- !u!114 &8683678815911376180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5605165927301384794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 117945b69dba4a0a9dc06b29818c204e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _subtitleManager: {fileID: 8683678815911376169}
-  _textController: {fileID: 1890635910}
 --- !u!1 &8683905808264192776
 GameObject:
   m_ObjectHideFlags: 0
