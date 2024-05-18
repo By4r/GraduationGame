@@ -5,18 +5,9 @@ namespace Runtime.Controllers.Player
     public class PlayerPickUpController : MonoBehaviour
     {
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
-<<<<<<< HEAD
-=======
-        [SerializeField] LayerMask layerMask;
-        [SerializeField] private Rigidbody _rigidbody;
->>>>>>> origin/main
         [SerializeField] private Transform itemContainer;
 
-
         private Transform _currentPickedItem;
-
-        private Animator animator;
-        private ParticleSystem particleSystem;
 
         private bool ispickuped;
 
@@ -55,42 +46,17 @@ namespace Runtime.Controllers.Player
             hitInfo.rigidbody.isKinematic = true;
 
             _currentPickedItem = hitInfo.transform;
-
-<<<<<<< HEAD
+            
             _currentPickedItem.SetParent(itemContainer);
             _currentPickedItem.localPosition = itemContainer.transform.localPosition;
             _currentPickedItem.localRotation = Quaternion.identity;
-=======
-                hit.transform.SetParent(itemContainer);
-                hit.transform.localPosition = itemContainer.transform.localPosition;
-                hit.transform.localRotation = Quaternion.identity;
-                _rigidbody.useGravity = false;
-                _rigidbody.isKinematic = true;
-                
-            }
-            else
-            {
-                Debug.LogWarning("No Item");
-            }
->>>>>>> origin/main
         }
-
-
+        
         private void LeaveItem()
         {
-<<<<<<< HEAD
             if (_currentPickedItem != null)
             {
                 _currentPickedItem.SetParent(null);
-=======
-            if (transform.parent == itemContainer)
-            {
-                transform.SetParent(null);
-                _rigidbody.useGravity = true;
-                _rigidbody.isKinematic = false;
-            }
-        }
->>>>>>> origin/main
 
                 Rigidbody rb = _currentPickedItem.GetComponent<Rigidbody>();
                 if (rb != null)
