@@ -1,39 +1,33 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Runtime.Controllers
 {
-    public class PlaySubtitle:MonoBehaviour
+    public class PlaySubtitle : MonoBehaviour
     {
-        private AudioSource audioSource;
         [SerializeField] private SubtitleManager _subtitleManager;
         [SerializeField] private TextController _textController;
 
-        private void Awake()
+
+        private void Start()
         {
-            audioSource = GetComponent<AudioSource>();
             _textController.ClearText();
         }
 
-        private void OnTriggerEnter(Collider other)
+        internal void PlaySpeech(AudioSource audioSource)
         {
-            if (other.CompareTag("Player"))
-            {
-               
-                
-                audioSource.Play();
-                Debug.Log("Text Key: " + audioSource.clip.name);
-
-                StartCoroutine(StartSubtitle());
-            }
+            StartCoroutine(StartSubtitle(audioSource));
         }
 
-        private IEnumerator StartSubtitle()
+        private IEnumerator StartSubtitle(AudioSource audioSource)
         {
+<<<<<<< HEAD
             var (sub, durations)  = _subtitleManager.GetTextWithDurations(audioSource.clip.name);
             
+=======
+            var (sub, durations) = _subtitleManager.GetTextWithDurations(audioSource.clip.name);
+            var lineDuration = audioSource.clip.length / sub.Length;
+>>>>>>> 28365731b4383292618be3fe59e77be0725dce7f
 
             for (int i = 0; i < sub.Length; i++)
             {
@@ -42,7 +36,6 @@ namespace Runtime.Controllers
             }
 
             _textController.ClearText();
-
         }
     }
 }
