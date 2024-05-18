@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Runtime.Controllers
+namespace Runtime.Controllers.Subtitle
 {
     public class PlaySubtitle : MonoBehaviour
     {

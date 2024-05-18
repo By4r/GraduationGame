@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Runtime.Controllers;
 using Runtime.Controllers.Player;
+using Runtime.Controllers.Subtitle;
 using Runtime.Managers;
 using UnityEngine;
 

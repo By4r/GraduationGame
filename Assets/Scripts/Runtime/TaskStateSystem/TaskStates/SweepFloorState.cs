@@ -1,4 +1,5 @@
-﻿using Runtime.Controllers.Player;
+﻿using Runtime.Controllers;
+using Runtime.Controllers.Player;
 using UnityEditor.Build.Content;
 using UnityEngine;
 
@@ -9,14 +10,14 @@ namespace Runtime.TaskStateSystem.TaskStates
         private int _currentSweepAmount;
         private int _maxSweepAmount;
         private PlayerPhysicsController _playerPhysicsController;
-        private PlayerPickUpController _playerPickUpController;
+        private BroomController _broomController;
         
         public void EnterState(TaskStateManager stateManager)
         {
             Debug.Log("Entering SweepFloor State");
             _maxSweepAmount = stateManager.GetWorkData().MaxSweepAmount;
             _playerPhysicsController = stateManager.GetPlayerPhysicsController();
-            _playerPickUpController = stateManager.GetPlayerPickUpController();
+            _broomController = Object.FindObjectOfType<BroomController>();
         }
 
         public void UpdateState(TaskStateManager stateManager)
@@ -36,10 +37,13 @@ namespace Runtime.TaskStateSystem.TaskStates
                     {
                         
                         Debug.Log("SWEEP AREA!");
-                        _playerPickUpController.SweepFloor();
+                        //_playerPickUpController.SweepFloor();
+                        
+                        _broomController.SweepFloor();
                         
                         hit.collider.gameObject.SetActive(false);
                         _currentSweepAmount++;
+                        
                         Debug.Log("Swept away waste");
 
                         if (_currentSweepAmount >= _maxSweepAmount)
@@ -49,7 +53,6 @@ namespace Runtime.TaskStateSystem.TaskStates
                     }
                 }
             }
-            
             
         }
 

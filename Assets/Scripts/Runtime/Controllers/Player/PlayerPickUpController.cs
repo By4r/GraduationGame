@@ -1,150 +1,84 @@
-﻿using System;
-using Runtime.Controllers.Item;
-using Runtime.Managers;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Runtime.Controllers.Player
 {
     public class PlayerPickUpController : MonoBehaviour
     {
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
-        [SerializeField] LayerMask layerMask;
-        private ItemPickUpController itemPickUpController;
-        [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Transform itemContainer;
 
+
+        private Transform _currentPickedItem;
 
         private Animator animator;
         private ParticleSystem particleSystem;
 
         private bool ispickuped;
-        private float wateringTime;
-        private float maxWateringTime = 3f;
-        private bool isWatering;
-        private bool hasWatered;
-        private bool pickedUp; //oyuncunun elinde tool var ise elindekini bırakmadan yeni tool alamasın
-
-        private bool inSweepArea;
-
-        void Start()
-        {
-            particleSystem = GetComponentInChildren<ParticleSystem>();
-            animator = GetComponentInChildren<Animator>();
-            particleSystem.Stop();
-        }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            Ray raycast = playerPhysicsController.GetRaycast();
+            float range = playerPhysicsController.range;
+
+
+            if (Physics.Raycast(raycast, out RaycastHit hit, range))
             {
-                PlayerPickUp();
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    if (hit.collider.CompareTag("Pickable"))
+                    {
+                        PlayerPickUp(hit);
+                    }
+                    else
+                    {
+                        Debug.Log("No Item");
+                    }
+                }
             }
 
             if (Input.GetMouseButtonDown(1))
             {
                 LeaveItem();
             }
-            //PlayerWateringFlowers();
-            //SweepFloor();
         }
 
-        public void PlayerPickUp()
+        private void PlayerPickUp(RaycastHit hitInfo)
         {
-            Ray raycast = playerPhysicsController.GetRaycast();
-            float range = playerPhysicsController.range;
+            ToggleItemPick();
 
+            hitInfo.rigidbody.useGravity = false;
+            hitInfo.rigidbody.isKinematic = true;
 
-            if (Physics.Raycast(raycast, out RaycastHit hit, range, layerMask))
-            {
-                Debug.LogWarning("Pickable Item");
-                TogglePickup();
+            _currentPickedItem = hitInfo.transform;
 
-                hit.transform.SetParent(itemContainer);
-                hit.transform.localPosition = itemContainer.transform.localPosition;
-                hit.transform.localRotation = Quaternion.identity;
-                _rigidbody.useGravity = false;
-                _rigidbody.isKinematic = true;
-
-
-                itemPickUpController = hit.collider.GetComponent<ItemPickUpController>();
-                if (itemPickUpController != null)
-                {
-                    itemPickUpController.Pickup();
-                }
-            }
-            else
-            {
-                Debug.LogWarning("No Item");
-            }
+            _currentPickedItem.SetParent(itemContainer);
+            _currentPickedItem.localPosition = itemContainer.transform.localPosition;
+            _currentPickedItem.localRotation = Quaternion.identity;
         }
+
 
         private void LeaveItem()
         {
-            transform.SetParent(null);
-            _rigidbody.useGravity = true;
-            _rigidbody.isKinematic = false;
-        }
+            if (_currentPickedItem != null)
+            {
+                _currentPickedItem.SetParent(null);
 
-        public void TogglePickup()
+                Rigidbody rb = _currentPickedItem.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.useGravity = true;
+                    rb.isKinematic = false;
+                }
+
+                _currentPickedItem = null;
+                ToggleItemPick();
+            }
+        }
+        
+        private void ToggleItemPick()
         {
             ispickuped = !ispickuped;
         }
-
-        internal void SweepFloor()
-        {
-            // if (Input.GetMouseButtonDown(0))
-            // {
-            //     Debug.Log("Sweeping!");
-            //     animator.SetTrigger("sweepFloor");
-            // }
-            // else
-            // {
-            //     animator.ResetTrigger("sweepFloor");
-            // }
-            
-            animator.SetTrigger("sweepFloor");
-
-        }
-
-        internal void InSweepArea(bool state)
-        {
-            inSweepArea = state;
-        }
-
-        internal void WaterFlowers()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                isWatering = true;
-                animator.SetTrigger("upCan");
-                wateringTime = 0f;
-                hasWatered = false;
-                if (particleSystem != null)
-                {
-                    particleSystem.Play();
-                }
-                else return;
-            }
-
-            if (isWatering)
-            {
-                wateringTime += Time.deltaTime;
-                if (wateringTime >= maxWateringTime && !hasWatered)
-                {
-                    Debug.Log("Watering Done!");
-                    hasWatered = true;
-                }
-            }
-
-            if (Input.GetMouseButtonUp(0))
-            {
-                animator.SetTrigger("downCan");
-                isWatering = false;
-                if (particleSystem != null)
-                {
-                    particleSystem.Stop();
-                }
-            }
-        }
+        
     }
 }
