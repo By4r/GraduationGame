@@ -1,5 +1,6 @@
 ﻿using Runtime.Controllers;
 using Runtime.Controllers.Player;
+using Runtime.Controllers.UI;
 using UnityEngine;
 
 namespace Runtime.TaskStateSystem.TaskStates
@@ -10,6 +11,7 @@ namespace Runtime.TaskStateSystem.TaskStates
         private int _maxSweepAmount;
         private PlayerPhysicsController _playerPhysicsController;
         private BroomController _broomController;
+        private ItemProgressBar _itemProgressBar;
         private float _sweepHoldTime;
         private const float _requiredHoldTime = 3f;
 
@@ -19,6 +21,7 @@ namespace Runtime.TaskStateSystem.TaskStates
             _maxSweepAmount = stateManager.GetWorkData().MaxSweepAmount;
             _playerPhysicsController = stateManager.GetPlayerPhysicsController();
             _broomController = Object.FindObjectOfType<BroomController>();
+            _itemProgressBar = Object.FindObjectOfType<ItemProgressBar>();
             _sweepHoldTime = 0f;
         }
 
@@ -40,7 +43,7 @@ namespace Runtime.TaskStateSystem.TaskStates
                         {
                             _sweepHoldTime += Time.deltaTime;
                             
-                            
+                            //_itemProgressBar.ProgressBar();
                             Debug.Log("Sweeping working");
                             if (_sweepHoldTime >= _requiredHoldTime)
                             {
