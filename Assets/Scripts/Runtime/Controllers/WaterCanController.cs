@@ -35,16 +35,18 @@ namespace Runtime.Controllers
 
         internal void WateringAmount()
         {
-            
             if (isWatering)
             {
+                Debug.Log("IS WATERING");
                 wateringTime += Time.deltaTime;
+                Debug.Log("Watering Time"+ wateringTime);
                 if (wateringTime >= maxWateringTime && !hasWatered)
                 {
                     Debug.Log("Watering Done!");
                     hasWatered = true;
                     
                     currentWateringAmount++;
+                    Debug.Log("Current Watering Amount Increased!");
                 }
             }
             
@@ -60,9 +62,9 @@ namespace Runtime.Controllers
             }
         }
 
-        internal void SendWateringAmount(int amount)
+        internal int GetCurrentWateringAmount()
         {
-            
+            return currentWateringAmount;
         }
         
     }

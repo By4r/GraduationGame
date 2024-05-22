@@ -20,7 +20,7 @@ namespace Runtime.Controllers
         [Button("Stop Sweep Floor!")]
         internal void StopSweepFloor()
         {
-            _animator.ResetTrigger("sweepFloor");
+            _animator.ResetTrigger("sweepFloor"); 
             _particle.Stop();
         }
         

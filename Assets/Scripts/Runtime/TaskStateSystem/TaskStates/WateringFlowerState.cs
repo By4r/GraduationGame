@@ -11,6 +11,8 @@ namespace Runtime.TaskStateSystem.TaskStates
         private PlayerPhysicsController _playerPhysicsController;
         private WaterCanController _waterCanController;
 
+        private bool isWateringActive;
+
         public void EnterState(TaskStateManager stateManager)
         {
             Debug.Log("Entering WateringFlower State");
@@ -26,7 +28,12 @@ namespace Runtime.TaskStateSystem.TaskStates
             Ray raycast = _playerPhysicsController.GetRaycast();
             float range = _playerPhysicsController.range;
 
-
+            if (isWateringActive)
+            {
+                _waterCanController.WateringAmount();
+                
+            }
+            
             if (Input.GetMouseButtonDown(0))
             {
                 _waterCanController.WaterFlowers();
@@ -35,19 +42,23 @@ namespace Runtime.TaskStateSystem.TaskStates
                 {
                     if (hit.collider.CompareTag("WateringArea"))
                     {
+                        isWateringActive = true;
                         Debug.Log("Watering Area!");
                         
-                        _waterCanController.WateringAmount();
+                        //_waterCanController.WateringAmount();
                     }
                 }
             }else if (Input.GetMouseButtonUp(0))
             {
+                isWateringActive = false;
                 _waterCanController.StopWaterFlowers();
             }
             
+            _currentWateringAmount = _waterCanController.GetCurrentWateringAmount();
             
             if (_currentWateringAmount >= _maxWateringAmount)
             {
+                _waterCanController.StopWaterFlowers();
                 stateManager.SetState(new GoSleepState());
             }
             
