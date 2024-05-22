@@ -37,8 +37,8 @@ namespace Runtime.TaskStateSystem.TaskStates
 
                         if (_currentGarbageAmount >= _maxGarbageAmount)
                         {
-                            //stateManager.SetState(new GoSleepState());
-                            stateManager.SetState(new SweepFloorState());
+                            stateManager.SetState(new GoSleepState());
+                            //stateManager.SetState(new SweepFloorState());
                         }
                     }
                 }
