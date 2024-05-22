@@ -164,7 +164,6 @@ namespace Runtime.Controllers.Player
     public class PlayerMovementController : MonoBehaviour
     {
         public CharacterController characterController;
-        public float moveSpeed = 5f;
         public float gravity = -9.81f;
         public Transform groundCheck;
         public LayerMask groundMask;
@@ -192,7 +191,7 @@ namespace Runtime.Controllers.Player
 
             if (isGrounded && velocity.y < 0)
             {
-                velocity.y = -2f;
+                velocity.y = -5f;
             }
 
             float x = Input.GetAxis("Horizontal");
