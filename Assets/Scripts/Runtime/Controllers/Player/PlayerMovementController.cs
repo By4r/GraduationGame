@@ -164,12 +164,11 @@ namespace Runtime.Controllers.Player
     public class PlayerMovementController : MonoBehaviour
     {
         public CharacterController characterController;
-        public float gravity = -9.81f;
+        public float gravity;
         public Transform groundCheck;
-        public LayerMask groundMask;
+      
 
         [ShowInInspector] private PlayerMovementData _data;
-        
         private bool isGrounded;
         private Vector3 velocity;
         public bool canMove = true;
@@ -188,7 +187,7 @@ namespace Runtime.Controllers.Player
                 return;
 
             isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f);
-
+            
             if (isGrounded && velocity.y < 0)
             {
                 velocity.y = -5f;

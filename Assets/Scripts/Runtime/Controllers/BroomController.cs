@@ -8,21 +8,28 @@ namespace Runtime.Controllers
         [SerializeField] Animator _animator;
         [SerializeField] private ParticleSystem _particle;
 
+        private bool isSweeping;
 
-        
         [Button("Sweep Floor!")]
         internal void SweepFloor()
         {
-            _animator.SetTrigger("sweepFloor");
-            _particle.Play();
+            if (!isSweeping)
+            {
+                isSweeping = true;
+                _animator.SetBool("isSweeping", true);
+                _particle.Play();
+            }
         }
 
         [Button("Stop Sweep Floor!")]
         internal void StopSweepFloor()
         {
-            _animator.ResetTrigger("sweepFloor");
-            _particle.Stop();
+            if (isSweeping)
+            {
+                isSweeping = false;
+                _animator.SetBool("isSweeping", false);
+                _particle.Stop();
+            }
         }
-        
     }
 }

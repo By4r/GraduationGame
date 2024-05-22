@@ -33,7 +33,7 @@ namespace Runtime.Controllers.Camera
         if (Physics.Raycast(raycast, out RaycastHit hit, range)) 
         {
             highlight = hit.transform;
-            if (highlight.CompareTag("Selectable") )
+            if (highlight.CompareTag("Pickable") )
             {
                 if (highlight.gameObject.GetComponent<Outline>() != null)
                 {
