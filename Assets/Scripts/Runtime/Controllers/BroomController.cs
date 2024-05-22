@@ -24,12 +24,17 @@ namespace Runtime.Controllers
         [Button("Stop Sweep Floor!")]
         internal void StopSweepFloor()
         {
+<<<<<<< HEAD
             if (isSweeping)
             {
                 isSweeping = false;
                 _animator.SetBool("isSweeping", false);
                 _particle.Stop();
             }
+=======
+            _animator.ResetTrigger("sweepFloor"); 
+            _particle.Stop();
+>>>>>>> 0b7291e7a8ed67c70d636155ab20cda3a34be5d8
         }
     }
 }
