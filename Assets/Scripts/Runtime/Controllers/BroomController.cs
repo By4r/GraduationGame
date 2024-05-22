@@ -14,11 +14,14 @@ namespace Runtime.Controllers
         internal void SweepFloor()
         {
             _animator.SetTrigger("sweepFloor");
+            _particle.Play();
         }
 
+        [Button("Stop Sweep Floor!")]
         internal void StopSweepFloor()
         {
             _animator.ResetTrigger("sweepFloor");
+            _particle.Stop();
         }
         
     }

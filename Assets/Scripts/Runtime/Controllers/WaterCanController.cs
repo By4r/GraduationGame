@@ -13,6 +13,7 @@ namespace Runtime.Controllers
         private float maxWateringTime = 3f;
         private bool isWatering;
         private bool hasWatered;
+        private int currentWateringAmount;
 
         #endregion
         
@@ -30,7 +31,11 @@ namespace Runtime.Controllers
                 }
                 else return;
             }
+        }
 
+        internal void WateringAmount()
+        {
+            
             if (isWatering)
             {
                 wateringTime += Time.deltaTime;
@@ -38,18 +43,27 @@ namespace Runtime.Controllers
                 {
                     Debug.Log("Watering Done!");
                     hasWatered = true;
+                    
+                    currentWateringAmount++;
                 }
             }
+            
+        }
 
-            if (Input.GetMouseButtonUp(0))
+        internal void StopWaterFlowers()
+        {
+            _animator.SetTrigger("downCan");
+            isWatering = false;
+            if (_particle != null)
             {
-                _animator.SetTrigger("downCan");
-                isWatering = false;
-                if (_particle != null)
-                {
-                    _particle.Stop();
-                }
+                _particle.Stop();
             }
         }
+
+        internal void SendWateringAmount(int amount)
+        {
+            
+        }
+        
     }
 }

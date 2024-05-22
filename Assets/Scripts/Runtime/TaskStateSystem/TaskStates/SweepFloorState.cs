@@ -11,7 +11,7 @@ namespace Runtime.TaskStateSystem.TaskStates
         private int _maxSweepAmount;
         private PlayerPhysicsController _playerPhysicsController;
         private BroomController _broomController;
-        
+
         public void EnterState(TaskStateManager stateManager)
         {
             Debug.Log("Entering SweepFloor State");
@@ -23,37 +23,39 @@ namespace Runtime.TaskStateSystem.TaskStates
         public void UpdateState(TaskStateManager stateManager)
         {
             Debug.Log("SweepFloor State");
-            
+
             Ray raycast = _playerPhysicsController.GetRaycast();
             float range = _playerPhysicsController.range;
-            
+
             if (Physics.Raycast(raycast, out RaycastHit hit, range))
             {
-                if (hit.collider.CompareTag("SweepArea"))
+                if (Input.GetMouseButtonDown(0))
                 {
-                    //_playerPickUpController.SweepFloor();
-                    
-                    if (Input.GetMouseButtonDown(0))
+                    _broomController.SweepFloor();
+                    Debug.Log("Sweeping working");
+
+                    if (hit.collider.CompareTag("SweepArea"))
                     {
-                        
                         Debug.Log("SWEEP AREA!");
-                        //_playerPickUpController.SweepFloor();
-                        
-                        _broomController.SweepFloor();
                         
                         hit.collider.gameObject.SetActive(false);
                         _currentSweepAmount++;
-                        
-                        Debug.Log("Swept away waste");
 
-                        if (_currentSweepAmount >= _maxSweepAmount)
-                        {
-                            stateManager.SetState(new WateringFlowerState());
-                        }
+                        Debug.Log("Swept away waste");
                     }
+                }
+                else if (Input.GetMouseButtonUp(0))
+                {
+                    _broomController.StopSweepFloor();
+                    
+                    Debug.Log("Sweeping stop");
                 }
             }
             
+            if (_currentSweepAmount >= _maxSweepAmount)
+            {
+                stateManager.SetState(new WateringFlowerState());
+            }
         }
 
         public void ExitState(TaskStateManager stateManager)
