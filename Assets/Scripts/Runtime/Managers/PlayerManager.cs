@@ -38,8 +38,8 @@ namespace Runtime.Managers
 
         private void SendDataToControllers()
         {
-            movementController.SetData(_data.MovementData);
-            movementController.SetData(_data.PlayerFOVData);
+             movementController.SetData(_data.MovementData);
+            // movementController.SetData(_data.PlayerFOVData);
         }
 
 
