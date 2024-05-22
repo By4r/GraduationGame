@@ -10,7 +10,7 @@ namespace Runtime.TaskStateSystem.TaskStates
         private int _maxWateringAmount;
         private PlayerPhysicsController _playerPhysicsController;
         private WaterCanController _waterCanController;
-        
+
         public void EnterState(TaskStateManager stateManager)
         {
             Debug.Log("Entering WateringFlower State");
@@ -22,31 +22,35 @@ namespace Runtime.TaskStateSystem.TaskStates
         public void UpdateState(TaskStateManager stateManager)
         {
             Debug.Log("WateringFlower State");
-            
+
             Ray raycast = _playerPhysicsController.GetRaycast();
             float range = _playerPhysicsController.range;
-            
-            if (Physics.Raycast(raycast, out RaycastHit hit, range))
+
+
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider.CompareTag("WateringArea"))
+                _waterCanController.WaterFlowers();
+                
+                if (Physics.Raycast(raycast, out RaycastHit hit, range))
                 {
-                    if (Input.GetMouseButtonDown(0))
+                    if (hit.collider.CompareTag("WateringArea"))
                     {
-                        
                         Debug.Log("Watering Area!");
                         
-                        _waterCanController.WaterFlowers();
-                        
-                        //hit.collider.gameObject.SetActive(false);
-                        _currentWateringAmount++;
-                        
-                        if (_currentWateringAmount>= _maxWateringAmount)
-                        {
-                            stateManager.SetState(new GoSleepState());
-                        }
+                        _waterCanController.WateringAmount();
                     }
                 }
+            }else if (Input.GetMouseButtonUp(0))
+            {
+                _waterCanController.StopWaterFlowers();
             }
+            
+            
+            if (_currentWateringAmount >= _maxWateringAmount)
+            {
+                stateManager.SetState(new GoSleepState());
+            }
+            
         }
 
         public void ExitState(TaskStateManager stateManager)
