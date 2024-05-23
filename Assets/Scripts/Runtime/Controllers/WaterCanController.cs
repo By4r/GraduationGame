@@ -2,7 +2,7 @@
 
 namespace Runtime.Controllers
 {
-    public class WaterCanController:MonoBehaviour
+    public class WaterCanController : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private ParticleSystem _particle;

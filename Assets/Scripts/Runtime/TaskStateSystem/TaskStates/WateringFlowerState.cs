@@ -1,5 +1,6 @@
 ﻿using Runtime.Controllers;
 using Runtime.Controllers.Player;
+using Runtime.TaskStateSystem.TaskUI;
 using UnityEngine;
 
 namespace Runtime.TaskStateSystem.TaskStates
@@ -12,6 +13,7 @@ namespace Runtime.TaskStateSystem.TaskStates
         private WaterCanController _waterCanController;
 
         private bool isWateringActive;
+        private TaskInfoManager _taskInfoManager;
 
         public void EnterState(TaskStateManager stateManager)
         {
@@ -19,6 +21,10 @@ namespace Runtime.TaskStateSystem.TaskStates
             _maxWateringAmount = stateManager.GetWorkData().MaxWateringAmount;
             _playerPhysicsController = stateManager.GetPlayerPhysicsController();
             _waterCanController = Object.FindObjectOfType<WaterCanController>();
+            
+            _taskInfoManager = stateManager.GetTaskInfoManager();
+            
+            _taskInfoManager.SetStateForInfo("WateringFlowers");
         }
 
         public void UpdateState(TaskStateManager stateManager)
@@ -66,6 +72,7 @@ namespace Runtime.TaskStateSystem.TaskStates
 
         public void ExitState(TaskStateManager stateManager)
         {
+            _taskInfoManager.HideInfoTab();
             Debug.Log("Exiting WateringFlower State");
         }
     }

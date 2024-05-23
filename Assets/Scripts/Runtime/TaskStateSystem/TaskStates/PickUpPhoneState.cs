@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Runtime.Controllers.Player;
 using Runtime.Controllers.Subtitle;
+using Runtime.TaskStateSystem.TaskUI;
 using UnityEngine;
 
 namespace Runtime.TaskStateSystem.TaskStates
@@ -11,6 +12,7 @@ namespace Runtime.TaskStateSystem.TaskStates
         private AudioSource _audioSource;
         private PlaySubtitle _playSubtitle;
         private TaskStateManager _stateManager;
+        private TaskInfoManager _taskInfoManager;
 
         public void EnterState(TaskStateManager stateManager)
         {
@@ -19,6 +21,10 @@ namespace Runtime.TaskStateSystem.TaskStates
             _audioSource = stateManager.GetAudioSource();
             _playSubtitle = stateManager.GetPlaySubtitle();
             _stateManager = stateManager;
+            _taskInfoManager = stateManager.GetTaskInfoManager();
+            
+            _taskInfoManager.SetStateForInfo("PickUpPhone");
+            
         }
 
         public void UpdateState(TaskStateManager stateManager)
@@ -59,6 +65,7 @@ namespace Runtime.TaskStateSystem.TaskStates
 
         public void ExitState(TaskStateManager stateManager)
         {
+            _taskInfoManager.HideInfoTab();
             Debug.Log("Exiting PickUpPhone State");
         }
     }
