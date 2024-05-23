@@ -66539,9 +66539,6 @@ MonoBehaviour:
   characterController: {fileID: 5605165927301384795}
   gravity: -9.81
   groundCheck: {fileID: 1482083148183037499}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 0
   canMove: 1
 --- !u!1 &5605165928233958716
 GameObject:

@@ -38,17 +38,10 @@ namespace Runtime.TaskStateSystem
         private void Start()
         {
             // Initialize the state machine with an initial state
-<<<<<<< HEAD
-            SetState(new PickUpPhoneState());
-            //SetState(new SweepFloorState());
-            //SetState(new WateringFlowerState());
-            //SetState(new WateringFlowerState());
-=======
             //SetState(new PickUpPhoneState());
             SetState(new SweepFloorState());
             //SetState(new WateringFlowerState());
             //SetState(new WateringFlowerState());
->>>>>>> origin/main
         }
 
         private void Update()
