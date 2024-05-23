@@ -1,12 +1,11 @@
-﻿using System;
-using Runtime.Controllers;
+﻿using Runtime.Controllers;
 using Runtime.Controllers.Player;
 using Runtime.Controllers.Subtitle;
 using Runtime.Data.UnityObjects;
 using Runtime.Data.ValueObjects;
 using Runtime.Managers;
-using Runtime.Signals;
 using Runtime.TaskStateSystem.TaskStates;
+using Runtime.TaskStateSystem.TaskUI;
 using Runtime.TaskSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -27,6 +26,7 @@ namespace Runtime.TaskStateSystem
         [SerializeField] private LetterManager letterManager;
         [SerializeField] private GoCarManager goCarManager;
         [SerializeField] private PlaySubtitle playSubtitle;
+        [SerializeField] private TaskInfoManager taskInfoManager;
 
         [ShowInInspector] private WorkData _workData;
 
@@ -38,8 +38,8 @@ namespace Runtime.TaskStateSystem
         private void Start()
         {
             // Initialize the state machine with an initial state
-            //SetState(new PickUpPhoneState());
-            SetState(new SweepFloorState());
+            SetState(new PickUpPhoneState());
+            //SetState(new SweepFloorState());
             //SetState(new WateringFlowerState());
             //SetState(new WateringFlowerState());
         }
@@ -75,7 +75,8 @@ namespace Runtime.TaskStateSystem
 
         public PlaySubtitle GetPlaySubtitle() => playSubtitle;
 
-
+        public TaskInfoManager GetTaskInfoManager() => taskInfoManager;
+        
         private WorkData GetData()
         {
             return Resources.Load<CD_Work>("Data/CD_Work").workData;

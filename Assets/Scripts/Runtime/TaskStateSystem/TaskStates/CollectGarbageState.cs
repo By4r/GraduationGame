@@ -1,4 +1,5 @@
 ﻿using Runtime.Controllers.Player;
+using Runtime.TaskStateSystem.TaskUI;
 using UnityEngine;
 
 namespace Runtime.TaskStateSystem.TaskStates
@@ -8,6 +9,8 @@ namespace Runtime.TaskStateSystem.TaskStates
         private int _currentGarbageAmount;
         private int _maxGarbageAmount;
         private PlayerPhysicsController _playerPhysicsController;
+        private TaskInfoManager _taskInfoManager;
+        
 
         public void EnterState(TaskStateManager stateManager)
         {
@@ -15,6 +18,10 @@ namespace Runtime.TaskStateSystem.TaskStates
 
             _maxGarbageAmount = stateManager.GetWorkData().MaxGarbageAmount;
             _playerPhysicsController = stateManager.GetPlayerPhysicsController();
+            
+            _taskInfoManager = stateManager.GetTaskInfoManager();
+            
+            _taskInfoManager.SetStateForInfo("CollectGarbage");
         }
 
         public void UpdateState(TaskStateManager stateManager)
@@ -37,7 +44,7 @@ namespace Runtime.TaskStateSystem.TaskStates
 
                         if (_currentGarbageAmount >= _maxGarbageAmount)
                         {
-                            stateManager.SetState(new GoSleepState());
+                            stateManager.SetState(new SweepFloorState());
                             //stateManager.SetState(new SweepFloorState());
                         }
                     }
@@ -47,6 +54,7 @@ namespace Runtime.TaskStateSystem.TaskStates
 
         public void ExitState(TaskStateManager stateManager)
         {
+            _taskInfoManager.HideInfoTab();
             Debug.Log("Exiting Collect Garbage State");
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Runtime.Controllers;
 using Runtime.Controllers.Player;
 using Runtime.Controllers.UI;
+using Runtime.TaskStateSystem.TaskUI;
 using UnityEngine;
 
 namespace Runtime.TaskStateSystem.TaskStates
@@ -14,6 +15,7 @@ namespace Runtime.TaskStateSystem.TaskStates
         private ItemProgressBar _itemProgressBar;
         private float _sweepHoldTime;
         private const float _requiredHoldTime = 3f;
+        private TaskInfoManager _taskInfoManager;
 
         public void EnterState(TaskStateManager stateManager)
         {
@@ -23,6 +25,10 @@ namespace Runtime.TaskStateSystem.TaskStates
             _broomController = Object.FindObjectOfType<BroomController>();
             _itemProgressBar = Object.FindObjectOfType<ItemProgressBar>();
             _sweepHoldTime = 0f;
+            
+            _taskInfoManager = stateManager.GetTaskInfoManager();
+            
+            _taskInfoManager.SetStateForInfo("SweepFloor");
         }
 
         public void UpdateState(TaskStateManager stateManager)
@@ -74,6 +80,7 @@ namespace Runtime.TaskStateSystem.TaskStates
 
         public void ExitState(TaskStateManager stateManager)
         {
+            _taskInfoManager.HideInfoTab();
             Debug.Log("Exiting SweepFloor State");
             _itemProgressBar.ResetProgress();
         }

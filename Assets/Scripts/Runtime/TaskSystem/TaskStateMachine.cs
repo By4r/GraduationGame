@@ -354,7 +354,9 @@ namespace Runtime.TaskSystem
                 case "HeatHouse":
                     return "Turn on the heating";
                 case "CheckUpstairs":
-                    return "Inspect the Upstairs";
+                    return "Inspect the upstairs";
+                case "CallPhone":
+                    return "Call the phone";
                 default:
                     return "";
             }
