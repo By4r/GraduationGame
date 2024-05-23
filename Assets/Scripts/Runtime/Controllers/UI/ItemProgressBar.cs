@@ -5,41 +5,22 @@ namespace Runtime.Controllers.UI
 {
     public class ItemProgressBar : MonoBehaviour
     {
-        [SerializeField] private float time = 0;
-        [SerializeField] private float maxTime = 3;
-        [SerializeField] private Image fillImage;
-        
+        [SerializeField] private Image progressBar;
 
-        private void Start()
+        public void UpdateProgress(float progress)
         {
-            SetAlpha(0);
-        }
-
-        internal void ProgressBar()
-        {
-            time += Time.deltaTime;
-            fillImage.fillAmount = time / maxTime;
-            Debug.Log(time + maxTime+"rrrrrrrrrrrr");
-            if (time < 0 )
+            if (progressBar != null)
             {
-                time = 0;
-                SetAlpha(0);
+                progressBar.fillAmount = progress;
             }
-
-            if (time >= maxTime)
-            {
-                SetAlpha(0);
-            }else SetAlpha(1);
-            
         }
 
-       
-
-        private void SetAlpha(float alpha)
+        public void ResetProgress()
         {
-            Color color = fillImage.color;
-            color.a = alpha;
-            fillImage.color = color;
+            if (progressBar != null)
+            {
+                progressBar.fillAmount = 0f;
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Runtime.TaskStateSystem.TaskStates
         private int _maxSweepAmount;
         private PlayerPhysicsController _playerPhysicsController;
         private BroomController _broomController;
-        //private ItemProgressBar _itemProgressBar;
+        private ItemProgressBar _itemProgressBar;
         private float _sweepHoldTime;
         private const float _requiredHoldTime = 3f;
 
@@ -21,7 +21,7 @@ namespace Runtime.TaskStateSystem.TaskStates
             _maxSweepAmount = stateManager.GetWorkData().MaxSweepAmount;
             _playerPhysicsController = stateManager.GetPlayerPhysicsController();
             _broomController = Object.FindObjectOfType<BroomController>();
-            //_itemProgressBar = Object.FindObjectOfType<ItemProgressBar>();
+            _itemProgressBar = Object.FindObjectOfType<ItemProgressBar>();
             _sweepHoldTime = 0f;
         }
 
@@ -34,39 +34,40 @@ namespace Runtime.TaskStateSystem.TaskStates
 
             if (Physics.Raycast(raycast, out RaycastHit hit, range))
             {
-                if (Input.GetMouseButton(0)) 
+                if (hit.collider.CompareTag("SweepArea"))
                 {
-                    _broomController.SweepFloor();
-                    Debug.Log(_sweepHoldTime+"---"+_requiredHoldTime);
-                    
-                        if (hit.collider.CompareTag("SweepArea"))
+                    if (Input.GetMouseButton(0))
+                    {
+                        _broomController.SweepFloor();
+                        _sweepHoldTime += Time.deltaTime;
+                        _itemProgressBar.UpdateProgress(_sweepHoldTime / _requiredHoldTime);
+
+                        if (_sweepHoldTime >= _requiredHoldTime)
                         {
-                            _sweepHoldTime += Time.deltaTime;
-                            
-                            //_itemProgressBar.ProgressBar();
-                            Debug.Log("Sweeping working");
-                            if (_sweepHoldTime >= _requiredHoldTime)
-                            {
-                                _currentSweepAmount++;
-                                hit.collider.gameObject.SetActive(false);
-                                Debug.Log("Swept away waste");
-                                _sweepHoldTime = 0f; 
-                                
-                            }
+                            _currentSweepAmount++;
+                            hit.collider.gameObject.SetActive(false);
+                            Debug.Log("Swept away waste");
+                            _sweepHoldTime = 0f;
 
                             if (_currentSweepAmount >= _maxSweepAmount)
                             {
                                 stateManager.SetState(new WateringFlowerState());
                                 _broomController.StopSweepFloor();
-                               
                             }
                         }
+                    }
+                    else
+                    {
+                        _broomController.StopSweepFloor();
+                        _sweepHoldTime = 0f;
+                        _itemProgressBar.ResetProgress();
+                    }
                 }
                 else
                 {
                     _broomController.StopSweepFloor();
-                    Debug.Log("Sweeping stop");
-                    _sweepHoldTime = 0f; 
+                    _sweepHoldTime = 0f;
+                    _itemProgressBar.ResetProgress();
                 }
             }
         }
@@ -74,6 +75,7 @@ namespace Runtime.TaskStateSystem.TaskStates
         public void ExitState(TaskStateManager stateManager)
         {
             Debug.Log("Exiting SweepFloor State");
+            _itemProgressBar.ResetProgress();
         }
     }
 }
