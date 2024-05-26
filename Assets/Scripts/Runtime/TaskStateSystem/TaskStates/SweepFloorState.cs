@@ -67,16 +67,12 @@ namespace Runtime.TaskStateSystem.TaskStates
                     }
                     else
                     {
-                        _broomController.StopSweepFloor();
-                        _sweepHoldTime = 0f;
-                        _itemProgressBar.ResetProgress();
+                        ResetSweep();
                     }
                 }
                 else
                 {
-                    _broomController.StopSweepFloor();
-                    _sweepHoldTime = 0f;
-                    _itemProgressBar.ResetProgress();
+                    ResetSweep();
                 }
             }
         }
@@ -87,6 +83,13 @@ namespace Runtime.TaskStateSystem.TaskStates
             _taskInfoManager.SetStateForInfoWNumber("SweepFloor", _currentSweepAmount,_maxSweepAmount);
         }
 
+        private void ResetSweep()
+        {
+            _broomController.StopSweepFloor();
+            _sweepHoldTime = 0f;
+            _itemProgressBar.ResetProgress();
+        }
+        
         public void ExitState(TaskStateManager stateManager)
         {
             _taskInfoManager.HideInfoTab();
