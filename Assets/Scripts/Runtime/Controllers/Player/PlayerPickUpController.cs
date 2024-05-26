@@ -38,7 +38,7 @@ namespace Runtime.Controllers.Player
             }
         }
 
-        private void PlayerPickUp(RaycastHit hitInfo)
+        internal void PlayerPickUp(RaycastHit hitInfo)
         {
             ToggleItemPick();
 
@@ -52,7 +52,7 @@ namespace Runtime.Controllers.Player
             _currentPickedItem.localRotation = Quaternion.identity;
         }
         
-        private void LeaveItem()
+        internal void LeaveItem()
         {
             if (_currentPickedItem != null)
             {
