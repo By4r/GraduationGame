@@ -17,7 +17,13 @@ namespace Runtime.TaskStateSystem.TaskUI
             ShowInfoTab();
         }
 
-        private void ShowInfoTab()
+        internal void SetStateForInfoWNumber(string stateName, int current, int max)
+        {
+            _currentState = stateName;
+            taskInfoController.TaskInfo(GetTaskForStateNumber(stateName,current, max));
+        }
+
+        internal void ShowInfoTab()
         {
             taskInfoController.ShowTaskInfo();
         }
@@ -33,12 +39,6 @@ namespace Runtime.TaskStateSystem.TaskUI
             {
                 case "PickUpPhone":
                     return "Pick up the phone";
-                case "CollectGarbage":
-                    return $"Collect the garbage";
-                case "SweepFloor":
-                    return "Sweep the floor";
-                case "WateringFlowers":
-                    return "Water the flowers";
                 case "GoSleep":
                     return "Go to sleep";
                 case "CheckHouse":
@@ -55,6 +55,21 @@ namespace Runtime.TaskStateSystem.TaskUI
                     return "Turn on the heating";
                 case "CheckUpstairs":
                     return "Inspect the Upstairs";
+                default:
+                    return "";
+            }
+        }
+
+        private string GetTaskForStateNumber(string state, int current, int max)
+        {
+            switch (state)
+            {
+                case "CollectGarbage":
+                    return $"Collect the garbage {current}/{max}";
+                case "SweepFloor":
+                    return $"Sweep the floor {current}/{max}";
+                case "WateringFlowers":
+                    return $"Water the flowers {current}/{max}";
                 default:
                     return "";
             }

@@ -21,7 +21,8 @@ namespace Runtime.TaskStateSystem.TaskStates
             
             _taskInfoManager = stateManager.GetTaskInfoManager();
             
-            _taskInfoManager.SetStateForInfo("CollectGarbage");
+            _taskInfoManager.SetStateForInfoWNumber("CollectGarbage",_currentGarbageAmount,_maxGarbageAmount);
+            _taskInfoManager.ShowInfoTab();
         }
 
         public void UpdateState(TaskStateManager stateManager)
@@ -39,7 +40,7 @@ namespace Runtime.TaskStateSystem.TaskStates
                     {
                         //Destroy(hit.collider.gameObject);
                         hit.collider.gameObject.SetActive(false);
-                        _currentGarbageAmount++;
+                        IncreaseGarbageAmount();
                         Debug.Log("Collected the garbage");
 
                         if (_currentGarbageAmount >= _maxGarbageAmount)
@@ -51,6 +52,13 @@ namespace Runtime.TaskStateSystem.TaskStates
                 }
             }
         }
+        
+        private void IncreaseGarbageAmount()
+        {
+            _currentGarbageAmount++;
+            _taskInfoManager.SetStateForInfoWNumber("CollectGarbage", _currentGarbageAmount, _maxGarbageAmount);
+        }
+        
 
         public void ExitState(TaskStateManager stateManager)
         {

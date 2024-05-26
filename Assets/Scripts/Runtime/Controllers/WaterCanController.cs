@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Runtime.Controllers
 {
@@ -6,6 +7,8 @@ namespace Runtime.Controllers
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private ParticleSystem _particle;
+        
+        public event Action<int> OnWateringAmountChanged;
 
         #region  Private Variables
         
@@ -47,6 +50,7 @@ namespace Runtime.Controllers
                     
                     currentWateringAmount++;
                     Debug.Log("Current Watering Amount Increased!");
+                    OnWateringAmountChanged?.Invoke(currentWateringAmount);
                 }
             }
             

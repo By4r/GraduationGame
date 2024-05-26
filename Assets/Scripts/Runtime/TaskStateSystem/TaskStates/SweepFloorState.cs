@@ -14,7 +14,7 @@ namespace Runtime.TaskStateSystem.TaskStates
         private BroomController _broomController;
         private ItemProgressBar _itemProgressBar;
         private float _sweepHoldTime;
-        private const float _requiredHoldTime = 3f;
+        private const float REQUİRED_HOLD_TİME = 3f;
         private TaskInfoManager _taskInfoManager;
 
         public void EnterState(TaskStateManager stateManager)
@@ -28,7 +28,8 @@ namespace Runtime.TaskStateSystem.TaskStates
             
             _taskInfoManager = stateManager.GetTaskInfoManager();
             
-            _taskInfoManager.SetStateForInfo("SweepFloor");
+            _taskInfoManager.SetStateForInfoWNumber("SweepFloor",_currentSweepAmount,_maxSweepAmount);
+            _taskInfoManager.ShowInfoTab();
         }
 
         public void UpdateState(TaskStateManager stateManager)
@@ -46,11 +47,13 @@ namespace Runtime.TaskStateSystem.TaskStates
                     {
                         _broomController.SweepFloor();
                         _sweepHoldTime += Time.deltaTime;
-                        _itemProgressBar.UpdateProgress(_sweepHoldTime / _requiredHoldTime);
+                        _itemProgressBar.UpdateProgress(_sweepHoldTime / REQUİRED_HOLD_TİME);
+                        
+                        Debug.Log("Hold Time" + _sweepHoldTime);
 
-                        if (_sweepHoldTime >= _requiredHoldTime)
+                        if (_sweepHoldTime >= REQUİRED_HOLD_TİME)
                         {
-                            _currentSweepAmount++;
+                            IncreaseSweepAmount();
                             hit.collider.gameObject.SetActive(false);
                             Debug.Log("Swept away waste");
                             _sweepHoldTime = 0f;
@@ -76,6 +79,12 @@ namespace Runtime.TaskStateSystem.TaskStates
                     _itemProgressBar.ResetProgress();
                 }
             }
+        }
+
+        private void IncreaseSweepAmount()
+        {
+            _currentSweepAmount++;
+            _taskInfoManager.SetStateForInfoWNumber("SweepFloor", _currentSweepAmount,_maxSweepAmount);
         }
 
         public void ExitState(TaskStateManager stateManager)

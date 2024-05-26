@@ -24,7 +24,11 @@ namespace Runtime.TaskStateSystem.TaskStates
             
             _taskInfoManager = stateManager.GetTaskInfoManager();
             
-            _taskInfoManager.SetStateForInfo("WateringFlowers");
+            _taskInfoManager.SetStateForInfoWNumber("WateringFlowers",_currentWateringAmount,_maxWateringAmount);
+            
+            _taskInfoManager.ShowInfoTab();
+
+            _waterCanController.OnWateringAmountChanged += HandleWateringAmountChanged;
         }
 
         public void UpdateState(TaskStateManager stateManager)
@@ -70,10 +74,17 @@ namespace Runtime.TaskStateSystem.TaskStates
             
         }
 
+        private void HandleWateringAmountChanged(int newAmount)
+        {
+            _currentWateringAmount = newAmount;
+            _taskInfoManager.SetStateForInfoWNumber("WateringFlowers", _currentWateringAmount, _maxWateringAmount);
+        }
+
         public void ExitState(TaskStateManager stateManager)
         {
             _taskInfoManager.HideInfoTab();
             Debug.Log("Exiting WateringFlower State");
+            _waterCanController.OnWateringAmountChanged -= HandleWateringAmountChanged;
         }
     }
 }
