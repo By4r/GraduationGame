@@ -50,18 +50,22 @@ namespace Runtime.TaskStateSystem.TaskStates
             if (Input.GetMouseButtonDown(1))
             {
                 _playerPickUpController.LeaveItem();
+                
+                if (_firePlaceController.IsInWoodArea())
+                {
+                    HandleFirePlaceInteraction();
+                }
             }
 
-            if (_firePlaceController.IsInWoodArea())
-            {
-                HandleFirePlaceInteraction();
-            }
             
         }
 
         private void HandleFirePlaceInteraction()
         {
             Debug.Log("Wood is in the fireplace area");
+            
+            _firePlaceController.LightFire();
+            
         }
 
         public void ExitState(TaskStateManager stateManager)

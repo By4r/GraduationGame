@@ -7,6 +7,15 @@ namespace Runtime.Controllers
     {
         private bool inWoodArea = false;
 
+        [SerializeField] private ParticleSystem fireParticle;
+        [SerializeField] private AudioSource fireAudioSource;
+
+        private void Start()
+        {
+            fireParticle.Stop();
+            fireAudioSource.Stop();
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Wood"))
@@ -18,6 +27,12 @@ namespace Runtime.Controllers
         public bool IsInWoodArea()
         {
             return inWoodArea;
+        }
+
+        internal void LightFire()
+        {
+            fireParticle.Play();
+            fireAudioSource.Play();
         }
     }
 }
