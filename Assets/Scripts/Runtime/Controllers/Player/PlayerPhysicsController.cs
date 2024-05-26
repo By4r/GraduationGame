@@ -1,4 +1,5 @@
-﻿using Runtime.Managers;
+﻿using System;
+using Runtime.Managers;
 using Runtime.Signals;
 using UnityEngine;
 
@@ -24,12 +25,9 @@ namespace Runtime.Controllers.Player
         [SerializeField] public float range;
 
         public GameObject anomalyPrefab;
-       
-        private void Start()
-        {
-            //_capturePhotoController = FindObjectOfType<CapturePhotoController>();
-            //backgroundArudiosource.PlayOneShot(mallBackgroundSound);
-        }
+        
+        private Action<bool> _updateParanormalTriggerStatus;
+        
 
         private void Update()
         {
@@ -72,24 +70,26 @@ namespace Runtime.Controllers.Player
         
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(_inLight))
-            {
-                isInsideLight = true;
-                
-            }
-            else if (other.CompareTag(_inSecRoom))
-            {
-                isInsideSecRoom = true;
-                _capturePhotoController.photoRemainCount = 3;
+            // if (other.CompareTag(_inLight))
+            // {
+            //     isInsideLight = true;
+            //     
+            // }
+            // else if (other.CompareTag(_inSecRoom))
+            // {
+            //     isInsideSecRoom = true;
+            //     _capturePhotoController.photoRemainCount = 3;
+            //
+            // }
 
-            }
-            else if(other.CompareTag(_paranormalEnter))
+            if (other.CompareTag(_paranormalEnter))
             {
-                anomalyPrefab.SetActive(true);
+                _updateParanormalTriggerStatus?.Invoke(true);
             }
-            else if(other.CompareTag(_paranormalExit))
+
+            if (other.CompareTag(_paranormalExit))
             {
-                anomalyPrefab.SetActive(false);
+                _updateParanormalTriggerStatus?.Invoke(false);
             }
             
         }
@@ -105,7 +105,14 @@ namespace Runtime.Controllers.Player
                 isInsideSecRoom = false;
             }
         }
+        
+        
 
+        internal void SetParanormalTriggerStatusUpdateAction(Action<bool> action)
+        {
+            _updateParanormalTriggerStatus = action;
+        }
+        
     }
 }
 

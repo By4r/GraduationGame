@@ -39,10 +39,11 @@ namespace Runtime.TaskStateSystem
         {
             // Initialize the state machine with an initial state
             //SetState(new PickUpPhoneState())
-            SetState(new CollectGarbageState());
+            //SetState(new CollectGarbageState());
             //SetState(new GoSleepState());
             //SetState(new SweepFloorState());
             //SetState(new WateringFlowerState());
+            SetState(new CheckHouseState());
             //SetState(new HeatHouseState());
         }
 
