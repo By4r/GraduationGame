@@ -48,14 +48,8 @@ namespace Runtime.TaskStateSystem
             //SetState(new GoSleepState());
             //SetState(new SweepFloorState());
             //SetState(new WateringFlowerState());
-<<<<<<< HEAD
             SetState(new CheckHouseState());
             //SetState(new CheckOfficeState());
-=======
-            //SetState(new CheckHouseState());
-            //SetState(new CheckOfficeState());
-
->>>>>>> origin/main
         }
 
         private void Update()
