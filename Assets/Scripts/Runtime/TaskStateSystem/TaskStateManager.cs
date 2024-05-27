@@ -1,4 +1,5 @@
 ﻿using Runtime.Controllers;
+using Runtime.Controllers.Camera;
 using Runtime.Controllers.Player;
 using Runtime.Controllers.Subtitle;
 using Runtime.Data.UnityObjects;
@@ -27,6 +28,8 @@ namespace Runtime.TaskStateSystem
         [SerializeField] private GoCarManager goCarManager;
         [SerializeField] private PlaySubtitle playSubtitle;
         [SerializeField] private TaskInfoManager taskInfoManager;
+        [SerializeField] private PlayerMovementController playerMovementController;
+        [SerializeField] private CameraController cameraController;
 
         [ShowInInspector] private WorkData _workData;
 
@@ -43,7 +46,8 @@ namespace Runtime.TaskStateSystem
             //SetState(new GoSleepState());
             //SetState(new SweepFloorState());
             //SetState(new WateringFlowerState());
-            SetState(new CheckHouseState());
+            //SetState(new CheckHouseState());
+            SetState(new CheckOfficeState());
             //SetState(new HeatHouseState());
         }
 
@@ -79,6 +83,10 @@ namespace Runtime.TaskStateSystem
         public PlaySubtitle GetPlaySubtitle() => playSubtitle;
 
         public TaskInfoManager GetTaskInfoManager() => taskInfoManager;
+
+        public PlayerMovementController GetPlayerMovementController() => playerMovementController;
+
+        public CameraController GetCameraController() => cameraController;
         
         private WorkData GetData()
         {
