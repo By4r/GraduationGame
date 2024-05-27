@@ -11,6 +11,8 @@ namespace Runtime.Controllers
     {
         [SerializeField] private GameObject sleepPanel;
 
+        public Transform Outbuilding;
+
         private Image sleepImage;
 
         private void Start()
@@ -41,5 +43,30 @@ namespace Runtime.Controllers
                     });
                 });
         }
+
+        internal void SleepCompulsory(TaskStateManager stateManager)
+        {
+            sleepPanel.SetActive(true);
+
+            sleepImage.color = new Color(sleepImage.color.r, sleepImage.color.g, sleepImage.color.b, 0f);
+
+            sleepImage.DOFade(1f, 1f)
+                .SetEase(Ease.InOutQuad)
+                .OnComplete(() =>
+                {
+                    DOVirtual.DelayedCall(1f, () =>
+                    {
+                        sleepImage.DOFade(0f, 1f)
+                            .SetEase(Ease.InOutQuad)
+                            .OnComplete(() =>
+                            {
+                                Debug.Log("SLEEPING DONE!");
+                                
+                                stateManager.SetState(new CheckCameraState());
+                            });
+                    });
+                });
+        }
+        
     }
 }

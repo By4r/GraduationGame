@@ -30,6 +30,8 @@ namespace Runtime.TaskStateSystem
         [SerializeField] private TaskInfoManager taskInfoManager;
         [SerializeField] private PlayerMovementController playerMovementController;
         [SerializeField] private CameraController cameraController;
+        [SerializeField] private WoodStickController woodStickController;
+        [SerializeField] private PlayerManager playerManager;
 
         [ShowInInspector] private WorkData _workData;
 
@@ -46,9 +48,8 @@ namespace Runtime.TaskStateSystem
             //SetState(new GoSleepState());
             //SetState(new SweepFloorState());
             //SetState(new WateringFlowerState());
-            //SetState(new CheckHouseState());
-            SetState(new CheckOfficeState());
-
+            SetState(new CheckHouseState());
+            //SetState(new CheckOfficeState());
         }
 
         private void Update()
@@ -87,6 +88,10 @@ namespace Runtime.TaskStateSystem
         public PlayerMovementController GetPlayerMovementController() => playerMovementController;
 
         public CameraController GetCameraController() => cameraController;
+
+        public WoodStickController GetWoodStickController() => woodStickController;
+
+        public PlayerManager GetPlayerManager() => playerManager;
         
         private WorkData GetData()
         {

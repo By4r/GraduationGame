@@ -27,6 +27,7 @@ namespace Runtime.Controllers.Player
         public GameObject anomalyPrefab;
         
         private Action<bool> _updateParanormalTriggerStatus;
+        private Action<bool> _updateParanormalTriggerExitStatus;
         
 
         private void Update()
@@ -89,7 +90,7 @@ namespace Runtime.Controllers.Player
 
             if (other.CompareTag(_paranormalExit))
             {
-                _updateParanormalTriggerStatus?.Invoke(false);
+                _updateParanormalTriggerExitStatus?.Invoke(true);
             }
             
         }
@@ -112,8 +113,11 @@ namespace Runtime.Controllers.Player
         {
             _updateParanormalTriggerStatus = action;
         }
-        
-        
+
+        internal void SetParanormalTriggerExitStatusUpdateAction(Action<bool> action)
+        {
+            _updateParanormalTriggerExitStatus = action;
+        }
     }
 }
 
