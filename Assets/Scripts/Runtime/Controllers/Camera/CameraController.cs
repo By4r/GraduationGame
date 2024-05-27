@@ -26,7 +26,7 @@ namespace Runtime.Controllers.Camera
 
         
         #region Private Variables
-
+        public Transform playerBody;
         private PlayerMovementData _data;
         private float _xRotation;
         private float2 _clampValues;
@@ -84,6 +84,7 @@ namespace Runtime.Controllers.Camera
                 playerMovementController.characterController.transform.rotation = Quaternion.identity;
             }
         }
+
       
 
         

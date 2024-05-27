@@ -41,13 +41,16 @@ namespace Runtime.TaskStateSystem
         private void Start()
         {
             // Initialize the state machine with an initial state
-            //SetState(new PickUpPhoneState())
+            SetState(new PickUpPhoneState());
             //SetState(new CollectGarbageState());
             //SetState(new GoSleepState());
             //SetState(new SweepFloorState());
             //SetState(new WateringFlowerState());
             //SetState(new CheckHouseState());
+<<<<<<< HEAD
             SetState(new CheckOfficeState());
+=======
+>>>>>>> origin/main
             //SetState(new HeatHouseState());
         }
 
