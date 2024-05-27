@@ -38,7 +38,8 @@ namespace Runtime.TaskStateSystem.TaskStates
             {
                 _checkHouseManager.ShowParanormal();
             }
-            else if(_paranormalTriggerActivated!)
+            
+            if(!_paranormalTriggerActivated)
             {
                 _checkHouseManager.HideParanormal();
             }

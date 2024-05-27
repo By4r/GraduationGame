@@ -113,6 +113,7 @@ namespace Runtime.Controllers.Player
             _updateParanormalTriggerStatus = action;
         }
         
+        
     }
 }
 
