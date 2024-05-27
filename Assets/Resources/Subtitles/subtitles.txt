@@ -13,14 +13,55 @@
             "duration": [4.0, 3.5, 4.0, 2.8, 4, 6.5]
         },
         {
-            "key": "speech2",
-            "line": ["222"],
-            "duration": [3.0]
+            "key": "women_watching",
+            "line": ["What was that! Was that a women watching me??"],
+            "duration": [2.0]
         },
         {
-            "key": "speech3",
-            "line": ["333"],
-            "duration": [4.0]
+            "key": "tripping",
+            "line": ["what is going on am I tripping."],
+            "duration": [2.0]
+        },
+        {
+            "key": "check_cameras",
+            "line": [
+                "ouch, my head is hurts",
+                "What happened to me how did I came here",
+                "I should check the cameras"
+            ],
+            "duration": [2.0, 2.0, 2.0]
+        },
+        {
+            "key": "want_home",
+            "line": [
+                "WHAT happend in this place. I dont want to get into this.",
+                "I just wanna go home."
+            ],
+            "duration": [3.0, 2.0]
+        },
+        {
+            "key": "call_help",
+            "line": [
+                "oh no I can't go anywhere. now I'm sure I'm not alone here.",
+                "there was a phone in my hut maybe I can call for help"
+            ],
+            "duration": [3.0, 2.0]
+        },
+        {
+            "key": "get_warm",
+            "line": [
+                "fuck now I am really stuck in this place.",
+                "I need to get warm or I'll freeze to death."
+            ],
+            "duration": [3.0, 2.0]
+        },
+        {
+            "key": "devil_himself",
+            "line": [
+                "I think it's the landlord's wife who wrote this letter.",
+                "This man is the devil himself."
+            ],
+            "duration": [3.0, 2.0]
         }
     ]
 }

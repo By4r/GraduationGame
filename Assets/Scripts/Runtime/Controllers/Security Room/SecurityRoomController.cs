@@ -12,16 +12,17 @@ namespace Runtime.Controllers.Security_Room
     {
         [SerializeField] private PlayerMovementController playerMovementController;
         [SerializeField] private CameraController cameraController;
-        [SerializeField] private CapturePhotoController capturePhotoController;
+        //[SerializeField] private CapturePhotoController capturePhotoController;
         [SerializeField] private float range;
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
         [SerializeField] private List<GameObject> cameras;
-        [SerializeField] private bool isPauseState;
+        //[SerializeField] private bool isPauseState;
         [SerializeField] private GameObject secCameraPressEtext;
-        [SerializeField] private GameObject infoPaperPressEtext;
-        [SerializeField] private AudioSource secRoomAudioSource;
-        [SerializeField] private AudioClip monitorSound;
-        [SerializeField] private AudioClip paperSound;
+        //[SerializeField] private GameObject infoPaperPressEtext;
+        //[SerializeField] private AudioSource secRoomAudioSource;
+        //[SerializeField] private AudioClip monitorSound;
+        //[SerializeField] private AudioClip paperSound;
+        [SerializeField] private GameObject secPanel;
 
         private int cameraSelected;
         private bool isSecurityCamOpen;
@@ -46,7 +47,7 @@ namespace Runtime.Controllers.Security_Room
 
             if (Physics.Raycast(raycast, out RaycastHit hit, range))
             {
-                if (hit.collider.CompareTag(securityCameraTag) && !isPauseState)
+                if (hit.collider.CompareTag(securityCameraTag))
                 {
                     secCameraPressEtext.SetActive(true);
 
@@ -70,10 +71,8 @@ namespace Runtime.Controllers.Security_Room
                         }
                     }
                 }
-                if (hit.collider.CompareTag(infoPaperTag) && !isPauseState)
+                if (hit.collider.CompareTag(infoPaperTag))
                 {
-                    infoPaperPressEtext.SetActive(true);
-
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         if (!isInfoPaperPanelOpen)
@@ -86,14 +85,9 @@ namespace Runtime.Controllers.Security_Room
             else
             {
                 secCameraPressEtext.SetActive(false);
-                infoPaperPressEtext.SetActive(false);
             }
         }
-
-        private void Start()
-        {
-            capturePhotoController = FindObjectOfType<CapturePhotoController>();
-        }
+        
 
         private void InfoPaperPanelOpen()
         {
@@ -101,10 +95,8 @@ namespace Runtime.Controllers.Security_Room
             isInfoPaperPanelOpen = true;
             playerMovementController.canMove = false;
             cameraController.mouseState = false;
-            capturePhotoController.isPhotoPanelOpen = false;
             if (!hasPlayedPaperSound)
             {
-                secRoomAudioSource.PlayOneShot(paperSound);
                 hasPlayedPaperSound = true;
             }
         }
@@ -139,9 +131,9 @@ namespace Runtime.Controllers.Security_Room
             isSecurityPanelOpen = true;
             playerMovementController.canMove = false;
             cameraController.mouseState = false;
+            secPanel.SetActive(true);
             if (!hasPlayedMonitorSound)
             {
-                secRoomAudioSource.PlayOneShot(monitorSound);
                 hasPlayedMonitorSound = true;
             }
         }
@@ -153,6 +145,7 @@ namespace Runtime.Controllers.Security_Room
             playerMovementController.canMove = true;
             cameraController.mouseState = true;
             hasPlayedMonitorSound = false;
+            secPanel.SetActive(false);
         }
     }
 }
