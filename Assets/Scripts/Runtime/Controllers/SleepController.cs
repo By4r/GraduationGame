@@ -61,8 +61,6 @@ namespace Runtime.Controllers
                             .OnComplete(() =>
                             {
                                 Debug.Log("SLEEPING DONE!");
-                                
-                                stateManager.SetState(new CheckCameraState());
                             });
                     });
                 });

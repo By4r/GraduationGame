@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Runtime.TaskSystem
@@ -13,6 +14,7 @@ namespace Runtime.TaskSystem
         internal void ShowParanormal()
         {
             paranormalGameObject.SetActive(true);
+            StartCoroutine(HideParanormalAfterDelay(3f)); 
         }
 
         internal void HideParanormal()
@@ -37,5 +39,11 @@ namespace Runtime.TaskSystem
             paranormalTriggerExit.SetActive(true);
         }
         
+        
+        IEnumerator HideParanormalAfterDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            HideParanormal();
+        }
     }
 }

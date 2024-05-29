@@ -25,8 +25,6 @@ namespace Runtime.TaskStateSystem.TaskStates
         public void EnterState(TaskStateManager stateManager)
         {
             Debug.Log("Entering CheckHouse State");
-
-            _stateManager = stateManager;
             
             _playerPhysicsController = stateManager.GetPlayerPhysicsController();
             _playerPhysicsController.SetParanormalTriggerStatusUpdateAction(UpdateParanormalTriggerStatus);
@@ -43,6 +41,8 @@ namespace Runtime.TaskStateSystem.TaskStates
 
             _taskInfoManager.SetStateForInfo("CheckHouse");
             _checkHouseManager.ActiveTriggers();
+            
+            _stateManager = stateManager;
             
         }
 
@@ -63,28 +63,34 @@ namespace Runtime.TaskStateSystem.TaskStates
 
         private void UpdateParanormalExitTriggerStatus(bool activated)
         {
+            Debug.Log($"UpdateParanormalExitTriggerStatus called with value: {activated}");
             _paranormalTriggerExitActivate = activated;
-            
-            if(_paranormalTriggerExitActivate && _paranormalTriggerActivated)
+
+            if (_paranormalTriggerExitActivate && _paranormalTriggerActivated)
             {
-                Debug.Log("CIKIS KOSULU SAGLANDI");
-                _checkHouseManager.HideParanormal();
-                
+                Debug.Log("Exit condition met: transitioning to CheckCameraState");
+                //_checkHouseManager.HideParanormal();
+
                 Sequence sequence = DOTween.Sequence();
 
                 sequence.AppendCallback(() => _camScareManager.showGhost())
                     .AppendInterval(0.75f)
                     .AppendCallback(() => _sleepController.SleepCompulsory(_stateManager))
                     .AppendInterval(1f)
-                    .AppendCallback(() => _camScareManager.hideGhost());
+                    .AppendCallback(() => _camScareManager.hideGhost())
+                    .AppendInterval(0.2f)
+                    .AppendCallback(() =>
+                    {
+                        Debug.Log("Transitioning to CheckCameraState");
+                        TransformToPosition(_sleepController.Outbuilding.transform);
+                        _stateManager.SetState(new CheckCameraState());
+                    });
 
             }
         }
-        
+
         public void ExitState(TaskStateManager stateManager)
         {
-            
-            TransformToPosition(_sleepController.Outbuilding.transform);
             _checkHouseManager.DeActiveTriggers();
             _taskInfoManager.HideInfoTab();
             Debug.Log("Exiting CheckHouse State");
@@ -92,12 +98,22 @@ namespace Runtime.TaskStateSystem.TaskStates
         
         private void TransformToPosition(Transform targetPosition)
         {
-            _playerManager.transform.DOMove(targetPosition.position, 1f)
-                .SetEase(Ease.InOutQuad)
+            if (targetPosition == null)
+            {
+                Debug.LogError("Target position is null");
+                return;
+            }
+
+            Debug.Log($"Player current position: {_playerManager.transform.position}");
+            Debug.Log($"Target position: {targetPosition.position}");
+    
+            _playerManager.transform.DOMove(targetPosition.position, 0f)
+                .SetEase(Ease.Linear)
                 .OnComplete(() =>
                 {
                     Debug.Log("Player moved to target position");
                 });
         }
+
     }
 }

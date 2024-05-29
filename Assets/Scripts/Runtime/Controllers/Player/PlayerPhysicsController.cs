@@ -7,8 +7,8 @@ namespace Runtime.Controllers.Player
 {
     public class PlayerPhysicsController : MonoBehaviour
     {
-        private readonly string _inLight = "InsideLight";
-        private readonly string _inSecRoom = "InsideSecurityRoom";
+        // private readonly string _inLight = "InsideLight";
+        // private readonly string _inSecRoom = "InsideSecurityRoom";
         private readonly string _paranormalEnter = "ParanormalEnter";
         private readonly string _paranormalExit = "ParanormalExit";
         [SerializeField] private AudioSource playerAudioSource;
@@ -97,14 +97,14 @@ namespace Runtime.Controllers.Player
         
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag(_inLight))
-            {
-                isInsideLight = false;
-            }
-            else if (other.CompareTag(_inSecRoom))
-            {
-                isInsideSecRoom = false;
-            }
+            // if (other.CompareTag(_inLight))
+            // {
+            //     isInsideLight = false;
+            // }
+            // else if (other.CompareTag(_inSecRoom))
+            // {
+            //     isInsideSecRoom = false;
+            // }
         }
         
         
