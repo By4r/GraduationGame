@@ -1,4 +1,5 @@
 ﻿using Runtime.Controllers.Player;
+using Runtime.SoundSystem;
 using Runtime.TaskStateSystem.TaskUI;
 using UnityEngine;
 
@@ -38,6 +39,7 @@ namespace Runtime.TaskStateSystem.TaskStates
 
                     if (Input.GetMouseButtonDown(0))
                     {
+                        AudioManager.Instance.PlayStateSounds("GarbageSound");
                         //Destroy(hit.collider.gameObject);
                         hit.collider.gameObject.SetActive(false);
                         IncreaseGarbageAmount();

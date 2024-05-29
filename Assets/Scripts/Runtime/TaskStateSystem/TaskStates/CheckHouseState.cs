@@ -6,6 +6,7 @@ using Runtime.TaskSystem;
 using UnityEngine;
 using DG.Tweening;
 using Runtime.Managers;
+using Runtime.SoundSystem;
 
 namespace Runtime.TaskStateSystem.TaskStates
 {
@@ -55,6 +56,8 @@ namespace Runtime.TaskStateSystem.TaskStates
         {
             _paranormalTriggerActivated = activated;
             
+            //AudioManager.Instance.PlayStateSounds("KnockingWindowSound");
+            
             if (_paranormalTriggerActivated)
             {
                 _checkHouseManager.ShowParanormal();
@@ -70,7 +73,9 @@ namespace Runtime.TaskStateSystem.TaskStates
             {
                 Debug.Log("Exit condition met: transitioning to CheckCameraState");
                 //_checkHouseManager.HideParanormal();
+                
 
+                
                 Sequence sequence = DOTween.Sequence();
 
                 sequence.AppendCallback(() => _camScareManager.showGhost())

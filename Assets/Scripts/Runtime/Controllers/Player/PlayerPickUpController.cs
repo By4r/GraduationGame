@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Runtime.SoundSystem;
+using UnityEngine;
 
 namespace Runtime.Controllers.Player
 {
@@ -24,6 +25,7 @@ namespace Runtime.Controllers.Player
                     if (hit.collider.CompareTag("Pickable"))
                     {
                         PlayerPickUp(hit);
+                        AudioManager.Instance.PlayInteractSounds("PickUpSound");
                     }
                     else
                     {

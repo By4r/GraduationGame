@@ -1,5 +1,6 @@
 ﻿using Runtime.Controllers;
 using Runtime.Controllers.Player;
+using Runtime.SoundSystem;
 using Runtime.TaskStateSystem.TaskUI;
 using UnityEngine;
 
@@ -44,9 +45,11 @@ namespace Runtime.TaskStateSystem.TaskStates
                 
             }
             
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0))
             {
+                
                 _waterCanController.WaterFlowers();
+                AudioManager.Instance.PlayStateSounds("WateringSound");
                 
                 if (Physics.Raycast(raycast, out RaycastHit hit, range))
                 {
@@ -62,6 +65,10 @@ namespace Runtime.TaskStateSystem.TaskStates
             {
                 isWateringActive = false;
                 _waterCanController.StopWaterFlowers();
+            }
+            else
+            {
+                AudioManager.Instance.StopStateSound();
             }
             
             _currentWateringAmount = _waterCanController.GetCurrentWateringAmount();

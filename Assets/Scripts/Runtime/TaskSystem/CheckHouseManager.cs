@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Runtime.SoundSystem;
 using UnityEngine;
 
 namespace Runtime.TaskSystem
@@ -13,12 +14,15 @@ namespace Runtime.TaskSystem
 
         internal void ShowParanormal()
         {
+            AudioManager.Instance.PlayStateSounds("KnockingWindowSound");
+
             paranormalGameObject.SetActive(true);
-            StartCoroutine(HideParanormalAfterDelay(3f)); 
+            StartCoroutine(HideParanormalAfterDelay(2.5f)); 
         }
 
         internal void HideParanormal()
         {
+            AudioManager.Instance.StopStateSound();
             paranormalGameObject.SetActive(false);
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Runtime.SoundSystem;
 using UnityEngine;
 
 namespace Runtime.Controllers
@@ -38,6 +39,7 @@ namespace Runtime.Controllers
 
         internal void WateringAmount()
         {
+            AudioManager.Instance.PlayStateSounds("WateringSound");
             if (isWatering)
             {
                 Debug.Log("IS WATERING");
@@ -58,6 +60,7 @@ namespace Runtime.Controllers
 
         internal void StopWaterFlowers()
         {
+            AudioManager.Instance.StopStateSound();
             _animator.SetTrigger("downCan");
             isWatering = false;
             if (_particle != null)

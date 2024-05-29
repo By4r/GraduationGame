@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Runtime.Controllers.Player;
 using Runtime.Controllers.Subtitle;
+using Runtime.SoundSystem;
 using Runtime.TaskStateSystem.TaskUI;
 using UnityEngine;
 
@@ -23,7 +24,11 @@ namespace Runtime.TaskStateSystem.TaskStates
             _stateManager = stateManager;
             _taskInfoManager = stateManager.GetTaskInfoManager();
             
-            _taskInfoManager.SetStateForInfo("PickUpPhone");
+            //_taskInfoManager.SetStateForInfo("PickUpPhone");
+            
+            //AudioManager.Instance.PlayStateSounds("PhoneRingSound");
+            
+            _stateManager.StartCoroutine(PlayPhoneRingSoundWithDelay(5.0f));
             
         }
 
@@ -40,6 +45,8 @@ namespace Runtime.TaskStateSystem.TaskStates
 
                     if (Input.GetKeyDown(KeyCode.E))
                     {
+                        AudioManager.Instance.StopStateSound();
+                        
                         Debug.Log("Talking Started");
 
                         if (_audioSource.clip != null)
@@ -57,6 +64,14 @@ namespace Runtime.TaskStateSystem.TaskStates
             }
         }
 
+        
+        private IEnumerator PlayPhoneRingSoundWithDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            _taskInfoManager.SetStateForInfo("PickUpPhone");
+            AudioManager.Instance.PlayStateSounds("PhoneRingSound");
+        }
+        
         private IEnumerator FinishPhoneAfterAudio(float delay)
         {
             yield return new WaitForSeconds(delay);

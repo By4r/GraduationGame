@@ -1,6 +1,7 @@
 ﻿using Runtime.Controllers;
 using Runtime.Controllers.Player;
 using Runtime.Controllers.UI;
+using Runtime.SoundSystem;
 using Runtime.TaskStateSystem.TaskUI;
 using UnityEngine;
 
@@ -46,6 +47,7 @@ namespace Runtime.TaskStateSystem.TaskStates
                     if (Input.GetMouseButton(0))
                     {
                         _broomController.SweepFloor();
+                        AudioManager.Instance.PlayStateSounds("SweepSound");
                         _sweepHoldTime += Time.deltaTime;
                         _itemProgressBar.UpdateProgress(_sweepHoldTime / REQUİRED_HOLD_TİME);
                         
@@ -85,6 +87,7 @@ namespace Runtime.TaskStateSystem.TaskStates
 
         private void ResetSweep()
         {
+            AudioManager.Instance.StopStateSound();
             _broomController.StopSweepFloor();
             _sweepHoldTime = 0f;
             _itemProgressBar.ResetProgress();
