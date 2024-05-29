@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Runtime.SoundSystem;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Runtime.Controllers
@@ -12,7 +13,8 @@ namespace Runtime.Controllers
 
         [Button("Sweep Floor!")]
         internal void SweepFloor()
-        {
+        {   
+            AudioManager.Instance.PlayStateSounds("SweepSound");
             if (!isSweeping)
             {
                 isSweeping = true;
@@ -24,7 +26,7 @@ namespace Runtime.Controllers
         [Button("Stop Sweep Floor!")]
         internal void StopSweepFloor()
         {
-
+            AudioManager.Instance.StopStateSound();
             if (isSweeping)
             {
                 isSweeping = false;

@@ -30,6 +30,8 @@ namespace Runtime.TaskStateSystem
         [SerializeField] private TaskInfoManager taskInfoManager;
         [SerializeField] private PlayerMovementController playerMovementController;
         [SerializeField] private CameraController cameraController;
+        [SerializeField] private PlayerManager playerManager;
+        [SerializeField] private CamScareManager camScareManager;
 
         [ShowInInspector] private WorkData _workData;
 
@@ -48,7 +50,6 @@ namespace Runtime.TaskStateSystem
             //SetState(new WateringFlowerState());
             //SetState(new CheckHouseState());
             //SetState(new CheckOfficeState());
-
         }
 
         private void Update()
@@ -87,6 +88,11 @@ namespace Runtime.TaskStateSystem
         public PlayerMovementController GetPlayerMovementController() => playerMovementController;
 
         public CameraController GetCameraController() => cameraController;
+
+        public CamScareManager GetCamScareManager() => camScareManager;
+        
+
+        public PlayerManager GetPlayerManager() => playerManager;
         
         private WorkData GetData()
         {

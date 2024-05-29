@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Runtime.Signals;
+using Runtime.SoundSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -37,10 +38,22 @@ namespace Runtime.Managers
  
         private float tempSecond;
 
-
+        
         private void OnEnable()
         {
             SubscribeEvents();
+        }
+
+        private void Start()
+        {
+            if (hours >= 6 && hours < 22)
+            {
+                AudioManager.Instance.PlayEnvironmentSound("DaySound");
+            }
+            else
+            {
+                AudioManager.Instance.PlayEnvironmentSound("NightSound");
+            }
         }
 
         private void SubscribeEvents()
@@ -69,7 +82,7 @@ namespace Runtime.Managers
  
             if (tempSecond >= 1)
             {
-                Minutes += 1; // Normally +1
+                Minutes += 10; // Normally +1
                 tempSecond = 0;
             }
         }
@@ -95,6 +108,7 @@ namespace Runtime.Managers
         {
             if (value == 6)
             {
+                AudioManager.Instance.PlayEnvironmentSound("DaySound");
                 StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 10f));
                 StartCoroutine(LerpLight(graddientNightToSunrise, 10f));
             }
@@ -110,6 +124,7 @@ namespace Runtime.Managers
             }
             else if (value == 22)
             {
+                AudioManager.Instance.PlayEnvironmentSound("NightSound");
                 StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 10f));
                 StartCoroutine(LerpLight(graddientSunsetToNight, 10f));
             }
