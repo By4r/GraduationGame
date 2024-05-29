@@ -20,6 +20,7 @@ namespace Runtime.TaskStateSystem.TaskStates
         private SleepController _sleepController;
         private TaskStateManager _stateManager;
         private PlayerManager _playerManager;
+        private CamScareManager _camScareManager;
 
         public void EnterState(TaskStateManager stateManager)
         {
@@ -33,7 +34,8 @@ namespace Runtime.TaskStateSystem.TaskStates
 
             _checkHouseManager = stateManager.GetCheckHouseManager();
             _taskInfoManager = stateManager.GetTaskInfoManager();
-            _woodStickController = stateManager.GetWoodStickController();
+
+            _camScareManager = stateManager.GetCamScareManager();
 
             _sleepController = stateManager.GetSleepController();
 
@@ -70,12 +72,17 @@ namespace Runtime.TaskStateSystem.TaskStates
                 
                 Sequence sequence = DOTween.Sequence();
 
-                sequence.AppendCallback(() => _woodStickController.ActiveWoodObject())
-                    .AppendInterval(1f) // Add an interval if needed, or chain directly
-                    .AppendCallback(() => _woodStickController.HitWood())
-                    .AppendInterval(1f) // Add a delay before invoking SleepCompulsory
+                sequence.AppendCallback(() => _camScareManager.showGhost())
+                    .AppendInterval(0.75f)
                     .AppendCallback(() => _sleepController.SleepCompulsory(_stateManager))
                     .AppendCallback(() => _woodStickController.DeActiveWoodObject());
+                
+                // sequence.AppendCallback(() => _woodStickController.ActiveWoodObject())
+                //     .AppendInterval(1f) // Add an interval if needed, or chain directly
+                //     .AppendCallback(() => _woodStickController.HitWood())
+                //     .AppendInterval(1f) // Add a delay before invoking SleepCompulsory
+                //     .AppendCallback(() => _sleepController.SleepCompulsory(_stateManager))
+                //     .AppendCallback(() => _woodStickController.DeActiveWoodObject());
                 
             }
         }

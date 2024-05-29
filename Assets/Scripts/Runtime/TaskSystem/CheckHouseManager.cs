@@ -8,27 +8,7 @@ namespace Runtime.TaskSystem
         [SerializeField] private GameObject paranormalGameObject;
         [SerializeField] private GameObject paranormalTriggerEnter;
         [SerializeField] private GameObject paranormalTriggerExit;
-
-
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
-
-        private void SubscribeEvents()
-        {
-            
-        }
-
-        private void OnDisable()
-        {
-            UnSubscribeEvents();
-        }
-
-        private void UnSubscribeEvents()
-        {
-            
-        }
+        
 
         internal void ShowParanormal()
         {

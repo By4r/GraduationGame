@@ -54,7 +54,7 @@ namespace Runtime.Controllers
                 .SetEase(Ease.InOutQuad)
                 .OnComplete(() =>
                 {
-                    DOVirtual.DelayedCall(1f, () =>
+                    DOVirtual.DelayedCall(0.2f, () =>
                     {
                         sleepImage.DOFade(0f, 1f)
                             .SetEase(Ease.InOutQuad)

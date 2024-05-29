@@ -30,8 +30,8 @@ namespace Runtime.TaskStateSystem
         [SerializeField] private TaskInfoManager taskInfoManager;
         [SerializeField] private PlayerMovementController playerMovementController;
         [SerializeField] private CameraController cameraController;
-        [SerializeField] private WoodStickController woodStickController;
         [SerializeField] private PlayerManager playerManager;
+        [SerializeField] private CamScareManager camScareManager;
 
         [ShowInInspector] private WorkData _workData;
 
@@ -89,7 +89,8 @@ namespace Runtime.TaskStateSystem
 
         public CameraController GetCameraController() => cameraController;
 
-        public WoodStickController GetWoodStickController() => woodStickController;
+        public CamScareManager GetCamScareManager() => camScareManager;
+        
 
         public PlayerManager GetPlayerManager() => playerManager;
         
