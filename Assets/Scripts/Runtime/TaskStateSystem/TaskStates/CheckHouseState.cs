@@ -75,15 +75,9 @@ namespace Runtime.TaskStateSystem.TaskStates
                 sequence.AppendCallback(() => _camScareManager.showGhost())
                     .AppendInterval(0.75f)
                     .AppendCallback(() => _sleepController.SleepCompulsory(_stateManager))
-                    .AppendCallback(() => _woodStickController.DeActiveWoodObject());
-                
-                // sequence.AppendCallback(() => _woodStickController.ActiveWoodObject())
-                //     .AppendInterval(1f) // Add an interval if needed, or chain directly
-                //     .AppendCallback(() => _woodStickController.HitWood())
-                //     .AppendInterval(1f) // Add a delay before invoking SleepCompulsory
-                //     .AppendCallback(() => _sleepController.SleepCompulsory(_stateManager))
-                //     .AppendCallback(() => _woodStickController.DeActiveWoodObject());
-                
+                    .AppendInterval(1f)
+                    .AppendCallback(() => _camScareManager.hideGhost());
+
             }
         }
         
