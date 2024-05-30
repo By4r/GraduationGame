@@ -1,6 +1,7 @@
 ﻿using Runtime.Controllers.Camera;
 using Runtime.Controllers.Player;
 using Runtime.TaskStateSystem.TaskUI;
+using Runtime.TaskSystem;
 using UnityEngine;
 
 namespace Runtime.TaskStateSystem.TaskStates
@@ -12,20 +13,25 @@ namespace Runtime.TaskStateSystem.TaskStates
         private PlayerMovementController _playerMovementController;
         private PadLockPassword _padLockPassword;
         private CameraController _cameraController;
-        
+        private CheckOfficeManager _checkOfficeManager;
+
         private bool _isPasswordTrue;
         private Vector3 _originalLockPadPosition;
         private Quaternion _originalLockPadRotation;
         private Transform _lockPadTransform;
+        
+        private bool _keyReceived = false;
 
         public void EnterState(TaskStateManager stateManager)
         {
             Debug.Log("Entering CheckOffice State");
             _playerPhysicsController = stateManager.GetPlayerPhysicsController();
             _playerMovementController = stateManager.GetPlayerMovementController();
+            _checkOfficeManager = stateManager.GetCheckOfficeManager();
+            
 
             _taskInfoManager = stateManager.GetTaskInfoManager();
-            
+
             _taskInfoManager.SetStateForInfo("CheckOffice");
         }
 
@@ -35,20 +41,36 @@ namespace Runtime.TaskStateSystem.TaskStates
 
             Ray raycast = _playerPhysicsController.GetRaycast();
             float range = _playerPhysicsController.range;
-            
+
             if (Physics.Raycast(raycast, out RaycastHit hit, range))
             {
-                if (hit.collider.CompareTag("Key"))
+
+                if (hit.collider.CompareTag("Drawer"))
                 {
-                    if (_isPasswordTrue)
+                    if (Input.GetKey(KeyCode.E))
                     {
-                        if (Input.GetMouseButtonDown(0))
-                        {
-                            KeyReceived(stateManager);
-                        }
+                        _checkOfficeManager.PlayDrawerAnimation();
                     }
                 }
                 
+                if (hit.collider.CompareTag("Letter"))
+                {
+                    
+                    if (Input.GetKey(KeyCode.E))
+                    {
+                        LetterReceived(stateManager);
+                        _keyReceived = true; 
+                    }
+                }
+                
+                // if (hit.collider.CompareTag("Letter") && _checkOfficeManager.DrawerAnimationPlayed && !_keyReceived)
+                // {
+                //     if (Input.GetKey(KeyCode.E))
+                //     {
+                //         LetterReceived(stateManager);
+                //         _keyReceived = true; 
+                //     }
+                // }
             }
         }
 
@@ -56,16 +78,15 @@ namespace Runtime.TaskStateSystem.TaskStates
         {
             _taskInfoManager.HideInfoTab();
             Debug.Log("Exiting CheckOffice State");
-
         }
 
-        private void KeyReceived(TaskStateManager taskStateManager)
+        private void LetterReceived(TaskStateManager taskStateManager)
         {
-            Debug.Log("Key Received !");
-            
+            Debug.Log("Letter Received !");
+
             taskStateManager.SetState(new AtticState());
         }
-        
+
         private void SetPasswordTrue()
         {
             _isPasswordTrue = true;

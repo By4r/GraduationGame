@@ -36,6 +36,7 @@ namespace Runtime.TaskStateSystem
         [SerializeField] private CamScareManager camScareManager;
         [SerializeField] private CheckCameraManager checkCameraManager;
         [SerializeField] private SecurityRoomController securityRoomController;
+        [SerializeField] private CheckAtticManager checkAtticManager;
 
         [ShowInInspector] private WorkData _workData;
 
@@ -52,8 +53,9 @@ namespace Runtime.TaskStateSystem
             //SetState(new GoSleepState());
             //SetState(new SweepFloorState());
             //SetState(new WateringFlowerState());
-            SetState(new CheckHouseState());
+            //SetState(new CheckHouseState());
             //SetState(new CheckOfficeState());
+            SetState(new AtticState());
             //SetState(new CheckCameraState());
         }
 
@@ -102,6 +104,8 @@ namespace Runtime.TaskStateSystem
         public CheckCameraManager GetCheckCameraManager() => checkCameraManager;
 
         public SecurityRoomController GetSecurityRoomController() => securityRoomController;
+
+        public CheckAtticManager GetCheckAtticManager() => checkAtticManager;
         
         private WorkData GetData()
         {
