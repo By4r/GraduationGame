@@ -4,6 +4,7 @@ using Runtime.TaskStateSystem.TaskUI;
 using UnityEngine;
 using System.Collections;
 using Runtime.Managers;
+using Runtime.TaskSystem;
 
 namespace Runtime.TaskStateSystem.TaskStates
 {
@@ -16,6 +17,7 @@ namespace Runtime.TaskStateSystem.TaskStates
         private bool _isLetterRead;
         private TaskStateManager _stateManager;
         private CamScareManager _camScareManager;
+        private HeatHouseManager _heatHouseManager;
 
         public void EnterState(TaskStateManager stateManager)
         {
@@ -25,6 +27,7 @@ namespace Runtime.TaskStateSystem.TaskStates
             _playerPickUpController = stateManager.GetPlayerPickUpController();
             _taskInfoManager = stateManager.GetTaskInfoManager();
             _camScareManager = stateManager.GetCamScareManager();
+            _heatHouseManager = stateManager.GetHeatHouseManager();
             _taskInfoManager.SetStateForInfo("HeatHouse");
 
             _firePlaceController = GameObject.FindObjectOfType<FirePlaceController>();
@@ -99,12 +102,12 @@ namespace Runtime.TaskStateSystem.TaskStates
             Debug.Log("Letter read, starting delay...");
             yield return new WaitForSeconds(4);
             
-            _camScareManager.showGhostTemporary();
+            _heatHouseManager.ShowParanormal();
 
-            _playerPhysicsController.StartCoroutine(AfterCamScare());
+            _playerPhysicsController.StartCoroutine(AfterShowGhost());
         }
         
-        private IEnumerator AfterCamScare()
+        private IEnumerator AfterShowGhost()
         {
             Debug.Log("Letter read, starting delay...");
             yield return new WaitForSeconds(2);

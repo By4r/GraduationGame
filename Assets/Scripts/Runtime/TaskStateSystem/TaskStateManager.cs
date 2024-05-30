@@ -37,6 +37,7 @@ namespace Runtime.TaskStateSystem
         [SerializeField] private CheckCameraManager checkCameraManager;
         [SerializeField] private SecurityRoomController securityRoomController;
         [SerializeField] private CheckAtticManager checkAtticManager;
+        [SerializeField] private HeatHouseManager heatHouseManager;
 
         [ShowInInspector] private WorkData _workData;
 
@@ -108,6 +109,8 @@ namespace Runtime.TaskStateSystem
         public SecurityRoomController GetSecurityRoomController() => securityRoomController;
 
         public CheckAtticManager GetCheckAtticManager() => checkAtticManager;
+
+        public HeatHouseManager GetHeatHouseManager() => heatHouseManager;
         
         private WorkData GetData()
         {
