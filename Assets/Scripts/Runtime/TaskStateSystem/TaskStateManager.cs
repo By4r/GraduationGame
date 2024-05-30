@@ -1,10 +1,12 @@
 ﻿using Runtime.Controllers;
 using Runtime.Controllers.Camera;
 using Runtime.Controllers.Player;
+using Runtime.Controllers.Security_Room;
 using Runtime.Controllers.Subtitle;
 using Runtime.Data.UnityObjects;
 using Runtime.Data.ValueObjects;
 using Runtime.Managers;
+using Runtime.StateManagers;
 using Runtime.TaskStateSystem.TaskStates;
 using Runtime.TaskStateSystem.TaskUI;
 using Runtime.TaskSystem;
@@ -32,6 +34,8 @@ namespace Runtime.TaskStateSystem
         [SerializeField] private CameraController cameraController;
         [SerializeField] private PlayerManager playerManager;
         [SerializeField] private CamScareManager camScareManager;
+        [SerializeField] private CheckCameraManager checkCameraManager;
+        [SerializeField] private SecurityRoomController securityRoomController;
 
         [ShowInInspector] private WorkData _workData;
 
@@ -43,13 +47,14 @@ namespace Runtime.TaskStateSystem
         private void Start()
         {
             // Initialize the state machine with an initial state
-            SetState(new PickUpPhoneState());
+            //SetState(new PickUpPhoneState());
             //SetState(new CollectGarbageState());
             //SetState(new GoSleepState());
             //SetState(new SweepFloorState());
             //SetState(new WateringFlowerState());
             //SetState(new CheckHouseState());
             //SetState(new CheckOfficeState());
+            SetState(new CheckCameraState());
         }
 
         private void Update()
@@ -93,6 +98,10 @@ namespace Runtime.TaskStateSystem
         
 
         public PlayerManager GetPlayerManager() => playerManager;
+
+        public CheckCameraManager GetCheckCameraManager() => checkCameraManager;
+
+        public SecurityRoomController GetSecurityRoomController() => securityRoomController;
         
         private WorkData GetData()
         {
