@@ -1,5 +1,6 @@
 ﻿using Runtime.Controllers.Camera;
 using Runtime.Controllers.Player;
+using Runtime.Controllers.UI;
 using Runtime.TaskStateSystem.TaskUI;
 using Runtime.TaskSystem;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace Runtime.TaskStateSystem.TaskStates
         private PadLockPassword _padLockPassword;
         private CameraController _cameraController;
         private CheckOfficeManager _checkOfficeManager;
-
+        
         private bool _isPasswordTrue;
         private Vector3 _originalLockPadPosition;
         private Quaternion _originalLockPadRotation;
@@ -28,8 +29,8 @@ namespace Runtime.TaskStateSystem.TaskStates
             _playerPhysicsController = stateManager.GetPlayerPhysicsController();
             _playerMovementController = stateManager.GetPlayerMovementController();
             _checkOfficeManager = stateManager.GetCheckOfficeManager();
-            
 
+          
             _taskInfoManager = stateManager.GetTaskInfoManager();
 
             _taskInfoManager.SetStateForInfo("CheckOffice");
@@ -60,6 +61,7 @@ namespace Runtime.TaskStateSystem.TaskStates
                     {
                         LetterReceived(stateManager);
                         _keyReceived = true; 
+                        _checkOfficeManager.atticNotePanel.SetActive(true);
                     }
                 }
                 
@@ -72,6 +74,11 @@ namespace Runtime.TaskStateSystem.TaskStates
                 //     }
                 // }
             }
+            if (_keyReceived)
+            {
+                _checkOfficeManager.atticNotePanel.SetActive(true);
+            }
+            
         }
 
         public void ExitState(TaskStateManager stateManager)
@@ -83,7 +90,7 @@ namespace Runtime.TaskStateSystem.TaskStates
         private void LetterReceived(TaskStateManager taskStateManager)
         {
             Debug.Log("Letter Received !");
-
+           
             taskStateManager.SetState(new AtticState());
         }
 

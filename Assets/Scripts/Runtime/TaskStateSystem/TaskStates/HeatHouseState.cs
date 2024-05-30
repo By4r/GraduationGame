@@ -3,6 +3,7 @@ using Runtime.Controllers.Player;
 using Runtime.TaskStateSystem.TaskUI;
 using UnityEngine;
 using System.Collections;
+using Runtime.Controllers.Subtitle;
 using Runtime.Managers;
 using Runtime.TaskSystem;
 
@@ -86,15 +87,12 @@ namespace Runtime.TaskStateSystem.TaskStates
         private IEnumerator HandleLetterRead()
         {
             Debug.Log("Letter read, starting delay...");
-            yield return new WaitForSeconds(1);
-            HeatHouseSpeech();
+            _heatHouseManager.secondLetter.SetActive(true);
+            yield return new WaitForSeconds(3);
+            PlaySubtitle.Instance.PlayAudioWithSubtitle("devil_himself");
         }
 
-        private void HeatHouseSpeech()
-        {
-            Debug.Log("Playing HeatHouse speech...");
-            // Konuşma metodu. Burada bir konuşma sistemi veya animasyon ekleyebilirsiniz.
-        }
+       
         
         
         private IEnumerator AfterReadCamScare()
@@ -119,6 +117,7 @@ namespace Runtime.TaskStateSystem.TaskStates
         public void ExitState(TaskStateManager stateManager)
         {
             _taskInfoManager.HideInfoTab();
+            PlaySubtitle.Instance.PlayAudioWithSubtitle("call_phone_help");
             Debug.Log("Exiting HeatHouse State");
         }
     }

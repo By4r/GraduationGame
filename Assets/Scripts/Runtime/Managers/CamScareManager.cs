@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Runtime.SoundSystem;
 
 namespace Runtime.Managers
 {
@@ -10,6 +11,7 @@ namespace Runtime.Managers
         internal void showGhost()
         {
             GhostObject.SetActive(true);
+            AudioManager.Instance.PlayStateSounds("scream");
         }
 
         internal void hideGhost()

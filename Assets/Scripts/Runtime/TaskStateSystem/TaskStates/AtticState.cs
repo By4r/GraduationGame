@@ -74,9 +74,16 @@ namespace Runtime.TaskStateSystem.TaskStates
             float range = _playerPhysicsController.range;
 
             if (_isLetterReceived)
-            {
-                _checkAtticManager.ActiveTrigger();
+            {   
+                _checkAtticManager.ShowLetter();
+                
                 _isLetterReceived = false;
+            }
+
+            if (Input.GetKey(KeyCode.Tab))
+            {
+                _checkAtticManager.CloseFirstLetter();
+                _checkAtticManager.ActiveTrigger();
             }
             
             if (Physics.Raycast(raycast, out RaycastHit hit, range))

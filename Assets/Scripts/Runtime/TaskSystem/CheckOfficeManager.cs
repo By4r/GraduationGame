@@ -11,7 +11,7 @@ namespace Runtime.TaskSystem
         [SerializeField] private GameObject drawerObject;
         [SerializeField] private DOTweenAnimation drawerAnim;
         [SerializeField] private GameObject letterObject;
-
+        [SerializeField] internal GameObject atticNotePanel;
         private bool _drawerAnimationPlayed;
 
         public bool DrawerAnimationPlayed
