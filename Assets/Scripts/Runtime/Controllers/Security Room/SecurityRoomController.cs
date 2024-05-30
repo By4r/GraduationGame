@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Runtime.Controllers.Camera;
 using Runtime.Controllers.Player;
 using Runtime.Enums;
@@ -12,16 +13,10 @@ namespace Runtime.Controllers.Security_Room
     {
         [SerializeField] private PlayerMovementController playerMovementController;
         [SerializeField] private CameraController cameraController;
-        //[SerializeField] private CapturePhotoController capturePhotoController;
         [SerializeField] private float range;
         [SerializeField] private PlayerPhysicsController playerPhysicsController;
         [SerializeField] private List<GameObject> cameras;
-        //[SerializeField] private bool isPauseState;
         [SerializeField] private GameObject secCameraPressEtext;
-        //[SerializeField] private GameObject infoPaperPressEtext;
-        //[SerializeField] private AudioSource secRoomAudioSource;
-        //[SerializeField] private AudioClip monitorSound;
-        //[SerializeField] private AudioClip paperSound;
         [SerializeField] private GameObject secPanel;
 
         private int cameraSelected;
@@ -29,15 +24,26 @@ namespace Runtime.Controllers.Security_Room
         private bool isInfoPaperPanelOpen;
         private bool hasPlayedMonitorSound;
         private bool hasPlayedPaperSound;
+        private bool wasCamOfficeActive;
 
         private readonly string securityCameraTag = "SecurityCamera";
         private readonly string infoPaperTag = "InfoPaper";
-    
+
         #region Public Variables
         
         public bool isSecurityPanelOpen;
         
+        private bool _isCheckCameraState;
+        public bool IsCheckCameraState
+        {
+            get => _isCheckCameraState;
+            set => _isCheckCameraState = value;
+        }
+        
         #endregion
+        
+        private Action<bool> _updateParanormalStatus;
+        
         private void Update()
         {
             Ray raycast = new Ray(playerPhysicsController.playerEyes.transform.position,
@@ -70,6 +76,21 @@ namespace Runtime.Controllers.Security_Room
                             isSecurityCamOpen = false;
                         }
                     }
+                    
+                    // Check if the current camera is "CamOffice"
+                    if (cameras[cameraSelected].name == "CamOffice" && IsCheckCameraState)
+                    {
+                        if (!wasCamOfficeActive)
+                        {
+                            wasCamOfficeActive = true;
+                            _updateParanormalStatus?.Invoke(true);
+                            Debug.Log("CamOffice is the currently active camera.");
+                        }
+                    }
+                    else
+                    {
+                        wasCamOfficeActive = false;
+                    }
                 }
                 if (hit.collider.CompareTag(infoPaperTag))
                 {
@@ -87,7 +108,6 @@ namespace Runtime.Controllers.Security_Room
                 secCameraPressEtext.SetActive(false);
             }
         }
-        
 
         private void InfoPaperPanelOpen()
         {
@@ -146,6 +166,11 @@ namespace Runtime.Controllers.Security_Room
             cameraController.mouseState = true;
             hasPlayedMonitorSound = false;
             secPanel.SetActive(false);
+        }
+        
+        internal void SetParanormalUpdateAction(Action<bool> action)
+        {
+            _updateParanormalStatus = action;
         }
     }
 }

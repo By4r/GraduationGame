@@ -27,13 +27,6 @@ namespace Runtime.TaskStateSystem.TaskStates
             _taskInfoManager = stateManager.GetTaskInfoManager();
             
             _taskInfoManager.SetStateForInfo("CheckOffice");
-
-            // Find the PadLockPassword component and subscribe to the event
-            _padLockPassword = GameObject.FindObjectOfType<PadLockPassword>();
-            if (_padLockPassword != null)
-            {
-                _padLockPassword.OnPasswordCorrect += SetPasswordTrue;
-            }
         }
 
         public void UpdateState(TaskStateManager stateManager)
@@ -42,11 +35,6 @@ namespace Runtime.TaskStateSystem.TaskStates
 
             Ray raycast = _playerPhysicsController.GetRaycast();
             float range = _playerPhysicsController.range;
-
-            if (_isPasswordTrue)
-            {
-                Debug.Log("DRAWER OPENED!");
-            }
             
             if (Physics.Raycast(raycast, out RaycastHit hit, range))
             {
@@ -60,33 +48,7 @@ namespace Runtime.TaskStateSystem.TaskStates
                         }
                     }
                 }
-
-                if (hit.collider.CompareTag("LockPad"))
-                {
-                    _lockPadTransform = hit.collider.transform;
-
-                    if (_originalLockPadPosition == Vector3.zero)
-                    {
-                        _originalLockPadPosition = _lockPadTransform.position;
-                        _originalLockPadRotation = _lockPadTransform.rotation;
-                    }
-
-                    if (Input.GetKeyDown(KeyCode.E))
-                    {
-                        Debug.Log("1111111111111111");
-                        _playerMovementController.canMove = false;
-                        Vector3 spawnPosition = _playerPhysicsController.transform.position + _playerPhysicsController.transform.forward * 2f;
-                        _lockPadTransform.position = spawnPosition;
-                        _lockPadTransform.rotation = _playerPhysicsController.transform.rotation;
-                    }
-
-                    if (Input.GetKeyDown(KeyCode.Q))
-                    {
-                        _playerMovementController.canMove = true;
-                        _lockPadTransform.position = _originalLockPadPosition;
-                        _lockPadTransform.rotation = _originalLockPadRotation;
-                    }
-                }
+                
             }
         }
 
@@ -95,11 +57,6 @@ namespace Runtime.TaskStateSystem.TaskStates
             _taskInfoManager.HideInfoTab();
             Debug.Log("Exiting CheckOffice State");
 
-            // Unsubscribe from the event
-            if (_padLockPassword != null)
-            {
-                _padLockPassword.OnPasswordCorrect -= SetPasswordTrue;
-            }
         }
 
         private void KeyReceived(TaskStateManager taskStateManager)
