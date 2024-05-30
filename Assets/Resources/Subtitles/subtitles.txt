@@ -34,7 +34,7 @@
         {
             "key": "want_home",
             "line": [
-                "WHAT happend in this place. I dont want to get into this.",
+                "WHAT happened in this place. I dont want to get into this.",
                 "I just wanna go home."
             ],
             "duration": [3.0, 2.0]
