@@ -7,8 +7,12 @@ namespace Runtime.Controllers
     {
         public string key;
         public string[] line;
-        public float[] duration; // Altyazı süresi (saniye cinsinden)
+        public float[] duration;
     }
 
-//text joson dosyasını burada temsil edecek
+    [Serializable]
+    public class VoiceOverText
+    {
+        public VoiceOverLine[] lines;
+    }
 }

@@ -1,19 +1,15 @@
 ﻿using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Runtime.SoundSystem
 {
-    public class AudioManager:MonoBehaviour
+    public class AudioManager : MonoBehaviour
     {
-
         public static AudioManager Instance;
         
-        [Space] public Sound[] environmentSounds, stateSounds, interactSounds;
+        [Space] public Sound[] environmentSounds, stateSounds, interactSounds, playerTalkingSounds;
 
-        [Space(10)]
-        public AudioSource environmentSource, stateSource, interactSource;
-
+        [Space(10)] public AudioSource environmentSource, stateSource, interactSource, playerTalkingSource;
 
         private void Awake()
         {
@@ -28,45 +24,30 @@ namespace Runtime.SoundSystem
             }
         }
 
-        
         public void PlayEnvironmentSound(string name)
         {
             Sound s = Array.Find(environmentSounds, x => x.name == name);
-
             if (s == null)
             {
                 Debug.Log("Sound Not Found");
+                return;
             }
-            else
-            {
-                environmentSource.clip = s.clip;
-                environmentSource.loop = true;
-                environmentSource.Play();
-            }
-            
-
+            environmentSource.clip = s.clip;
+            environmentSource.loop = true;
+            environmentSource.Play();
         }
 
         public void PlayStateSounds(string name)
         {
             Sound s = Array.Find(stateSounds, x => x.name == name);
-
             if (s == null)
             {
                 Debug.Log("Sound Not Found");
+                return;
             }
-            
-            if (!stateSource.isPlaying)
-            {
-                stateSource.clip = s.clip;
-                stateSource.loop = true;
-                stateSource.Play();
-            }
-            
-            // else
-            // {
-            //     stateSource.PlayOneShot(s.clip);
-            // }
+            stateSource.clip = s.clip;
+            stateSource.loop = false; // Sadece bir kere çalmak için
+            stateSource.Play();
         }
 
         public void StopStateSound()
@@ -74,24 +55,39 @@ namespace Runtime.SoundSystem
             if (stateSource.isPlaying)
             {
                 stateSource.Stop();
-                stateSource.loop = false;
             }
         }
-        
-        
+
         public void PlayInteractSounds(string name)
         {
             Sound s = Array.Find(interactSounds, x => x.name == name);
-
             if (s == null)
             {
                 Debug.Log("Sound Not Found");
+                return;
             }
-            else
+            interactSource.PlayOneShot(s.clip);
+        }
+
+        public void PlayPlayerTalkingSound(string name)
+        {
+            Sound s = Array.Find(playerTalkingSounds, x => x.name == name);
+            if (s == null)
             {
-                interactSource.PlayOneShot(s.clip);
+                Debug.Log("Sound Not Found");
+                return;
+            }
+            playerTalkingSource.clip = s.clip;
+            playerTalkingSource.loop = false; // Sadece bir kere çalmak için
+            playerTalkingSource.Play();
+        }
+
+        public void StopPlayerTalkingSound()
+        {
+            if (playerTalkingSource.isPlaying)
+            {
+                playerTalkingSource.Stop();
             }
         }
-        
     }
 }

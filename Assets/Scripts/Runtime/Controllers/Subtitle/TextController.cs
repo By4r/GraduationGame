@@ -15,10 +15,7 @@ namespace Runtime.Controllers
 
         public void ClearText()
         {
-            textBox.text = String.Empty;
+            textBox.text = string.Empty;
         }
-        
-        
-        
     }
 }
