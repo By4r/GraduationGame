@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skybox
+  m_Name: Skybox_Dual Panoramic
   m_Shader: {fileID: 4800000, guid: 7bbc90bab48e15c4ea948cf176778662, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -21,20 +21,16 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Texture1:
-        m_Texture: {fileID: 2800000, guid: 99bd560bdcabc9143822319520462936, type: 3}
+        m_Texture: {fileID: 2800000, guid: f1f5de2b6afee7045bb6bade22b7e43e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2:
-        m_Texture: {fileID: 2800000, guid: 00e9b7f0829899140a02f60cfa3dff18, type: 3}
+        m_Texture: {fileID: 2800000, guid: 99bd560bdcabc9143822319520462936, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-<<<<<<< HEAD
-    - _Blend: 0.25634262
-=======
-    - _Blend: 0.5033959
->>>>>>> origin/main
+    - _Blend: 0
     - _Exposure1: 1
     - _Exposure2: 1
     - _ImageType: 0
