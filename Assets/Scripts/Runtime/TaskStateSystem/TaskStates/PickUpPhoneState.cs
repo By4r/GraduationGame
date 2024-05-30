@@ -52,7 +52,7 @@ namespace Runtime.TaskStateSystem.TaskStates
                         if (_audioSource.clip != null)
                         {
                             _audioSource.Play();
-                            _playSubtitle.PlaySpeech(_audioSource);
+                            _playSubtitle.PlayAudioWithSubtitle("pickup_phone");
                             _stateManager.StartCoroutine(FinishPhoneAfterAudio(_audioSource.clip.length));
                         }
                     }

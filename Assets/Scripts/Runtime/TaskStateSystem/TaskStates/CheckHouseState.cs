@@ -22,6 +22,8 @@ namespace Runtime.TaskStateSystem.TaskStates
         private TaskStateManager _stateManager;
         private PlayerManager _playerManager;
         private CamScareManager _camScareManager;
+        private AudioManager _audioManager;
+        
 
         public void EnterState(TaskStateManager stateManager)
         {
@@ -39,7 +41,7 @@ namespace Runtime.TaskStateSystem.TaskStates
             _sleepController = stateManager.GetSleepController();
 
             _playerManager = stateManager.GetPlayerManager();
-
+            _audioManager.PlayPlayerTalkingSound("women_watching");
             _taskInfoManager.SetStateForInfo("CheckHouse");
             _checkHouseManager.ActiveTriggers();
             
