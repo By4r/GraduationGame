@@ -30,8 +30,10 @@ namespace Runtime.TaskStateSystem.TaskStates
         public void UpdateState(TaskStateManager stateManager)
         {
             Debug.Log("CheckCamera State");
+            
         }
 
+        
         public void ExitState(TaskStateManager stateManager)
         {
             _taskInfoManager.HideInfoTab();
