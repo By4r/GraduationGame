@@ -6,9 +6,23 @@ namespace Runtime.Controllers.Subtitle
 {
     public class PlaySubtitle : MonoBehaviour
     {
+        public static PlaySubtitle Instance;
+        
         [SerializeField] private SubtitleManager _subtitleManager;
         [SerializeField] private TextController _textController;
 
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
         private void Start()
         {
             _textController.ClearText();

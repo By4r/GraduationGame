@@ -51,7 +51,7 @@ namespace Runtime.TaskStateSystem
         private void Start()
         {
             // Initialize the state machine with an initial state
-            //SetState(new PickUpPhoneState());
+            SetState(new PickUpPhoneState());
             //SetState(new CollectGarbageState());
             //SetState(new GoSleepState());
             //SetState(new SweepFloorState());
@@ -63,6 +63,7 @@ namespace Runtime.TaskStateSystem
             //SetState(new GoCarState());
             //SetState(new HeatHouseState());
             SetState(new CallPhoneState());
+
         }
 
         private void Update()

@@ -34,6 +34,7 @@ namespace Runtime.Controllers
                     _particle.Play();
                 }
                 else return;
+                
             }
         }
 
@@ -42,6 +43,7 @@ namespace Runtime.Controllers
             AudioManager.Instance.PlayStateSounds("WateringSound");
             if (isWatering)
             {
+                
                 Debug.Log("IS WATERING");
                 wateringTime += Time.deltaTime;
                 Debug.Log("Watering Time"+ wateringTime);
