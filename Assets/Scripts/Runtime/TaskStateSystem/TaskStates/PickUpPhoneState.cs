@@ -25,10 +25,10 @@ namespace Runtime.TaskStateSystem.TaskStates
             _taskInfoManager = stateManager.GetTaskInfoManager();
             
             //_taskInfoManager.SetStateForInfo("PickUpPhone");
-            
+            AudioManager.Instance.PlayStateSounds("CarSound");
             //AudioManager.Instance.PlayStateSounds("PhoneRingSound");
             _playSubtitle.PlayAudioWithSubtitle("starting_speech");
-            _stateManager.StartCoroutine(PlayPhoneRingSoundWithDelay(25.0f));
+            _stateManager.StartCoroutine(PlayPhoneRingSoundWithDelay(30.0f));
             
         }
 
