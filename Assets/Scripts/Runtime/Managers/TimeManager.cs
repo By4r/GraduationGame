@@ -43,7 +43,8 @@ namespace Runtime.Managers
         {
             SubscribeEvents();
         }
-
+        
+        
         private void Start()
         {
             if (hours >= 6 && hours < 22)
@@ -78,7 +79,7 @@ namespace Runtime.Managers
 
         public void Update()
         {
-            tempSecond += Time.deltaTime;
+            //tempSecond += Time.deltaTime;
  
             if (tempSecond >= 1)
             {
@@ -108,6 +109,7 @@ namespace Runtime.Managers
         {
             if (value == 6)
             {
+                RenderSettings.fog = false;
                 AudioManager.Instance.PlayEnvironmentSound("DaySound");
                 StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 10f));
                 StartCoroutine(LerpLight(graddientNightToSunrise, 10f));
@@ -124,6 +126,7 @@ namespace Runtime.Managers
             }
             else if (value == 22)
             {
+                RenderSettings.fog = true;
                 AudioManager.Instance.PlayEnvironmentSound("NightSound");
                 StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 10f));
                 StartCoroutine(LerpLight(graddientSunsetToNight, 10f));
@@ -148,7 +151,7 @@ namespace Runtime.Managers
             for (float i = 0; i < time; i += Time.deltaTime)
             {
                 globalLight.color = lightGradient.Evaluate(i / time);
-                RenderSettings.fogColor = globalLight.color;
+                //RenderSettings.fogColor = globalLight.color;
                 yield return null;
             }
         }

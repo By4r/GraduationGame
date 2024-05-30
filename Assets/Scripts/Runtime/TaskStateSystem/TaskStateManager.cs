@@ -56,13 +56,13 @@ namespace Runtime.TaskStateSystem
             //SetState(new GoSleepState());
             //SetState(new SweepFloorState());
             //SetState(new WateringFlowerState());
-            //SetState(new CheckHouseState());
+            SetState(new CheckHouseState());
             //SetState(new CheckOfficeState());
             //SetState(new AtticState());
             //SetState(new CheckCameraState());
             //SetState(new GoCarState());
             //SetState(new HeatHouseState());
-            SetState(new CallPhoneState());
+            //SetState(new CallPhoneState());
 
         }
 

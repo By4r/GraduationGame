@@ -42,7 +42,6 @@ namespace Runtime.TaskStateSystem.TaskStates
                     _endingController.OpenInventoryPanel();
                 }
             }
-            
         }
 
         public void ExitState(TaskStateManager stateManager)
