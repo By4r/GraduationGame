@@ -63,7 +63,8 @@ namespace Runtime.TaskStateSystem.TaskStates
                 _checkHouseManager.ShowParanormal();
             }
         }
-
+        
+        
         private void UpdateParanormalExitTriggerStatus(bool activated)
         {
             Debug.Log($"UpdateParanormalExitTriggerStatus called with value: {activated}");
@@ -100,6 +101,7 @@ namespace Runtime.TaskStateSystem.TaskStates
             _taskInfoManager.HideInfoTab();
             Debug.Log("Exiting CheckHouse State");
         }
+        
         
         private void TransformToPosition(Transform targetPosition)
         {

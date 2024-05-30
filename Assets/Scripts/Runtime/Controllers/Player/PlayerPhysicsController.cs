@@ -1,6 +1,7 @@
 ﻿using System;
 using Runtime.Managers;
 using Runtime.Signals;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Runtime.Controllers.Player
@@ -93,6 +94,13 @@ namespace Runtime.Controllers.Player
                 _updateParanormalTriggerExitStatus?.Invoke(true);
             }
             
+        }
+
+        [Button("UPDATE PARANORMAL TRUE")]
+        private void UpdateParanormal()
+        {
+            _updateParanormalTriggerStatus?.Invoke(true);
+            _updateParanormalTriggerExitStatus?.Invoke(true);
         }
         
         private void OnTriggerExit(Collider other)

@@ -52,9 +52,9 @@ namespace Runtime.TaskStateSystem
             //SetState(new GoSleepState());
             //SetState(new SweepFloorState());
             //SetState(new WateringFlowerState());
-            //SetState(new CheckHouseState());
+            SetState(new CheckHouseState());
             //SetState(new CheckOfficeState());
-            SetState(new CheckCameraState());
+            //SetState(new CheckCameraState());
         }
 
         private void Update()

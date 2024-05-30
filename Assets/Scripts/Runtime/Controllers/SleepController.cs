@@ -10,7 +10,7 @@ namespace Runtime.Controllers
     public class SleepController : MonoBehaviour
     {
         [SerializeField] private GameObject sleepPanel;
-
+        
         public Transform Outbuilding;
 
         private Image sleepImage;
