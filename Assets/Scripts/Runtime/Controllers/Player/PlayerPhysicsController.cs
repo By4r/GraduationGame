@@ -1,6 +1,8 @@
 ﻿using System;
+using Runtime.Controllers.Subtitle;
 using Runtime.Managers;
 using Runtime.Signals;
+using Runtime.SoundSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -12,16 +14,16 @@ namespace Runtime.Controllers.Player
         // private readonly string _inSecRoom = "InsideSecurityRoom";
         private readonly string _paranormalEnter = "ParanormalEnter";
         private readonly string _paranormalExit = "ParanormalExit";
-        [SerializeField] private AudioSource playerAudioSource;
-        [SerializeField] private AudioSource backgroundArudiosource;
-        [SerializeField] private AudioClip mentalDecreaseSound;
-        [SerializeField] private AudioClip mallBackgroundSound;
-        [SerializeField] private PlayerManager playerManager;
-        public bool isInsideLight;
-        public bool isInsideSecRoom;
-        [SerializeField] private CapturePhotoController _capturePhotoController;
+        //[SerializeField] private AudioSource playerAudioSource;
+        // [SerializeField] private AudioSource backgroundArudiosource;
+        // [SerializeField] private AudioClip mentalDecreaseSound;
+        // [SerializeField] private AudioClip mallBackgroundSound;
+        // [SerializeField] private PlayerManager playerManager;
+        //public bool isInsideLight;
+         public bool isInsideSecRoom;
+        // [SerializeField] private CapturePhotoController _capturePhotoController;
         private bool hasPlayedMentalDecreaseSound = false;
-        
+        [SerializeField] private PlaySubtitle _playSubtitle;
         [SerializeField] public GameObject playerEyes;
         [SerializeField] public float range;
 
@@ -34,22 +36,22 @@ namespace Runtime.Controllers.Player
         private void Update()
         {
             Debug.DrawRay(playerEyes.transform.position, playerEyes.transform.TransformDirection(Vector3.forward) * range, Color.green);
-            if (isInsideLight || isInsideSecRoom)
-            {
-                IncreaseMentalHealth();
-            }
-            else 
-            {
-                DecreaseMentalHealth();
-            }
+            // if (isInsideLight || isInsideSecRoom)
+            // {
+            //     IncreaseMentalHealth();
+            // }
+            // else 
+            // {
+            //     DecreaseMentalHealth();
+            // }
         }
-        private void IncreaseMentalHealth()
-        {
-            PlayerSignals.Instance.onIncreaseMentalHealth?.Invoke();
-            Debug.Log("IncreaseMental");
-            hasPlayedMentalDecreaseSound = false;
-            playerAudioSource.Stop();
-        }
+        // private void IncreaseMentalHealth()
+        // {
+        //     PlayerSignals.Instance.onIncreaseMentalHealth?.Invoke();
+        //     Debug.Log("IncreaseMental");
+        //     hasPlayedMentalDecreaseSound = false;
+        //     playerAudioSource.Stop();
+        // }
 
         public Ray GetRaycast()
         {
@@ -60,14 +62,14 @@ namespace Runtime.Controllers.Player
         
         private void DecreaseMentalHealth()
         {
-            PlayerSignals.Instance.onDecreaseMentalHealth?.Invoke();
-            if (!hasPlayedMentalDecreaseSound)
-            {
-               
-                Debug.Log("DecreaseMental");
-                playerAudioSource.PlayOneShot(mentalDecreaseSound);
-                hasPlayedMentalDecreaseSound = true;
-            }
+            // PlayerSignals.Instance.onDecreaseMentalHealth?.Invoke();
+            // if (!hasPlayedMentalDecreaseSound)
+            // {
+            //    
+            //     Debug.Log("DecreaseMental");
+            //     playerAudioSource.PlayOneShot(mentalDecreaseSound);
+            //     hasPlayedMentalDecreaseSound = true;
+            // }
         }
         
         private void OnTriggerEnter(Collider other)
@@ -87,6 +89,8 @@ namespace Runtime.Controllers.Player
             if (other.CompareTag(_paranormalEnter))
             {
                 _updateParanormalTriggerStatus?.Invoke(true);
+                _playSubtitle.PlayAudioWithSubtitle("tripping");
+                Debug.Log("womenin");
             }
 
             if (other.CompareTag(_paranormalExit))
