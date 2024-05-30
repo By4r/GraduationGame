@@ -55,8 +55,10 @@ namespace Runtime.TaskStateSystem
             //SetState(new WateringFlowerState());
             //SetState(new CheckHouseState());
             //SetState(new CheckOfficeState());
-            SetState(new AtticState());
+            //SetState(new AtticState());
             //SetState(new CheckCameraState());
+            //SetState(new GoCarState());
+            SetState(new HeatHouseState());
         }
 
         private void Update()
