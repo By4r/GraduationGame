@@ -27,8 +27,8 @@ namespace Runtime.TaskStateSystem.TaskStates
             //_taskInfoManager.SetStateForInfo("PickUpPhone");
             
             //AudioManager.Instance.PlayStateSounds("PhoneRingSound");
-            
-            _stateManager.StartCoroutine(PlayPhoneRingSoundWithDelay(5.0f));
+            _playSubtitle.PlayAudioWithSubtitle("starting_speech");
+            _stateManager.StartCoroutine(PlayPhoneRingSoundWithDelay(25.0f));
             
         }
 

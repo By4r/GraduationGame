@@ -62,6 +62,16 @@
                 "This man is the devil himself."
             ],
             "duration": [3.0, 2.0]
+        },
+        {
+            "key": "starting_speech",
+            "line": [
+                "I wonder why I was so easily accepted for such a high paying job.",
+                "I hope I can get through it without any problems. They just want me to",
+                "do the work for a house in the middle of the jungle. what could go wrong?"
+                
+            ],
+            "duration": [3.0, 3.0, 3,0]
         }
     ]
 }
