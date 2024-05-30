@@ -3,6 +3,7 @@ using Runtime.Controllers.Camera;
 using Runtime.Controllers.Player;
 using Runtime.Controllers.Security_Room;
 using Runtime.Controllers.Subtitle;
+using Runtime.Controllers.UI;
 using Runtime.Data.UnityObjects;
 using Runtime.Data.ValueObjects;
 using Runtime.Managers;
@@ -38,6 +39,7 @@ namespace Runtime.TaskStateSystem
         [SerializeField] private SecurityRoomController securityRoomController;
         [SerializeField] private CheckAtticManager checkAtticManager;
         [SerializeField] private HeatHouseManager heatHouseManager;
+        [SerializeField] private EndingController endingController;
 
         [ShowInInspector] private WorkData _workData;
 
@@ -60,6 +62,8 @@ namespace Runtime.TaskStateSystem
             //SetState(new CheckCameraState());
             //SetState(new GoCarState());
             //SetState(new HeatHouseState());
+            //SetState(new CallPhoneState());
+
         }
 
         private void Update()
@@ -111,6 +115,8 @@ namespace Runtime.TaskStateSystem
         public CheckAtticManager GetCheckAtticManager() => checkAtticManager;
 
         public HeatHouseManager GetHeatHouseManager() => heatHouseManager;
+
+        public EndingController GetEndingController() => endingController;
         
         private WorkData GetData()
         {

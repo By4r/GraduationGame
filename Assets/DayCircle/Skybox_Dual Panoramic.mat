@@ -30,7 +30,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+<<<<<<< HEAD
     - _Blend: 0.999448
+=======
+    - _Blend: 0.5902631
+>>>>>>> 5623f7a0e365ce3c2e2888b8c49c2f8ec7ceea11
     - _Exposure1: 1
     - _Exposure2: 1
     - _ImageType: 0

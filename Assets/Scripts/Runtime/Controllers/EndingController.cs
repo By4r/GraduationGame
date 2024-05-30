@@ -32,12 +32,14 @@ namespace Runtime.Controllers.UI
             // }
         }
 
+        
+        
         private void InventoryToggle()
         {
             _isInventoryPanelOpen = !_isInventoryPanelOpen;
         }
 
-        private void OpenInventoryPanel()
+        internal void OpenInventoryPanel()
         {
             inventoryPanel[0].SetActive(true);
             _cameraController.mouseState = false;
