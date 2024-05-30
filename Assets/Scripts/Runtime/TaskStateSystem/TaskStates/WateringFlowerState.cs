@@ -49,12 +49,13 @@ namespace Runtime.TaskStateSystem.TaskStates
             {
                 
                 _waterCanController.WaterFlowers();
-                AudioManager.Instance.PlayStateSounds("WateringSound");
+                
                 
                 if (Physics.Raycast(raycast, out RaycastHit hit, range))
                 {
                     if (hit.collider.CompareTag("WateringArea"))
                     {
+                        AudioManager.Instance.PlayStateSounds("WateringSound");
                         isWateringActive = true;
                         Debug.Log("Watering Area!");
                         

@@ -89,7 +89,7 @@ namespace Runtime.Controllers.Player
             if (other.CompareTag(_paranormalEnter))
             {
                 _updateParanormalTriggerStatus?.Invoke(true);
-                _playSubtitle.PlayAudioWithSubtitle("tripping");
+                //_playSubtitle.PlayAudioWithSubtitle("starting_speech");
                 Debug.Log("womenin");
             }
 

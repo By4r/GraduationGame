@@ -1,5 +1,6 @@
 ﻿using Runtime.Controllers;
 using Runtime.Controllers.Player;
+using Runtime.Controllers.Subtitle;
 using Runtime.Signals;
 using Runtime.TaskStateSystem.TaskUI;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Runtime.TaskStateSystem.TaskStates
             Debug.Log("Entering GoSleep State");
 
             _sleepController = stateManager.GetSleepController();
+            PlaySubtitle.Instance.PlayAudioWithSubtitle("take_nap");
         }
 
         public void UpdateState(TaskStateManager stateManager)

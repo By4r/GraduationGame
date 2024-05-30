@@ -15,12 +15,12 @@
         {
             "key": "women_watching",
             "line": ["What was that! Was that a women watching me??"],
-            "duration": [2.0]
+            "duration": [2.6]
         },
         {
             "key": "tripping",
             "line": ["what is going on am I tripping."],
-            "duration": [2.0]
+            "duration": [2.35]
         },
         {
             "key": "check_cameras",
@@ -29,7 +29,7 @@
                 "What happened to me how did I came here",
                 "I should check the cameras"
             ],
-            "duration": [2.0, 2.0, 2.0]
+            "duration": [2.6, 4, 2.7]
         },
         {
             "key": "want_home",
@@ -37,7 +37,7 @@
                 "WHAT happened in this place. I dont want to get into this.",
                 "I just wanna go home."
             ],
-            "duration": [3.0, 2.0]
+            "duration": [3.5, 1.5]
         },
         {
             "key": "call_help",
@@ -45,7 +45,7 @@
                 "oh no I can't go anywhere. now I'm sure I'm not alone here.",
                 "there was a phone in my hut maybe I can call for help"
             ],
-            "duration": [3.0, 2.0]
+            "duration": [3.7, 3.1]
         },
         {
             "key": "get_warm",
@@ -53,7 +53,7 @@
                 "fuck now I am really stuck in this place.",
                 "I need to get warm or I'll freeze to death."
             ],
-            "duration": [3.0, 2.0]
+            "duration": [3.45, 2.4]
         },
         {
             "key": "devil_himself",
@@ -61,7 +61,7 @@
                 "I think it's the landlord's wife who wrote this letter.",
                 "This man is the devil himself."
             ],
-            "duration": [3.0, 2.0]
+            "duration": [2.5, 1.5]
         },
         {
             "key": "starting_speech",
@@ -71,7 +71,14 @@
                 "do the work for a house in the middle of the jungle. what could go wrong?"
                 
             ],
-            "duration": [3.0, 3.0, 3,0]
+            "duration": [3.0, 3.5, 4,2]
+        }, 
+        {
+            "key": "take_nap",
+            "line": [
+                "I've come a long way and I've done a lot of work, I'd better take a quick nap"
+            ],
+            "duration": [4.0]
         }
     ]
 }
