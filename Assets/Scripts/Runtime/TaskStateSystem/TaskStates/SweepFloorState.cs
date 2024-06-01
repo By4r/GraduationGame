@@ -47,7 +47,7 @@ namespace Runtime.TaskStateSystem.TaskStates
                     if (Input.GetMouseButton(0))
                     {
                         _broomController.SweepFloor();
-                        AudioManager.Instance.PlayStateSounds("SweepSound");
+                        //AudioManager.Instance.PlayStateSounds("SweepSound");
                         _sweepHoldTime += Time.deltaTime;
                         _itemProgressBar.UpdateProgress(_sweepHoldTime / REQUİRED_HOLD_TİME);
                         
