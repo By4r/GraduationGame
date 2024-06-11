@@ -116,6 +116,7 @@ namespace Runtime.Managers
             }
             else if (value == 8)
             {
+                RenderSettings.fog = false;
                 StartCoroutine(LerpSkybox(skyboxSunrise, skyboxDay, 10f));
                 StartCoroutine(LerpLight(graddientSunriseToDay, 10f));
             }
