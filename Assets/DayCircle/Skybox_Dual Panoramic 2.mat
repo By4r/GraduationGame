@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Skybox_Dual Panoramic 2
+  m_Shader: {fileID: 4800000, guid: 7bbc90bab48e15c4ea948cf176778662, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Texture1:
+        m_Texture: {fileID: 2800000, guid: 00e9b7f0829899140a02f60cfa3dff18, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2:
+        m_Texture: {fileID: 2800000, guid: cd359f0c4cd5e6a41bc4c17d3cee73fa, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Blend: 0
+    - _Exposure1: 1
+    - _Exposure2: 1
+    - _ImageType: 0
+    - _Layout: 0
+    - _MirrorOnBack: 0
+    - _Rotation1: 0
+    - _Rotation2: 0
+    m_Colors:
+    - _Tint1: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+    - _Tint2: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+  m_BuildTextureStacks: []

@@ -79,6 +79,13 @@
                 "I've come a long way and I've done a lot of work, I'd better take a quick nap"
             ],
             "duration": [4.0]
+        },
+        {
+            "key": "call_phone_help",
+            "line": [
+                "I'd better call for help. There was a phone where I was staying."
+            ],
+            "duration": [3.0]
         }
     ]
 }

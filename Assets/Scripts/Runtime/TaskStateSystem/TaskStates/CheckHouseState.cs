@@ -5,6 +5,7 @@ using Runtime.TaskStateSystem.TaskUI;
 using Runtime.TaskSystem;
 using UnityEngine;
 using DG.Tweening;
+using Runtime.Controllers.Subtitle;
 using Runtime.Managers;
 using Runtime.SoundSystem;
 
@@ -63,6 +64,7 @@ namespace Runtime.TaskStateSystem.TaskStates
             if (_paranormalTriggerActivated)
             {
                 _checkHouseManager.ShowParanormal();
+                PlaySubtitle.Instance.PlayAudioWithSubtitle("women_watching");
             }
         }
         
@@ -71,20 +73,22 @@ namespace Runtime.TaskStateSystem.TaskStates
         {
             Debug.Log($"UpdateParanormalExitTriggerStatus called with value: {activated}");
             _paranormalTriggerExitActivate = activated;
-
+            
+            
+            
             if (_paranormalTriggerExitActivate && _paranormalTriggerActivated)
             {
                 Debug.Log("Exit condition met: transitioning to CheckCameraState");
                 //_checkHouseManager.HideParanormal();
                 
-
                 
                 Sequence sequence = DOTween.Sequence();
 
                 sequence.AppendCallback(() => _camScareManager.showGhost())
+                    
                     .AppendInterval(0.75f)
                     .AppendCallback(() => _sleepController.SleepCompulsory(_stateManager))
-                    .AppendInterval(1f)
+                    .AppendInterval(1.7f)
                     .AppendCallback(() => _camScareManager.hideGhost())
                     .AppendInterval(0.2f)
                     .AppendCallback(() =>

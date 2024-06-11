@@ -21,7 +21,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Texture1:
+<<<<<<< HEAD
+        m_Texture: {fileID: 2800000, guid: cd359f0c4cd5e6a41bc4c17d3cee73fa, type: 3}
+=======
         m_Texture: {fileID: 2800000, guid: 00e9b7f0829899140a02f60cfa3dff18, type: 3}
+>>>>>>> 5623f7a0e365ce3c2e2888b8c49c2f8ec7ceea11
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2:
@@ -30,7 +34,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+<<<<<<< HEAD
     - _Blend: 0
+=======
+<<<<<<< HEAD
+    - _Blend: 0.9986561
+=======
+    - _Blend: 0.99895525
+>>>>>>> 5623f7a0e365ce3c2e2888b8c49c2f8ec7ceea11
+>>>>>>> origin/main
     - _Exposure1: 1
     - _Exposure2: 1
     - _ImageType: 0

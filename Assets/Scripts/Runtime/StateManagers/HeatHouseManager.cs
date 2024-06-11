@@ -8,14 +8,14 @@ namespace Runtime.TaskSystem
     public class HeatHouseManager : MonoBehaviour
     {
         [SerializeField] private GameObject paranormalGameObject;
-        
+        [SerializeField] internal GameObject secondLetter;
 
         internal void ShowParanormal()
         {
             paranormalGameObject.SetActive(true);
             StartCoroutine(HideParanormalAfterDelay(5f)); 
         }
-
+        
         internal void HideParanormal()
         {
             AudioManager.Instance.StopStateSound();

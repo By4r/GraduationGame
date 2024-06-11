@@ -2,6 +2,7 @@
 using Runtime.Controllers.Player;
 using Runtime.TaskStateSystem.TaskUI;
 using System.Collections;
+using Runtime.Controllers.Subtitle;
 using Runtime.SoundSystem;
 using UnityEngine;
 
@@ -41,6 +42,7 @@ namespace Runtime.TaskStateSystem.TaskStates
 
                     if (Input.GetKey(KeyCode.E) && !_isCarChecked)
                     {
+                        PlaySubtitle.Instance.PlayAudioWithSubtitle("get_warm");
                         _isCarChecked = true;
                         _playerPhysicsController.StartCoroutine(HandleCarBrokeInfo());
                     }

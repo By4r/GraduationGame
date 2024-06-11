@@ -1,7 +1,9 @@
 ﻿using DG.Tweening;
 using Runtime.Controllers;
 using Runtime.Controllers.Security_Room;
+using Runtime.Controllers.Subtitle;
 using Runtime.Managers;
+using Runtime.Signals;
 using Runtime.StateManagers;
 using Runtime.TaskStateSystem.TaskUI;
 using UnityEngine;
@@ -37,6 +39,10 @@ namespace Runtime.TaskStateSystem.TaskStates
             _securityRoomController.IsCheckCameraState = true;
             
             _stateManager = stateManager;
+            
+            TimeSignals.Instance.onSetHours?.Invoke(22);
+            
+            PlaySubtitle.Instance.PlayAudioWithSubtitle("check_cameras");
 
         }
 
